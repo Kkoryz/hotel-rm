@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "seo-site-template-v1",
+  "sourceUrl": "https://www.hhmhotels.com/",
+  "route": "/",
+  "components": [
+    "Hero"
+  ],
+  "islands": [],
+  "mode": "authoring",
+  "routes": [
+    "/",
+    "/about-us/",
+    "/boutique-hotel-consulting/",
+    "/careers/",
+    "/case-studies/",
+    "/commercial-strategy/",
+    "/contact-us/",
+    "/dynamic-pricing-strategy/",
+    "/hotel-digital-marketing/",
+    "/hotel-distribution/",
+    "/ota-optimization/",
+    "/our-process/",
+    "/privacy-policy/",
+    "/request-a-quote/",
+    "/resources/",
+    "/revenue-management-audit/",
+    "/services/",
+    "/terms-and-conditions/"
+  ],
+  "representatives": {
+    "solution": "/hotel-digital-marketing/",
+    "about": "/about-us/",
+    "contact": "/contact-us/"
+  }
+}

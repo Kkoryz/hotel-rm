@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "seo-site-nav-v1",
+  "source": "site-factory pages.json",
+  "brand": null,
+  "header": [
+    {
+      "label": "Services",
+      "route": "/services/",
+      "children": [
+        {
+          "label": "Hotel Digital Marketing",
+          "route": "/hotel-digital-marketing/",
+          "children": []
+        },
+        {
+          "label": "Boutique Hotel Consulting",
+          "route": "/boutique-hotel-consulting/",
+          "children": []
+        },
+        {
+          "label": "Commercial Strategy",
+          "route": "/commercial-strategy/",
+          "children": []
+        },
+        {
+          "label": "OTA Optimization",
+          "route": "/ota-optimization/",
+          "children": []
+        },
+        {
+          "label": "Dynamic Pricing Strategy",
+          "route": "/dynamic-pricing-strategy/",
+          "children": []
+        },
+        {
+          "label": "Hotel Distribution",
+          "route": "/hotel-distribution/",
+          "children": []
+        },
+        {
+          "label": "Revenue Management Audit",
+          "route": "/revenue-management-audit/",
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "About Us",
+      "route": "/about-us/",
+      "children": []
+    },
+    {
+      "label": "Case Studies",
+      "route": "/case-studies/",
+      "children": []
+    },
+    {
+      "label": "Blog",
+      "route": "/blog/",
+      "children": []
+    },
+    {
+      "label": "Contact Us",
+      "route": "/contact-us/",
+      "children": []
+    }
+  ],
+  "footer": [
+    {
+      "label": "Our Process",
+      "route": "/our-process/",
+      "children": []
+    },
+    {
+      "label": "Resources",
+      "route": "/resources/",
+      "children": []
+    },
+    {
+      "label": "Careers",
+      "route": "/careers/",
+      "children": []
+    },
+    {
+      "label": "Privacy Policy",
+      "route": "/privacy-policy/",
+      "children": []
+    },
+    {
+      "label": "Terms and Conditions",
+      "route": "/terms-and-conditions/",
+      "children": []
+    },
+    {
+      "label": "Request a Quote",
+      "route": "/request-a-quote/",
+      "children": []
+    }
+  ]
+}

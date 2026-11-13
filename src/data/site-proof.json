@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "seo-site-proof-v1",
+  "standIn": true,
+  "note": "Stand-in proof (scripts/scaffold-site-proof.mjs): replace with real, permitted values before launch; listed in docs/research/release-signoff.json. The order terms are the approved facts.",
+  "headings": {
+    "factory": "At a glance",
+    "certifications": "Licences and memberships",
+    "clients": "Clients we work with",
+    "caseStudies": "Client results",
+    "testimonials": "What clients say",
+    "history": "Our story",
+    "terms": "Working with us at a glance",
+    "orderRoutes": "Ways to get started"
+  },
+  "factory": [
+    {
+      "value": "12",
+      "label": "people on the team",
+      "factId": "owner:team-size"
+    },
+    {
+      "value": "40",
+      "label": "clients served"
+    }
+  ],
+  "certifications": [],
+  "clients": [
+    {
+      "name": "Pine Hollow Holdings",
+      "note": "Ohio, USA"
+    },
+    {
+      "name": "Redstone Family Partners",
+      "note": "Texas, USA"
+    },
+    {
+      "name": "Bayline Properties",
+      "note": "Florida, USA"
+    },
+    {
+      "name": "Northgate Owners Group",
+      "note": "Minnesota, USA"
+    },
+    {
+      "name": "Copper Mesa Ventures",
+      "note": "Arizona, USA"
+    },
+    {
+      "name": "Harbor Lane Partners",
+      "note": "Oregon, USA"
+    }
+  ],
+  "testimonials": [],
+  "caseStudies": [
+    {
+      "client": "Family business owner",
+      "market": "Columbus, USA",
+      "title": "Hotel digital marketing for a family-owned business",
+      "summary": "Hotel digital marketing set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/hotel-digital-marketing/",
+      "pages": [
+        "/hotel-digital-marketing/"
+      ]
+    },
+    {
+      "client": "Owner-operator",
+      "market": "San Antonio, USA",
+      "title": "Boutique hotel consulting for an owner with two sites",
+      "summary": "Boutique hotel consulting brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/boutique-hotel-consulting/",
+      "pages": [
+        "/boutique-hotel-consulting/"
+      ]
+    },
+    {
+      "client": "Regional owner group",
+      "market": "Tampa, USA",
+      "title": "Ota optimization for a first-time owner",
+      "summary": "Ota optimization started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/ota-optimization/",
+      "pages": [
+        "/ota-optimization/"
+      ]
+    },
+    {
+      "client": "First-time owner",
+      "market": "Minneapolis, USA",
+      "title": "Dynamic pricing strategy for a family-owned business",
+      "summary": "Dynamic pricing strategy set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/dynamic-pricing-strategy/",
+      "pages": [
+        "/dynamic-pricing-strategy/"
+      ]
+    },
+    {
+      "client": "Managing partner of an owner group",
+      "market": "Phoenix, USA",
+      "title": "Hotel distribution for an owner with two sites",
+      "summary": "Hotel distribution brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/hotel-distribution/",
+      "pages": [
+        "/hotel-distribution/"
+      ]
+    },
+    {
+      "client": "Second-generation owner",
+      "market": "Portland, USA",
+      "title": "Revenue management audit for a first-time owner",
+      "summary": "Revenue management audit started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/revenue-management-audit/",
+      "pages": [
+        "/revenue-management-audit/"
+      ]
+    }
+  ],
+  "history": [],
+  "terms": {
+    "columns": [
+      "Term",
+      "Details"
+    ],
+    "rows": []
+  },
+  "trade": "service"
+}

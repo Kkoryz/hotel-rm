@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "seo-site-trust-v1",
+  "items": [
+    {
+      "value": "5 years",
+      "label": "Years experience",
+      "note": "Your dedicated specialist comes from our 12-person team and has at least 5 years of hands-on hotel revenue management and OTA experience with independent and boutique properties. They own your account from start to finish, the wider team covers all 365 days of the year, and each specialist looks after no more than 10 properties.",
+      "factId": "homed:SG19",
+      "unconfirmed": true
+    },
+    {
+      "value": "365 days",
+      "label": "Days covered",
+      "note": "Your dedicated specialist comes from our 12-person team and has at least 5 years of hands-on hotel revenue management and OTA experience with independent and boutique properties. They own your account from start to finish, the wider team covers all 365 days of the year, and each specialist looks after no more than 10 properties.",
+      "factId": "homed:SG19",
+      "unconfirmed": true
+    },
+    {
+      "value": "10 properties",
+      "label": "Properties per specialist",
+      "note": "Your dedicated specialist comes from our 12-person team and has at least 5 years of hands-on hotel revenue management and OTA experience with independent and boutique properties. They own your account from start to finish, the wider team covers all 365 days of the year, and each specialist looks after no more than 10 properties.",
+      "factId": "homed:SG19",
+      "unconfirmed": true
+    }
+  ]
+}

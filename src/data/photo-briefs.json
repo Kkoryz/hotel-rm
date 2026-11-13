@@ -1,0 +1,110 @@
+{
+  "/hotel-digital-marketing/": {
+    "m5": [
+      {
+        "id": "brief-m5-1",
+        "type": "photo",
+        "content": "An independent hotel owner sits at a desk beside a window overlooking the property's small courtyard, working on an open laptop with its screen facing away from the camera.",
+        "setting": "Owner's office in a small independent hotel",
+        "caption": "Remote marketing support for independent hotel owners."
+      }
+    ]
+  },
+  "/boutique-hotel-consulting/": {
+    "splitMedia-2": [
+      {
+        "id": "brief-splitMedia-2-1",
+        "type": "photo",
+        "content": "A revenue specialist at her office desk demonstrates a routine to two hotel staff visible on a video call, pointing to an indistinct rate calendar on a second monitor, with no readable text or logos anywhere in view.",
+        "setting": "The consultancy’s Canadian office",
+        "caption": "Remote training prepares your team to manage rates and listings independently."
+      }
+    ]
+  },
+  "/ota-optimization/": {
+    "m3": [
+      {
+        "id": "brief-m3-1",
+        "type": "photo",
+        "content": "An OTA specialist at her desk compares two guest-room photographs displayed side by side on a monitor while selecting images for a property's listing, with all interface text indistinct and no visible logos.",
+        "setting": "The team's Canadian office, close view",
+        "caption": "Choosing room photos for an Agoda listing rebuild."
+      }
+    ],
+    "m5": [
+      {
+        "id": "brief-m5-1",
+        "type": "photo",
+        "content": "An independent hotel owner seated in his property's small office discusses suitable booking channels with a remote specialist visible on his laptop, photographed from across the room with no readable screen text, signage or logos.",
+        "setting": "A client's hotel office, wide view",
+        "caption": "Choosing channels around your hotel's guests and source markets."
+      }
+    ]
+  },
+  "/dynamic-pricing-strategy/": {
+    "splitMedia-2": [
+      {
+        "id": "brief-splitMedia-2-1",
+        "type": "photo",
+        "content": "A revenue specialist points to three unlabelled comparative bar charts on a monitor while discussing the hotel's performance with its owner, visible in a video-call tile, with no readable text or logos anywhere in the scene.",
+        "setting": "The team's Canadian office",
+        "caption": "Reviewing occupancy, ADR and RevPAR against your competitive set."
+      }
+    ]
+  },
+  "/about-us/": {
+    "splitMedia-1": [
+      {
+        "id": "brief-splitMedia-1-1",
+        "type": "photo",
+        "content": "A revenue specialist feeds a certification document face down into a desktop scanner to prepare a copy for a hotel owner, with no readable words or logos visible.",
+        "setting": "The team's Canadian office",
+        "caption": "Sharing evidence of our specialists’ credentials before you sign."
+      }
+    ]
+  },
+  "/case-studies/": {
+    "splitMedia-1": [
+      {
+        "id": "brief-splitMedia-1-1",
+        "type": "photo",
+        "content": "A revenue specialist at a desk compares room photographs and rate grids across two monitors, pointing to a corresponding row with a pen, with all screen text indistinct and no visible logos.",
+        "setting": "The team's Canadian office",
+        "caption": "Reviewing hotel listings and rate consistency across booking channels."
+      }
+    ]
+  },
+  "/our-process/": {
+    "m6": [
+      {
+        "id": "brief-m6-1",
+        "type": "photo",
+        "content": "A revenue specialist seated at a desk adjusts room availability with a mouse while comparing two monitors showing blurred calendar grids and inventory panels with no readable text or logos.",
+        "setting": "The revenue team's office in Canada",
+        "caption": "Managing rates and availability remotely within your existing systems."
+      }
+    ]
+  },
+  "/careers/": {
+    "m3": [
+      {
+        "id": "brief-m3-1",
+        "type": "photo",
+        "content": "A remote specialist at a home desk talks through an account handover on a video call with two colleagues, pointing to an indistinct chart on a second monitor, with no readable text or logos visible.",
+        "setting": "A lived-in home office",
+        "caption": "Sharing account updates so colleagues can cover confidently."
+      }
+    ]
+  },
+  "/request-a-quote/": {
+    "m6": [
+      {
+        "id": "brief-m6-1",
+        "type": "photo",
+        "content": "A revenue consultant wearing a headset sits at an office desk, listening to an independent hotel owner on a laptop video call, with the owner's face visible and no readable text on screen.",
+        "setting": "The consultancy’s Canadian office",
+        "caption": "Talk through your property, channels and goals in a free 30-minute consultation."
+      }
+    ]
+  }
+}

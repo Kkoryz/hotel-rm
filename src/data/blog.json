@@ -1,0 +1,42 @@
+{
+  "title": "Blog: Hotel & Airbnb Pricing Math | RateHarbor",
+  "description": "Practical break-even pricing guides for hotels and Airbnb hosts on the RateHarbor blog: rate strategy, OTA commission costs, fees and policy changes.",
+  "heading": "RateHarbor Blog: Hotel and Airbnb Pricing Insights",
+  "intro": "In these articles we explain how pricing, booking channels, operations and owner reporting work, so you can judge any management company with confidence.",
+  "blocks": [
+    {
+      "id": "overview",
+      "type": "intro",
+      "sourceSectionIds": [
+        "overview"
+      ],
+      "heading": "What You'll Find on the RateHarbor Blog",
+      "paragraphs": [
+        "Our blog covers room pricing, OTA listings, rate parity and performance reporting for owners of independent hotels, small hotel groups and other lodging properties. We write it from our remote revenue management and OTA management work.",
+        "We [work with independent hotels and small hotel groups](/about-us/) in many countries, including the United States, Canada, the United Kingdom and Australia. You can take these services and our related online services separately or together. We don't run your hotel operations.",
+        "We [work only remotely](/our-process/). We use your hotel's own systems and online accounts, and we have no staff on site at any property."
+      ],
+      "wordCount": 100
+    },
+    {
+      "id": "cta",
+      "type": "cta",
+      "sourceSectionIds": [
+        "cta"
+      ],
+      "heading": "Ready to Talk Pricing? Send RateHarbor an Enquiry",
+      "paragraphs": [
+        "Send us an [enquiry](/contact-us/) to talk about pricing for your property. We’ll reply within one business day."
+      ],
+      "cta": {
+        "label": "Talk to our team",
+        "href": "/contact-us/"
+      },
+      "links": []
+    }
+  ],
+  "source": {
+    "package": "sf/authoring/v1",
+    "pageId": "site:blog"
+  }
+}
