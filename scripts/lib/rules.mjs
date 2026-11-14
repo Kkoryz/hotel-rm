@@ -34,3 +34,8 @@ export const captureFolder = (pageType) => CAPTURE_FOLDER[pageType] ?? pageType;
 // competitor set its 45-word values three to a row.
 export const CARD_GRID = Object.freeze({ max: 4, longMax: 3, longWords: 40 });
 export const cardGridMax = (longestWords = 0) => (longestWords >= CARD_GRID.longWords ? CARD_GRID.longMax : CARD_GRID.max);
+
+// The most steps a process shows as numbered cards over a photo of the work: on a phone the steps stack and the photo
+// stretches behind them all, about 270px a step (hotel-rm's four steps ran 1,240px, five 1,510px, the photo a narrow
+// slice); more are a list (lib/media-slots.mjs).
+export const MAX_PHOTO_STEPS = 3;

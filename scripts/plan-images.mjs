@@ -12,12 +12,27 @@
 import { mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { ownPhotoRoutes, planLibrary } from './lib/image-plan.mjs';
+import { ownPhotoRoutes, photoDemand, planLibrary } from './lib/image-plan.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 import { styleReferences } from './lib/style-references.mjs';
 import { DEFAULT_TRADE, imageBriefs } from './lib/trade.mjs';
 
+
+// What the image plan is made from, as planImages reads it: the photo demand (lib/image-plan.mjs photoDemand) and the
+// style references. site-run hashes it for the images step (plan:photo-slots).
+export async function imageDemand(root = process.cwd()) {
+  const variants = await readJson(resolve(root, 'src/data/template-variants.json'));
+  const briefs = await imageBriefs(root);
+  const previous = await readJson(resolve(root, 'docs/research/image-plan.json'), null);
+  const own = new Set(((await readJson(resolve(root, 'src/data/site-media.json'), null))?.photos ?? []).map((photo) => photo.class));
+  const pages = await loadSitePages(root);
+  const ownRoutes = ownPhotoRoutes(pages, await readJson(resolve(root, 'docs/research/image-fit.json'), null), briefs, previous);
+  return {
+    demand: photoDemand({ pages, components: variants.components, briefs: { ...briefs, placeholderKinds: (briefs.placeholderKinds ?? []).filter((kind) => own.has(kind)) }, ownRoutes }),
+    styleRefs: await styleReferences(root, variants.components),
+  };
+}
 
 export async function planImages({ line = null, changeLine = false, changeTrade = false, root = process.cwd() }) {
   const variants = await readJson(resolve(root, 'src/data/template-variants.json'));

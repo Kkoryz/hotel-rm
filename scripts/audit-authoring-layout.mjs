@@ -18,9 +18,20 @@ import { INSTALLED_FONTS } from "./lib/font-install.mjs";
 import { headingLineIssues, measureHeadingLines } from "./lib/heading-fit.mjs";
 import { protectedOverrides } from "./lib/protected-rules.mjs";
 import { assertServesDist, retryCrash } from "./lib/audit-runtime.mjs";
+import { TRIAL_TOLERANCE } from "./lib/trial-build.mjs";
 
 // Pages measured at the same time, each in its own browser page.
 export const AUDIT_CONCURRENCY = 4;
+
+// The built pages against the layout plan (Fable's plan 3.1: the audit checks the page keeps the plan): a page whose
+// measured picture area is more than the trial build's tolerance off the plan's estimate (the photos made for it cover
+// less or more than its grey frames did: a crop, a position left empty). The template's to see; a warning, as the
+// density is. plan: docs/research/layout-plan.json, or null (the template's own pages have none).
+export function densityOffPlan(results, plan) {
+  const planned = new Map((plan?.pages ?? []).map((page) => [page.route, page.estimate?.visualAreaPct]));
+  return results.filter((result) => result.density && planned.get(result.route) != null && Math.abs(result.density.visualAreaPct - planned.get(result.route)) > TRIAL_TOLERANCE.visualPts)
+    .map((result) => ({ route: result.route, viewport: result.viewport, issue: 'density_off_plan', value: result.density.visualAreaPct, planned: planned.get(result.route), tolerance: TRIAL_TOLERANCE.visualPts }));
+}
 
 export const VIEWPORTS = Object.freeze([{ id: "desktop", width: 1440, height: 1000 }, { id: "tablet", width: 768, height: 1024 }, { id: "mobile", width: 390, height: 844 }]);
 
@@ -286,6 +297,7 @@ export async function auditAuthoringLayout({ baseUrl, rootDir = process.cwd(), m
   for (const override of protectedOverrides(await readFile(resolve(root, "src/styles/reference.css"), "utf8").catch(() => ""))) failures.push({ route: "src/styles/reference.css", viewport: "", issue: "template_rule_overridden", ...override });
   for (const outlier of gutterOutliers(results.filter((item) => item.visual && item.viewport === "mobile").map((item) => ({ route: item.route, axis: item.visual.textAxis })))) failures.push({ ...outlier, viewport: "mobile", issue: "gutter_mismatch" });
   if (template.mode === "authoring" && !referenceDensity) failures.push({ issue: "missing_reference_density", value: densityFile ? `docs/research/raw/reference-density.json is ${densityFile.schemaVersion}, not ${DENSITY_SCHEMA}: run pnpm measure:reference-density <reference urls> again` : "run pnpm measure:reference-density <reference urls>" });
+  warnings.push(...densityOffPlan(results, await readJson(resolve(root, "docs/research/layout-plan.json"), null)));
   for (const result of results) {
     const pageType = pages.find((page) => page.route === result.route)?.pageType;
     const floorless = DENSITY_FLOOR_EXEMPT_PAGE_TYPES.includes(pageType);

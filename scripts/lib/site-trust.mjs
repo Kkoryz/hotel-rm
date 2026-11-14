@@ -6,6 +6,7 @@
 // whose fact is not in facts.yaml word for word is borrowed from a competitor and marked a placeholder.
 
 import { factApproved, factConfirmed } from './facts.mjs';
+import { NO_BAND_PAGE_TYPES, SITE_BAND_PAGE_TYPES } from './page-figures.mjs';
 
 export const TRUST_SCHEMA = 'seo-site-trust-v1';
 export const TRUST_BAR_ITEMS = 5;
@@ -85,6 +86,15 @@ export function orderRoutesFrom(authoringPackage, facts = null) {
     const real = Boolean(fact?.confirmed && fact.text.includes(item.value));
     return { heading: item.label, text: item.value, ...(item.fact_id ? { factId: item.fact_id } : {}), ...(real ? {} : { placeholder: true }) };
   });
+}
+
+// What a page's trust bar shows (TrustBar.astro; the layout plan counts its height): the page's own figures
+// (page-figures.json; none, no band) on pages that have them read, the site-wide band (its items and certificates) on
+// the home and about pages and while no figures are read. own: the page's own figures, or null for the site band.
+/** @returns {{ own: { value: string, label: string }[] | null, items: { value: string, label: string }[], certifications: string[] }} */
+export function trustBarContent(page, pageFigures, trust) {
+  const own = page && pageFigures && !SITE_BAND_PAGE_TYPES.includes(page.pageType) ? (NO_BAND_PAGE_TYPES.includes(page.pageType) ? [] : pageFigures[page.route] ?? []) : null;
+  return { own, items: own ?? trustBarItems(trust), certifications: own ? [] : trust?.certifications ?? [] };
 }
 
 // What the band shows: the size facts first, then the founding year while there is room and no item shows it already

@@ -63,14 +63,24 @@ export function pickReferences(pool, category, usage, count = 2) {
 
 const sameIntent = (left, right) => JSON.stringify(left ?? null) === JSON.stringify(right ?? null);
 
+// Every image position the site asks a photo for: the site allocation run on an empty library ({ route, blockId, kind,
+// category, topic, intent }, in page order). What the image steps work from (Fable's plan, stage 3: site-run hashes it as
+// the images step's input, plan:photo-slots), so a setting that moves no photo position (a heading's fit, a colour; the
+// block model only where it moves a wall) makes no photo again.
+export function photoDemand({ pages, components, briefs, ownRoutes = null }) {
+  const routes = Object.fromEntries(pages.map((page) => [page.route, pageCategory(page, briefs, ownRoutes)]));
+  const built = new Set(pages.map((page) => page.route));
+  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
+  return probe.unfilled.map(({ route, status, blockId, kind, category, topic, intent = null }) => ({ route, status, blockId, kind, category, topic, intent }));
+}
+
 // The plan: library entries with subjects, sizes and style references, and each route's category. Classes listed in
 // briefs.placeholderKinds are not generated (they stay image slots until real photos are supplied).
 // ownRoutes: the service pages that get photos of their own (ownPhotoRoutes).
 export function planLibrary({ pages, components, line, briefs, styleRefs, previous = null, ownRoutes = null }) {
   const routes = Object.fromEntries(pages.map((page) => [page.route, pageCategory(page, briefs, ownRoutes)]));
-  const built = new Set(pages.map((page) => page.route));
-  // Every image position the site asks for: the site allocation run on an empty library.
-  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
+  // Every image position the site asks for (photoDemand).
+  const probe = { unfilled: photoDemand({ pages, components, briefs, ownRoutes }) };
   const demand = {};
   const topics = {};
   const perPage = new Map();

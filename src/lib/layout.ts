@@ -18,29 +18,8 @@ export function density(words = 0): 'compact' | 'standard' | 'long' {
   return 'long';
 }
 
-// Equal-grid plan: the column count that leaves the fewest empty cells (ties go to more columns), and when the last
-// row is short, the grid track where its first item starts so the row is centred. Grids use two tracks per column.
-// min: the fewest columns a grid may take (icon cards: three, so thirteen are not two columns of seven).
-// fixed: the column count a grid must take on a desktop whatever its count (a card set's grids keep one card width), a
-// short row centred; on tablets each grid keeps its own plan (two of 4 + 3 + 3 + 3 left a card alone in each three).
-export function gridPlan(count: number, max = 4, min = 2, fixed?: number) {
-  const empty = (size: number) => (size - (count % size)) % size;
-  let columns = fixed ?? Math.min(count, max);
-  if (!fixed && count > max) for (let size = max; size >= Math.min(min, max); size -= 1) if (empty(size) < empty(columns)) columns = size;
-  // Tablets (768-1023px) fit two or three columns: the one leaving fewer empty cells, ties to three.
-  const tablet = Math.min(count, empty(2) < empty(3) ? 2 : 3);
-  const start = (size: number, index: number) => {
-    const remainder = count % size;
-    return remainder && index === count - remainder ? size - remainder + 1 : null;
-  };
-  return {
-    columns,
-    tabletColumns: tablet,
-    style: `--tracks: ${columns * 2}; --tracks-md: ${tablet * 2}`,
-    // Inline style for item `index`: only the first item of a short last row gets a start track (per breakpoint).
-    itemStyle: (index: number) => [start(columns, index) && `--start: ${start(columns, index)}`, start(tablet, index) && `--start-md: ${start(tablet, index)}`].filter(Boolean).join('; ') || undefined,
-  };
-}
+// Equal-grid plan (scripts/lib/block-layout.mjs, shared with the layout plan).
+export { gridPlan } from '../../scripts/lib/block-layout.mjs';
 
 // Splits verbatim paragraphs into a lead sentence and short runs of sentences. Layout only: no word changes.
 export function textFlow(paragraphs: string[], { lead = true, maxWords = 48 } = {}) {

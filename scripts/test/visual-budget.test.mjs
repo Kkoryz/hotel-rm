@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { estimateBlock, fitBlockModel, pageEstimate, planVisualBudget, varyItemRows } from '../lib/visual-budget.mjs';
-import { modelMoved } from '../break-text-runs.mjs';
+import { MAX_BUDGET_WALLS, estimateBlock, fitBlockModel, modelMoved, pageEstimate, planVisualBudget, varyItemRows } from '../lib/visual-budget.mjs';
 
 const model = {
   'intro:text': { base: 200, perWord: 3, visual: 0, before: 1, after: 1 },
@@ -22,13 +21,17 @@ test('a block\'s estimate follows its words; a page\'s run ends at a picture', (
 });
 
 test('a page is planned to its band: walls where its copy runs on, none on a short page, tiles give way on a crowded one', () => {
-  // Eight sections of 300 words each (1,100px apiece): one picture-less run of 8,800px gets walls until no run is too long.
-  const long = [...Array.from({ length: 8 }, (_, index) => text(`s${index}`, 300)), { id: 'cta', type: 'cta' }];
+  // Six sections of 300 words each (1,100px apiece): one picture-less run of 6,600px gets walls until no run is too long.
+  const long = [...Array.from({ length: 6 }, (_, index) => text(`s${index}`, 300)), { id: 'cta', type: 'cta' }];
   const planned = planVisualBudget(long, helpers());
   const walls = planned.filter((block) => block.type === 'gallery').length;
   assert.ok(walls >= 3, `walls: ${walls}`);
   const estimate = pageEstimate(planned.map((block) => estimateBlock(block, helpers().variantOf(block), block.words ?? 0, model)));
   assert.ok(estimate.longestRun <= bands.longestTextOnlyPx.max, `longest run ${estimate.longestRun}`);
+  // The band, not a count, decides: eight such sections take more walls, within the safety stop.
+  const longer = planVisualBudget([...Array.from({ length: 8 }, (_, index) => text(`s${index}`, 300)), { id: 'cta', type: 'cta' }], helpers());
+  const more = longer.filter((block) => block.type === 'gallery').length;
+  assert.ok(more > walls && more <= MAX_BUDGET_WALLS, `walls: ${more}`);
   // A short page with photo tiles and a photo closing band shows too much: its tiles become links, no wall goes in.
   const crowded = { ...model, 'relatedPages:tiles': { ...model['relatedPages:tiles'], visual: 0.9 }, 'cta:form': { ...model['cta:form'], visual: 0.4 } };
   const short = planVisualBudget([text('a', 20), { id: 'related', type: 'relatedPages' }, { id: 'cta', type: 'cta' }], helpers({ model: crowded }));
@@ -67,28 +70,9 @@ test('two rows of short items never stand together: the card grid of the pair be
   // A section split in two is one section; a grid without its own heading is never made a list.
   const split = [grid('m9'), { id: 'm9-2', type: 'featureGrid', continues: 'm9' }, { id: 'n', type: 'featureGrid' }];
   assert.deepEqual(varyItemRows(split, variantOf).map((block) => variantOf(block)), ['icons', 'icons', 'icons']);
-  // Steps, then a card set others go on from: the set stays cards, all of it.
+  // Steps, then a card set others go on from: the set stays cards, all of it, and the steps are a list.
   const set = [{ id: 'steps', type: 'process' }, grid('entries'), { id: 'entries-2', type: 'featureGrid', continues: 'entries' }];
-  assert.deepEqual(varyItemRows(set, variantOf).map((block) => variantOf(block) ?? block.type), ['process', 'icons', 'icons']);
-});
-
-test('the block model is not refitted while the audit fails on something else: the photos would move under the repair', async () => {
-  const { breakTextRuns } = await import('../break-text-runs.mjs');
-  const { mkdtemp, mkdir, writeFile, readFile } = await import('node:fs/promises');
-  const { tmpdir } = await import('node:os');
-  const { join } = await import('node:path');
-  const root = await mkdtemp(join(tmpdir(), 'refit-'));
-  await mkdir(join(root, 'docs/research'), { recursive: true });
-  await mkdir(join(root, 'src/data'), { recursive: true });
-  const variants = { components: { densityBands: { visualAreaPct: { min: 10, max: 50 } }, blockModel: {} } };
-  await writeFile(join(root, 'src/data/template-variants.json'), JSON.stringify(variants));
-  const samples = Array.from({ length: 4 }, (_, index) => ({ key: 'intro:text', words: 100 + index * 50, height: 900 + index * 400, visualShare: 0, before: 0, after: 0 }));
-  const audit = (failures) => writeFile(join(root, 'docs/research/authoring-layout-audit.json'), JSON.stringify({ failures, warnings: [{ route: '/a/', issue: 'density_long_text_run' }], results: [{ blockMetrics: samples }] }));
-  await audit([{ route: '/a/', issue: 'low_contrast' }]);
-  assert.deepEqual(await breakTextRuns({ root }), [], 'a contrast failure is the agent\'s; the walls stay where they are');
-  assert.deepEqual(JSON.parse(await readFile(join(root, 'src/data/template-variants.json'), 'utf8')), variants);
-  await audit([]);
-  assert.deepEqual(await breakTextRuns({ root }), ['block model'], 'with only the density off its band the model is refitted');
+  assert.deepEqual(varyItemRows(set, variantOf).map((block) => variantOf(block) ?? block.type), ['list', 'icons', 'icons']);
 });
 
 test('a page short of pictures gets walls wherever a run takes one, and a section too long for the band takes one where its module changes', () => {
@@ -123,4 +107,35 @@ test('a wall never stands where the page says two blocks belong together (two pr
   const ids = planned.map((block) => block.id);
   assert.equal(ids.indexOf('quotes') - ids.indexOf('logos'), 1, ids.join(' '));
   assert.ok(planned.some((block) => String(block.id).startsWith('media-module-budget')), ids.join(' '));
+});
+
+test('where neither card grid of a pair can be a list, the steps of the pair are set out as a list', () => {
+  // hotel-rm's pricing page and motel's process page, 2026-11-14: a grid going on from another (no heading of its own)
+  // stood over a row of steps.
+  const blocks = [{ id: 'm3', type: 'featureGrid', heading: 'Plans' }, { id: 'm3-2', type: 'featureGrid', continues: 'm3' }, { id: 'm2', type: 'process', heading: 'How it works' }];
+  const varied = varyItemRows(blocks, (block) => (block.type === 'featureGrid' ? 'cards' : block.variant ?? 'circles'));
+  assert.equal(varied[2].variant, 'list');
+  assert.equal(varied[2].planned, true);
+  assert.equal(varied[1].variant, undefined);
+});
+
+test('two split rows of the tinted variant one under the other: the later one is a plain split row', async () => {
+  const { varySurfaces } = await import('../lib/visual-budget.mjs');
+  // hotel-rm's digital marketing page, 2026-11-14: two tinted splits ran as one grey band.
+  const blocks = [{ id: 'm5', type: 'splitMedia' }, { id: 's1', type: 'splitMedia' }, { id: 'g', type: 'featureGrid' }, { id: 's2', type: 'splitMedia' }];
+  const varied = varySurfaces(blocks, (block) => (block.planned ? block.variant : block.type === 'splitMedia' ? 'tinted' : 'cards'));
+  assert.deepEqual(varied.map((block) => block.variant ?? null), [null, 'single', null, null]);
+  assert.equal(varied[1].planned, true);
+});
+
+test('a card grid of fewer than three cards is no structured block to the measure: none of it counts as picture', () => {
+  // lib/density.mjs counts a card grid as structured from three boxed cards side by side; motel /our-history/ 2026-11-14:
+  // a grid going on with two cards was estimated 159px of picture and measured none.
+  const grid = { 'featureGrid:cards': { base: 300, perWord: 1, visual: 0.42, before: 0.2, after: 0.2 } };
+  const two = estimateBlock({ type: 'featureGrid', items: [{}, {}] }, 'cards', 80, grid);
+  assert.equal(two.visual, 0);
+  assert.equal(two.pictured, false);
+  assert.ok(estimateBlock({ type: 'featureGrid', items: [{}, {}, {}] }, 'cards', 80, grid).visual > 0);
+  // Photo cards show their photos whatever their number.
+  assert.ok(estimateBlock({ type: 'featureGrid', items: [{}, {}] }, 'media', 80, { 'featureGrid:media': { ...grid['featureGrid:cards'], visual: 0.5 } }).visual > 0);
 });

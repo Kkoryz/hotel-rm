@@ -169,7 +169,7 @@ export interface TemplateVariants {
   // under its heading, without a panel (below, as a competitor's heading-above-form close).
   ctaForm?: 'beside' | 'below';
   // photoBreaks: extra photo rows a page gets where its text runs longer than the competitor's, by route (written by the
-  // run from the layout audit, scripts/break-text-runs.mjs; not a choice of the treatment).
+  // run from the layout audit by a rule fix since retired for the trial build, calibrate-plan.mjs; not a choice of the treatment).
   photoBreaks?: Record<string, number>;
   blog?: { hub?: { header?: string; card?: string }; post?: { layout?: string } };
   media: { hero: Media | null; heroByPageType?: Record<string, Media>; heroByRoute?: Record<string, Media>; pool?: Media[]; pools?: Pools; routePools?: Record<string, Pools>; routeCategories?: Record<string, string>; placeholders?: MediaKind[]; origin: string };

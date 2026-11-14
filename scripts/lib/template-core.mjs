@@ -4,6 +4,7 @@
 // copy is detected instead of guessed.
 
 import { createHash } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { cp, mkdir, readFile, readdir, rm, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -33,6 +34,12 @@ export const CORE_PATHS = Object.freeze([
   'docs/research/CSS_HOOKS.md',
 ]);
 export const CORE_MANIFEST = 'template-core.json';
+
+// The template a workspace syncs its core from (site-run.mjs adds the core step only then): the manifest's source,
+// relative to the workspace, where it still holds the sync script; else null, and the run uses the workspace's own copy.
+export function coreSourceOf(workspaceRoot, manifest) {
+  return manifest?.source && existsSync(resolve(workspaceRoot, manifest.source, 'scripts/sync-template-core.mjs')) ? manifest.source.replaceAll('\\', '/') : null;
+}
 export const CORE_SCHEMA = 'seo-site-template-core-v1';
 
 async function listFiles(root, path) {

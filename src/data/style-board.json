@@ -77,7 +77,7 @@
       "key": "gallery:band",
       "type": "gallery",
       "variant": "band",
-      "uses": 59,
+      "uses": 54,
       "names": [
         "gallery:band",
         "figure"
@@ -109,7 +109,7 @@
       "key": "featureGrid:cards",
       "type": "featureGrid",
       "variant": "cards",
-      "uses": 43,
+      "uses": 45,
       "names": [
         "featureGrid:cards"
       ],
@@ -421,7 +421,7 @@
       "key": "relatedPages:tiles",
       "type": "relatedPages",
       "variant": "tiles",
-      "uses": 12,
+      "uses": 13,
       "names": [
         "relatedPages:tiles"
       ],
@@ -834,12 +834,12 @@
       ]
     },
     {
-      "key": "process:photo-cards",
+      "key": "process:list",
       "type": "process",
-      "variant": "photo-cards",
-      "uses": 13,
+      "variant": "list",
+      "uses": 14,
       "names": [
-        "process:photo-cards"
+        "process:list"
       ],
       "evidence": [],
       "samples": [
@@ -850,7 +850,7 @@
           "blockId": "splitMedia-1-steps",
           "splitIndex": 0,
           "words": 125,
-          "slots": 1,
+          "slots": 0,
           "block": {
             "id": "splitMedia-1-steps",
             "type": "process",
@@ -879,7 +879,7 @@
                 "text": "We report impressions, clicks, completed direct bookings and the commission saved compared with getting the same bookings through OTAs."
               }
             ],
-            "variant": "photo-cards",
+            "variant": "list",
             "continues": "splitMedia-1"
           }
         },
@@ -890,7 +890,7 @@
           "blockId": "m6-steps",
           "splitIndex": 0,
           "words": 64,
-          "slots": 1,
+          "slots": 0,
           "block": {
             "id": "m6-steps",
             "type": "process",
@@ -919,7 +919,7 @@
                 "text": "Remote training and handover to your own staff"
               }
             ],
-            "variant": "photo-cards",
+            "variant": "list",
             "continues": "m6"
           }
         }
@@ -929,7 +929,7 @@
       "key": "splitMedia:tinted",
       "type": "splitMedia",
       "variant": "tinted",
-      "uses": 12,
+      "uses": 8,
       "names": [
         "splitMedia:tinted"
       ],
@@ -955,6 +955,113 @@
           "module": "splitMedia:tinted"
         }
       ],
+      "samples": [
+        {
+          "role": "longest",
+          "route": "/ota-optimization/",
+          "pageType": "solution",
+          "blockId": "m5",
+          "splitIndex": 1,
+          "words": 111,
+          "slots": 1,
+          "block": {
+            "id": "m5",
+            "type": "splitMedia",
+            "sourceSectionIds": [
+              "m5"
+            ],
+            "heading": "Regional, corporate and wholesale channels beyond the major OTAs",
+            "paragraphs": [
+              "We add regional, corporate and wholesale channels only when they suit your source markets and type of guest. Being available isn't enough of a reason to add a channel. We prepare content and promotions tailored to each channel, including regional platforms such as Traveloka, MakeMyTrip and Despegar. The same goes for HRS, Priceline and Hostelworld. For boutique hotels, we also cover Airbnb.",
+              "Through our [Hotel Distribution service](/hotel-distribution/), we split your inventory across OTAs, the GDS and direct channels based on booking trends and commissions. We also control pricing and availability to keep your rates in parity and lower the risk of overbooking."
+            ],
+            "wordCount": 102,
+            "media": null,
+            "variant": "tinted",
+            "mediaKind": "process",
+            "visuals": [
+              {
+                "id": "brief-m5-1",
+                "type": "photo",
+                "content": "An independent hotel owner seated in his property's small office discusses suitable booking channels with a remote specialist visible on his laptop, photographed from across the room with no readable screen text, signage or logos.",
+                "setting": "A client's hotel office, wide view",
+                "caption": "Choosing channels around your hotel's guests and source markets."
+              }
+            ]
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/hotel-distribution/",
+          "pageType": "solution",
+          "blockId": "splitMedia-1",
+          "splitIndex": 1,
+          "words": 15,
+          "slots": 1,
+          "block": {
+            "id": "splitMedia-1",
+            "type": "splitMedia",
+            "sourceSectionIds": [
+              "m2_3"
+            ],
+            "paragraphs": [
+              "We move only inventory that sits outside your contracted allotments, release periods and exclusivity commitments."
+            ],
+            "wordCount": 15,
+            "media": null,
+            "variant": "tinted",
+            "mediaKind": "process",
+            "visuals": [
+              {
+                "id": "m2_3_sequence",
+                "type": "data",
+                "purpose": "Shows the reader how contracted allotments are protected and what happens to unsold rooms once the release date passes.",
+                "caption": "What happens to contracted allotments",
+                "data": {
+                  "shape": "sequence",
+                  "items": [
+                    {
+                      "label": "Contracts stay fixed limits",
+                      "detail": "Contracted allotments, release periods and exclusivity commitments stay as they are unless you approve a change in writing."
+                    },
+                    {
+                      "label": "Release dates added",
+                      "detail": "We put every allotment's release date into the selling calendar."
+                    },
+                    {
+                      "label": "Unsold rooms return",
+                      "detail": "Once an allotment passes its release date, its unsold rooms go back to the shared pool."
+                    },
+                    {
+                      "label": "Offered on higher-yield channels",
+                      "detail": "Rooms that come back at release are offered on your higher-yield channels straight away."
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "brief-splitMedia-1-1",
+                "type": "photo",
+                "content": "In a close-up, a distribution specialist holds a hotel contract open with one hand while tracing an allotment clause with a fingertip, its print outside the plane of focus and unreadable.",
+                "setting": "Company office, quiet meeting room",
+                "caption": "Checking contractual commitments before reallocating rooms."
+              }
+            ],
+            "continues": "m2",
+            "stepsKeepPhoto": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "splitMedia:single",
+      "type": "splitMedia",
+      "variant": "single",
+      "uses": 5,
+      "names": [
+        "splitMedia:single"
+      ],
+      "evidence": [],
       "samples": [
         {
           "role": "longest",
@@ -1033,157 +1140,73 @@
                   ]
                 }
               }
-            ]
+            ],
+            "stepsKeepPhoto": true
           }
         },
         {
           "role": "shortest",
-          "route": "/hotel-distribution/",
+          "route": "/hotel-digital-marketing/",
           "pageType": "solution",
           "blockId": "splitMedia-1",
           "splitIndex": 1,
-          "words": 15,
-          "slots": 0,
+          "words": 35,
+          "slots": 1,
           "block": {
             "id": "splitMedia-1",
             "type": "splitMedia",
             "sourceSectionIds": [
-              "m2_3"
+              "m5_2"
             ],
+            "heading": "Booking Tracking That Credits Every Reservation",
             "paragraphs": [
-              "We move only inventory that sits outside your contracted allotments, release periods and exclusivity commitments."
+              "Before we increase your ad spend, we check that completed, uncancelled reservations can be traced back to the campaigns that produced them. We don't judge performance on clicks alone."
             ],
-            "wordCount": 15,
+            "wordCount": 29,
             "media": null,
-            "variant": "tinted",
+            "variant": "single",
             "mediaKind": "process",
             "visuals": [
               {
-                "id": "m2_3_sequence",
+                "id": "m5_2_sequence",
                 "type": "data",
-                "purpose": "Shows the reader how contracted allotments are protected and what happens to unsold rooms once the release date passes.",
-                "caption": "What happens to contracted allotments",
+                "purpose": "Shows the steps RateHarbor takes to trace every completed reservation to the campaign that produced it, before ad spend increases.",
+                "caption": "How we connect every completed booking to the campaign that brought the guest in.",
                 "data": {
                   "shape": "sequence",
                   "items": [
                     {
-                      "label": "Contracts stay fixed limits",
-                      "detail": "Contracted allotments, release periods and exclusivity commitments stay as they are unless you approve a change in writing."
+                      "label": "Named login access",
+                      "detail": "We work through a named login in your own analytics, advertising and booking-engine accounts."
                     },
                     {
-                      "label": "Release dates added",
-                      "detail": "We put every allotment's release date into the selling calendar."
+                      "label": "Cross-domain GA4 tracking",
+                      "detail": "We set up cross-domain tracking in Google Analytics 4 between your website and your booking engine."
                     },
                     {
-                      "label": "Unsold rooms return",
-                      "detail": "Once an allotment passes its release date, its unsold rooms go back to the shared pool."
+                      "label": "Conversions to ad platforms",
+                      "detail": "We pass booking-confirmation conversions to Google Ads and metasearch, and link each metasearch platform's tracking to your booking engine, with cancellations taken out."
                     },
                     {
-                      "label": "Offered on higher-yield channels",
-                      "detail": "Rooms that come back at release are offered on your higher-yield channels straight away."
+                      "label": "Test booking confirmed",
+                      "detail": "If your booking engine vendor has to install the tags, we provide the code and confirm a test booking within 5 business days."
+                    },
+                    {
+                      "label": "30-day check report",
+                      "detail": "We report impressions, clicks, completed direct bookings and the commission saved compared with getting the same bookings through OTAs."
                     }
                   ]
                 }
+              },
+              {
+                "id": "brief-splitMedia-1-1",
+                "type": "photo",
+                "content": "A marketing analyst at the company's office checks a completed reservation against its originating campaign on two monitors seen obliquely with all screen details out of focus, one hand resting on the mouse.",
+                "setting": "Canadian team's office, close desk view",
+                "caption": "Tracing completed reservations back to their campaigns."
               }
             ],
-            "continues": "m2"
-          }
-        }
-      ]
-    },
-    {
-      "key": "featureGrid:bullets",
-      "type": "featureGrid",
-      "variant": "bullets",
-      "uses": 6,
-      "names": [
-        "featureGrid:bullets"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/boutique-hotel-consulting/",
-          "pageType": "solution",
-          "blockId": "featureGrid-2",
-          "splitIndex": 0,
-          "words": 154,
-          "slots": 0,
-          "block": {
-            "id": "featureGrid-2",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "m2_2"
-            ],
-            "heading": "What We Need From You Before Kickoff",
-            "items": [
-              {
-                "heading": "Access and ownership",
-                "paragraphs": [
-                  "Before kickoff, you give us your property details, user access to your systems and the name of the person responsible for the work. If any access is missing, the timeline stalls."
-                ]
-              },
-              {
-                "heading": "Calls and approvals",
-                "paragraphs": [
-                  "You join a 60-minute kickoff call, then weekly or monthly strategy calls, and you reply to approval requests within 2 business days. Slow approvals delay delivery."
-                ]
-              },
-              {
-                "heading": "No marketing person",
-                "paragraphs": [
-                  "If you don't have a marketing person, we train your general manager or a staff member you nominate. We can also act as your interim marketing lead until your new hire is trained."
-                ]
-              },
-              {
-                "heading": "Data access safeguards",
-                "paragraphs": [
-                  "Your data stays in your systems, and only our team has remote access to it. We keep our working files in access-controlled cloud storage that only our team can use. No subcontractor or external provider accesses your data. Our [privacy policy](/privacy-policy/) sets out the details."
-                ]
-              }
-            ],
-            "mediaKind": "material",
-            "variant": "bullets",
-            "planned": true
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/our-process/",
-          "pageType": "general",
-          "blockId": "m7",
-          "splitIndex": 0,
-          "words": 106,
-          "slots": 0,
-          "block": {
-            "id": "m7",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "m7"
-            ],
-            "heading": "Quick Services and Fixed-Scope Consulting",
-            "items": [
-              {
-                "heading": "Checklist and turnaround",
-                "paragraphs": [
-                  "At the start, we send you an access and data checklist. Once it's complete, we finish most quick services within 1 to 3 business days. Most delays come from waiting for property details and access."
-                ]
-              },
-              {
-                "heading": "One-time scope",
-                "paragraphs": [
-                  "A one-time service gives you a snapshot of your property. It doesn't include ongoing adjustments as demand changes."
-                ]
-              },
-              {
-                "heading": "Commercial Strategy consulting",
-                "paragraphs": [
-                  "If you already have a revenue team and want an outside view, [Commercial Strategy](/commercial-strategy/) gives you fixed-scope consulting. That means a written revenue audit, a custom roadmap, pricing and distribution strategy, and market positioning analysis that includes your competitive set."
-                ]
-              }
-            ],
-            "mediaKind": "product",
-            "variant": "bullets",
+            "stepsKeepPhoto": true,
             "planned": true
           }
         }
@@ -1330,6 +1353,104 @@
               }
             ],
             "mediaKind": "process"
+          }
+        }
+      ]
+    },
+    {
+      "key": "featureGrid:bullets",
+      "type": "featureGrid",
+      "variant": "bullets",
+      "uses": 4,
+      "names": [
+        "featureGrid:bullets"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "longest",
+          "route": "/boutique-hotel-consulting/",
+          "pageType": "solution",
+          "blockId": "featureGrid-2",
+          "splitIndex": 0,
+          "words": 154,
+          "slots": 0,
+          "block": {
+            "id": "featureGrid-2",
+            "type": "featureGrid",
+            "sourceSectionIds": [
+              "m2_2"
+            ],
+            "heading": "What We Need From You Before Kickoff",
+            "items": [
+              {
+                "heading": "Access and ownership",
+                "paragraphs": [
+                  "Before kickoff, you give us your property details, user access to your systems and the name of the person responsible for the work. If any access is missing, the timeline stalls."
+                ]
+              },
+              {
+                "heading": "Calls and approvals",
+                "paragraphs": [
+                  "You join a 60-minute kickoff call, then weekly or monthly strategy calls, and you reply to approval requests within 2 business days. Slow approvals delay delivery."
+                ]
+              },
+              {
+                "heading": "No marketing person",
+                "paragraphs": [
+                  "If you don't have a marketing person, we train your general manager or a staff member you nominate. We can also act as your interim marketing lead until your new hire is trained."
+                ]
+              },
+              {
+                "heading": "Data access safeguards",
+                "paragraphs": [
+                  "Your data stays in your systems, and only our team has remote access to it. We keep our working files in access-controlled cloud storage that only our team can use. No subcontractor or external provider accesses your data. Our [privacy policy](/privacy-policy/) sets out the details."
+                ]
+              }
+            ],
+            "mediaKind": "material",
+            "variant": "bullets",
+            "planned": true
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/our-process/",
+          "pageType": "general",
+          "blockId": "m7",
+          "splitIndex": 0,
+          "words": 106,
+          "slots": 0,
+          "block": {
+            "id": "m7",
+            "type": "featureGrid",
+            "sourceSectionIds": [
+              "m7"
+            ],
+            "heading": "Quick Services and Fixed-Scope Consulting",
+            "items": [
+              {
+                "heading": "Checklist and turnaround",
+                "paragraphs": [
+                  "At the start, we send you an access and data checklist. Once it's complete, we finish most quick services within 1 to 3 business days. Most delays come from waiting for property details and access."
+                ]
+              },
+              {
+                "heading": "One-time scope",
+                "paragraphs": [
+                  "A one-time service gives you a snapshot of your property. It doesn't include ongoing adjustments as demand changes."
+                ]
+              },
+              {
+                "heading": "Commercial Strategy consulting",
+                "paragraphs": [
+                  "If you already have a revenue team and want an outside view, [Commercial Strategy](/commercial-strategy/) gives you fixed-scope consulting. That means a written revenue audit, a custom roadmap, pricing and distribution strategy, and market positioning analysis that includes your competitive set."
+                ]
+              }
+            ],
+            "mediaKind": "product",
+            "variant": "bullets",
+            "planned": true
           }
         }
       ]
@@ -1539,48 +1660,6 @@
       ]
     },
     {
-      "key": "relatedPages:links",
-      "type": "relatedPages",
-      "variant": "links",
-      "uses": 1,
-      "names": [
-        "relatedPages:links"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "only",
-          "route": "/dynamic-pricing-strategy/",
-          "pageType": "solution",
-          "blockId": "related",
-          "splitIndex": 0,
-          "words": 9,
-          "slots": 0,
-          "block": {
-            "id": "related",
-            "type": "relatedPages",
-            "heading": "Related services",
-            "links": [
-              {
-                "label": "Services",
-                "href": "/services/"
-              },
-              {
-                "label": "Hotel Digital Marketing",
-                "href": "/hotel-digital-marketing/"
-              },
-              {
-                "label": "Boutique Hotel Consulting",
-                "href": "/boutique-hotel-consulting/"
-              }
-            ],
-            "variant": "links",
-            "planned": true
-          }
-        }
-      ]
-    },
-    {
       "key": "splitMedia:panel",
       "type": "splitMedia",
       "variant": "panel",
@@ -1692,53 +1771,6 @@
               {}
             ],
             "competitor": true
-          }
-        }
-      ]
-    },
-    {
-      "key": "process:list",
-      "type": "process",
-      "variant": "list",
-      "uses": 1,
-      "names": [
-        "process:list"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "only",
-          "route": "/contact-us/",
-          "pageType": "contact",
-          "blockId": "m3",
-          "splitIndex": 0,
-          "words": 105,
-          "slots": 0,
-          "block": {
-            "id": "m3",
-            "type": "process",
-            "sourceSectionIds": [
-              "m3"
-            ],
-            "heading": "What Happens After You Send a Message",
-            "paragraphs": [
-              "We talk through your needs before quoting in writing, because your channel mix, systems and goals set the scope and price."
-            ],
-            "steps": [
-              {
-                "heading": "Free consultation",
-                "text": "Once we've replied, we book a free 30-minute consultation to learn about your property, your goals and your current setup. You don't commit to anything."
-              },
-              {
-                "heading": "Written proposal and quote",
-                "text": "Within 5 business days of that call, we send you a written proposal with a free quote. There's no instant price, and even a rough figure waits for the proposal."
-              },
-              {
-                "heading": "Onboarding begins",
-                "text": "Once you've signed the proposal and given us access, we start onboarding your property."
-              }
-            ],
-            "mediaKind": "process"
           }
         }
       ]
@@ -2004,42 +2036,6 @@
           }
         }
       ]
-    },
-    {
-      "key": "splitMedia:single",
-      "type": "splitMedia",
-      "variant": "single",
-      "uses": 1,
-      "names": [
-        "splitMedia:single"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "only",
-          "route": "/terms-and-conditions/",
-          "pageType": "privacy",
-          "blockId": "splitMedia-1",
-          "splitIndex": 0,
-          "words": 74,
-          "slots": 1,
-          "block": {
-            "id": "splitMedia-1",
-            "type": "splitMedia",
-            "sourceSectionIds": [
-              "overview_2"
-            ],
-            "heading": "How We Work With Hotel Owners",
-            "paragraphs": [
-              "We're a [Canadian business-to-business service company](/about-us/). That means we agree every engagement directly with you as a hotel owner or operator, never with travellers. You can take our services and related online services on their own or together, and we don't run hotel operations.",
-              "With our [remote working process](/our-process/), we work only in your hotel's own systems and online accounts. We have no on-site staff at any property."
-            ],
-            "wordCount": 68,
-            "media": null,
-            "mediaKind": "lifestyle"
-          }
-        }
-      ]
     }
   ],
   "unbacked": [
@@ -2048,18 +2044,16 @@
     "iconList:checks",
     "testimonials:grid",
     "relatedPages:tiles",
-    "process:photo-cards",
-    "featureGrid:bullets",
+    "process:list",
+    "splitMedia:single",
     "orderCase:default",
     "process:circles",
+    "featureGrid:bullets",
     "table:cards",
-    "relatedPages:links",
     "gallery:circles",
-    "process:list",
     "contactChannels:list",
     "iconList:icons",
     "splitMedia:icons",
-    "process:cards",
-    "splitMedia:single"
+    "process:cards"
   ]
 }

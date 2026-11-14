@@ -6,10 +6,10 @@
 // (a line icon over each card's title: the cards of a site whose cards name services, scripts/lib/slot-visuals.mjs; the
 // icon from the card's words, config/card-icons.json, drawn from Lucide, src/lib/lucide-icons.json).
 import { cardIcon } from '../../../scripts/lib/card-icons.mjs';
-import { cardGridMax } from '../../../scripts/lib/rules.mjs';
+import { cardGridColumns, cardTitleLevel } from '../../../scripts/lib/block-layout.mjs';
 import { fitRatio, usualRatio } from '../../../scripts/lib/media-ratio.mjs';
 import lucide from '../../lib/lucide-icons.json';
-import { density, gridPlan, variants, type FeatureGridBlock, type Media } from '../../lib/authoring';
+import { density, variants, type FeatureGridBlock, type Media } from '../../lib/authoring';
 import Eyebrow from './Eyebrow.astro';
 import InlineText from '../blog/InlineText.astro';
 import MediaFigure from './MediaFigure.astro';
@@ -21,11 +21,11 @@ const pattern = variant ?? (media.length ? 'media' : 'cards');
 // One frame ratio for the grid, following the photos' orientation (lib/media-ratio.mjs).
 const ratio = fitRatio(usualRatio('featureGrid'), media);
 const words = Math.max(...block.items.map((item) => item.wordCount ?? 0));
-// A grid of a card set going on in grids of its own takes the set's column count (PageView.astro setColumns). Four
-// cards side by side only while every card is short (scripts/lib/rules.mjs cardGridMax), counted on the cards' own text
-// (Site Factory's card sections carry no wordCount).
-const most = cardGridMax(Math.max(...block.items.map((item) => item.wordCount ?? item.paragraphs.join(' ').split(/\s+/).filter(Boolean).length)));
-const grid = gridPlan(block.items.length, most, 2, block.setColumns);
+// Columns: a bullet list's, or the grid's (four short cards a row; a card set's grids take the set's count, PageView.astro
+// setColumns), from scripts/lib/block-layout.mjs, shared with the layout plan.
+const grid = cardGridColumns(block, pattern);
+// The equal grid's tracks (every pattern but bullets).
+const tracks = 'style' in grid ? grid : undefined;
 // A grid going on from the one above starts its cards under that grid's first column, as the next row of one set does
 // (hotel-rm's home, 2026-11-14: the set's last two cards stood centred under three, off its left edge); only a grid's
 // own short last row is centred.
@@ -34,10 +34,8 @@ const numbered = pattern === 'numbered' || pattern === 'outline-numbered';
 // Icon cards: each card's icon (null: none, and no row for it when no card has one).
 const icons = pattern === 'icons' ? block.items.map((item) => { const name = cardIcon(item); return name ? (lucide.icons as Record<string, string>)[name] ?? null : null; }) : [];
 const cardRows = (media.length ? 1 : 0) + (numbered || pattern === 'icon-cards' || icons.some(Boolean) ? 1 : 0) + 2;
-// Card titles sit one level below the grid's own title, or the title of the section it goes on from (continues: the
-// hotel home's six service cards over two grids had h3 titles in the first and h2 in the second, 22px and 36px);
-// without either, each card is a page section (h2).
-const Title = block.heading || block.continues ? 'h3' : 'h2';
+// Card titles one level below the grid's title or the section it goes on from (block-layout.mjs cardTitleLevel).
+const Title = cardTitleLevel(block);
 // Numbered cards are an ordered list, so their order reaches assistive technology, not only the visual 01/02.
 const List = numbered ? 'ol' : 'div';
 const Item = numbered ? 'li' : 'article';
@@ -51,7 +49,7 @@ const Item = numbered ? 'li' : 'article';
       {block.heading && <h2 class="feature-grid__heading">{block.heading}</h2>}
       {block.paragraphs?.map((paragraph) => <p class="block__lead"><InlineText text={paragraph} /></p>)}
     </div>
-    <ul class="point-list__items" data-columns={block.items.length > 6 ? 2 : 1}>
+    <ul class="point-list__items" data-columns={grid.columns}>
       {block.items.map((item) => (
         <li class="point-list__item"><Title class="point-list__title">{item.heading}</Title>{item.paragraphs.map((paragraph) => <p><InlineText text={paragraph} /></p>)}</li>
       ))}
@@ -62,9 +60,9 @@ const Item = numbered ? 'li' : 'article';
     <Eyebrow text={block.eyebrow} />
     {block.heading && <h2 class="feature-grid__heading">{block.heading}</h2>}
     {block.paragraphs?.map((paragraph) => <p class="block__lead"><InlineText text={paragraph} /></p>)}
-    <List class="feature-grid" data-layout="equal-grid" data-columns={gridPlan(block.items.length, most).columns} data-density={density(words)} style={`${grid.style}; --card-rows: ${cardRows}`}>
+    <List class="feature-grid" data-layout="equal-grid" data-columns={tracks?.ownColumns} data-density={density(words)} style={`${tracks?.style}; --card-rows: ${cardRows}`}>
       {block.items.map((item, index) => (
-        <Item class="feature-card" data-explicit-span={block.span ? 'true' : undefined} style={block.span ? `grid-column: span ${block.span}` : block.continues ? undefined : grid.itemStyle(index)}>
+        <Item class="feature-card" data-explicit-span={block.span ? 'true' : undefined} style={block.span ? `grid-column: span ${block.span}` : block.continues ? undefined : tracks?.itemStyle(index)}>
           {media[index] && <MediaFigure media={media[index]} ratio={ratio} class="feature-card__media" />}
           {numbered && <span class="feature-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
           {pattern === 'icon-cards' && <span class="feature-card__mark" aria-hidden="true"></span>}

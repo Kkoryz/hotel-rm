@@ -30,3 +30,26 @@ test('a photo under the header counts for the part of it below the header, not f
     await browser.close();
   }
 });
+
+test("an article's own header is content, not the site's shell: its hero video counts", async () => {
+  // Concord's home opens on a 1440x1000 video in article > header, measured as shell and counted for nothing.
+  const { chromium } = await import('playwright');
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage({ viewport: { width: 1000, height: 800 } });
+    await page.setContent(`<!doctype html><body style="margin:0">
+      <header style="height:100px">Site</header>
+      <main><article>
+        <header><video style="display:block;width:1000px;height:900px;background:#000"></video><h1>Title</h1></header>
+        <section style="height:900px"><p style="margin:0">Text after the hero.</p></section>
+      </article></main>
+      <footer style="height:100px">Footer</footer>
+    </body>`);
+    const density = await measureDensity(page);
+    assert.equal(density.images, 1);
+    assert.ok(density.photoAreaPct >= 45, `the video counts (${density.photoAreaPct}%)`);
+    assert.ok(density.words >= 5, 'the title in the article header counts as words');
+  } finally {
+    await browser.close();
+  }
+});

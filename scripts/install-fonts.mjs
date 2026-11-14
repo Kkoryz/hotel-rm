@@ -15,14 +15,14 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
-import { FONTS_CSS, FONTS_DIR, INSTALLED_FONTS, downloadFaces, fontPlan, fontsCss, installedFonts, stripFontFaces, withFontsImport } from './lib/font-install.mjs';
+import { FONTS_CSS, FONTS_DIR, INSTALLED_FONTS, downloadFaces, fontPlan, fontsCss, installedFonts, referenceFontLock, stripFontFaces, withFontsImport } from './lib/font-install.mjs';
 
 const FONT_FILE = /\.(woff2?|ttf|otf)$/i;
 
 export async function installFonts({ root = process.cwd(), fetch = globalThis.fetch, cacheDir = process.env.FONT_CACHE_DIR || resolve(root, '.pipeline/cache/fonts') } = {}) {
   const fontRoles = await readJson(resolve(root, 'docs/research/analysis/font-roles.json'), null);
   if (!fontRoles) throw new Error('fonts: docs/research/analysis/font-roles.json is missing (the analysis step writes it)');
-  const fontLock = await readJson(resolve(root, 'docs/research/raw/font-lock.json'), null);
+  const fontLock = await referenceFontLock(root);
   if (!fontLock) throw new Error('fonts: docs/research/raw/font-lock.json is missing (the capture step writes it)');
   const plan = fontPlan({ fontRoles, fontLock });
   // Everything is downloaded before anything is written: a failure leaves the site's fonts as they were.

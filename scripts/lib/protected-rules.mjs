@@ -1,3 +1,5 @@
+import { PLAN_ASSERTIONS } from './plan-assertions.mjs';
+
 // The template's own layout decisions a site's stylesheet may not undo (owner 2026-11-12: "不应该照搬固定宽度和顶端对齐 应该
 // 适配我们自己的设计"). The hotel site's style-board repair wrote a rule stronger than the template's to set its split
 // photos back to the competitor's fixed shape and top alignment, and another pinned the closing band's button to the
@@ -108,19 +110,10 @@ export function stripProtected(css) {
 // from the competitor's module, given to the design review and to every repair (config/agent-steps {{siteRules}}) so a
 // review does not ask to copy the competitor's fixed values and a repair does not write them. The protected ones are
 // also taken out by code if a repair writes them anyway (stripProtected).
-export const SITE_DECISIONS = Object.freeze([
-  'the style of each module follows the competitor; its sizes follow our copy: widths, heights, column counts and line lengths are not copied as fixed values',
-  'a title and every heading are sized by the template to their own words (at most two lines for a page title on desktops); no rule sets their font-size or the fit variables, and no section heading is larger than its page\'s title',
-  'two sections of the same shape (rows of short items) do not stand one under the other: the template sets one of them out as a list beside its heading',
-  'a card set split over several grids reads as one section: one heading, one card width',
-  'a card set\'s last grid starts under the set\'s first column; only a grid\'s own short last row is centred',
-  'a hero lead much longer than the competitor\'s stands under the hero, not on its photo',
-  'cards that name services carry a line icon, not a photo',
-  'a full-width photo band may carry a button on its lower edge, linking where the section before it links',
-  // The hotel site's sheet listed by hand the page types whose header sits over the hero photo; each page type that
-  // came to open on a photo (privacy, terms, the blog) showed the header as a black band over it.
-  'what follows the hero (a header over its photo, the photo\'s overlay) is written for main[data-hero-photo] (set by the template on every page that opens on a photo), never for a list of page types',
-]);
+// The sentences are the plan gate's assertion table (lib/plan-assertions.mjs): each is checked by code before the photos
+// (an assertion with a check) or judged by the review alone (gate "review"), so what the review is told and what the
+// gate checks cannot drift apart (hotel-rm 2026-11-14: the review was told a rule the template did not keep).
+export const SITE_DECISIONS = Object.freeze(PLAN_ASSERTIONS.filter((assertion) => assertion.rule).map((assertion) => assertion.rule));
 export function siteRules(components = {}) {
   const rules = [...new Set(PROTECTED_RULES.map((guard) => guard.rule.replace(/ \(template\.css[^)]*\)$/, '')))];
   if (components.headingAlign === 'start') rules.unshift('every section heading starts on the content\'s left edge; none is centred, even where the competitor\'s module centres it');

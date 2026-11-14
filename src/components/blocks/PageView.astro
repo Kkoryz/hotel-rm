@@ -1,7 +1,8 @@
 ---
+import { cardSet, cardSetColumns } from '../../../scripts/lib/block-layout.mjs';
 import { bandLink, withMediaModules } from '../../../scripts/lib/media-slots.mjs';
 import { headingFitVars, heroLeadShown, wrapEmFor } from '../../../scripts/lib/heading-fit.mjs';
-import { tintedSections, tintStyle } from '../../../scripts/lib/section-surfaces.mjs';
+import { PAGE_LEAD, tintedSections, tintStyle } from '../../../scripts/lib/section-surfaces.mjs';
 import { blockVariant, isBuilt, pageHero, pageMedia, variants, type AuthoringPage } from '../../lib/authoring';
 import Breadcrumbs from '../site/Breadcrumbs.astro';
 import TrustBar from '../site/TrustBar.astro';
@@ -19,13 +20,11 @@ const blocks = withMediaModules(page, variants, { isBuilt }) as AuthoringPage['b
 // Each block's pattern variant: split rows follow the reference page's split sequence (splitIndex: their place in it).
 let splits = 0;
 // A card set going on in grids of its own (continues) keeps one card width: every grid of the set takes the widest
-// grid's column count, a shorter row centred (the hotel hub's 4 + 3 + 3 + 3 entry cards were 255px, then 350px wide).
-const setOf = (block: AuthoringPage['blocks'][number]) => ('continues' in block && block.continues) || block.id;
-const setColumns = new Map<string, number>();
-for (const block of blocks) if (block.type === 'featureGrid' && blocks.some((item) => item !== block && setOf(item) === setOf(block))) setColumns.set(setOf(block), Math.max(setColumns.get(setOf(block)) ?? 0, Math.min(4, block.items.length)));
+// grid's column count (scripts/lib/block-layout.mjs cardSetColumns, shared with the layout plan).
+const setColumns = cardSetColumns(blocks);
 const resolved = blocks.map((block, index) => {
   const splitIndex = block.type === 'splitMedia' ? splits++ : 0;
-  const columns = block.type === 'featureGrid' ? setColumns.get(setOf(block)) : undefined;
+  const columns = block.type === 'featureGrid' ? setColumns.get(cardSet(block)) : undefined;
   // A photo band with a button leads to the page the section before it links to (media-slots.mjs bandLink).
   const link = block.type === 'gallery' && block.action ? bandLink(blocks, index, page.route) : null;
   const shown = columns ? { ...block, setColumns: columns } : link ? { ...block, bandLink: link } : block;
@@ -48,7 +47,8 @@ const titleFit = headingFitVars(page.hero.heading, { charEm: wrapEmFor(variants.
 const heroVariant = pageHero(page).variant;
 const leadBelow = ['media-overlay', 'media-form'].includes(heroVariant) && Boolean(page.hero.lead?.length) && !heroLeadShown(page.hero.lead, variants.heroText);
 // Neighbouring plain sections alternate white and tinted (lib/section-surfaces.mjs), a section's charts with it.
-const tintCss = tintStyle(new Set([...tintedSections(resolved.map(({ block }) => block))].flatMap((id) => [id, `${id}-charts`])));
+const variantOf = new Map(resolved.map(({ block, variant }) => [block.id, variant]));
+const tintCss = tintStyle(new Set([...tintedSections([...(leadBelow ? [PAGE_LEAD] : []), ...resolved.map(({ block }) => block)], (block) => variantOf.get(block.id))].flatMap((id) => [id, `${id}-charts`])));
 const mainStyle = titleFit ? `--title-ems-phone: ${titleFit['--fit-ems-phone']}; --title-min-phone: ${titleFit['--fit-min-phone']}` : undefined;
 ---
 

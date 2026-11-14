@@ -38,10 +38,22 @@ export const SNAPSHOT_FILES = Object.freeze({
   // (proof-signoff.mjs ownerTodoItems).
   'owner-todo.json': '../owner/todo.json',
 });
-const OPTIONAL = new Set(['keywords.json', 'capabilities.json', 'slot-manifest.json', 'manifest.json', 'handoff.json', 'package/identity/project.yaml', 'owner-todo.json']);
+export const OPTIONAL = new Set(['keywords.json', 'capabilities.json', 'slot-manifest.json', 'manifest.json', 'handoff.json', 'package/identity/project.yaml', 'owner-todo.json']);
+
+// The project's places of the files a snapshot cannot be made without.
+export const missingProjectFiles = (project) => Object.entries(SNAPSHOT_FILES).filter(([name, path]) => !OPTIONAL.has(name) && !existsSync(resolve(project, path))).map(([, path]) => path);
+
+// The whole site's plan (the snapshot's pages.json) from the project's tree and its routes, made in memory: the input
+// check (check-inputs.mjs) runs it before anything is frozen. A page the package types itself (page_type: a legal page
+// is privacy) takes that type.
+export async function projectPlan(project) {
+  const read = (name) => (existsSync(resolve(project, SNAPSHOT_FILES[name])) ? readJson(resolve(project, SNAPSHOT_FILES[name])) : null);
+  const pageTypes = new Map(((await read('authoring_package.json'))?.pages ?? []).filter((page) => page.page_type).map((page) => [page.page_id, page.page_type]));
+  return handoffStatuses(sitePlanFromTree({ tree: await read('tree.json'), sitePlan: await read('site_plan.json'), keywords: await read('keywords.json'), pageTypes }), await read('handoff.json'));
+}
 
 export async function freezeSiteFactory({ project, out }) {
-  const missing = Object.entries(SNAPSHOT_FILES).filter(([name, path]) => !OPTIONAL.has(name) && !existsSync(resolve(project, path))).map(([, path]) => path);
+  const missing = missingProjectFiles(project);
   if (missing.length) throw new Error(`${project} lacks ${missing.join(', ')}`);
   const hash = createHash('sha256');
   for (const [name, path] of Object.entries(SNAPSHOT_FILES)) if (existsSync(resolve(project, path))) hash.update(name).update(await readFile(resolve(project, path)));
@@ -50,11 +62,8 @@ export async function freezeSiteFactory({ project, out }) {
   // The same inputs were frozen before: that snapshot is the one (complete: pages.json is written last).
   if (existsSync(resolve(folder, 'pages.json'))) return { folder, version, existed: true };
   if (existsSync(folder)) throw new Error(`${folder} is an unfinished snapshot: remove it and freeze again`);
-  const read = (name) => (existsSync(resolve(project, SNAPSHOT_FILES[name])) ? readJson(resolve(project, SNAPSHOT_FILES[name])) : null);
   // The whole site's plan from the tree and its routes, before anything is copied (a broken tree freezes nothing).
-  // A page the package types itself (page_type: a legal page is privacy) takes that type.
-  const pageTypes = new Map(((await read('authoring_package.json'))?.pages ?? []).filter((page) => page.page_type).map((page) => [page.page_id, page.page_type]));
-  const plan = handoffStatuses(sitePlanFromTree({ tree: await read('tree.json'), sitePlan: await read('site_plan.json'), keywords: await read('keywords.json'), pageTypes }), await read('handoff.json'));
+  const plan = await projectPlan(project);
   await mkdir(folder, { recursive: true });
   const copied = [];
   for (const [name, path] of Object.entries(SNAPSHOT_FILES)) {

@@ -4,12 +4,12 @@
 
 import { BLOCK_VARIANTS, TEMPLATE_VARIANTS } from './authoring-contract.mjs';
 import { galleryShown } from './gallery.mjs';
-import { MEDIA_KINDS } from './rules.mjs';
+import { MAX_PHOTO_STEPS, MEDIA_KINDS } from './rules.mjs';
 import { isChartData } from './visual-data.mjs';
 import { DENSITY_EXEMPT_PAGE_TYPES, bandFor } from './density.mjs';
 import { blockVisual, cardGridVariant, cardVisual } from './slot-visuals.mjs';
 // The site's fitted model over the template's defaults: a module the site has not measured yet keeps its default.
-import { DEFAULT_BLOCK_MODEL, planVisualBudget } from './visual-budget.mjs';
+import { DEFAULT_BLOCK_MODEL, planVisualBudget, varyItemRows, varySurfaces } from './visual-budget.mjs';
 import { signatureBands } from './pattern-map.mjs';
 
 // Pattern variant for one block: the content's explicit request, then the page type's reference pattern (split rows
@@ -19,11 +19,18 @@ import { signatureBands } from './pattern-map.mjs';
 export function resolveVariant(block, pageType, splitIndex, components) {
   // A variant the visual budget set for this page (planVisualBudget: photo cards cut to icon cards, tiles to links).
   if (block.planned && block.variant) return block.variant;
+  // A split row that draws its section's chart in the photo's place is a plain text-beside row: the photo variants
+  // bleed or frame a photo, not a chart (SplitMediaBlock.astro set it so alone, and the page's surfaces counted a tinted
+  // band that was not there: hotel-rm 2026-11-14).
+  if (block.type === 'splitMedia' && (block.visuals ?? []).some((visual) => visual.type === 'data' && isChartData(visual.data))) return 'single';
   // The site's own choice for this section (pageTypes.<type>.blocks.<block id>.variant, set by the treatment or a
   // repair) comes before the variant the section was given from the competitor's module.
   const chosen = components.pageTypes?.[pageType]?.blocks?.[block.id]?.variant;
   if (chosen) return chosen;
   const variant = designedVariant(block, pageType, splitIndex, components);
+  // A related block's photo tiles (each page's own photo) are links on a site whose cards carry icons: cards that name
+  // services carry a line icon, not a photo (motel 2026-11-14: twelve service pages' related tiles were photo panels).
+  if (block.type === 'relatedPages') return variant === 'tiles' && cardVisual(components) === 'icon' ? 'links' : variant;
   if (block.type !== 'featureGrid') return variant;
   // Photo cards by the site-wide switch (components.featureGridMedia) are photo cards too.
   return variant === undefined && components.featureGridMedia && cardVisual(components) !== 'photo' ? cardGridVariant('media', components) : cardGridVariant(variant, components);
@@ -166,7 +173,7 @@ export const heroShowsPhoto = (variant) => TEMPLATE_VARIANTS.hero.includes(varia
 // policy, legal text, shows none.
 // A legal page opens without a photo unless the site sets its own hero for it (components.heroByPageType.privacy: the
 // competitor's privacy page opens on a photo masthead; the hotel review asked twice for the configured hero to show).
-const privacyHero = (page, components = {}) => page.pageType !== 'privacy' || Boolean(components.heroByPageType?.privacy);
+export const privacyHero = (page, components = {}) => page.pageType !== 'privacy' || Boolean(components.heroByPageType?.privacy);
 export function heroPhoto(page, components, sitePhotos = []) {
   if (!privacyHero(page, components)) return null;
   const own = sitePhotos.find((photo) => photo.class === 'hero' && photo.pages?.includes(page.route)) ?? sitePhotos.find((photo) => photo.class === 'hero' && !photo.pages);
@@ -183,7 +190,7 @@ export function heroPhoto(page, components, sitePhotos = []) {
 // blueprint's) and the hubs (a photo card per child page already) get none. A wall follows a copy section: between
 // two proof sections (certificates, testimonials...) a photo wall has no purpose, so a run of proof gets none.
 const MEDIA_MODULE_EXEMPT = new Set(['contact', 'privacy', 'home', 'products_hub', 'solutions_hub', 'wholesale_hub', 'blog_hub', 'blog_post']);
-const PROOF_BLOCKS = new Set(['certifications', 'testimonials', 'caseStudies', 'logos', 'stats', 'table', 'orderCase', 'orderRoutes', 'styleGrid', 'relatedPages', 'sources', 'trustBar', 'gallery', 'pricing', 'swatches']);
+export const PROOF_BLOCKS = new Set(['certifications', 'testimonials', 'caseStudies', 'logos', 'stats', 'table', 'orderCase', 'orderRoutes', 'styleGrid', 'relatedPages', 'sources', 'trustBar', 'gallery', 'pricing', 'swatches']);
 // A text section that asks for a photo of its own (Site Factory's visuals of type photo) shows it beside its text, as
 // a split row (the competitor's photo-beside-text module) (owner 2026-10-30: a photo where the writer asked for one;
 // the density audit keeps the page within the competitor's share of photos). Renderer, allocation and plan all see it.
@@ -199,9 +206,13 @@ const stepsOf = (block, components, pageType) => (block.visuals ?? []).filter((v
   type: 'process',
   ...(visual.caption ? { paragraphs: [visual.caption] } : {}),
   steps: visual.data.items.map((item) => (item.detail ? { heading: item.label, text: item.detail } : item.label)),
-  variant: components.pageTypes?.[pageType]?.process ?? components.process ?? 'photo-cards',
+  variant: stepsVariant(components.pageTypes?.[pageType]?.process ?? components.process ?? 'photo-cards', visual.data.items.length),
   ...(block.type === 'cta' ? {} : { continues: block.id }),
 }));
+// Steps over a photo of the work stack on a phone with the photo stretched behind them all: past MAX_PHOTO_STEPS
+// (lib/rules.mjs) they are a list (hotel-rm 2026-11-14: four and five steps over one photo, 1,240-1,510px on a phone,
+// the photo "severely cropped").
+function stepsVariant(variant, count) { return variant === 'photo-cards' && count > MAX_PHOTO_STEPS ? 'list' : variant; }
 // The closing band's steps come before it, the page's last word staying the band (owner 2026-11-09 via Site Factory:
 // a closing section's steps were dropped; its charts are drawn before it too, PageView.astro).
 // A section split into grids of cards (sf-kinds chunkCards) that renders as a bullet list is one list again: its
@@ -222,6 +233,35 @@ export const withSectionVisuals = (blocks, components = {}, pageType = '') => jo
   const own = steps.length && steps.every((item) => item.variant !== 'photo-cards') ? { ...askedPhoto(block), stepsKeepPhoto: true } : askedPhoto(block);
   return [own, ...steps];
 });
+
+// The words a page renders as the density measure counts them (lib/density.mjs: p, li, h1-h4, summary, outside nav,
+// forms and tables; a closed accordion's text is not rendered): its copy without the labels of buttons and fields,
+// eyebrows, captions, a table's cells, a person's name and role, and the answers under a FAQ's closed questions. Over
+// the two sites' 34 measured pages this is within about 15% of the count the audit measured; copyWords, which counts
+// every string, ran 6-49% over (the FAQ answers).
+const NOT_RENDERED = new Set(['id', 'type', 'variant', 'href', 'src', 'srcset', 'media', 'mediaKind', 'continues', 'sourceSectionIds', 'visuals', 'factIds', 'slot', 'eyebrow', 'cta', 'secondaryCta', 'label', 'submitLabel', 'table', 'alt', 'caption', 'author', 'role', 'name', 'issuer', 'scope', 'number', 'validUntil', 'unit', 'value', 'fields', 'answer', 'photoBrief', 'brief']);
+export function renderedWords(value) {
+  if (typeof value === 'string') return (value.replace(/\]\([^)]*\)/g, ']').match(/[\p{L}\p{N}][\p{L}\p{N}'’.-]*/gu) ?? []).length;
+  if (Array.isArray(value)) return value.reduce((sum, item) => sum + renderedWords(item), 0);
+  if (value && typeof value === 'object') return Object.entries(value).reduce((sum, [key, item]) => sum + (NOT_RENDERED.has(key) ? 0 : renderedWords(item)), 0);
+  return 0;
+}
+
+// A block's words as the trial build and the layout audit measure them (lib/density.mjs measureBlocks), the words the
+// block model is fitted on: its rendered copy, and an FAQ's answers only where its variant shows them open (open-list
+// and cards every one; the others the first under a heading, unless the site's FAQ starts closed: FaqBlock.astro).
+// hotel-rm /ota-optimization/ 2026-11-14: every answer counted made an accordion 2,456px for 832px measured.
+// Whether a section's data is drawn as charts after it (PageView.astro: a split row draws them in its photo's place).
+export const drawsCharts = (block) => block.type !== 'splitMedia' && (block.visuals ?? []).some((visual) => visual.type === 'data' && isChartData(visual.data));
+
+export function blockWords(block, variant, components = {}) {
+  const words = renderedWords(block);
+  if (block.type !== 'faq') return words;
+  const items = block.items ?? [];
+  const open = ['open-list', 'cards'].includes(variant) ? items : components.faqFirst !== 'closed' && block.heading ? items.slice(0, 1) : [];
+  return words + open.reduce((sum, item) => sum + renderedWords(item.answer ?? ''), 0);
+}
+
 
 // The words of a section's copy (every string but ids, links and settings), as a stand-in for how tall its text renders.
 const NOT_COPY = new Set(['id', 'type', 'variant', 'href', 'src', 'srcset', 'media', 'mediaKind', 'continues', 'sourceSectionIds', 'visuals', 'factIds', 'slot']);
@@ -246,11 +286,21 @@ function takesWalls(page, components) {
 // on a page that takes photo walls; none on any other. What withMediaModules guarantees and the layout audit checks.
 export const signatureFloor = (page, components) => (takesWalls(page, components) ? signatureBands(components.pageTypes?.[page.pageType]) : 0);
 
+// The page's blocks as the renderer places them: its sections with their visuals, the photo walls, and then no two rows
+// of short items one under the other and no two tinted split rows (lib/visual-budget.mjs varyItemRows, varySurfaces),
+// on every page.
 export function withMediaModules(page, components, options) {
+  const blocks = placeMediaModules(page, components, options);
+  const variantOf = (block) => modelVariant(block, page, blocks, components, options);
+  return varySurfaces(varyItemRows(blocks, variantOf), variantOf);
+}
+
+function placeMediaModules(page, components, options) {
   const budget = components.densityBands ?? null;
   if (!takesWalls(page, components)) return withSectionVisuals(page.blocks, components, page.pageType);
   // The competitor's photo modules for the page type, and the photo rows the run's density audit added or took away
-  // (photoBreaks, scripts/break-text-runs.mjs: more where the text ran on too long or the page showed too little, fewer
+  // (photoBreaks, an older site's data from the audit's rule fix, retired for the trial build calibrate-plan.mjs: more
+  // where the text ran on too long or the page showed too little, fewer
   // where it showed too much; a negative number takes that many of the competitor's modules off the page).
   const breaks = budget ? 0 : components.photoBreaks?.[page.route] ?? 0;
   const competitor = components.pageTypes?.[page.pageType]?.mediaModules ?? (budget ? [] : [{ at: 0.5, type: 'mosaic' }]);
@@ -324,21 +374,25 @@ export function withMediaModules(page, components, options) {
   if (budget) {
     // The site's kind of wall: a band where the reference's walls are bands on any page type, else a grid.
     const banded = Object.values(components.pageTypes ?? {}).some((patterns) => (patterns.mediaModules ?? []).some((module) => module.type === 'band'));
-    const splitIndexOf = (block) => blocks.filter((item) => item.type === 'splitMedia').indexOf(block);
-    const variantOf = (block) => {
-      // The variant the block renders with, as the layout audit names it: a renderer's own default where none is set.
-      const variant = resolveVariant(block, page.pageType, block.type === 'splitMedia' ? Math.max(0, splitIndexOf(block)) : 0, components);
-      if (block.type === 'featureGrid') return variant ?? (mediaSlots(block, variant, components, options).length ? 'media' : 'cards');
-      const shown = variant ?? { process: 'circles', cta: components.cta, relatedPages: 'links' }[block.type];
-      // A closing band showing its photo (image-band, form) is modelled apart from one without.
-      return block.type === 'cta' && mediaSlots(block, shown, components, options).length ? `${shown}+photo` : shown;
-    };
+    const variantOf = (block) => modelVariant(block, page, blocks, components, options);
     const heroVariant = components.heroByPageType?.[page.pageType] ?? components.hero;
     const heroShown = privacyHero(page, components) && heroShowsPhoto(heroVariant);
-    const hero = page.hero ? { block: { type: 'hero' }, variant: heroShown ? heroVariant : 'plain', words: copyWords(page.hero) } : null;
-    planVisualBudget(blocks, { bands: bandFor(budget, page.pageType), floor, model: components.blockModel ? { ...DEFAULT_BLOCK_MODEL, ...components.blockModel } : DEFAULT_BLOCK_MODEL, variantOf, wordsOf: copyWords, wall: (id) => wall(id, banded ? 'band' : 'grid'), isWall: (block) => String(block.id).startsWith('media-module-'), apart: (before, after) => !(PROOF_BLOCKS.has(before?.type) && PROOF_BLOCKS.has(after?.type)), hero, pageType: page.pageType });
+    const hero = page.hero ? { block: { type: 'hero' }, variant: heroShown ? heroVariant : 'plain', words: renderedWords(page.hero) } : null;
+    planVisualBudget(blocks, { bands: bandFor(budget, page.pageType), floor, model: components.blockModel ? { ...DEFAULT_BLOCK_MODEL, ...components.blockModel } : DEFAULT_BLOCK_MODEL, variantOf, wordsOf: (block) => blockWords(block, variantOf(block), components), wall: (id) => wall(id, banded ? 'band' : 'grid'), isWall: (block) => String(block.id).startsWith('media-module-'), apart: (before, after) => !(PROOF_BLOCKS.has(before?.type) && PROOF_BLOCKS.has(after?.type)), hero, pageType: page.pageType });
   } else if (components.textRunWords) breakLongRuns(blocks, page, components, options, competitor);
   return blocks;
+}
+
+// The variant a block renders with as the block model names it (lib/visual-budget.mjs; the layout audit measures it
+// so): a renderer's own default where none is set, a featureGrid's pattern, a closing band showing its photo (image-band,
+// form) apart from one without. blocks: the page's blocks, for a split row's place among them. Shared with the layout
+// plan (lib/layout-plan.mjs).
+export function modelVariant(block, page, blocks, components, options) {
+  const splitIndex = block.type === 'splitMedia' ? Math.max(0, blocks.filter((item) => item.type === 'splitMedia').indexOf(block)) : 0;
+  const variant = resolveVariant(block, page.pageType, splitIndex, components);
+  if (block.type === 'featureGrid') return variant ?? (mediaSlots(block, variant, components, options).length ? 'media' : 'cards');
+  const shown = variant ?? { process: 'circles', cta: components.cta, relatedPages: 'links', iconList: 'checks', faq: components.faq }[block.type];
+  return block.type === 'cta' && mediaSlots(block, shown, components, options).length ? `${shown}+photo` : shown;
 }
 
 // A photo wall of a kind: a band is one landscape photo across the page (lifestyle, made 3:2, so the page-wide frame

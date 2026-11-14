@@ -13,6 +13,9 @@ export const PAGE_SHELL = Object.freeze({
   header,
   footer,
   shell: `${header}, ${footer}`,
+  // A header or footer inside one of these is the page's own (an article's header holding its hero: Concord's home opens
+  // on a 1440×1000 video in article > header, measured as shell and counted for nothing), not the site's shell.
+  page: ['main', 'article', '[role=main]'].join(', '),
   // Top-level content regions and disclosure widgets beyond the semantic defaults.
   sections: ['main > section', 'main > div', 'article > section', '.elementor-top-section', '[data-element_type="section"]'].join(', '),
   disclosureTitles: ['.elementor-accordion-title', '.elementor-tab-title'].join(', '),

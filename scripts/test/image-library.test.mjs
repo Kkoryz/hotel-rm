@@ -469,3 +469,19 @@ test('a category refused on a model at every try shows the rest of its products 
   assert.match(prompts[0], /product photograph with no person/);
   assert.deepEqual([made.status, made.productOnly], ['generated', true]);
 });
+
+test('the photo demand the images step works from: every position the site asks a photo for, whatever else the site sets', async () => {
+  const { photoDemand } = await import('../lib/image-plan.mjs');
+  const demand = photoDemand({ pages, components, briefs: allKinds });
+  assert.ok(demand.length > 0);
+  assert.deepEqual(Object.keys(demand[0]).sort(), ['blockId', 'category', 'intent', 'kind', 'route', 'status', 'topic']);
+  // Settings that move no photo position (here the block model on a site with no density band, a heading's fit) make no
+  // photo again (Fable's plan, Q12: the images step reran on any change of template-variants.json).
+  assert.deepEqual(photoDemand({ pages, components: { ...components, blockModel: { 'intro:text': { base: 1 } }, heroText: { leadWords: 9 } }, briefs: allKinds }), demand);
+  // A photo position more is a photo more.
+  const more = pages.map((page) => (page.route === '/t-shirts-manufacturer/' ? { ...page, blocks: [...page.blocks, split('f')] } : page));
+  assert.ok(photoDemand({ pages: more, components, briefs: allKinds }).length > demand.length);
+  // The plan's library entries come from the same demand.
+  const plan = planLibrary({ pages, components, line: 'activewear', briefs: allKinds, styleRefs });
+  assert.ok(plan.entries.length > 0);
+});

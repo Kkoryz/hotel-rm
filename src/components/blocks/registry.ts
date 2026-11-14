@@ -72,7 +72,7 @@ export const BLOCKS = {
   certifications: { component: CertificationsBlock, props: withVariant },
   caseStudies: { component: CaseStudiesBlock, props: ({ block, media, page }) => ({ block, media, route: page.route }) },
   orderRoutes: { component: OrderRoutesBlock, props: blockOnly },
-  relatedPages: { component: RelatedPagesBlock, props: withVariant },
+  relatedPages: { component: RelatedPagesBlock, props: ({ block, variant, page }) => ({ block, variant, route: page.route }) },
   styleGrid: { component: StyleGridBlock, props: withMedia },
   orderCase: { component: OrderCaseBlock, props: blockOnly },
   pricing: { component: PricingBlock, props: blockOnly },

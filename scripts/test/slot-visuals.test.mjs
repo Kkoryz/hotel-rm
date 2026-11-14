@@ -70,3 +70,24 @@ test('a wall of the site\'s own pages takes icons, no photos, where its cards do
   assert.equal(mediaSlots(wall, 'grid', {}).length, 2, 'a trade whose photos are its products keeps a photo a card');
   assert.equal(pageCardIcons({ ...wall, items: [{ media: 'product' }] }, service), false, 'a photo wall stays one');
 });
+
+test('steps over a photo stay three at most: more are a list (four stacked over one photo ran 1,240px on a phone)', async () => {
+  const { withSectionVisuals } = await import('../lib/media-slots.mjs');
+  const section = (n) => ({ id: 's', type: 'intro', heading: 'How we work', visuals: [{ type: 'data', data: { shape: 'sequence', items: Array.from({ length: n }, (_, index) => ({ label: `Step ${index + 1}` })) } }] });
+  assert.equal(withSectionVisuals([section(3)], {}, 'solution')[1].variant, 'photo-cards');
+  assert.equal(withSectionVisuals([section(4)], {}, 'solution')[1].variant, 'list');
+});
+
+test("a related block's photo tiles are links on a site whose cards carry icons (cards that name services carry no photo)", async () => {
+  const { resolveVariant } = await import('../lib/media-slots.mjs');
+  const related = { id: 'related', type: 'relatedPages', variant: 'tiles', links: [{ label: 'Services', href: '/services/' }] };
+  assert.equal(resolveVariant(related, 'solution', 0, { cardVisual: 'icon' }), 'links');
+  assert.equal(resolveVariant(related, 'solution', 0, { cardVisual: 'photo' }), 'tiles');
+});
+
+test("a split row drawing its section's chart is a plain split row, as the renderer sets it, for the plan and the surfaces too", async () => {
+  const { resolveVariant } = await import('../lib/media-slots.mjs');
+  const split = { id: 's', type: 'splitMedia', paragraphs: ['x'], visuals: [{ type: 'data', data: { shape: 'comparison', columns: ['A', 'B'], rows: [['1', '2']] } }] };
+  // hotel-rm 2026-11-14: a tinted split with a chart rendered single, while the page's surfaces counted it a grey band.
+  assert.equal(resolveVariant(split, 'solution', 0, { pageTypes: { solution: { splits: ['tinted'] } } }), 'single');
+});

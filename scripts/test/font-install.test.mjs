@@ -190,3 +190,14 @@ test('a failed download installs nothing: the site keeps its fonts as they were'
   assert.equal(await readFile(join(root, 'docs/research/installed-fonts.json'), 'utf8').catch(() => null), null);
   assert.match((await fontErrors(root)).join('\n'), /Missing docs\/research\/installed-fonts\.json/);
 });
+
+test("a role the home page does not show is taken from the competitor's other pages; the home page's own come first (Concord's home has no title)", async () => {
+  const { withPageRoles } = await import('../lib/font-install.mjs');
+  const home = { roles: { body: { family: 'freight-text-pro' }, hero: null, display: { family: 'Josefin Sans', weight: '700' } } };
+  const pages = [null, { roles: { hero: { family: 'Josefin Sans', weight: '700', size: '64px' }, display: { family: 'Other' } } }];
+  const roles = withPageRoles(home, pages).roles;
+  assert.equal(roles.hero.family, 'Josefin Sans');
+  assert.equal(roles.hero.size, '64px');
+  assert.equal(roles.display.family, 'Josefin Sans');
+  assert.equal(withPageRoles(home, []).roles.hero, null);
+});

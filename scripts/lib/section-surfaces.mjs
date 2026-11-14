@@ -6,32 +6,54 @@
 // testimonials a treatment sets on a band) ends a run; within a run of plain sections every second one is tinted, and
 // the last of a run is left white when the section after it is a band of its own (two grey bands would run together).
 
-// The sections that part a page by themselves.
-const PARTS = new Set(['figure', 'gallery', 'cta', 'form', 'splitMedia', 'testimonials']);
-// Of those, the ones a treatment usually sets on a grey band.
-const BANDED = new Set(['testimonials']);
-const parts = (block) => PARTS.has(block.type) || String(block.id).startsWith('media-module-');
+// The sections that part a page by themselves: a photo, a band, the closing call, the testimonials, a wall, and steps
+// laid over a photo (process photo-cards: hotel-rm 2026-11-14). A split row with its photo beside the copy and the
+// enquiry form sit on the page's own white like any plain section and alternate with them (motel 2026-11-14: the review
+// saw a white split row after a white grid, and form, channels and closing call as three white sections, as one column).
+const PARTS = new Set(['figure', 'gallery', 'cta', 'testimonials']);
+// Of those, the ones on a grey band of their own: the testimonials a treatment usually sets on one, and a split row of
+// the tinted variant (hotel-rm 2026-11-14: a tinted split under a tinted grid read as one grey surface).
+const banded = (block, variant) => block.type === 'testimonials' || (block.type === 'splitMedia' && variant === 'tinted');
+const parts = (block, variant) => PARTS.has(block.type) || String(block.id).startsWith('media-module-') || (block.type === 'process' && variant === 'photo-cards');
 
-/** @param {{ id: string, type: string }[]} blocks @returns {Set<string>} the ids of the tinted sections */
-export function tintedSections(blocks) {
+// The hero's lead opening the page under the hero (PageView, BlogHubView: a lead much longer than the competitor's) is
+// the first plain section of the page: left out, the section after it took the white it already had (motel's contact
+// page, 2026-11-14: page-lead and overview two white sections in a row).
+export const PAGE_LEAD = Object.freeze({ id: 'page-lead', type: 'pageLead' });
+
+/**
+ * @param {{ id: string, type: string, continues?: string }[]} blocks
+ * @param {(block: any) => string | undefined} [variantOf] the variant each block renders with
+ * @returns {Set<string>} the ids of the tinted sections (a tinted split row's band is its variant's own, not in the set)
+ */
+export function tintedSections(blocks, variantOf = () => undefined) {
   const tinted = new Set();
+  const role = new Map();
   let run = [];
+  // A run of plain sections alternates; before a band of its own it counts back from the band, its last section white,
+  // so two grey surfaces never meet and no two white ones either (it once left the last two white: motel's about page,
+  // 2026-11-14).
   const close = (next) => {
-    const ids = run.filter((_, index) => index % 2 === 1).map((block) => block.id);
-    if (next && BANDED.has(next.type) && ids.at(-1) === run.at(-1)?.id) ids.pop();
-    for (const id of ids) tinted.add(id);
+    const fromEnd = next && role.get(next.id) === 'banded';
+    run.forEach((block, index) => { if ((fromEnd ? run.length - 1 - index : index) % 2 === 1) tinted.add(block.id); });
     run = [];
   };
-  // A section going on in blocks of its own (continues: a long card set in grids of four) is one section: its blocks
-  // take the first one's surface and do not count in the alternation.
-  const goesOn = (block) => block.continues != null && blocks.some((item) => item.id === block.continues);
+  // A section going on in blocks of its own (continues) is one section: going on from a plain section it takes that
+  // section's surface and does not count in the alternation; going on from a section that parts the page or is a band
+  // of its own (a split row, its steps after it) it is a plain section of the run that follows (hotel-rm 2026-11-14: the
+  // steps of a tinted split took its tint and met the tinted grid after them).
   for (const block of blocks) {
-    if (goesOn(block)) continue;
-    if (parts(block)) close(block);
-    else run.push(block);
+    const variant = variantOf(block);
+    const head = block.continues != null ? role.get(block.continues) : undefined;
+    const kind = head === 'plain' || head === 'follows' ? 'follows' : !head && banded(block, variant) ? 'banded' : !head && parts(block, variant) ? 'part' : 'plain';
+    role.set(block.id, kind);
+    if (kind === 'follows') continue;
+    if (kind === 'plain') run.push(block); else close(block);
   }
   close(null);
-  for (const block of blocks) if (goesOn(block) && tinted.has(block.continues)) tinted.add(block.id);
+  // A block that goes on takes the surface of the section it goes on from, through any blocks between.
+  const headOf = (block) => { let at = block; while (role.get(at.id) === 'follows') at = blocks.find((item) => item.id === at.continues) ?? at; return at; };
+  for (const block of blocks) if (role.get(block.id) === 'follows' && tinted.has(headOf(block).id)) tinted.add(block.id);
   return tinted;
 }
 

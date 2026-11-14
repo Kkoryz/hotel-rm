@@ -20,6 +20,30 @@ test('the steps name the competitor pages the way each script expects', () => {
   assert.ok(list.find((step) => step.id === 'patterns').run[0].includes('product_manufacturer=https://example.com/leggings/'));
 });
 
+test("checks before anything costs: the inputs first, the competitor's capture checked before the analysis, the plan and its gate before the photos", () => {
+  const ids = steps(site, { coreSource: '../template' }).map((step) => step.id);
+  const at = (id) => ids.indexOf(id);
+  // The inputs right after the template core (their checks read the site's config/), before the capture.
+  assert.deepEqual(ids.slice(0, 5), ['core', 'inputs', 'capture', 'density', 'capture-check']);
+  assert.equal(at('capture-check') + 1, at('analysis'), 'a capture that fails its check is never analysed');
+  // Feasibility once the copy is imported, then the plan and its gate, all before the photos and the style board.
+  assert.ok(at('import') < at('feasibility') && at('feasibility') < at('layout-plan') && at('layout-plan') + 1 === at('plan-gate'));
+  for (const later of ['photo-briefs', 'style-board', 'images']) if (at(later) >= 0) assert.ok(at('plan-gate') < at(later), `${later} after the plan gate`);
+  const inputs = steps(site).find((step) => step.id === 'inputs');
+  assert.equal(inputs.always, true, 'the inputs are checked every run');
+  assert.deepEqual(steps(site).find((step) => step.id === 'plan-gate').run, [['node', 'scripts/plan-layout.mjs', '.', '--gate']]);
+  // The grey-frame trial build right after the gate, before any photo: it refits the block model, so the plan is made
+  // and gated again from the model it leaves (Fable's plan, stage 2).
+  assert.equal(at('plan-gate') + 1, at('calibrate'));
+  for (const later of ['photo-briefs', 'style-board', 'images']) if (at(later) >= 0) assert.ok(at('calibrate') < at(later), `${later} after the trial build`);
+  const calibrate = steps(site).find((step) => step.id === 'calibrate');
+  assert.deepEqual(calibrate.run, [['node', 'scripts/calibrate-plan.mjs', '.'], ['node', 'scripts/plan-layout.mjs', '.'], ['node', 'scripts/plan-layout.mjs', '.', '--gate']]);
+  // Its measure follows the site's styles and components, not only its data.
+  for (const input of ['src/styles', 'src/components', 'src/data/page-figures.json', 'src/data/site-trust.json', 'code:scripts/calibrate-plan.mjs']) assert.ok(calibrate.inputs.includes(input), input);
+  // The plan counts each page's trust bar from the figures.
+  for (const id of ['feasibility', 'layout-plan']) assert.ok(steps(site).find((step) => step.id === id).inputs.includes('src/data/page-figures.json'), id);
+});
+
 test('the fonts are installed by code after the analysis and the treatment, before the build', () => {
   const ids = steps(site).map((step) => step.id);
   const fonts = steps(site).find((step) => step.id === 'fonts');
@@ -47,8 +71,9 @@ test('a run stops at a step an agent must do, skips unchanged steps and stops at
   assert.equal(next.code, 2);
   assert.match(next.waits, /treatment/);
   // (The template's gaps are collected once the modules are named, before the treatment.)
-  assert.deepEqual(next.summary.map((item) => `${item.step}:${item.status}`), ['capture:unchanged', 'analysis:done', 'apply-analysis:passed', 'brand:passed', 'patterns:passed', 'modules:done', 'template-gaps:passed', 'treatment:waiting']);
-  assert.deepEqual(ran, ['scripts/apply-reference-analysis.mjs', 'scripts/site-brand.mjs', 'scripts/scaffold-placeholder-pages.mjs', 'scripts/collect-template-gaps.mjs']);
+  // The inputs are checked every run; the capture's density and check are unchanged with it.
+  assert.deepEqual(next.summary.map((item) => `${item.step}:${item.status}`), ['inputs:passed', 'capture:unchanged', 'density:unchanged', 'capture-check:unchanged', 'analysis:done', 'apply-analysis:passed', 'brand:passed', 'patterns:passed', 'modules:done', 'template-gaps:passed', 'treatment:waiting']);
+  assert.deepEqual(ran, ['scripts/check-inputs.mjs', 'scripts/apply-reference-analysis.mjs', 'scripts/site-brand.mjs', 'scripts/scaffold-placeholder-pages.mjs', 'scripts/collect-template-gaps.mjs']);
   // A failing step stops the run and names its log.
   await mkdir(join(root, 'src/styles'), { recursive: true });
   // The template's empty reference.css (a comment only) is not a treatment.
@@ -68,7 +93,8 @@ test('a step that rewrites one of its own inputs is not run again for its own ou
   await writeFile(join(root, 'site.json'), JSON.stringify(site));
   let runs = 0;
   // The capture step's input is site.json; this runner rewrites it the way apply-image-library rewrites variants.
-  const runner = async () => { runs += 1; await writeFile(join(root, 'site.json'), JSON.stringify({ ...site, touched: runs })); return 0; };
+  // (The inputs' check runs every run and writes nothing.)
+  const runner = async (command) => { if (String(command[1]).includes('check-inputs')) return 0; runs += 1; await writeFile(join(root, 'site.json'), JSON.stringify({ ...site, touched: runs })); return 0; };
   await siteRun({ root, runner, to: 'capture' });
   const before = runs;
   await siteRun({ root, runner, to: 'capture' });
@@ -84,10 +110,10 @@ test('a site makes its own photos and never shows the competitor\'s; each step t
   // The photos are installed by the image step alone: applying the analysis sets the design lock only.
   assert.deepEqual(steps(site).find((step) => step.id === 'apply-analysis').run, [['node', 'scripts/apply-reference-analysis.mjs', '--design-lock', 'docs/research/analysis/design-lock.json']]);
   // A step writes a file; the run commits it under the step's name.
-  const runner = async () => { await writeFile(join(root, 'capture.txt'), 'captured'); return 0; };
+  const runner = async (command) => { if (String(command[1]).includes('capture')) await writeFile(join(root, 'capture.txt'), 'captured'); return 0; };
   await siteRun({ root, runner, to: 'capture', repo: true });
   const log = spawnSync('git', ['log', '--format=%s'], { cwd: root, encoding: 'utf8' }).stdout.trim().split('\n');
-  assert.deepEqual(log, ['site-run: capture', 'site-run: first record of the site']);
+  assert.deepEqual(log, ['site-run: capture', 'site-run: inputs', 'site-run: first record of the site']);
   assert.match(await readFile(join(root, '.gitignore'), 'utf8'), /node_modules\/\ndist\//);
 });
 
@@ -216,12 +242,13 @@ test('a site captured before site:run tracked it keeps its capture: the step is 
   await writeFile(join(root, 'docs/research/raw/capture-summary.json'), '{}');
   const ran = [];
   const result = await siteRun({ root, to: 'capture', runner: async (command) => { ran.push(command[1]); return 0; } });
-  assert.deepEqual(result.summary.map((item) => `${item.step}:${item.status}`), ['capture:adopted']);
-  assert.deepEqual(ran, []);
+  assert.deepEqual(result.summary.map((item) => `${item.step}:${item.status}`), ['inputs:passed', 'capture:adopted']);
+  assert.deepEqual(ran, ['scripts/check-inputs.mjs']);
+  ran.length = 0;
   // Once recorded it is an ordinary step: a new reference captures again.
   await writeFile(join(root, 'site.json'), JSON.stringify({ ...site, reference: { ...site.reference, origin: 'https://example.org' } }));
   await siteRun({ root, to: 'capture', runner: async (command) => { ran.push(command[1]); return 0; } });
-  assert.deepEqual(ran, ['scripts/capture-reference.mjs', 'scripts/capture-reference-pages.mjs']);
+  assert.deepEqual(ran, ['scripts/check-inputs.mjs', 'scripts/capture-reference.mjs', 'scripts/capture-reference-pages.mjs']);
 });
 
 test('an agent does the judgment steps: one run per page type of crops, the step done only when its outputs are there', async () => {
@@ -778,19 +805,16 @@ test('a new capture and every blueprint write keep what the treatment and repair
   assert.equal(JSON.parse(await readFile(join(root, 'src/data/template-variants.json'), 'utf8')).components.tradePhotos, 'scenes');
 });
 
-test('density failures get a photo row by rule before any agent: the page is built and audited again; with no row left to give, the run stops (the agent never patches a rule\'s failure)', async () => {
-  const { addBreaks, MAX_BREAKS } = await import('../break-text-runs.mjs');
+test('a density failure at the audit is no rule fix and no agent repair: the run stops on it (the trial build calibrated the plan before the photos)', async () => {
   const { withMediaModules } = await import('../lib/media-slots.mjs');
-  const failures = [{ route: '/a/', issue: 'density_long_text_run' }, { route: '/a/', issue: 'density_too_few_images' }, { route: '/b/', issue: 'low_contrast' }, { route: '/c/', issue: 'density_long_text_run' }];
-  assert.deepEqual(addBreaks(failures, { '/c/': MAX_BREAKS }), { breaks: { '/a/': 1, '/c/': MAX_BREAKS }, added: ['/a/'] });
-  // A page with a break gets one more photo row in its longest run of photo-less sections.
+  // A site with no density band (the template's own pages): an extra row a page's photoBreaks names (an older site's
+  // data) goes in its longest run of photo-less sections.
   const text = (id) => ({ id, type: 'intro', heading: id, paragraphs: ['P'] });
   const page = { route: '/a/', pageType: 'solution', blocks: ['a', 'b', 'c', 'd', 'e', 'f'].map(text) };
   const components = { pageTypes: { solution: { mediaModules: [] } } };
   assert.equal(withMediaModules(page, components, {}).filter((block) => block.type === 'gallery').length, 0);
   assert.equal(withMediaModules(page, { ...components, photoBreaks: { '/a/': 1 } }, {}).filter((block) => block.type === 'gallery').length, 1);
-  // A page showing too much loses a row, then the competitor's walls (owner 2026-11-12: the photos follow the content).
-  assert.deepEqual(addBreaks([{ route: '/a/', issue: 'density_too_many_images' }, { route: '/d/', issue: 'density_too_many_images' }], { '/a/': 1, '/d/': -MAX_BREAKS }), { breaks: { '/a/': 0, '/d/': -MAX_BREAKS }, added: ['/a/'] });
+  // A negative count takes the competitor's walls off (owner 2026-11-12: the photos follow the content).
   const walled = { pageTypes: { solution: { mediaModules: [{ at: 0.5, type: 'mosaic' }] } } };
   const walls = (more) => withMediaModules(page, { ...walled, ...more }, {}).filter((block) => block.type === 'gallery').length;
   assert.equal(walls({}), 1);
@@ -804,35 +828,30 @@ test('density failures get a photo row by rule before any agent: the page is bui
   // A reference whose walls are full-width photos gets bands: one photo across the page, and its extra rows are bands too.
   const banded = withMediaModules(page, { pageTypes: { solution: { mediaModules: [{ at: 0.5, type: 'band' }] } }, photoBreaks: { '/a/': 1 } }, {}).filter((block) => block.type === 'gallery');
   assert.deepEqual(banded.map((block) => [block.variant, block.items.length]), [['band', 1], ['band', 1]]);
-  // In the run: the rule fixes twice (each a rebuild and an audit), then has nothing left. Before, the agent then
-  // patched the stylesheet for the density failure; it is the visual budget's (a rule's) failure, so the run stops on
-  // it and says so (one failure, one patch was how the hotel site's repairs went).
+  // In the run: a density failure the audit reports has no rule fix (break-text-runs.mjs refitted the model after the
+  // photos were made, and the photos moved); the visual budget's failure is a rule's, so no agent patches it either:
+  // the run stops on it and says so.
   const root = await mkdtemp(join(tmpdir(), 'site-run-rule-fix-')); await seedPhotos(root);
   await writeFile(join(root, 'site.json'), JSON.stringify(site));
   await mkdir(join(root, 'docs/research'), { recursive: true });
   let audits = 0;
-  let fixes = 0;
+  const ran = [];
   const runner = async (command) => {
-    if (String(command[1]).includes('break-text-runs')) return fixes++ < 2 ? 0 : 2;
+    ran.push(String(command[1]));
     if (String(command[1]).includes('audit-authoring-layout')) {
       audits += 1;
-      await writeFile(join(root, 'docs/research/authoring-layout-audit.json'), JSON.stringify({ failures: audits < 4 ? [{ route: '/a/', viewport: 'desktop', issue: 'density_long_text_run' }] : [] }));
-      return audits < 4 ? 1 : 0;
+      await writeFile(join(root, 'docs/research/authoring-layout-audit.json'), JSON.stringify({ failures: [{ route: '/a/', viewport: 'desktop', issue: 'density_long_text_run' }] }));
+      return 1;
     }
     return 0;
   };
   const repairs = [];
   const result = await siteRun({ root, runner, agent: async ({ step }) => { repairs.push(step.id); return 0; }, from: 'audits', to: 'audits' });
   assert.equal(result.code, 1);
-  assert.equal(audits, 3, 'two rule fixes, each audited again; no agent repair');
+  assert.equal(audits, 1, 'audited once: nothing replans the photos after they are made');
   assert.deepEqual(repairs, []);
-  assert.ok(result.summary.some((item) => item.step === 'audits-fix' && item.status === 'done by rule'));
+  assert.ok(!ran.some((command) => command.includes('break-text-runs')));
   assert.ok(result.summary.some((item) => item.step === 'audits-repair' && /not given to the agent: 1 failure\(s\) .*\(density_long_text_run\)/.test(item.status)));
-  // A rule that crashed (exit 1, e.g. a broken template-variants.json) did not find nothing to do: the step fails, no agent.
-  const crashed = await siteRun({ root, runner: async (command) => (String(command[1]).includes('break-text-runs') || String(command[1]).includes('audit-authoring-layout') ? 1 : 0), agent: async ({ step }) => { repairs.push(step.id); return 0; }, from: 'audits', to: 'audits' });
-  assert.deepEqual([crashed.code, crashed.failed], [1, 'audits']);
-  assert.ok(crashed.summary.some((item) => item.step === 'audits-fix' && /rule fix failed/.test(item.status)));
-  assert.deepEqual(repairs, [], 'no agent repair after a crashed rule');
 });
 
 test('the agent repairs only what the site\'s stylesheet is where to fix: contrast, overflow, measure; a failure of another kind stops the run with its report', async () => {
@@ -924,4 +943,36 @@ test('what the design repair lists as asked against the site rules or as a templ
   assert.deepEqual(applyListed(findings, listed).map((finding) => Boolean(finding.resolution)), [true, true, false, false]);
   const manifest = { pages: [{ key: 'privacy', pageType: 'privacy', route: '/privacy-policy/', shots: 's' }] };
   assert.equal(judgeReviews(manifest, { privacy: { shots: 's', findings: [findings[0]] } }, [], listed).status, 'passed');
+});
+
+test('the images step runs again only when the photo demand changes, not on every change of the site\'s settings', async () => {
+  const images = steps(site).find((step) => step.id === 'images' && step.kind === 'codex');
+  assert.ok(images.inputs.includes('plan:photo-slots'));
+  assert.ok(!images.inputs.includes('src/data/template-variants.json'), 'a setting that moves no photo position is no new photo');
+  // The owner's own photos are part of what the library holds.
+  assert.ok(images.inputs.includes('src/data/site-media.json'));
+  // A folder with no site data still hashes (the demand is null there).
+  const { inputsHash } = await import('../site-run.mjs');
+  const root = await mkdtemp(join(tmpdir(), 'site-run-demand-'));
+  assert.equal(await inputsHash(root, ['plan:photo-slots']), await inputsHash(root, ['plan:photo-slots']));
+});
+
+test('a run says at its start which steps that call a model it will run, as far as the inputs say now', async () => {
+  const { pendingPaidSteps, inputsHash } = await import('../site-run.mjs');
+  const root = await mkdtemp(join(tmpdir(), 'site-run-paid-'));
+  const list = [
+    { id: 'plan', kind: 'auto', inputs: [] },
+    { id: 'board', kind: 'preview', paid: true, inputs: [] },
+    { id: 'images', kind: 'codex', inputs: [] },
+    { id: 'review', kind: 'agent', inputs: [], done: ['docs/review.json'] },
+  ];
+  // Nothing has run: every paid step is to run; a step that calls no model is not listed.
+  assert.deepEqual((await pendingPaidSteps(root, list, {})).map((step) => step.id), ['board', 'images', 'review']);
+  // A step that passed on these inputs is not; an agent step whose outputs are there is done.
+  const hash = await inputsHash(root, []);
+  await mkdir(join(root, 'docs'), { recursive: true });
+  await writeFile(join(root, 'docs/review.json'), '{}');
+  assert.deepEqual((await pendingPaidSteps(root, list, { board: { status: 'passed', hash }, images: { status: 'passed', hash: 'other' } })).map((step) => step.id), ['images']);
+  // The style board's review calls a model (design-review.mjs board).
+  assert.equal(steps(site).find((step) => step.id === 'style-board').paid, true);
 });

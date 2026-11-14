@@ -8,9 +8,27 @@
         "setting": "Owner's office in a small independent hotel",
         "caption": "Remote marketing support for independent hotel owners."
       }
+    ],
+    "splitMedia-1": [
+      {
+        "id": "brief-splitMedia-1-1",
+        "type": "photo",
+        "content": "A marketing analyst at the company's office checks a completed reservation against its originating campaign on two monitors seen obliquely with all screen details out of focus, one hand resting on the mouse.",
+        "setting": "Canadian team's office, close desk view",
+        "caption": "Tracing completed reservations back to their campaigns."
+      }
     ]
   },
   "/boutique-hotel-consulting/": {
+    "splitMedia-1": [
+      {
+        "id": "brief-splitMedia-1-1",
+        "type": "photo",
+        "content": "A revenue specialist points to coloured rate bands on a monitor while discussing the pricing framework with a hotel owner visible on an adjacent video-call screen, with all screen text indistinct.",
+        "setting": "Close view of a desk in the Canadian consulting office.",
+        "caption": "Agreeing your pricing framework together."
+      }
+    ],
     "splitMedia-2": [
       {
         "id": "brief-splitMedia-2-1",
@@ -49,6 +67,26 @@
         "content": "A revenue specialist points to three unlabelled comparative bar charts on a monitor while discussing the hotel's performance with its owner, visible in a video-call tile, with no readable text or logos anywhere in the scene.",
         "setting": "The team's Canadian office",
         "caption": "Reviewing occupancy, ADR and RevPAR against your competitive set."
+      }
+    ]
+  },
+  "/hotel-distribution/": {
+    "m2": [
+      {
+        "id": "brief-m2-1",
+        "type": "photo",
+        "content": "A distribution analyst at a workstation compares unlabeled booking and commission charts on two monitors, resting one hand on a calculator, with no readable text or logos visible.",
+        "setting": "Company office, window-side workstation",
+        "caption": "Balancing channel exposure against net booking revenue."
+      }
+    ],
+    "splitMedia-1": [
+      {
+        "id": "brief-splitMedia-1-1",
+        "type": "photo",
+        "content": "In a close-up, a distribution specialist holds a hotel contract open with one hand while tracing an allotment clause with a fingertip, its print outside the plane of focus and unreadable.",
+        "setting": "Company office, quiet meeting room",
+        "caption": "Checking contractual commitments before reallocating rooms."
       }
     ]
   },

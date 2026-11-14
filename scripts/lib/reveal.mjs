@@ -21,11 +21,20 @@ const LAZY_ATTRIBUTES = [
 // Fully, not as far as it got: the last sections and the footer never reach the window's middle, and stayed faint at
 // whatever the bottom of the page allowed. In-flow elements only: an absolutely placed slide of a fading carousel is
 // hidden by the carousel, not by the scroll.
+// A fade started in the window and run slower than the scroll (concordhotels.com's AOS: a 1.5s transition from opacity
+// 0 and a 100px slide, undone out of the window) showed a few percent of itself at most, which the page back at the top
+// still had: an element whose opacity rose in the window is pinned too, shown and unshifted where it never got near
+// fully shown (its slide then was the start of the animation, not where it ends). So is one the page restyled in the
+// window (its class or style changed: AOS's callouts wait out a delay before they fade, and rose by nothing while the
+// scroll went by). A faint element the page never touched stays.
 export async function scrollThroughPage(page, { delay = 60, settle = 600 } = {}) {
   await page.evaluate(async ({ delay, settle }) => {
     const wait = (ms) => new Promise((done) => setTimeout(done, ms));
     document.documentElement.style.scrollBehavior = 'auto';
     const shown = new Map();
+    // Each element's class and style before the scroll: what the page restyles while scrolling differs from it.
+    const marksOf = (element) => `${element.getAttribute('class')}|${element.getAttribute('style')}`;
+    const before = new Map([...document.body.querySelectorAll('*')].map((element) => [element, marksOf(element)]));
     const look = () => {
       for (const element of document.body.querySelectorAll('*')) {
         const rect = element.getBoundingClientRect();
@@ -33,7 +42,13 @@ export async function scrollThroughPage(page, { delay = 60, settle = 600 } = {})
         const style = getComputedStyle(element);
         if (style.position === 'absolute' || style.position === 'fixed') continue;
         const opacity = Number(style.opacity);
-        if (!(shown.get(element)?.opacity >= opacity)) shown.set(element, { opacity, transform: style.transform });
+        const seen = shown.get(element);
+        const restyled = before.has(element) && marksOf(element) !== before.get(element);
+        if (!seen) shown.set(element, { first: opacity, opacity, transform: style.transform, restyled });
+        else {
+          if (opacity > seen.opacity) Object.assign(seen, { opacity, transform: style.transform });
+          if (restyled) seen.restyled = true;
+        }
       }
     };
     // Half a window a step: each element is seen near the window's middle, where a fade shows it most.
@@ -44,9 +59,11 @@ export async function scrollThroughPage(page, { delay = 60, settle = 600 } = {})
     await wait(settle);
     const rules = [];
     for (const [element, best] of shown) {
-      if (Number(getComputedStyle(element).opacity) >= best.opacity - 0.05) continue;
+      const now = Number(getComputedStyle(element).opacity);
+      const rose = best.opacity > best.first + 0.01 || best.restyled;
+      if (now >= 0.95 || (now >= best.opacity - 0.05 && !rose)) continue;
       element.dataset.captureShown = String(rules.length);
-      rules.push(`[data-capture-shown="${rules.length}"]{opacity:1!important;transform:${best.transform}!important;transition:none!important}`);
+      rules.push(`[data-capture-shown="${rules.length}"]{opacity:1!important;transform:${best.opacity >= 0.95 ? best.transform : 'none'}!important;transition:none!important}`);
     }
     if (rules.length) document.head.append(Object.assign(document.createElement('style'), { textContent: rules.join('\n') }));
   }, { delay, settle });

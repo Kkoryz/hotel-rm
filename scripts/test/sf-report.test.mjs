@@ -27,3 +27,14 @@ test("08's report back to Site Factory gathers what is Site Factory's to fix, fr
   const schema = JSON.parse(await readFile(new URL('../../config/sf-contracts/handoff-report.schema.json', import.meta.url), 'utf8'));
   assert.deepEqual(schema.required, ['handoff_sha256', 'made_at', 'template', 'pages']);
 });
+
+test("the layout plan's report items of the copy reach Site Factory (headings over three lines, titles too long); a page whose pictures cannot reach the band does not", () => {
+  const plan = { gate: { items: [
+    { assertion: 'does_not_fit', owner: 'owner', gate: 'report', route: '/', block: 'page', detail: 'pictures reach 45%, 2 points short of 47%' },
+    { assertion: 'section_heading_lines', owner: 'site-factory', gate: 'report', route: '/a/', block: 'm2', viewport: 'mobile', detail: '"A long heading": 5 lines' },
+    { assertion: 'surface_repeat', owner: 'template', gate: 'fail', route: '/a/', block: 'm3', detail: 'x' },
+  ] } };
+  const issues = siteFactoryIssues({ plan });
+  assert.deepEqual(issues.map((issue) => [issue.source, issue.kind, issue.route]), [['layout-plan', 'section_heading_lines', '/a/']]);
+  assert.match(issues[0].detail, /mobile/);
+});

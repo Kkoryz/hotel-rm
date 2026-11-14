@@ -98,3 +98,36 @@ test('a cookie notice fixed in the window is put away, as a visitor dismisses it
     await browser.close();
   }
 });
+
+test('a section that starts a slow fade as it enters the window and fades back out above it is shown fully, unshifted (concordhotels.com AOS)', async () => {
+  const { chromium } = await import('playwright');
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
+    // AOS: a class added in the window starts a 1.5s transition from opacity 0 and a 100px slide, removed again out of
+    // it (mirror): the page scrolled past in steps far shorter than the transition shows a few percent of it.
+    await page.setContent(`<!doctype html><head><style>
+      .aos { opacity: 0; transform: translate3d(0, 100px, 0); transition: opacity 1.5s, transform 1.5s; }
+      .aos.on { opacity: 1; transform: none; }
+    </style></head><body style="margin:0">
+      <div style="height:1500px"></div>
+      <section id="aos" class="aos" style="height:300px"><p>Differentiators</p></section>
+      <section id="late" class="aos" style="height:300px;transition-delay:0.6s"><p>A callout that waits before it fades</p></section>
+      <p id="faint" style="opacity:0.3">A faint decoration</p>
+      <div style="height:1500px"></div>
+      <script>
+        const aos = document.getElementById('aos');
+        const late = document.getElementById('late');
+        const place = () => { for (const item of [aos, late]) { const rect = item.getBoundingClientRect(); item.classList.toggle('on', rect.top < innerHeight - 120 && rect.bottom > 0); } };
+        addEventListener('scroll', place); place();
+      </script>
+    </body>`);
+    await scrollThroughPage(page, { delay: 30, settle: 100 });
+    assert.equal(await page.$eval('#aos', (element) => getComputedStyle(element).opacity), '1');
+    assert.equal(await page.$eval('#aos', (element) => getComputedStyle(element).transform), 'none');
+    assert.equal(await page.$eval('#late', (element) => getComputedStyle(element).opacity), '1', 'a fade with a delay longer than the scroll dwell is shown too');
+    assert.equal(await page.$eval('#faint', (element) => getComputedStyle(element).opacity), '0.3', 'a faint element that never faded in keeps its opacity');
+  } finally {
+    await browser.close();
+  }
+});

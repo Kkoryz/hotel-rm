@@ -4,7 +4,7 @@
 // from the Google Fonts CSS2 API, and the @font-face rules and role tokens generated from that record.
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { primaryFamily, resolveFamily } from './font-licenses.mjs';
 
@@ -239,4 +239,27 @@ export function withFontsImport(css) {
   if (!after) return `${FONTS_IMPORT}${eol}${css}`;
   const at = after.index + after[0].length;
   return `${css.slice(0, at)}${FONTS_IMPORT}${eol}${css.slice(at)}`;
+}
+
+// The reference's font lock (docs/research/raw/font-lock.json, the home page's capture), a role the home page does not
+// show taken from the competitor's other pages (their own captures' font locks, by page type): Concord's home opens on
+// a video with no title, and its hero role was added to the font lock by hand, lost again with the next capture (motel
+// 2026-11-14). The home page's roles stay first.
+export function withPageRoles(fontLock, pageLocks = []) {
+  const roles = { ...fontLock.roles };
+  for (const [role, value] of Object.entries(roles)) {
+    if (value?.family) continue;
+    const found = pageLocks.map((lock) => lock?.roles?.[role]).find((item) => item?.family);
+    if (found) roles[role] = { ...found, note: 'from the reference pages (the home page shows none)' };
+  }
+  return { ...fontLock, roles };
+}
+const readLock = async (path) => { try { return JSON.parse(await readFile(path, 'utf8')); } catch { return null; } };
+/** @param {string} root @returns {Promise<any>} the font lock with its roles filled from the page types', or null */
+export async function referenceFontLock(root) {
+  const lock = await readLock(join(root, 'docs/research/raw/font-lock.json'));
+  if (!lock) return null;
+  const dir = join(root, 'docs/research/reference-pages');
+  const types = (await readdir(dir).catch(() => [])).sort();
+  return withPageRoles(lock, await Promise.all(types.map((type) => readLock(join(dir, type, 'raw/font-lock.json')))));
 }

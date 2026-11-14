@@ -2,14 +2,18 @@
 // checks): each page's height, picture share and longest picture-less run estimated from its sections before it is
 // built, and photo walls added or taken off until the estimate sits inside the reference's density band
 // (components.densityBands, measure-reference-density.mjs). How tall a module renders and how much of it is picture
-// comes from the block model (config/block-model.default.json, calibrated per site from its layout audit:
-// components.blockModel, calibrate-block-model in break-text-runs.mjs).
+// comes from the block model (config/block-model.default.json, calibrated per site from its grey-frame trial build before
+// any photo is made: components.blockModel, calibrate-plan.mjs).
 
 import defaults from '../../config/block-model.default.json' with { type: 'json' };
 
 export const DEFAULT_BLOCK_MODEL = defaults.modules;
 // The estimate aims inside the band, not at its edges: the model is a fit, the audit measures the real page.
 export const BUDGET_MARGIN = Object.freeze({ run: 0.9, visualPct: 3 });
+// The most photo walls a page takes for density: a safety stop, not a design rule. The picture-area band decides how
+// many a page takes (its ceiling keeps a page from becoming photo after photo); a page still outside it after this many
+// is reported as not fitting (lib/layout-plan.mjs feasibility). Owner 2026-11-14 withdrew the cap of three the same
+// day: it held hotel-rm's home at 39% where its walls had brought it to 45% ("照片多少由图片面积区间决定").
 export const MAX_BUDGET_WALLS = 12;
 
 // The model key of a block: its type and the variant it renders with (featureGrid: its pattern).
@@ -23,8 +27,11 @@ export function estimateBlock(block, variant, words, model = DEFAULT_BLOCK_MODEL
   // A variant the model has not seen takes its module's average (type:*), then the module without a variant.
   const fit = (pageType ? model[`${modelKey(block, variant)}@${pageType}`] : null) ?? model[modelKey(block, variant)] ?? model[`${block.type}:*`] ?? model[`${block.type}:`] ?? model['*'] ?? DEFAULT_BLOCK_MODEL['*'];
   const height = Math.max(40, fit.base + fit.perWord * words);
-  const pictured = fit.visual > 0.05;
-  return { height, visual: fit.visual * height, before: pictured ? fit.before * height : height, after: pictured ? fit.after * height : height, pictured };
+  // A card grid of fewer than three cards is no structured block to the measure (lib/density.mjs: three boxed cards
+  // side by side), photo cards apart (motel /our-history/ 2026-11-14: two cards going on, 159px estimated, none measured).
+  const share = block.type === 'featureGrid' && variant !== 'media' && Array.isArray(block.items) && block.items.length < 3 ? 0 : fit.visual;
+  const pictured = share > 0.05;
+  return { height, visual: share * height, before: pictured ? fit.before * height : height, after: pictured ? fit.after * height : height, pictured };
 }
 
 // A page's estimated density from its blocks' estimates in order (the hero first): content height, picture share (%)
@@ -125,14 +132,16 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
   if (over()) for (const [index, block] of blocks.entries()) if (block.type === 'relatedPages' && variantOf(block) === 'tiles') blocks[index] = { ...block, variant: 'links', planned: true };
   takeOff((block) => block.competitor && !block.signature);
   takeOff((block) => block.signature, () => blocks.filter((block) => isWall(block) && block.signature).length > floor);
-  return varyItemRows(blocks, variantOf);
+  return blocks;
 }
 
 // Two sections of the same shape never stand together (owner 2026-11-12: "图标得穿插 元素堆一起是不是不好看", "同类型模块
 // 堆在一起这个得在最开始就避免": the hotel home ran three rows of three short items, icon cards, icon cards and steps, one
 // under the other). A row of short items is a card grid (any but the list), steps (any but the list) or figures; where
 // two meet, the card grid of the pair sets its points out as a list beside its heading (bullets, the competitor's
-// service lists), the later one first. Planned with the page, before anything is built or photographed.
+// service lists), the later one first. Planned with the page, before anything is built or photographed: on every page of
+// every site (lib/media-slots.mjs withMediaModules), not only where a density band plans photo walls (Fable's 08-onward
+// plan: it ran inside the visual budget, so a site without a band and the pages without walls never had it).
 const itemRow = (block, variant) => (block.type === 'featureGrid' && variant !== 'bullets') || (block.type === 'process' && variant !== 'list') || block.type === 'stats';
 export function varyItemRows(blocks, variantOf) {
   const toList = (index) => { blocks[index] = { ...blocks[index], variant: 'bullets', planned: true }; };
@@ -147,8 +156,33 @@ export function varyItemRows(blocks, variantOf) {
     if (!itemRow(before, variantOf(before)) || !itemRow(block, variantOf(block))) continue;
     if (listable(index)) toList(index);
     else if (listable(index - 1) && !(index >= 2 && blocks[index - 2].type === 'featureGrid' && variantOf(blocks[index - 2]) === 'bullets')) toList(index - 1);
+    // Neither grid can be a list (one goes on from another, or has no heading of its own): the pair's steps are
+    // (hotel-rm's pricing page, motel's process page, 2026-11-14: a grid going on from another over a row of steps).
+    else for (const at of [index, index - 1]) if (blocks[at].type === 'process') { blocks[at] = { ...blocks[at], variant: 'list', planned: true }; break; }
   }
   return blocks;
+}
+
+// Two split rows of the tinted variant one under the other run as one grey band (hotel-rm's digital marketing page,
+// 2026-11-14): the later is a plain split row, planned with the page (lib/media-slots.mjs withMediaModules) and on its
+// variant (resolveVariant: planned).
+export function varySurfaces(blocks, variantOf) {
+  for (let index = 1; index < blocks.length; index += 1) {
+    const [before, block] = [blocks[index - 1], blocks[index]];
+    if (before.type === 'splitMedia' && block.type === 'splitMedia' && variantOf(before) === 'tinted' && variantOf(block) === 'tinted') blocks[index] = { ...block, variant: 'single', planned: true };
+  }
+  return blocks;
+}
+
+// Whether a fitted model differs from the one in use enough to plan again: a module 15% taller or shorter at its usual
+// length, or its picture share 0.1 apart.
+export function modelMoved(previous = DEFAULT_BLOCK_MODEL, next = DEFAULT_BLOCK_MODEL) {
+  return Object.entries(next).some(([key, fit]) => {
+    const was = previous[key];
+    if (!was) return true;
+    const at = (model) => model.base + model.perWord * 120;
+    return Math.abs(at(fit) - at(was)) > 0.15 * at(was) || Math.abs(fit.visual - was.visual) > 0.1;
+  });
 }
 
 // A block model fitted from a built site's measured blocks (the layout audit's desktop block metrics): per model key a
