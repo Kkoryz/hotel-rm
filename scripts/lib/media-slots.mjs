@@ -164,8 +164,11 @@ export const heroShowsPhoto = (variant) => TEMPLATE_VARIANTS.hero.includes(varia
 // The photo a page's hero shows (the renderer's resolution, src/lib/media.ts pageHero): the owner's own hero photo
 // (for this page when it names pages), then the template's for the route, the page type, the site; the privacy
 // policy, legal text, shows none.
+// A legal page opens without a photo unless the site sets its own hero for it (components.heroByPageType.privacy: the
+// competitor's privacy page opens on a photo masthead; the hotel review asked twice for the configured hero to show).
+const privacyHero = (page, components = {}) => page.pageType !== 'privacy' || Boolean(components.heroByPageType?.privacy);
 export function heroPhoto(page, components, sitePhotos = []) {
-  if (page.pageType === 'privacy') return null;
+  if (!privacyHero(page, components)) return null;
   const own = sitePhotos.find((photo) => photo.class === 'hero' && photo.pages?.includes(page.route)) ?? sitePhotos.find((photo) => photo.class === 'hero' && !photo.pages);
   if (own) return { src: own.src, srcset: own.srcset, width: own.width, height: own.height, alt: own.alt };
   const media = components.media ?? {};
@@ -331,9 +334,9 @@ export function withMediaModules(page, components, options) {
       return block.type === 'cta' && mediaSlots(block, shown, components, options).length ? `${shown}+photo` : shown;
     };
     const heroVariant = components.heroByPageType?.[page.pageType] ?? components.hero;
-    const heroShown = page.pageType !== 'privacy' && heroShowsPhoto(heroVariant);
+    const heroShown = privacyHero(page, components) && heroShowsPhoto(heroVariant);
     const hero = page.hero ? { block: { type: 'hero' }, variant: heroShown ? heroVariant : 'plain', words: copyWords(page.hero) } : null;
-    planVisualBudget(blocks, { bands: bandFor(budget, page.pageType), floor, model: components.blockModel ? { ...DEFAULT_BLOCK_MODEL, ...components.blockModel } : DEFAULT_BLOCK_MODEL, variantOf, wordsOf: copyWords, wall: (id) => wall(id, banded ? 'band' : 'grid'), isWall: (block) => String(block.id).startsWith('media-module-'), hero, pageType: page.pageType });
+    planVisualBudget(blocks, { bands: bandFor(budget, page.pageType), floor, model: components.blockModel ? { ...DEFAULT_BLOCK_MODEL, ...components.blockModel } : DEFAULT_BLOCK_MODEL, variantOf, wordsOf: copyWords, wall: (id) => wall(id, banded ? 'band' : 'grid'), isWall: (block) => String(block.id).startsWith('media-module-'), apart: (before, after) => !(PROOF_BLOCKS.has(before?.type) && PROOF_BLOCKS.has(after?.type)), hero, pageType: page.pageType });
   } else if (components.textRunWords) breakLongRuns(blocks, page, components, options, competitor);
   return blocks;
 }

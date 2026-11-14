@@ -43,8 +43,10 @@ export async function measureDensity(page) {
       const rect = element.getBoundingClientRect();
       return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 60 && rect.height > 60;
     };
-    // Off-canvas carousel slides are not visible content.
-    const inside = (rect) => rect.top + scrollY >= top - 1 && rect.bottom + scrollY <= bottom + 1 && rect.right > 0 && rect.left < width;
+    // Off-canvas carousel slides are not visible content. A box reaching past the content's top or foot counts for its
+    // part inside (area and runs are clipped to it): a hero photo under the header starts above the header's foot, and
+    // counted for nothing (hotel-rm's home and hhmhotels.com's, 2026-11-14).
+    const inside = (rect) => rect.bottom + scrollY > top + 1 && rect.top + scrollY < bottom - 1 && rect.right > 0 && rect.left < width;
     const content = (element) => !element.closest(shell.shell);
     const boxes = (elements) => elements.filter((element) => content(element) && visible(element)).map((element) => element.getBoundingClientRect()).filter(inside);
     // Photos: images, video and background photos.
@@ -66,7 +68,7 @@ export async function measureDensity(page) {
       const cells = new Set();
       for (const rect of rects) {
         const x0 = Math.max(0, Math.floor(rect.left / 20)), x1 = Math.min(Math.ceil(width / 20), Math.ceil(rect.right / 20));
-        const y0 = Math.floor((rect.top + scrollY) / 20), y1 = Math.ceil((rect.bottom + scrollY) / 20);
+        const y0 = Math.floor(Math.max(top, rect.top + scrollY) / 20), y1 = Math.ceil(Math.min(bottom, rect.bottom + scrollY) / 20);
         for (let y = y0; y < y1; y += 1) for (let x = x0; x < x1; x += 1) cells.add(y * 10000 + x);
       }
       return cells.size * 400;
@@ -78,7 +80,7 @@ export async function measureDensity(page) {
       .filter((element) => !element.closest(`${shell.shell}, nav, form, table`) && !element.querySelector('p, li, h2, h3') && rendered(element))
       .map((element) => element.innerText).join(' ').split(/\s+/).filter(Boolean).length;
     // The longest stretch with neither a photo nor a structured block.
-    const breaks = [...photos, ...structured].map((rect) => ({ top: rect.top + scrollY, bottom: rect.bottom + scrollY })).sort((left, right) => left.top - right.top);
+    const breaks = [...photos, ...structured].map((rect) => ({ top: Math.max(top, rect.top + scrollY), bottom: Math.min(bottom, rect.bottom + scrollY) })).sort((left, right) => left.top - right.top);
     let cursor = top;
     let longest = 0;
     for (const item of breaks) { longest = Math.max(longest, item.top - cursor); cursor = Math.max(cursor, item.bottom); }

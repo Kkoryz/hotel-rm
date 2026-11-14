@@ -48,13 +48,21 @@ test('the preflight holds a build never verified, one changed since, and lists t
   assert.deepEqual(changed.holds.map((hold) => hold.code), ['verified_build_mismatch']);
 });
 
-test('a preview is published from the verified build only, unless marked unreviewed on every page', async () => {
+test('a preview needs the audits passed; an open design review puts its findings in a banner; unaudited only when marked so', async () => {
+  // Audits failing: refused, unless marked unreviewed (the red banner).
+  const failing = await site({ layout: [{ issue: 'low_contrast' }] });
+  await assert.rejects(publishPreview({ root: failing, out: join(failing, 'out'), base: '/motelpilot' }), /not publishing a build whose audits have not passed[\s\S]*layout_audit_not_passed/);
+  const unreviewed = await publishPreview({ root: failing, out: join(failing, 'out'), base: '/motelpilot', unreviewed: true });
+  assert.deepEqual([unreviewed.verified, unreviewed.audited], [false, false]);
+  assert.match(await readFile(join(failing, 'out/about/index.html'), 'utf8'), /<body class="x"><div data-preview-banner/);
+  // Audits passed, the design review open (owner 2026-11-14: a preview needs the audits only): published, its open findings listed.
+  const reviewing = await site({ review: 'open' });
+  await json(reviewing, 'docs/research/design-review.json', { shots: 'b1', status: 'open', findings: [{ severity: 'P1', route: '/about-us/', viewport: 'desktop', block: 'hero', issue: 'overlay too wide' }, { severity: 'P2', route: '/', block: 'cta', issue: 'small' }] });
+  const audited = await publishPreview({ root: reviewing, out: join(reviewing, 'out'), base: '/motelpilot' });
+  assert.deepEqual([audited.verified, audited.audited, audited.openFindings], [false, true, 1]);
+  assert.match(await readFile(join(reviewing, 'out/index.html'), 'utf8'), /<details data-preview-banner[\s\S]*1 条意见未关闭[\s\S]*\/about-us\/ desktop hero: overlay too wide/);
   const root = await site();
   const out = join(root, 'out');
-  await assert.rejects(publishPreview({ root, out, base: '/motelpilot' }), /not publishing a build that is not verified[\s\S]*verified_build_missing/);
-  const unreviewed = await publishPreview({ root, out, base: '/motelpilot', unreviewed: true });
-  assert.equal(unreviewed.verified, false);
-  assert.match(await readFile(join(out, 'about/index.html'), 'utf8'), /<body class="x"><div data-preview-banner/);
   await recordVerifiedBuild(root, ['/', '/about/']);
   await mkdir(join(out, '.git'), { recursive: true });
   const verified = await publishPreview({ root, out, base: '/motelpilot' });
@@ -66,6 +74,6 @@ test('a preview is published from the verified build only, unless marked unrevie
   assert.match(home, /<meta name="robots" content="noindex, nofollow">/);
   assert.ok(existsSync(join(out, '.git')), 'the preview repository is kept');
   const log = JSON.parse(await readFile(join(root, 'docs/research/preview-log.json'), 'utf8'));
-  assert.deepEqual(log.entries.map((entry) => entry.verified), [false, true]);
+  assert.deepEqual(log.entries.map((entry) => entry.verified), [true]);
   assert.equal(rewriteForBase('a{background:url(/media/x.png)}', '.css', '/p'), 'a{background:url(/p/media/x.png)}');
 });

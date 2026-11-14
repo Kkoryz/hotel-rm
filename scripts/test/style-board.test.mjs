@@ -52,11 +52,11 @@ test('the board is shot module by module beside the competitor sections it rende
   assert.equal((await styleBoardGate({ root })).status, 'missing');
   const review = (key, findings) => writeFile(join(root, 'docs/research/design-review', `${key}.review.json`), JSON.stringify({ shots: manifest.board.find((entry) => entry.key === key).shots, rules: manifest.board.find((entry) => entry.key === key).rules, findings }));
   await review('board--intro-text', []);
-  await review('board--featureGrid-cards', [{ block: 'g', viewport: 'desktop', severity: 'P1', scope: 'site', issue: 'heavy borders' }]);
+  await review('board--featureGrid-cards', [{ block: 'g', viewport: 'desktop', severity: 'P0', scope: 'site', issue: 'heavy borders' }]);
   const open = await styleBoardGate({ root });
   assert.equal(open.status, 'open');
   assert.deepEqual(JSON.parse(await readFile(join(root, 'docs/research/style-board-review.json'), 'utf8')).unbacked, ['featureGrid:cards']);
-  await review('board--featureGrid-cards', [{ block: 'g', viewport: 'desktop', severity: 'P1', scope: 'template', issue: 'needs a layout' }]);
+  await review('board--featureGrid-cards', [{ block: 'g', viewport: 'desktop', severity: 'P0', scope: 'template', issue: 'needs a layout' }]);
   assert.equal((await styleBoardGate({ root })).status, 'passed', 'a template finding is listed, not holding this site');
   // The design is settled only once the board's and the pages' reviews have both passed.
   const { designSettled, settleDesign } = await import('../design-review.mjs');

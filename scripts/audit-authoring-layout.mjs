@@ -11,7 +11,7 @@ import { resolveVariant, signatureFloor, withMediaModules } from "./lib/media-sl
 import { signatureMissing, subjectRepeat } from "./lib/photo-audit.mjs";
 import { pageSchemas } from "./lib/seo-head.mjs";
 import { writeJson } from './lib/json-io.mjs';
-import { actionsDetached, carouselsWithoutControls, smallTargets, splitEdges, heavyCrops, heavyOverlays, lockPalette, longMeasures, unmarkedScrollers, measurePage, misalignedColumns, centredRunningText, gutterOutliers, headingAxes, offPalette, parseRgb, photoOverlaps, referenceRuns, repeatedModules, unevenPhotos } from "./lib/visual-checks.mjs";
+import { actionsDetached, unevenSetType, carouselsWithoutControls, smallTargets, splitEdges, heavyCrops, heavyOverlays, lockPalette, longMeasures, unmarkedScrollers, measurePage, misalignedColumns, centredRunningText, gutterOutliers, headingAxes, offPalette, parseRgb, photoOverlaps, referenceRuns, repeatedModules, unevenPhotos } from "./lib/visual-checks.mjs";
 import { builtPageKey, sharedPageKey } from "./lib/page-keys.mjs";
 import { fontProblems, measureFonts } from "./lib/font-checks.mjs";
 import { INSTALLED_FONTS } from "./lib/font-install.mjs";
@@ -272,6 +272,8 @@ export async function auditAuthoringLayout({ baseUrl, rootDir = process.cwd(), m
     // A split row's photo and copy share their edges; a button stays with its copy (desktop, where they sit side by side).
     if (result.viewport === "desktop") for (const split of splitEdges(result.visual.splits)) failures.push({ ...at, ...split });
     if (result.viewport !== "tablet") for (const action of actionsDetached(result.visual.actions)) failures.push({ ...at, issue: "action_detached", ...action });
+    // The item titles of one section set keep one size and one level, however many blocks the set runs over.
+    for (const uneven of unevenSetType(result.visual.titles)) failures.push({ ...at, issue: "uneven_set_type", ...uneven });
     for (const text of centredRunningText(result.visual.centred)) failures.push({ ...at, issue: "centred_running_text", ...text });
     // Section headings on the reference's axis (owner 2026-11-12), at desktop where the axis shows.
     if (result.viewport === "desktop") for (const heading of headingAxes(result.visual.headings, components.headingAlign)) failures.push({ ...at, issue: "heading_off_axis", ...heading });

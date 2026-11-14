@@ -50,7 +50,9 @@ export function pageEstimate(estimates) {
 // the page shows too little; where it shows too much, in this order (owner 2026-11-12: the competitor's own photo
 // bands go last, and never below its count): the walls added here, the photos of photo cards (icon cards instead),
 // photo tiles (links instead), the competitor's other walls, then its bands down to the floor.
-export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, pageType = null, floor = 0 }) {
+// apart(before, after): whether a wall may stand between these two blocks (media-slots: never between two proof sections,
+// where a photo has nothing to break up).
+export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, pageType = null, floor = 0, apart = () => true }) {
   const target = { run: bands.longestTextOnlyPx.max * BUDGET_MARGIN.run, min: bands.visualAreaPct.min + BUDGET_MARGIN.visualPct, max: bands.visualAreaPct.max - BUDGET_MARGIN.visualPct };
   const estimates = () => blocks.map((block) => estimateBlock(block, variantOf(block), wordsOf(block), model, pageType));
   const top = hero ? estimateBlock(hero.block, hero.variant, hero.words, model, pageType) : null;
@@ -74,15 +76,18 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
     return found;
   };
   // Where a wall may go in a run: between two of its blocks, else at its edge (next to a pictured block), never next to
-  // another wall; the place that splits the run's height most evenly.
-  const place = (run) => {
+  // another wall; the place that splits the run's height most evenly. Not inside a section going on in a block of its
+  // own (continues): the wall would cut it in two. Across (a run too long for the band that has no other place): where
+  // such a section changes module (its cards go on as a list), never between two grids of one card set.
+  const place = (run, across = false) => {
     const list = estimates();
     const candidates = [];
     for (let at = run.start; at <= run.end; at += 1) {
       if (at === 0 || at > closing()) continue;
       if (isWall(blocks[at - 1]) || (blocks[at] && isWall(blocks[at]))) continue;
-      // Nor inside a section going on in a block of its own (continues): the wall would cut it in two.
-      if (blocks[at]?.continues != null && [blocks[at - 1]?.id, blocks[at - 1]?.continues].includes(blocks[at].continues)) continue;
+      if (!apart(blocks[at - 1], blocks[at])) continue;
+      const inside = blocks[at]?.continues != null && [blocks[at - 1]?.id, blocks[at - 1]?.continues].includes(blocks[at].continues);
+      if (inside && !(across && blocks[at].type !== blocks[at - 1]?.type)) continue;
       candidates.push(at);
     }
     const above = (at) => list.slice(run.start, at).reduce((sum, item) => sum + item.height, 0);
@@ -92,10 +97,15 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
   for (; added < MAX_BUDGET_WALLS; added += 1) {
     const now = measure();
     const longest = runs().sort((left, right) => right.height - left.height);
-    // A run too long is split (one inside a single section cannot be); a page short of pictures gets one in its longest run.
-    const needed = (now.longestRun > target.run ? longest.find((run) => run.end - run.start >= 2 && run.height > target.run) : null) ?? (now.visualPct < target.min ? longest[0] : null);
-    if (!needed) break;
-    const at = place(needed);
+    // A run too long is split; a page short of pictures gets one in its longest run that takes one. Each run is tried in
+    // turn, longest first (hotel-rm's home, 2026-11-14: its longest run had no place and the planner stopped there, the
+    // page at 10% pictures for a band of 38-68%); a run too long for the band takes one across a section's change of
+    // module when it has no other place.
+    const tooLong = now.longestRun > target.run ? longest.filter((run) => run.height > target.run) : [];
+    const short = now.visualPct < target.min ? longest : [];
+    let at;
+    for (const run of tooLong) if ((at = place(run) ?? place(run, true)) !== undefined) break;
+    if (at === undefined) for (const run of short) if ((at = place(run)) !== undefined) break;
     if (at === undefined) break;
     blocks.splice(at, 0, wall(`media-module-budget-${added + 1}`));
   }

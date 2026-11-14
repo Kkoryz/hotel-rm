@@ -33,7 +33,7 @@ if (!((['banner', 'hero'].includes(header) && photo) || featured?.image)) {
 }
 ---
 
-<main id="main" data-authoring-page={page.id} data-page-type={page.pageType} data-page-status={page.status}>
+<main id="main" data-authoring-page={page.id} data-page-type={page.pageType} data-page-status={page.status} data-hero-photo={header === 'banner' && photo ? '' : undefined}>
   {header !== 'banner' && <Breadcrumbs page={page} />}
   <section class="blog-hub-hero" data-authoring-block="hero" data-layout="hero" data-header={header} data-boundary-anchor={header === 'banner' ? 'box' : undefined}>
     {header === 'banner' && photo && <img class="blog-hub-hero__backdrop" src={photo.src} alt="" data-decorative width={photo.width} height={photo.height} loading="eager" decoding="async" style={focusStyle(photo.src)} />}

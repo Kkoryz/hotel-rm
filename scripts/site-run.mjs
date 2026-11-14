@@ -173,7 +173,8 @@ export function steps(site, { coreSource = null } = {}) {
     // The template's own checks (its tests, the template contract, the types) run when its code changes, not after
     // every repair of the site's stylesheet or copy (each rebuild ran them all again, 40-75s; Fable's review 11-14).
     { id: 'template-check', kind: 'auto', inputs: ['scripts', 'src/components', 'src/layouts', 'src/lib', 'src/pages', 'src/hooks', 'src/types', 'src/styles/template.css', 'src/styles/patterns.css'], run: [pnpm('test'), pnpm('validate:template'), pnpm('typecheck')] },
-    { id: 'build', kind: 'auto', inputs: ['src', 'public', 'scripts'], run: [pnpm('build'), pnpm('audit:seo')] },
+    // What undoes a template decision goes from the site's stylesheet before every build (strip-protected.mjs).
+    { id: 'build', kind: 'auto', inputs: ['src', 'public', 'scripts'], run: [node('strip-protected.mjs'), pnpm('build'), pnpm('audit:seo')] },
     // Whether each photo of the site's own library shows its page's subject (judge-image-fit.mjs, one judgment per photo
     // and page subject, kept by content); the competitor's placeholder photos never ship and are not judged.
     ...(generate ? [{ id: 'image-fit', kind: 'codex', inputs: ['dist', 'config/agent-steps/image-fit.md', 'code:scripts/judge-image-fit.mjs'], run: [node('judge-image-fit.mjs')] }] : []),

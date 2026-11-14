@@ -12,7 +12,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { runMain } from './lib/cli.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { fillTemplate } from './lib/image-prompt.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { imageBriefs } from './lib/trade.mjs';
@@ -67,7 +67,7 @@ export async function reviewLibrary({ root = process.cwd(), dryRun = false } = {
   ].join('\n');
   const lastMessage = resolve(root, 'docs/research/images/library-review.reply.txt');
   // A judgment: it runs in the judge homes (lib/codex-exec.mjs), never the owner's, whose use the photos need.
-  const run = await runCodex({ root, prompt, images: [sheet], lastMessage, sandbox: 'read-only', lean: true, judge: true, label: 'library review' });
+  const run = await runJudge({ root, prompt, images: [sheet], lastMessage, sandbox: 'read-only', lean: true, judge: true, label: 'library review' });
   if (run.code !== 0) throw new Error(`codex exit ${run.code}: ${run.stderr.trim().slice(-300)}`);
   const line = (await readFile(lastMessage, 'utf8')).trim().split('\n').reverse().find((text) => text.trim().startsWith('{'));
   if (!line) throw new Error('the review reply has no JSON line');

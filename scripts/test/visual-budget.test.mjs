@@ -90,3 +90,37 @@ test('the block model is not refitted while the audit fails on something else: t
   await audit([]);
   assert.deepEqual(await breakTextRuns({ root }), ['block model'], 'with only the density off its band the model is refitted');
 });
+
+test('a page short of pictures gets walls wherever a run takes one, and a section too long for the band takes one where its module changes', () => {
+  // The hotel-rm home of 2026-11-14: its longest run was one section (cards, the rest of the cards, then a list) between
+  // two of the competitor's walls; with no place there the planner stopped and the page showed 10% pictures for 38%.
+  const card = (id, words, extra = {}) => ({ id, type: 'featureGrid', words, ...extra });
+  const wallAt = (id) => ({ id, type: 'gallery', variant: 'band', items: [{}] });
+  const page = () => [
+    text('intro', 120), card('set', 150), card('set-2', 150, { continues: 'set' }), wallAt('media-module-1'),
+    card('svc', 200), card('svc-2', 200, { continues: 'svc' }), { id: 'svc-list', type: 'iconList', words: 300, continues: 'svc' }, wallAt('media-module-2'),
+    card('more', 120), text('faq', 200), { id: 'cta', type: 'cta' },
+  ];
+  const tight = { ...bands, visualAreaPct: { min: 38, max: 68 }, longestTextOnlyPx: { max: 1758 } };
+  const planned = planVisualBudget(page(), helpers({ bands: tight }));
+  const ids = planned.map((block) => block.id);
+  const added = planned.filter((block) => String(block.id).startsWith('media-module-budget'));
+  assert.ok(added.length >= 2, `walls added: ${ids.join(' ')}`);
+  // Never between two grids of one card set, never beside another wall.
+  for (const [index, block] of planned.entries()) {
+    if (!String(block.id).startsWith('media-module-')) continue;
+    assert.ok(!String(planned[index - 1]?.id).startsWith('media-module-') && !String(planned[index + 1]?.id).startsWith('media-module-'), `walls side by side: ${ids.join(' ')}`);
+    const next = planned[index + 1];
+    if (next?.continues) assert.notEqual(next.type, planned[index - 1].type, `a wall cut a card set in two: ${ids.join(' ')}`);
+  }
+  assert.ok(ids.indexOf('svc-list') - ids.indexOf('svc-2') === 2, `the long section takes its wall where cards turn to a list: ${ids.join(' ')}`);
+});
+
+test('a wall never stands where the page says two blocks belong together (two proof sections)', () => {
+  const proof = (id) => ({ id, type: 'testimonials', words: 400 });
+  const page = [text('a', 300), proof('logos'), proof('quotes'), text('b', 300), { id: 'cta', type: 'cta' }];
+  const planned = planVisualBudget(page, helpers({ bands: { ...bands, visualAreaPct: { min: 40, max: 70 } }, apart: (before, after) => !(before?.type === 'testimonials' && after?.type === 'testimonials') }));
+  const ids = planned.map((block) => block.id);
+  assert.equal(ids.indexOf('quotes') - ids.indexOf('logos'), 1, ids.join(' '));
+  assert.ok(planned.some((block) => String(block.id).startsWith('media-module-budget')), ids.join(' '));
+});

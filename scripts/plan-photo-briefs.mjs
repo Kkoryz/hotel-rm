@@ -13,7 +13,7 @@ import { mkdir, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { PHOTO_BRIEFS_SCHEMA, briefSlots, parseBriefs } from './lib/photo-briefs.mjs';
 import { loadSitePages, pageCopy } from './lib/site-pages.mjs';
@@ -67,7 +67,7 @@ export function pageText(page) {
   return [`[hero] ${hero}`, ...sections].join('\n');
 }
 
-export async function planPhotoBriefs({ root = process.cwd(), concurrency = 2, run = runCodex } = {}) {
+export async function planPhotoBriefs({ root = process.cwd(), concurrency = 2, run = runJudge } = {}) {
   const briefs = await imageBriefs(root);
   if (!briefs.planFromCopy) {
     await rm(resolve(root, TARGET), { force: true });

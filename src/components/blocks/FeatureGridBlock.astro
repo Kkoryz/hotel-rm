@@ -26,13 +26,18 @@ const words = Math.max(...block.items.map((item) => item.wordCount ?? 0));
 // (Site Factory's card sections carry no wordCount).
 const most = cardGridMax(Math.max(...block.items.map((item) => item.wordCount ?? item.paragraphs.join(' ').split(/\s+/).filter(Boolean).length)));
 const grid = gridPlan(block.items.length, most, 2, block.setColumns);
+// A grid going on from the one above starts its cards under that grid's first column, as the next row of one set does
+// (hotel-rm's home, 2026-11-14: the set's last two cards stood centred under three, off its left edge); only a grid's
+// own short last row is centred.
 // Rows each card shares with its neighbours (photo, number, title, text) so titles and text line up across a row.
 const numbered = pattern === 'numbered' || pattern === 'outline-numbered';
 // Icon cards: each card's icon (null: none, and no row for it when no card has one).
 const icons = pattern === 'icons' ? block.items.map((item) => { const name = cardIcon(item); return name ? (lucide.icons as Record<string, string>)[name] ?? null : null; }) : [];
 const cardRows = (media.length ? 1 : 0) + (numbered || pattern === 'icon-cards' || icons.some(Boolean) ? 1 : 0) + 2;
-// Card titles sit one level below the grid's own title; without one, each card is a page section (h2).
-const Title = block.heading ? 'h3' : 'h2';
+// Card titles sit one level below the grid's own title, or the title of the section it goes on from (continues: the
+// hotel home's six service cards over two grids had h3 titles in the first and h2 in the second, 22px and 36px);
+// without either, each card is a page section (h2).
+const Title = block.heading || block.continues ? 'h3' : 'h2';
 // Numbered cards are an ordered list, so their order reaches assistive technology, not only the visual 01/02.
 const List = numbered ? 'ol' : 'div';
 const Item = numbered ? 'li' : 'article';
@@ -59,7 +64,7 @@ const Item = numbered ? 'li' : 'article';
     {block.paragraphs?.map((paragraph) => <p class="block__lead"><InlineText text={paragraph} /></p>)}
     <List class="feature-grid" data-layout="equal-grid" data-columns={gridPlan(block.items.length, most).columns} data-density={density(words)} style={`${grid.style}; --card-rows: ${cardRows}`}>
       {block.items.map((item, index) => (
-        <Item class="feature-card" data-explicit-span={block.span ? 'true' : undefined} style={block.span ? `grid-column: span ${block.span}` : grid.itemStyle(index)}>
+        <Item class="feature-card" data-explicit-span={block.span ? 'true' : undefined} style={block.span ? `grid-column: span ${block.span}` : block.continues ? undefined : grid.itemStyle(index)}>
           {media[index] && <MediaFigure media={media[index]} ratio={ratio} class="feature-card__media" />}
           {numbered && <span class="feature-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
           {pattern === 'icon-cards' && <span class="feature-card__mark" aria-hidden="true"></span>}

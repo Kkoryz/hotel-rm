@@ -1,7 +1,7 @@
 {
   "/": {
     "hash": "db702d4456ab76ff",
-    "modified": "2026-11-13"
+    "modified": "2026-11-14"
   },
   "/services/": {
     "hash": "66c5b9993994c549",
@@ -25,7 +25,7 @@
   },
   "/dynamic-pricing-strategy/": {
     "hash": "01a58b42855ba386",
-    "modified": "2026-11-13"
+    "modified": "2026-11-14"
   },
   "/hotel-distribution/": {
     "hash": "6ff4f2282f2a5087",

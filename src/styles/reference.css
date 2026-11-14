@@ -455,7 +455,7 @@ main[data-page-type="home"] .trust-bar { background: rgb(255, 255, 255); }
 .trust-bar .trust-bar__item { border: 0; padding: 0 15px; gap: 12px; }
 .trust-bar__item::before { content: ""; width: 40px; height: 2px; background: var(--accent); margin-bottom: 12px; }
 .trust-bar .trust-bar__value { color: var(--accent-text); font-size: 2rem; font-weight: 600; line-height: 1.4; }
-main:not([data-page-type="home"]):not([data-page-type="solution"]) .block--grid:is([data-pattern="cards"], [data-pattern="icons"], [data-pattern="columns"]) { background: var(--surface-primary); }
+
 .block--grid .feature-card { row-gap: 30px; align-content: normal; }
 main:is([data-page-type="solution"], [data-page-type="solutions_hub"]) .block--grid:not([data-pattern="icons"]) .feature-card__title {
   padding-bottom: 24px;
@@ -497,7 +497,7 @@ main[data-authoring-page] .block--grid[data-pattern="bullets"] .feature-grid__he
   white-space: normal;
 }
 .related-tile__media { --tile-shade: transparent; }
-main:not([data-page-type="solution"]) .block.block--faq { background: var(--surface-primary); }
+
 .block--faq:is([data-variant="accordion"], [data-variant="bars"]) .faq__item { background: transparent; }
 main[data-page-type="contact"] .block--faq summary { text-transform: uppercase; letter-spacing: 0.1em; }
 main[data-page-type="contact"] .process-step__title { font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
@@ -648,7 +648,7 @@ main:is([data-page-type="privacy"], [data-page-type="general"]) .block--icon-lis
   .block--form .form-block__form,
   .block--form .form-block__form > .button { width: 100%; }
   main[data-page-type="general"] .trust-bar .trust-bar__value { font-size: clamp(1rem, 4.6vw, 1.25rem); line-height: 1.5; }
-  main[data-page-type="general"] .block--process[data-variant="photo-cards"] { background: var(--surface-dark); }
+  
   main[data-page-type="general"] .block--process[data-variant="photo-cards"]::before,
   main[data-page-type="general"] .block--process[data-variant="photo-cards"] .process__backdrop { display: none; }
   main[data-page-type="general"] .block--process[data-variant="photo-cards"] .process-steps { row-gap: 30px; }
@@ -659,15 +659,7 @@ main:is([data-page-type="privacy"], [data-page-type="general"]) .block--icon-lis
   .blog-hub-hero h1 + .blog-hub-hero__lead { margin-top: 32px; }
 }
 
-/* White counterparts to the warm page surface; continuation colours stay template-owned. */
-main:is([data-page-type="solution"], [data-page-type="solutions_hub"], [data-page-type="contact"], [data-page-type="blog_hub"]) .block--intro,
-main[data-page-type="general"] .block--intro:has(+ .block--grid),
-main[data-page-type="solution"] :is(.block--split:not([data-variant="panel"]), .block--testimonials),
-main[data-page-type="about"] .block--logos,
-main[data-page-type="contact"] :is(.block--process[data-variant="list"], .block--contact-channels),
-main[data-page-type="privacy"] .block--split:not([data-variant="panel"]) {
-  background: var(--section-tint, rgb(255, 255, 255));
-}
+/* White counterparts to the warm page surface; 
 /* Both halves of the continuation boundary sum to the grid's mobile item gap. */
 @media (max-width: 767px) {
   main:is([data-page-type="general"], [data-page-type="solutions_hub"]) .block--grid[data-pattern="icons"] {
@@ -681,15 +673,7 @@ main[data-page-type="privacy"] .block--split:not([data-variant="panel"]) {
   }
 }
 
-/* Intro/grid pairs retain their alternating warm card surface. */
-main[data-page-type="solution"] .block--intro + .block--grid { background: var(--surface-primary); }
 
-/* Open modules alternate surfaces at both widths, without adding card chrome. */
-main[data-page-type="home"] :is(.block--icon-list, .block--logos, .block--related),
-main[data-page-type="solution"] .block--grid:has(+ .block--related) {
-  background: rgb(255, 255, 255);
-}
-main[data-page-type="solution"] .block--intro + .block--icon-list,
-main[data-page-type="solution"] .block--grid + .block--split[data-variant="tinted"] {
-  background: var(--surface-primary);
-}
+
+
+

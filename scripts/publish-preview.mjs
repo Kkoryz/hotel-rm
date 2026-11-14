@@ -11,6 +11,7 @@ import { extname, join, resolve } from 'node:path';
 import { cliArgs, runMain, usage } from './lib/cli.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { verifiedNow } from './lib/verified-build.mjs';
+import { REFERENCE_PATHS } from './lib/release-guard.mjs';
 
 export const UNREVIEWED_BANNER = '<div data-preview-banner style="position:sticky;top:0;z-index:9999;padding:8px 16px;background:#b42318;color:#fff;font:600 14px/1.4 system-ui,sans-serif;text-align:center">未评审预览：这一版还没通过审计和整页评审 / Unreviewed preview</div>';
 const TEXT = new Set(['.html', '.css', '.js', '.xml', '.json', '.webmanifest', '.txt']);
@@ -31,15 +32,28 @@ export function rewriteForBase(text, ext, prefix, { banner = null } = {}) {
   return out;
 }
 
+// A build whose audits pass but whose design review has not (owner 2026-11-14, Fable's review audit: a preview needs the
+// audits only; the release still needs the review): a banner saying how many findings are open, with the list.
+const escapeHtml = (text) => String(text).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char]);
+export function reviewBanner(findings = []) {
+  const items = findings.map((finding) => `<li>${escapeHtml(`${finding.severity} ${finding.route ?? ''} ${finding.viewport ?? ''} ${finding.block}: ${finding.issue}`)}</li>`).join('');
+  return `<details data-preview-banner style="position:sticky;top:0;z-index:9999;padding:8px 16px;background:#b54708;color:#fff;font:600 14px/1.4 system-ui,sans-serif"><summary style="cursor:pointer;text-align:center">预览：审计已通过，整页评审还有 ${findings.length} 条意见未关闭 / Audited preview, ${findings.length} design finding(s) open</summary><ul style="margin:8px 0 0;padding-left:20px;font-weight:400;max-height:40vh;overflow:auto">${items}</ul></details>`;
+}
+
 export async function publishPreview({ root = process.cwd(), out, base, unreviewed = false, at = new Date().toISOString() }) {
   const { current, problems, record } = await verifiedNow(root);
-  if (!current && !unreviewed) throw new Error(`not publishing a build that is not verified (--unreviewed to publish it with a banner saying so):\n${problems.map((problem) => `- ${problem.code}: ${problem.detail}`).join('\n')}`);
+  // A preview needs the audits passed; the design review only decides its banner.
+  const audited = !problems.some((problem) => problem.code === 'layout_audit_not_passed');
+  if (!audited && !unreviewed) throw new Error(`not publishing a build whose audits have not passed (--unreviewed to publish it with a banner saying so):\n${problems.map((problem) => `- ${problem.code}: ${problem.detail}`).join('\n')}`);
+  const open = current || !audited ? [] : ((await readJson(resolve(root, 'docs/research/design-review.json'), null))?.findings ?? []).filter((finding) => finding.severity !== 'P2' && (finding.scope ?? 'site') === 'site' && !finding.resolution);
   const prefix = base.replace(/\/$/, '');
   const target = resolve(out);
   await mkdir(target, { recursive: true });
   for (const entry of await readdir(target)) if (entry !== '.git') await rm(resolve(target, entry), { recursive: true, force: true });
   await cp(resolve(root, 'dist'), target, { recursive: true });
-  const banner = current ? null : UNREVIEWED_BANNER;
+  // The competitor's files never go out, used by a page or not (a development build keeps media/reference/).
+  for (const path of REFERENCE_PATHS) await rm(resolve(target, path), { recursive: true, force: true });
+  const banner = current ? null : audited ? reviewBanner(open) : UNREVIEWED_BANNER;
   for (const file of await walk(target)) {
     if (file.includes(`${join(target, '.git')}`) || !TEXT.has(extname(file))) continue;
     const text = await readFile(file, 'utf8');
@@ -50,7 +64,7 @@ export async function publishPreview({ root = process.cwd(), out, base, unreview
   await writeFile(resolve(target, '.nojekyll'), '');
   const logPath = resolve(root, 'docs/research/preview-log.json');
   const log = await readJson(logPath, { schemaVersion: 'seo-site-preview-log-v1', entries: [] });
-  const entry = { at, out: target.replaceAll('\\', '/'), base: prefix, verified: current, ...(current ? { verifiedAt: record.at, auditedOnly: record.auditedOnly } : { problems: problems.map((problem) => problem.code) }) };
+  const entry = { at, out: target.replaceAll('\\', '/'), base: prefix, verified: current, audited, ...(audited && !current ? { openFindings: open.length } : {}), ...(current ? { verifiedAt: record.at, auditedOnly: record.auditedOnly } : { problems: problems.map((problem) => problem.code) }) };
   log.entries.push(entry);
   await writeJson(logPath, log);
   return entry;
@@ -60,5 +74,5 @@ runMain(import.meta.url, async () => {
   const { values, positionals: [out] } = cliArgs({ base: { type: 'string' }, unreviewed: { type: 'boolean' } });
   if (!out || !values.base) return usage('Usage: node scripts/publish-preview.mjs <out> --base /<sub-path> [--unreviewed]');
   const entry = await publishPreview({ out, base: values.base, unreviewed: values.unreviewed === true });
-  console.log(`${entry.verified ? 'verified' : 'UNREVIEWED'} preview in ${entry.out} under ${entry.base}/${entry.verified && entry.auditedOnly.length ? ` (${entry.auditedOnly.length} page(s) audited only, not reviewed)` : ''}`);
+  console.log(`${entry.verified ? 'verified' : entry.audited ? `audited (${entry.openFindings} design finding(s) open)` : 'UNREVIEWED'} preview in ${entry.out} under ${entry.base}/${entry.verified && entry.auditedOnly.length ? ` (${entry.auditedOnly.length} page(s) audited only, not reviewed)` : ''}`);
 });

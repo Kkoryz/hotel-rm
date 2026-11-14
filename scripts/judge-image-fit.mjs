@@ -15,7 +15,8 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { decode, readBuiltPage } from './lib/built-site.mjs';
 import { cliArgs, listOption, runMain } from './lib/cli.mjs';
-import { JUDGE_MODEL, runCodex } from './lib/codex-exec.mjs';
+import { JUDGE_MODEL } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 
@@ -45,7 +46,7 @@ export function fitLabel(reply) {
   try { const label = JSON.parse(line ?? '').label; return LABELS.includes(label) ? label : null; } catch { return null; }
 }
 
-export async function judgeImageFit({ root = process.cwd(), routes = null, reads = 1, concurrency = 2, run = runCodex } = {}) {
+export async function judgeImageFit({ root = process.cwd(), routes = null, reads = 1, concurrency = 2, run = runJudge } = {}) {
   const template = await readFile(PROMPT, 'utf8');
   const rules = createHash('sha256').update(template).digest('hex').slice(0, 16);
   const site = await readJson(resolve(root, 'site.json'), {});

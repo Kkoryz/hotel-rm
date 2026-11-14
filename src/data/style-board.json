@@ -74,10 +74,42 @@
       ]
     },
     {
+      "key": "gallery:band",
+      "type": "gallery",
+      "variant": "band",
+      "uses": 59,
+      "names": [
+        "gallery:band",
+        "figure"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "longest",
+          "route": "/",
+          "pageType": "home",
+          "blockId": "media-module-budget-2",
+          "splitIndex": 0,
+          "words": 0,
+          "slots": 1,
+          "block": {
+            "id": "media-module-budget-2",
+            "type": "gallery",
+            "variant": "band",
+            "items": [
+              {
+                "media": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
       "key": "featureGrid:cards",
       "type": "featureGrid",
       "variant": "cards",
-      "uses": 42,
+      "uses": 43,
       "names": [
         "featureGrid:cards"
       ],
@@ -160,39 +192,6 @@
               }
             ],
             "mediaKind": "process"
-          }
-        }
-      ]
-    },
-    {
-      "key": "gallery:circles",
-      "type": "gallery",
-      "variant": "circles",
-      "uses": 2,
-      "names": [
-        "gallery:circles"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/",
-          "pageType": "home",
-          "blockId": "media-module-2",
-          "splitIndex": 0,
-          "words": 0,
-          "slots": 4,
-          "block": {
-            "id": "media-module-2",
-            "type": "gallery",
-            "variant": "grid",
-            "items": [
-              {},
-              {},
-              {},
-              {}
-            ],
-            "competitor": true
           }
         }
       ]
@@ -422,7 +421,7 @@
       "key": "relatedPages:tiles",
       "type": "relatedPages",
       "variant": "tiles",
-      "uses": 3,
+      "uses": 12,
       "names": [
         "relatedPages:tiles"
       ],
@@ -430,11 +429,11 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/",
-          "pageType": "home",
+          "route": "/ota-optimization/",
+          "pageType": "solution",
           "blockId": "related",
           "splitIndex": 0,
-          "words": 6,
+          "words": 14,
           "slots": 0,
           "block": {
             "id": "related",
@@ -446,16 +445,20 @@
                 "href": "/services/"
               },
               {
-                "label": "Blog",
-                "href": "/blog/"
+                "label": "Boutique Hotel Consulting",
+                "href": "/boutique-hotel-consulting/"
               },
               {
-                "label": "Resources",
-                "href": "/resources/"
+                "label": "Commercial Strategy",
+                "href": "/commercial-strategy/"
               },
               {
-                "label": "Careers",
-                "href": "/careers/"
+                "label": "Dynamic Pricing Strategy",
+                "href": "/dynamic-pricing-strategy/"
+              },
+              {
+                "label": "Revenue Management Audit",
+                "href": "/revenue-management-audit/"
               }
             ],
             "variant": "tiles"
@@ -726,38 +729,6 @@
               "href": "/contact-us/"
             },
             "links": []
-          }
-        }
-      ]
-    },
-    {
-      "key": "gallery:band",
-      "type": "gallery",
-      "variant": "band",
-      "uses": 20,
-      "names": [
-        "gallery:band",
-        "figure"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "media-module-budget-2",
-          "splitIndex": 0,
-          "words": 0,
-          "slots": 1,
-          "block": {
-            "id": "media-module-budget-2",
-            "type": "gallery",
-            "variant": "band",
-            "items": [
-              {
-                "media": null
-              }
-            ]
           }
         }
       ]
@@ -1124,7 +1095,7 @@
       "key": "featureGrid:bullets",
       "type": "featureGrid",
       "variant": "bullets",
-      "uses": 7,
+      "uses": 6,
       "names": [
         "featureGrid:bullets"
       ],
@@ -1268,82 +1239,6 @@
                 "placeholder": true
               }
             ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "relatedPages:links",
-      "type": "relatedPages",
-      "variant": "links",
-      "uses": 10,
-      "names": [
-        "relatedPages:links"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/ota-optimization/",
-          "pageType": "solution",
-          "blockId": "related",
-          "splitIndex": 0,
-          "words": 14,
-          "slots": 0,
-          "block": {
-            "id": "related",
-            "type": "relatedPages",
-            "heading": "Related services",
-            "links": [
-              {
-                "label": "Services",
-                "href": "/services/"
-              },
-              {
-                "label": "Boutique Hotel Consulting",
-                "href": "/boutique-hotel-consulting/"
-              },
-              {
-                "label": "Commercial Strategy",
-                "href": "/commercial-strategy/"
-              },
-              {
-                "label": "Dynamic Pricing Strategy",
-                "href": "/dynamic-pricing-strategy/"
-              },
-              {
-                "label": "Revenue Management Audit",
-                "href": "/revenue-management-audit/"
-              }
-            ],
-            "variant": "links",
-            "planned": true
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/boutique-hotel-consulting/",
-          "pageType": "solution",
-          "blockId": "related",
-          "splitIndex": 0,
-          "words": 5,
-          "slots": 0,
-          "block": {
-            "id": "related",
-            "type": "relatedPages",
-            "heading": "Related services",
-            "links": [
-              {
-                "label": "Services",
-                "href": "/services/"
-              },
-              {
-                "label": "Commercial Strategy",
-                "href": "/commercial-strategy/"
-              }
-            ],
-            "variant": "links",
-            "planned": true
           }
         }
       ]
@@ -1644,6 +1539,48 @@
       ]
     },
     {
+      "key": "relatedPages:links",
+      "type": "relatedPages",
+      "variant": "links",
+      "uses": 1,
+      "names": [
+        "relatedPages:links"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "only",
+          "route": "/dynamic-pricing-strategy/",
+          "pageType": "solution",
+          "blockId": "related",
+          "splitIndex": 0,
+          "words": 9,
+          "slots": 0,
+          "block": {
+            "id": "related",
+            "type": "relatedPages",
+            "heading": "Related services",
+            "links": [
+              {
+                "label": "Services",
+                "href": "/services/"
+              },
+              {
+                "label": "Hotel Digital Marketing",
+                "href": "/hotel-digital-marketing/"
+              },
+              {
+                "label": "Boutique Hotel Consulting",
+                "href": "/boutique-hotel-consulting/"
+              }
+            ],
+            "variant": "links",
+            "planned": true
+          }
+        }
+      ]
+    },
+    {
       "key": "splitMedia:panel",
       "type": "splitMedia",
       "variant": "panel",
@@ -1722,6 +1659,39 @@
                 "caption": "Talk through your property, channels and goals in a free 30-minute consultation."
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "gallery:circles",
+      "type": "gallery",
+      "variant": "circles",
+      "uses": 1,
+      "names": [
+        "gallery:circles"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "only",
+          "route": "/about-us/",
+          "pageType": "about",
+          "blockId": "media-module-1",
+          "splitIndex": 0,
+          "words": 0,
+          "slots": 4,
+          "block": {
+            "id": "media-module-1",
+            "type": "gallery",
+            "variant": "grid",
+            "items": [
+              {},
+              {},
+              {},
+              {}
+            ],
+            "competitor": true
           }
         }
       ]
@@ -2073,18 +2043,18 @@
     }
   ],
   "unbacked": [
+    "gallery:band",
     "featureGrid:cards",
-    "gallery:circles",
     "iconList:checks",
     "testimonials:grid",
     "relatedPages:tiles",
-    "gallery:band",
     "process:photo-cards",
     "featureGrid:bullets",
     "orderCase:default",
-    "relatedPages:links",
     "process:circles",
     "table:cards",
+    "relatedPages:links",
+    "gallery:circles",
     "process:list",
     "contactChannels:list",
     "iconList:icons",

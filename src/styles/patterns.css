@@ -74,6 +74,8 @@
 /* Two columns only where the list asks for them (IconListBlock.astro: an even count of short items); every list took
    two at 768px and up before, an odd or long one too (the hotel site's split list read as three columns). */
 @media (min-width: 768px) { .icon-list__items[data-columns="2"] { grid-template-columns: 1fr 1fr; } }
+/* An odd count's last item runs the row, as a short last row must (unfilled_row). */
+@media (min-width: 768px) { .icon-list__items[data-columns="2"] > .icon-list__item:last-child:nth-child(odd):not(:first-child) { grid-column: 1 / -1; } }
 /* Beside its introduction a one-column list keeps one column (about half the container); where the site's treatment
    sets the introduction above it, the list has the full width and its items go two to a row where two of 24rem fit
    (hotel-rm 2026-11-14: three lists of six to eight short items ran one column across the page); an odd count's last
@@ -542,6 +544,17 @@ main[data-authoring-page] .block--prose p { margin: 0 0 var(--article-paragraph-
 }
 .prose__list { display: grid; gap: 0.75rem; margin: 0 0 var(--article-paragraph-gap, 1.75rem); padding-left: 1.4rem; line-height: var(--article-line-height, 1.8); }
 .prose__table { overflow-x: auto; margin: 2.5rem 0; }
+/* A table wider than its column shows that it scrolls (Fable's review audit, 2026-11-14: the article tables' right-hand
+   columns were cut off on phones with nothing to say more was there): a shade on the side that hides columns, gone at
+   either end (the covers scroll with the table, the shades stay with the box); focusable, so a keyboard scrolls it. */
+:is(.prose__table, .table-block__scroll)[data-scroll="sideways"] {
+  background:
+    linear-gradient(to right, var(--surface-primary), var(--surface-primary) 30%, transparent) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--surface-primary), var(--surface-primary) 30%, transparent) right center / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / 0.2), transparent) left center / 0.9rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / 0.2), transparent) right center / 0.9rem 100% no-repeat scroll;
+}
+:is(.prose__table, .table-block__scroll)[data-scroll="sideways"]:focus-visible { outline: 2px solid var(--focus-ring, var(--accent)); outline-offset: 2px; }
 /* The section's own bottom space follows its last picture or table (no double gap before the next heading). */
 .block--prose > :is(.prose__figure, .prose__table):last-child { margin-bottom: 0; }
 .prose__table table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }

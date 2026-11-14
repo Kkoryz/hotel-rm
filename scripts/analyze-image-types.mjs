@@ -11,7 +11,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { DESCRIBE_BATCH, IMAGE_TYPES_SCHEMA, allowedTypes, notWornIn, spreadSlots, describePrompt, parseDescribed, parseProducts, parseSlots, parseTypes, photoContexts, productsPrompt, section, slotsPrompt, typed, typesPrompt, usedFor } from './lib/image-types.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { pageCategory } from './lib/image-plan.mjs';
@@ -59,7 +59,7 @@ async function capturedPhotos(root) {
 }
 
 // run: the Codex call (a stand-in in tests).
-export async function analyzeImageTypes({ root = process.cwd(), force = false, run: codex = runCodex } = {}) {
+export async function analyzeImageTypes({ root = process.cwd(), force = false, run: codex = runJudge } = {}) {
   const briefs = await imageBriefs(root);
   const variants = await readJson(resolve(root, 'src/data/template-variants.json'));
   const plan = await readJson(resolve(root, 'docs/research/image-plan.json'));

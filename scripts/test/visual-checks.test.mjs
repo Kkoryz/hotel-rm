@@ -191,3 +191,14 @@ test('a split row\'s photo and copy share their edges; a button stays with its c
   // The closing band's button 335px under its paragraph and 414px to its right.
   assert.deepEqual(actionsDetached([{ block: 'cta', label: 'Talk to our team', gap: 335, offset: 414, centred: false }, { block: 'hero', label: 'Talk', gap: 24, offset: 300, centred: true }]).map((item) => item.block), ['cta']);
 });
+
+test('the item titles of one section set keep one size and level, over every block the set runs over', async () => {
+  const { unevenSetType } = await import('../lib/visual-checks.mjs');
+  const card = (block, set, tag, size, text) => ({ set, block, kind: 'feature-card__title', tag, size, text });
+  // The hotel home: six service cards over two grids, the second without a heading of its own.
+  const titles = [card('featureGrid-1', 'featureGrid-1', 'h3', 22, 'Full remote management'), card('featureGrid-1', 'featureGrid-1', 'h3', 22, 'Pricing'), card('featureGrid-2', 'featureGrid-1', 'h2', 36, 'Online visibility')];
+  assert.deepEqual(unevenSetType(titles), [{ block: 'featureGrid-2', kind: 'feature-card__title', sizes: [22, 36], tags: ['h3', 'h2'], text: 'Online visibility' }]);
+  assert.deepEqual(unevenSetType(titles.slice(0, 2)), []);
+  // Two sets may differ: each keeps its own.
+  assert.deepEqual(unevenSetType([card('a', 'a', 'h3', 22, 'x'), card('b', 'b', 'h3', 18, 'y')]), []);
+});

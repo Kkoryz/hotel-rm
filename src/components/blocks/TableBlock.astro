@@ -33,7 +33,7 @@ const mark = (cell: string) => (/^(yes|included|available)\b/i.test(cell.trim())
         ))}
       </ul>
     ) : (
-      <div class="table-block__scroll" data-layout="table" data-scroll="sideways">
+      <div class="table-block__scroll" data-layout="table" data-scroll="sideways" role="region" tabindex="0" aria-label={block.heading ?? block.columns.join(', ')}>
         <table class="table-block">
           <thead><tr>{block.columns.map((column) => <th scope="col">{column}</th>)}</tr></thead>
           <tbody>{block.rows.map((row) => <tr>{row.map((cell) => {

@@ -16,8 +16,12 @@ const notes = headed ? block.items.filter((item) => !item.heading) : [];
 // two columns there hold a few words each; without one, a sentence or two each (the hotel site's style board: detailed
 // items squeezed into two narrow columns, and a split list read as three columns).
 const ICON_LIST_TWO_COLUMN_CHARS = { split: 60, list: 160 };
+// A list across the full width (no introduction) of four items or more, each a short paragraph at most, takes two
+// columns of about 530px whatever its count, an odd count's last item running the row (hotel-rm's home, 2026-11-14:
+// seven items of up to 343 characters ran one 1,320px column across the page, its longest run without a picture).
+const FULL_WIDTH_TWO_COLUMN_CHARS = 360;
 const longest = Math.max(0, ...listed.map((item) => `${item.heading ?? ''} ${item.text}`.trim().length));
-const columns = listed.length % 2 === 0 && longest <= ICON_LIST_TWO_COLUMN_CHARS[hasIntro ? 'split' : 'list'] ? 2 : 1;
+const columns = (listed.length % 2 === 0 && longest <= ICON_LIST_TWO_COLUMN_CHARS[hasIntro ? 'split' : 'list']) || (!hasIntro && !notes.length && listed.length >= 4 && longest <= FULL_WIDTH_TWO_COLUMN_CHARS) ? 2 : 1;
 ---
 
 <section class="block block--icon-list" data-authoring-block="iconList" data-block-id={block.id} data-variant={variant}>

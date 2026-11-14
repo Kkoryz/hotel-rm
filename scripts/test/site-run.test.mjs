@@ -260,17 +260,18 @@ test('a site that names its Site Factory project is frozen by the run and pointe
   assert.equal(await freezeForRun(root, site, freeze), site);
 });
 
-test('the design review waits for a review of the current shots and for every open P0/P1 finding', async () => {
+test('the design review waits for a review of the current shots and for every open P0 finding; a P1 is polished, not held', async () => {
   const { judgeReviews, representatives } = await import('../design-review.mjs');
   const pages = [{ route: '/a/', pageType: 'product_manufacturer', status: 'placeholder' }, { route: '/b/', pageType: 'product_manufacturer', status: 'authored' }, { route: '/', pageType: 'home', status: 'authored' }];
   assert.deepEqual(representatives(pages, ['home', 'product_manufacturer', 'about']).map((page) => page.route), ['/', '/b/']);
   const manifest = { id: 'all', pages: [{ pageType: 'home', route: '/', shots: 'new' }, { pageType: 'product_manufacturer', route: '/b/', shots: 'new' }] };
   assert.equal(judgeReviews(manifest, { home: { shots: 'new', findings: [] } }).status, 'missing');
   assert.equal(judgeReviews(manifest, { home: { shots: 'new', findings: [] }, product_manufacturer: { shots: 'old', findings: [] } }).status, 'stale');
-  const open = judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'hero', severity: 'P1', issue: 'x' }, { block: 'cta', severity: 'P2', issue: 'y' }] }, product_manufacturer: { shots: 'new', findings: [] } });
+  assert.equal(judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'hero', severity: 'P1', issue: 'x' }] }, product_manufacturer: { shots: 'new', findings: [] } }).status, 'passed', 'a P1 goes to the polish repair (owner 2026-11-14)');
+  const open = judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'hero', severity: 'P0', issue: 'x' }, { block: 'cta', severity: 'P2', issue: 'y' }] }, product_manufacturer: { shots: 'new', findings: [] } });
   assert.equal(open.status, 'open');
   assert.equal(open.findings[0].route, '/');
-  const resolved = judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'hero', severity: 'P1', issue: 'x', resolution: 'accepted: the competitor does the same' }] }, product_manufacturer: { shots: 'new', findings: [] } });
+  const resolved = judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'hero', severity: 'P0', issue: 'x', resolution: 'accepted: the competitor does the same' }] }, product_manufacturer: { shots: 'new', findings: [] } });
   assert.equal(resolved.status, 'passed');
   // A template or content finding is for the template or Site Factory to fix: it does not hold this site.
   const elsewhere = judgeReviews(manifest, { home: { shots: 'new', findings: [{ block: 'footer', severity: 'P1', scope: 'template', issue: 'x' }, { block: 'g', severity: 'P0', scope: 'content', issue: 'y' }] }, product_manufacturer: { shots: 'new', findings: [] } });
@@ -297,7 +298,7 @@ test('the review looks at the longest and the shortest page of every page type, 
   ]);
   // Two reviews of one page type: each is judged on its own shots, and their findings keep both the page type and the review.
   const manifest = { id: 'm', pages: chosen.slice(1, 3).map((item) => ({ key: item.key, pageType: item.pageType, route: item.route, shots: 's' })) };
-  const result = judgeReviews(manifest, { solution: { shots: 's', findings: [] }, 'solution--shortest': { shots: 's', findings: [{ block: 'faq', severity: 'P1', issue: 'x' }] } });
+  const result = judgeReviews(manifest, { solution: { shots: 's', findings: [] }, 'solution--shortest': { shots: 's', findings: [{ block: 'faq', severity: 'P0', issue: 'x' }] } });
   assert.equal(result.status, 'open');
   assert.deepEqual(result.findings.map((finding) => [finding.pageType, finding.review, finding.route]), [['solution', 'solution--shortest', '/a/']]);
   assert.equal(judgeReviews(manifest, { solution: { shots: 's', findings: [] } }).status, 'missing');
@@ -700,7 +701,9 @@ test('a review made under other rules (its instructions, the practice, the hooks
   await writeFile(join(root, 'config/agent-steps/design-review.md'), 'Review v2');
   const after = await reviewRules(root);
   assert.notEqual(after, before);
-  assert.ok(!reviewCurrent({ ...page, rules: after }, { shots: 's1', rules: before }), 'same shots, new rules: reviewed again');
+  assert.ok(!reviewCurrent({ ...page, rules: after }, { shots: 's1', rules: before, findings: [{ block: 'hero', severity: 'P0', issue: 'x' }] }), 'same shots, new rules, a finding open: reviewed again');
+  assert.ok(reviewCurrent({ ...page, rules: after }, { shots: 's1', rules: before, findings: [{ block: 'hero', severity: 'P2', issue: 'x' }] }), 'a review holding nothing is not sent back for new rules alone (owner 2026-11-14)');
+  assert.ok(!reviewCurrent({ ...page, shots: 's2', rules: after }, { shots: 's1', rules: before, findings: [] }), 'new shots: reviewed again');
 });
 
 test('the same treatment with other problems is a new situation: a repair is tried again after the template changed', async () => {
@@ -910,4 +913,15 @@ test('an audit repair of the stylesheet alone goes back to the audit; one that c
   assert.ok(css.result.summary.every((item) => item.seconds === undefined || Number.isInteger(item.seconds)), 'each step records its seconds');
   const variants = await runOnce({ 'src/data/template-variants.json': JSON.stringify({ components: { band: 'left' } }) });
   assert.ok(variants.ran.includes('plan-images.mjs'), `a variants repair goes back to the images: ${variants.ran.join(', ')}`);
+});
+
+test('what the design repair lists as asked against the site rules or as a template gap holds nothing next round', async () => {
+  const { applyListed, listedByRepair, judgeReviews } = await import('../design-review.mjs');
+  const notes = ['# Notes', '## Asked against the site rules', '', '### Design-gate repair (2026-11-14)', '- `/privacy-policy/`, block `hero`, desktop and mobile: the overlay follows the site rule.', '## Template gaps', '- `/information-technology/` `m3`: two tinted sections in a row come from the alternation.', '## Excluded assets', '- `/` block `cta`: not a gap list.'].join('\n');
+  const listed = listedByRepair(notes);
+  assert.deepEqual(listed.map((entry) => entry.section), ['Asked against the site rules', 'Template gaps']);
+  const findings = [{ route: '/privacy-policy/', block: 'hero', severity: 'P0', issue: 'x' }, { route: '/information-technology/', block: 'm3', severity: 'P0', issue: 'y' }, { route: '/', block: 'cta', severity: 'P0', issue: 'z' }, { route: '/privacy-policy/', block: 'hero-2', severity: 'P0', issue: 'w' }];
+  assert.deepEqual(applyListed(findings, listed).map((finding) => Boolean(finding.resolution)), [true, true, false, false]);
+  const manifest = { pages: [{ key: 'privacy', pageType: 'privacy', route: '/privacy-policy/', shots: 's' }] };
+  assert.equal(judgeReviews(manifest, { privacy: { shots: 's', findings: [findings[0]] } }, [], listed).status, 'passed');
 });

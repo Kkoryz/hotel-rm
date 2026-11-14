@@ -277,7 +277,32 @@ export function measurePage() {
     const rect = nearest.getBoundingClientRect();
     return [{ block: section.getAttribute('data-block-id'), label: button.textContent.trim().slice(0, 40), gap: Math.round(box.top - rect.bottom), offset: Math.round(box.left - rect.left), centred: getComputedStyle(nearest).textAlign === 'center' }];
   });
-  return { blocks, palette, colours, photos, overlays, measures, scrollers, carousels, targets, columns, textAxis, centred, headings, splits, actions };
+  // The item titles of each section set (a block and the blocks going on from it, data-continues): their kind (the
+  // class ending in __title), tag and size (setType).
+  const titles = [...main.querySelectorAll('[data-authoring-block] [class*="__title"]')].filter((title) => title.getBoundingClientRect().height > 0).flatMap((title) => {
+    const section = title.closest('[data-authoring-block]');
+    const kind = [...title.classList].find((name) => name.endsWith('__title'));
+    return kind ? [{ set: section.getAttribute('data-continues') || section.getAttribute('data-block-id'), block: section.getAttribute('data-block-id'), kind, tag: title.tagName.toLowerCase(), size: Math.round(parseFloat(getComputedStyle(title).fontSize) * 10) / 10, text: title.textContent.trim().slice(0, 40) }] : [];
+  });
+  return { blocks, palette, colours, photos, overlays, measures, scrollers, carousels, targets, columns, textAxis, centred, headings, splits, actions, titles };
+}
+
+// The titles of one kind in one section set at one size and level (owner 2026-11-14: "字体大小都不一样": the hotel home's
+// six service cards, split over two grids, had 22px titles in the first and 36px in the second, which had no heading of
+// its own and set its card titles as section headings). [{ block, kind, sizes, tags, text }]
+export function unevenSetType(titles = []) {
+  const groups = new Map();
+  for (const title of titles) {
+    const key = `${title.set}|${title.kind}`;
+    groups.set(key, [...(groups.get(key) ?? []), title]);
+  }
+  return [...groups.values()].flatMap((list) => {
+    const sizes = [...new Set(list.map((title) => title.size))];
+    const tags = [...new Set(list.map((title) => title.tag))];
+    if (sizes.length < 2 && tags.length < 2) return [];
+    const odd = list.find((title) => title.size !== list[0].size || title.tag !== list[0].tag) ?? list[0];
+    return [{ block: odd.block, kind: odd.kind, sizes, tags, text: odd.text }];
+  });
 }
 
 // A split row's photo and copy share their edges (owner 2026-11-12: "左内容右图或者右内容左图也没有对齐", "不应该照搬固定宽度

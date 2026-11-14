@@ -20,7 +20,8 @@ import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { blogGates } from './lib/blog-gates.mjs';
 import { cliArgs, listOption, runMain, usage } from './lib/cli.mjs';
-import { imageHomes, runCodex } from './lib/codex-exec.mjs';
+import { imageHomes } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { companyFacts } from './lib/facts.mjs';
 import { articlePost, parseArticle, pictureDensity, pictureTarget, placedVisuals, slugOf } from './lib/geo-article.mjs';
 import { articleVisualPrompt } from './lib/image-prompt.mjs';
@@ -56,7 +57,7 @@ const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 // trade's words, showed a Chinese factory worker fixing a motel lamp.
 const visualKey = (visual, trade = DEFAULT_TRADE) => sha(JSON.stringify([visual.type, visual.title, visual.content, visual.setting ?? null, visual.purpose, visual.section, SIZE, VISUAL_RULES, ...(trade === DEFAULT_TRADE ? [] : [trade])])).slice(0, 16);
 
-export async function importGeoArticle({ root = process.cwd(), runDir, only = null, run = runCodex } = {}) {
+export async function importGeoArticle({ root = process.cwd(), runDir, only = null, run = runJudge } = {}) {
   const source = resolve(runDir);
   const runName = basename(source);
   const article = parseArticle(await readFile(resolve(source, '06-article.md'), 'utf8'));

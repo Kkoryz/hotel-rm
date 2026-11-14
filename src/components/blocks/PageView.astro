@@ -52,7 +52,7 @@ const tintCss = tintStyle(new Set([...tintedSections(resolved.map(({ block }) =>
 const mainStyle = titleFit ? `--title-ems-phone: ${titleFit['--fit-ems-phone']}; --title-min-phone: ${titleFit['--fit-min-phone']}` : undefined;
 ---
 
-<main id="main" data-authoring-page={page.id} data-page-type={page.pageType} data-page-status={page.status} style={mainStyle}>
+<main id="main" data-authoring-page={page.id} data-page-type={page.pageType} data-page-status={page.status} data-hero-photo={pageHero(page).showsImage ? '' : undefined} style={mainStyle}>
   {tintCss && <style is:inline set:html={tintCss} />}
   {variants.breadcrumbs !== 'after-hero' && <Breadcrumbs page={page} />}
   <PageHero page={page} />

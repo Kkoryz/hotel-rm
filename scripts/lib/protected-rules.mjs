@@ -5,7 +5,46 @@
 // src/styles/reference.css that sets one of these properties on these parts fails the layout audit
 // (template_rule_overridden) and goes to the site-CSS repair, which takes it out.
 
+// A selector whose rule styles a plain section itself (its rightmost part is the section, .block--<type>, of a type the
+// template alternates white and tinted: not a photo, band, closing call, form, split row or testimonials, which carry
+// their own surface). The hotel site's repairs tinted sections by their neighbours (".block--gallery +
+// .block--icon-list"), and two grey sections met where the template's alternation had one.
+const OWN_SURFACE = /^(cta|testimonials|gallery|split|band|figure|form|charts|page-lead)$/;
+const topLevel = (text, separator) => {
+  const parts = [];
+  let depth = 0;
+  let current = '';
+  for (const char of text) {
+    if (char === '(' || char === '[') depth += 1;
+    if (char === ')' || char === ']') depth -= 1;
+    if (depth === 0 && separator.test(char)) { parts.push(current); current = ''; } else current += char;
+  }
+  return [...parts, current].map((part) => part.trim()).filter(Boolean);
+};
+// Only a page's own sections: not a block inside another block or inside an article's body (posts are not alternated).
+export const stylesPlainSection = (selector) => topLevel(selector, /,/).some((item) => {
+  // The compounds with the combinator after each (" ", ">", "+", "~"; the last has none).
+  const steps = [];
+  let depth = 0;
+  let current = '';
+  for (const char of item.trim()) {
+    if (char === '(' || char === '[') depth += 1;
+    if (char === ')' || char === ']') depth -= 1;
+    if (depth === 0 && /[\s>+~]/.test(char)) {
+      if (current) { steps.push({ compound: current, after: ' ' }); current = ''; }
+      if (char !== ' ' && steps.length) steps.at(-1).after = char;
+    } else current += char;
+  }
+  const last = current;
+  if (last.includes('::') || /\.post-(article|body)\b/.test(item)) return false;
+  // A block inside another: a block compound followed by a descendant or child combinator (+ and ~ name a neighbour).
+  if (steps.some((step) => /^[\s>]$/.test(step.after) && /\.block(--[\w-]+)?\b/.test(step.compound))) return false;
+  const types = [...last.matchAll(/\.block--([\w-]+)/g)].map((match) => match[1]);
+  return types.some((type) => !OWN_SURFACE.test(type));
+});
+
 export const PROTECTED_RULES = Object.freeze([
+  { part: { test: stylesPlainSection }, properties: ['background', 'background-color'], rule: 'neighbouring plain sections alternate white and tinted backgrounds, set by the template (the treatment colours the tint through --section-tint, never one section)' },
   { part: /\.split__media-set|\.split__media\b|\.split__copy/, properties: ['align-self', 'height', 'max-height', 'aspect-ratio'], rule: 'a split row\'s photo runs its copy\'s height up to a 4:5 portrait, then stays in view beside the longer copy as it scrolls (sticky), and shorter copy sits level with the photo\'s middle (template.css)' },
   { part: /\.split\b(?![\w-])/, properties: ['align-items'], rule: 'a split row\'s photo and copy share their edges (template.css)' },
   { part: /\.button\b/, properties: ['position'], values: /absolute|fixed|sticky/, rule: 'a button stays in its copy\'s flow, under the text it ends (template.css)' },
@@ -73,12 +112,14 @@ export const SITE_DECISIONS = Object.freeze([
   'the style of each module follows the competitor; its sizes follow our copy: widths, heights, column counts and line lengths are not copied as fixed values',
   'a title and every heading are sized by the template to their own words (at most two lines for a page title on desktops); no rule sets their font-size or the fit variables, and no section heading is larger than its page\'s title',
   'two sections of the same shape (rows of short items) do not stand one under the other: the template sets one of them out as a list beside its heading',
-  'neighbouring plain sections alternate white and tinted backgrounds, a section split over several blocks keeping one background',
   'a card set split over several grids reads as one section: one heading, one card width',
-  'a grid\'s short last row, and the last grid of a card set, is centred under the full rows above it (src/lib/layout.ts gridPlan), not set from their left edge',
+  'a card set\'s last grid starts under the set\'s first column; only a grid\'s own short last row is centred',
   'a hero lead much longer than the competitor\'s stands under the hero, not on its photo',
   'cards that name services carry a line icon, not a photo',
   'a full-width photo band may carry a button on its lower edge, linking where the section before it links',
+  // The hotel site's sheet listed by hand the page types whose header sits over the hero photo; each page type that
+  // came to open on a photo (privacy, terms, the blog) showed the header as a black band over it.
+  'what follows the hero (a header over its photo, the photo\'s overlay) is written for main[data-hero-photo] (set by the template on every page that opens on a photo), never for a list of page types',
 ]);
 export function siteRules(components = {}) {
   const rules = [...new Set(PROTECTED_RULES.map((guard) => guard.rule.replace(/ \(template\.css[^)]*\)$/, '')))];

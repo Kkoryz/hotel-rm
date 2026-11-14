@@ -40,7 +40,9 @@ export const VIEWPORTS = Object.freeze([
 ]);
 // Open findings of these severities hold the run, when the site can fix them (scope "site": its treatment). A template
 // or content finding is listed for whoever fixes it (the template, Site Factory) and does not hold one site's run.
-export const BLOCKING = Object.freeze(['P0', 'P1']);
+// Only a broken page holds (owner 2026-11-14, Fable's review audit: the gate stood on taste and on template work since
+// 11-05, while a cut-off table passed as "template"); P1 and P2 go to the polish repair and stay in the report.
+export const BLOCKING = Object.freeze(['P0']);
 export const SITE_SCOPE = 'site';
 // The severities and scopes a finding may have (config/agent-steps/design-review.md); a finding without a scope is the site's.
 export const SEVERITIES = Object.freeze(['P0', 'P1', 'P2']);
@@ -109,8 +111,10 @@ export function standIns(page, { proofStandIn = false } = {}) {
 // one page type sends only that one back for review).
 // ... and under the rules it is judged by now (its instructions, the shared practice, the template's hooks and variants):
 // a review made under other rules is not current either.
-export const reviewCurrent = (page, review) => Boolean(review) && review.shots === page.shots && review.rules === page.rules;
-export const REVIEW_RULES = Object.freeze(['config/agent-steps/design-review.md', 'config/agent-steps/treatment-practice.md', 'docs/research/CSS_HOOKS.md']);
+// A review that holds nothing stays current when only the rules changed (owner 2026-11-14: every edit of the review's
+// instructions sent every page back for review); new shots are always reviewed again.
+export const reviewCurrent = (page, review) => Boolean(review) && review.shots === page.shots && (review.rules === page.rules || !openFindings(review.findings ?? []).length);
+export const REVIEW_RULES = Object.freeze(['config/agent-steps/design-review.md', 'config/agent-steps/treatment-practice.md']);
 export async function reviewRules(root) {
   const hash = createHash('sha256');
   for (const path of REVIEW_RULES) hash.update(await readFile(resolve(root, path)).catch(() => 'missing'));
@@ -127,9 +131,31 @@ export async function siteLayoutFacts(root) {
 
 // Findings that hold the run: the site's own P0/P1 without a resolution.
 export const openFindings = (findings = []) => findings.filter((finding) => BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
-// The small findings of the site's own treatment (P2) the run repairs after the gate passes, never holding it
-// (owner 2026-10-30: the small ones are fixed in the run too; site10's gate passed on sixteen).
-export const minorFindings = (findings = []) => findings.filter((finding) => finding.severity === 'P2' && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+// The findings of the site's own treatment that do not hold the gate (P1, P2): the run repairs them after it passes, and
+// what the repair cannot mend stays in the report (owner 2026-10-30: the small ones are fixed in the run too).
+export const minorFindings = (findings = []) => findings.filter((finding) => !BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+// What the design repair said it cannot do (docs/research/analysis/notes.md, its "Asked against the site rules" and
+// "Template gaps" lists): a finding whose route and block a listed line names carries that answer and holds nothing
+// the next round (Fable's review audit: such findings came back every round and the rounds ran out).
+export const NOTES = 'docs/research/analysis/notes.md';
+const LISTED = /^##\s+(Asked against the site rules|Template gaps)\s*$/;
+export function listedByRepair(notes = '') {
+  const lines = [];
+  let section = null;
+  for (const line of String(notes).split(/\r?\n/)) {
+    if (/^##\s/.test(line)) { section = LISTED.exec(line)?.[1] ?? null; continue; }
+    if (section && /^\s*[-*]\s/.test(line)) lines.push({ section, line });
+  }
+  return lines;
+}
+export function applyListed(findings, listed = []) {
+  const names = (line, block) => new RegExp(`\`${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\`|\\bblock ${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(line);
+  return findings.map((finding) => {
+    if (finding.resolution || !finding.route || !finding.block) return finding;
+    const hit = listed.find(({ line }) => line.includes(finding.route) && names(line, finding.block));
+    return hit ? { ...finding, resolution: `listed by the design repair under "${hit.section}" (${NOTES})` } : finding;
+  });
+}
 // The treatment's rules written for one block by its id: blocks of a kind no longer look alike once the page changes
 // (site10: the first three proof sections styled by id, a fourth left as the template had it). Small findings too.
 export const blockIdRules = (css = '') => [...new Set([...css.matchAll(/\[data-block-id[~^$*|]?="([^"]+)"\]/g)].map((match) => match[1]))];
@@ -149,12 +175,14 @@ export function applyWaivers(findings, waivers = []) {
   });
 }
 const readWaivers = async (root) => (await readJson(resolve(root, WAIVERS), null))?.waivers ?? [];
-export function judgeReviews(manifest, reviews, waivers = []) {
+const readListed = async (root) => listedByRepair(await readFile(resolve(root, NOTES), 'utf8').catch(() => ''));
+export function judgeReviews(manifest, reviews, waivers = [], listed = []) {
   const missing = manifest.pages.filter((page) => !reviews[reviewKey(page)]).map(reviewKey);
   const stale = manifest.pages.filter((page) => reviews[reviewKey(page)] && !reviewCurrent(page, reviews[reviewKey(page)])).map(reviewKey);
   const findings = applyWaivers(manifest.pages.flatMap((page) => (reviews[reviewKey(page)]?.findings ?? []).map((finding) => ({ pageType: page.pageType, review: reviewKey(page), route: page.route, ...finding }))), waivers);
-  const status = missing.length ? 'missing' : stale.length ? 'stale' : openFindings(findings).length ? 'open' : 'passed';
-  return { status, missing, stale, findings };
+  const answered = applyListed(findings, listed);
+  const status = missing.length ? 'missing' : stale.length ? 'stale' : openFindings(answered).length ? 'open' : 'passed';
+  return { status, missing, stale, findings: answered };
 }
 
 // A labelled full-page shot of our page: every section (data-authoring-block) gets its block id written on it.
@@ -446,7 +474,7 @@ export async function settleDesign({ root = process.cwd() } = {}) {
 export async function styleBoardGate({ root = process.cwd() } = {}) {
   const manifest = await readJson(resolve(root, DIR, 'manifest.json'), null);
   const board = manifest?.board ?? [];
-  const result = judgeReviews({ pages: board }, await readReviews(root, manifest ?? {}, board), await readWaivers(root));
+  const result = judgeReviews({ pages: board }, await readReviews(root, manifest ?? {}, board), await readWaivers(root), await readListed(root));
   await writeJson(resolve(root, 'docs/research/style-board-review.json'), { schemaVersion: REVIEW_SCHEMA, status: result.status, modules: board.length, unbacked: board.filter((entry) => entry.unbacked).map((entry) => entry.module), findings: result.findings });
   return result;
 }
@@ -464,7 +492,7 @@ export async function readReviews(root, manifest, list = manifest.pages) {
 export async function designReviewGate({ root = process.cwd() } = {}) {
   const manifest = await readJson(resolve(root, DIR, 'manifest.json'), null);
   if (!manifest) throw new Error(`no ${DIR}/manifest.json: run design-review prepare first`);
-  const result = judgeReviews(manifest, await readReviews(root, manifest), await readWaivers(root));
+  const result = judgeReviews(manifest, await readReviews(root, manifest), await readWaivers(root), await readListed(root));
   await writeJson(resolve(root, 'docs/research/design-review.json'), { schemaVersion: REVIEW_SCHEMA, shots: manifest.id, status: result.status, findings: result.findings });
   return result;
 }
