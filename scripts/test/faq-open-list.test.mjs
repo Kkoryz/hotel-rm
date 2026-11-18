@@ -2,24 +2,24 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { FAQ_OPEN_LIST_ITEMS, faqOpenList, isFaqPage } from '../lib/faq-layout.mjs';
+import { FAQ_OPEN_LIST_ITEMS, faqOpenList, faqPlannedOpen, isFaqPage } from '../lib/faq-layout.mjs';
 import { blockWords, modelVariant } from '../lib/media-slots.mjs';
 
 const source = (path) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const items = (count) => Array.from({ length: count }, (_, index) => ({ question: `Question ${index + 1}?`, answer: 'An answer of five words.' }));
 
-test('the FAQ page and a long FAQ block are open lists; a short one keeps the reference\'s disclosure (four-site audit 2026-11-17, G3)', () => {
+test('every FAQ folds, on the FAQ page and however long; only the open variants show every answer (owner 2026-11-18)', () => {
   const product = { id: 'site:bikini', route: '/bikini-manufacturer/', pageType: 'product_manufacturer' };
   assert.equal(faqOpenList({ items: items(3) }, 'accordion', product), false);
-  assert.equal(faqOpenList({ items: items(FAQ_OPEN_LIST_ITEMS) }, 'accordion', product), true);
-  assert.equal(faqOpenList({ items: items(FAQ_OPEN_LIST_ITEMS - 1) }, 'bars', product), false);
+  assert.equal(faqOpenList({ items: items(12) }, 'accordion', product), false, 'a long FAQ folds');
+  assert.equal(faqOpenList({ items: items(5) }, 'bars', product), false);
   // site13's FAQ page is a general page with the id site:faq.
   for (const page of [{ id: 'site:faq', route: '/faq/', pageType: 'general' }, { id: 'x', route: '/faqs/', pageType: 'general' }, { id: 'y', route: '/questions/', pageType: 'faq' }]) {
     assert.ok(isFaqPage(page), page.route);
-    assert.equal(faqOpenList({ items: items(2) }, 'two-column', page), true);
+    assert.equal(faqOpenList({ items: items(2) }, 'two-column', page), false, `${page.route} folds`);
   }
   assert.equal(isFaqPage(product), false);
-  // The open variants are open lists anywhere; a blog post's FAQ (no page) by its length.
+  // The open variants are open lists anywhere.
   assert.equal(faqOpenList({ items: items(1) }, 'open-list'), true);
   assert.equal(faqOpenList({ items: items(1) }, 'cards'), true);
   assert.equal(faqOpenList({ items: items(2) }, 'accordion'), false);
@@ -41,9 +41,11 @@ test('an open list renders each question as an h3 with its answer shown; the acc
   assert.match(await source('src/components/blocks/registry.ts'), /faq: \{ component: FaqBlock, props: \(\{ block, variant, page \}: BlockContext\) => \(\{ block, variant, page \}\) \}/);
 });
 
-test('the layout plan measures an open list with every answer shown', () => {
+test('the photo plan keeps the measure the photos were placed with: a long FAQ as an open list, though it folds (hand fix 2026-11-18)', () => {
   const block = { id: 'faq', type: 'faq', heading: 'Questions', items: items(FAQ_OPEN_LIST_ITEMS) };
   const page = { id: 'site:bikini', route: '/bikini-manufacturer/', pageType: 'product_manufacturer', blocks: [block] };
+  assert.equal(faqOpenList(block, 'accordion', page), false, 'it renders folded');
+  assert.equal(faqPlannedOpen(block, 'accordion', page), true);
   const shape = modelVariant(block, page, page.blocks, { faq: 'accordion', faqFirst: 'closed' }, {});
   assert.equal(shape, 'open-list');
   const closed = blockWords(block, 'accordion', { faqFirst: 'closed' });
