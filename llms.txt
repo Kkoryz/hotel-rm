@@ -1,0 +1,27 @@
+# RateHarbor
+
+> Hotel revenue management from RateHarbor: meet the company, see who we are and how we work, and send an enquiry to discuss your property.
+
+## Pages
+
+- [Hotel Revenue Management Company | RateHarbor](https://rateharbor.com/): Hotel revenue management from RateHarbor: meet the company, see who we are and how we work, and send an enquiry to discuss your property.
+- [Hotel Digital Marketing for Direct Bookings | RateHarbor](https://rateharbor.com/hotel-digital-marketing/): Hotel digital marketing that grows direct bookings: brand and website builds, Google Ads and metasearch in accounts you own, plus email and social.
+- [Boutique Hotel Consulting With Team Handover | RateHarbor](https://rateharbor.com/boutique-hotel-consulting/): Boutique hotel consulting that moves guests from OTAs to direct bookings: a positioning diagnostic, pricing framework and training for your team.
+- [Hotel Commercial Strategy and Market Analysis | RateHarbor](https://rateharbor.com/commercial-strategy/): A hotel commercial strategy built on market analysis, with sales team support on group business and ancillary spend, and tech selection support.
+- [OTA Optimization: Booking.com, Expedia & Agoda | RateHarbor](https://rateharbor.com/ota-optimization/): RateHarbor's OTA optimization, aimed at stronger ranking: Booking.com, Expedia and Agoda listing rebuilds, rate parity fixes and a 30-day review.
+- [Hotel Dynamic Pricing: Live Build in Your Tool | RateHarbor](https://rateharbor.com/dynamic-pricing-strategy/): Hotel dynamic pricing set up live in your own pricing tool, with rates for each room type, documented and kept current after launch.
+- [Hotel Distribution and Channel Mix | RateHarbor](https://rateharbor.com/hotel-distribution/): Revenue-led hotel distribution: inventory allocated by booking data and commission cost, rate parity and direct booking growth.
+- [Hotel Revenue Management Audit: 4-Step Review | RateHarbor](https://rateharbor.com/revenue-management-audit/): Get a hotel revenue management audit of pricing, forecasting and distribution, a review of margins and acquisition costs, and clear recommendations.
+- [About Us: Canadian Remote Revenue & OTA Team | RateHarbor](https://rateharbor.com/about-us/): Meet RateHarbor's Canadian remote team: a dedicated specialist on every account, hands-on hotel experience and no OTA or vendor referral commissions.
+- [Contact Us: What Happens After You Write | RateHarbor](https://rateharbor.com/contact-us/): Reach the right person at RateHarbor: contact us the way that suits your request and see each step from your message to a first call or proposal.
+- [Case Studies: Hotel Success Stories | RateHarbor](https://rateharbor.com/case-studies/): See how hotels tackled OTA listings, rates and parity in RateHarbor case studies: the challenges, the solutions applied and the results achieved.
+- [Our Process: Each Step and Its Timing | RateHarbor](https://rateharbor.com/our-process/): See every engagement step, what happens in it and how long it takes. Our process also lists the input, approvals and system access we need from you.
+- [Resources: Guides, Templates & Checklists | RateHarbor](https://rateharbor.com/resources/): Guides, templates and checklists for hotel owners: see what each covers, how to get it and when in your work it helps most. Browse the resources.
+- [Careers: Roles, Team Life & How to Apply | RateHarbor](https://rateharbor.com/careers/): Find out what joining RateHarbor offers: the roles we hire for, how our team works day to day and the steps from application to offer. Explore careers.
+- [Privacy Policy – Enquiries and Your Data | RateHarbor](https://rateharbor.com/privacy-policy/): Your data and RateHarbor: read our Privacy Policy on how we collect, store and protect what you send us, with access controls and vendor reviews.
+- [Terms and Conditions: Billing & Cancellation | RateHarbor](https://rateharbor.com/terms-and-conditions/): How working with RateHarbor is billed and ended: our Terms and Conditions on monthly plans, cancellation, ownership of your work and handover.
+- [Request a Quote for an Exact Proposal | RateHarbor](https://rateharbor.com/request-a-quote/): Get an exact proposal for your property. Request a quote with your details and current results, and see each step to a signed engagement.
+- [RateHarbor Blog: Hotel and Airbnb Pricing Guides](https://rateharbor.com/blog/): The RateHarbor blog: guides for independent hotels and Airbnb hosts on break-even pricing, rate strategy, OTA commission costs, fees and policy changes.
+- [Hotel Rate Parity Issues: Verify Undercuts and Fix the Cause](https://rateharbor.com/blog/hotel-rate-parity-issues/): Learn to verify hotel rate undercuts, separate guest discounts from payout losses, and prioritize fixes with audit, impact and contract worksheets.
+- [What Does a Revenue Manager Do for a Hotel?](https://rateharbor.com/blog/hotel-revenue-manager-duties/): Understand hotel revenue manager duties, approval boundaries and skills through a decision diary, owner scorecard and practical hiring exercise.
+- [How Much Do OTAs Charge Hotels? Rates and Real Costs](https://rateharbor.com/blog/how-much-otas-charge-hotels/): Understand hotel OTA commissions, trace booking payments, and use worked examples to compare retained revenue with the cost of winning direct bookings.
