@@ -14,40 +14,41 @@
   },
   "factory": [
     {
+      "value": "8",
+      "label": "clients served",
+      "fromCopy": "/boutique-hotel-consulting/"
+    },
+    {
       "value": "12",
       "label": "people on the team",
       "factId": "owner:team-size"
-    },
-    {
-      "value": "40",
-      "label": "clients served"
     }
   ],
   "certifications": [],
   "clients": [
     {
-      "name": "Pine Hollow Holdings",
+      "name": "Larkspur Family Partners",
+      "note": "Utah, USA"
+    },
+    {
+      "name": "Lantern Bay Hospitality",
       "note": "Ohio, USA"
     },
     {
-      "name": "Redstone Family Partners",
-      "note": "Texas, USA"
+      "name": "Sagebrush Ventures",
+      "note": "Wisconsin, USA"
     },
     {
-      "name": "Bayline Properties",
-      "note": "Florida, USA"
+      "name": "Harbor Lane Hotel Holdings",
+      "note": "Virginia, USA"
     },
     {
-      "name": "Northgate Owners Group",
+      "name": "Prairie Wind Hospitality Partners",
+      "note": "Missouri, USA"
+    },
+    {
+      "name": "Pine Hollow Inns",
       "note": "Minnesota, USA"
-    },
-    {
-      "name": "Copper Mesa Ventures",
-      "note": "Arizona, USA"
-    },
-    {
-      "name": "Harbor Lane Partners",
-      "note": "Oregon, USA"
     }
   ],
   "testimonials": [],
@@ -103,8 +104,8 @@
     {
       "client": "Regional owner group",
       "market": "Tampa, USA",
-      "title": "Ota optimization for a first-time owner",
-      "summary": "Ota optimization started in the owner's first month, with the routines and reports set up from day one.",
+      "title": "Commercial strategy for a first-time owner",
+      "summary": "Commercial strategy started in the owner's first month, with the routines and reports set up from day one.",
       "results": [
         {
           "value": "1st",
@@ -119,16 +120,16 @@
           "label": "weekly report"
         }
       ],
-      "href": "/ota-optimization/",
+      "href": "/commercial-strategy/",
       "pages": [
-        "/ota-optimization/"
+        "/commercial-strategy/"
       ]
     },
     {
       "client": "First-time owner",
       "market": "Minneapolis, USA",
-      "title": "Dynamic pricing strategy for a family-owned business",
-      "summary": "Dynamic pricing strategy set up with the owners over a planned handover, with the results reported to them every week.",
+      "title": "Ota optimization for a family-owned business",
+      "summary": "Ota optimization set up with the owners over a planned handover, with the results reported to them every week.",
       "results": [
         {
           "value": "6 weeks",
@@ -143,16 +144,16 @@
           "label": "owner meetings a month"
         }
       ],
-      "href": "/dynamic-pricing-strategy/",
+      "href": "/ota-optimization/",
       "pages": [
-        "/dynamic-pricing-strategy/"
+        "/ota-optimization/"
       ]
     },
     {
       "client": "Managing partner of an owner group",
       "market": "Phoenix, USA",
-      "title": "Hotel distribution for an owner with two sites",
-      "summary": "Hotel distribution brought both sites under one way of working and one report.",
+      "title": "Dynamic pricing strategy for an owner with two sites",
+      "summary": "Dynamic pricing strategy brought both sites under one way of working and one report.",
       "results": [
         {
           "value": "2",
@@ -167,16 +168,16 @@
           "label": "to a settled routine"
         }
       ],
-      "href": "/hotel-distribution/",
+      "href": "/dynamic-pricing-strategy/",
       "pages": [
-        "/hotel-distribution/"
+        "/dynamic-pricing-strategy/"
       ]
     },
     {
       "client": "Second-generation owner",
       "market": "Portland, USA",
-      "title": "Revenue management audit for a first-time owner",
-      "summary": "Revenue management audit started in the owner's first month, with the routines and reports set up from day one.",
+      "title": "Hotel distribution for a first-time owner",
+      "summary": "Hotel distribution started in the owner's first month, with the routines and reports set up from day one.",
       "results": [
         {
           "value": "1st",
@@ -189,6 +190,30 @@
         {
           "value": "1",
           "label": "weekly report"
+        }
+      ],
+      "href": "/hotel-distribution/",
+      "pages": [
+        "/hotel-distribution/"
+      ]
+    },
+    {
+      "client": "Family business owner",
+      "market": "Columbus, USA",
+      "title": "Revenue management audit for a family-owned business",
+      "summary": "Revenue management audit set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
         }
       ],
       "href": "/revenue-management-audit/",
@@ -205,5 +230,42 @@
     ],
     "rows": []
   },
-  "trade": "service"
+  "trade": "service",
+  "clientsFor": "RateHarbor",
+  "team": [
+    {
+      "name": "Monica Hollis",
+      "role": "Founder",
+      "years": 18,
+      "bio": "Runs the company and agrees the scope of the work with each new owner.",
+      "reviews": [
+        "place",
+        "location"
+      ]
+    },
+    {
+      "name": "Ethan Delgado",
+      "role": "Revenue manager",
+      "years": 12,
+      "bio": "Sets the rates and watches the booking pace for the properties we work for.",
+      "blogAuthor": true,
+      "reviews": [
+        "solution",
+        "service",
+        "product_manufacturer",
+        "product_wholesale"
+      ]
+    },
+    {
+      "name": "Derek Mercer",
+      "role": "Account lead",
+      "years": 9,
+      "bio": "The owner's day-to-day contact: the weekly report, questions and changes to the plan."
+    }
+  ],
+  "privacy": {
+    "source": "site-factory",
+    "contact": "hello@rateharbor.com",
+    "placeholder": true
+  }
 }

@@ -8,10 +8,10 @@ import { PLAN_ASSERTIONS } from './plan-assertions.mjs';
 // (template_rule_overridden) and goes to the site-CSS repair, which takes it out.
 
 // A selector whose rule styles a plain section itself (its rightmost part is the section, .block--<type>, of a type the
-// template alternates white and tinted: not a photo, band, closing call, form, split row or testimonials, which carry
-// their own surface). The hotel site's repairs tinted sections by their neighbours (".block--gallery +
-// .block--icon-list"), and two grey sections met where the template's alternation had one.
-const OWN_SURFACE = /^(cta|testimonials|gallery|split|band|figure|form|charts|page-lead)$/;
+// template alternates white and tinted: not a photo, band, closing call, form or split row, which carry their own
+// surface; the testimonials alternate since 2026-11-15). The hotel site's repairs tinted sections by their neighbours
+// (".block--gallery + .block--icon-list"), and two grey sections met where the template's alternation had one.
+const OWN_SURFACE = /^(cta|gallery|split|band|figure|form|charts)$/;
 const topLevel = (text, separator) => {
   const parts = [];
   let depth = 0;
@@ -47,6 +47,9 @@ export const stylesPlainSection = (selector) => topLevel(selector, /,/).some((it
 
 export const PROTECTED_RULES = Object.freeze([
   { part: { test: stylesPlainSection }, properties: ['background', 'background-color'], rule: 'neighbouring plain sections alternate white and tinted backgrounds, set by the template (the treatment colours the tint through --section-tint, never one section)' },
+  // The trust bar is the first section of the alternation (hotel-rm 2026-11-15: a repair set it to the page's surface
+  // on four page types, and the overview under it ran on as one surface).
+  { part: /\.trust-bar(?![\w-])\s*(,|$)/, properties: ['background', 'background-color'], rule: 'the trust bar is the first section of the white and tinted alternation, its surface set by the template (the treatment colours the tint through --section-tint)' },
   { part: /\.split__media-set|\.split__media\b|\.split__copy/, properties: ['align-self', 'height', 'max-height', 'aspect-ratio'], rule: 'a split row\'s photo runs its copy\'s height up to a 4:5 portrait, then stays in view beside the longer copy as it scrolls (sticky), and shorter copy sits level with the photo\'s middle (template.css)' },
   { part: /\.split\b(?![\w-])/, properties: ['align-items'], rule: 'a split row\'s photo and copy share their edges (template.css)' },
   { part: /\.button\b/, properties: ['position'], values: /absolute|fixed|sticky/, rule: 'a button stays in its copy\'s flow, under the text it ends (template.css)' },
@@ -56,6 +59,10 @@ export const PROTECTED_RULES = Object.freeze([
   // four and five lines.
   { part: /[\s\S]/, properties: ['--heading-fit', '--fit-above', '--fit-above-step', '--fit-min', '--fit-ems', '--fit-min-desktop', '--fit-min-phone', '--fit-ems-desktop', '--fit-ems-phone', '--title-min-phone', '--title-ems-phone', '--section-cap'], rule: 'a title is sized to its own words so it keeps to its lines (template.css [data-heading-fit])' },
   { part: /\.page-hero\b[^,]*\bh1\b|\.page-hero__title|\.post-header__title|\.blog-hub-hero\b[^,]*\bh1\b/, properties: ['font-size'], rule: 'a title is sized to its own words so it keeps to its lines (template.css [data-heading-fit])' },
+  // The page title in the first screen of a phone (390×844) and a desktop (1366×768) (four-site audit 2026-11-17: the
+  // hotel site's title at y=904 under a full-screen photo; owner 2026-11-17, after claude-seo): a hero's height is set
+  // through --hero-min-height and --hero-banner-height, which the template caps; a height on the hero itself would not be.
+  { part: /\.page-hero(?:__inner|__banner)?(?:\[[^\]]*\]|:[\w-]+(?:\([^)]*\))?)*\s*(,|$)/, properties: ['height', 'min-height', 'max-height'], rule: 'a photo hero gives way in height so the page title shows in the first screen of a phone and a desktop: its height is set through --hero-min-height and --hero-banner-height, which the template caps (template.css --fold-room)' },
 ]);
 
 // The rules of a stylesheet as { selector, properties: [name], values: { name: value } }, innermost blocks only (media

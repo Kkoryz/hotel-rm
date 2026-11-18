@@ -3,7 +3,13 @@
     "hero": {
       "byPageType": {
         "home": 1,
-        "solution": 3.06
+        "solution": 3.06,
+        "about": 1,
+        "contact": 1,
+        "general": 1,
+        "privacy": 1,
+        "blog_hub": 1,
+        "blog_post": 1
       }
     },
     "cta": {
@@ -12,5 +18,6 @@
   },
   "crops": {},
   "soft": [],
-  "unfocused": []
+  "unfocused": [],
+  "overBudget": []
 }

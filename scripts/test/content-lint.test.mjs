@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { contentIssuesMarkdown, keywordList, lintContent } from '../lib/content-lint.mjs';
+import { contentIssuesMarkdown, keywordList, lintContent, termsSentences, verbatimKeys } from '../lib/content-lint.mjs';
 
 const page = (route, blocks, extra = {}) => ({ route, pageType: 'product_manufacturer', status: 'authored', seo: { title: 'T', description: 'D' }, hero: { heading: 'H' }, blocks, ...extra });
 const terms = 'Our minimum order quantity is 50 pieces per style per colour. Standard samples take 10 to 15 days from the approved brief. Bulk production normally takes 35 to 40 days after sample approval and deposit.';
@@ -60,4 +60,49 @@ test('a hub that writes its child pages out again goes back to Site Factory; one
   assert.match(issue.text, /"Revenue Strategy and Dynamic Pricing" \(\/revenue-management\/\)/);
   const short = { ...long, blocks: [cards, { id: 'intro', type: 'intro', heading: 'Revenue, accounting and OTA support' }] };
   assert.deepEqual(hubsRepeatingChildren([short, ...children]), [], 'an introduction and the cards');
+});
+
+test("the owner's order terms, written out word for word on every product and service page (owner 2026-11-07), are not boilerplate; a writer's own sentences around them still are", () => {
+  // Site Factory marks them by fact_ids (owner:<type> of AuthoringParams.terms_fact_types): an item that cites one is
+  // the term itself; a prose section that cites one holds the fact's text word for word among the writer's sentences.
+  const facts = new Map([
+    ['owner:moq', { text: 'Our minimum order quantity is 50 pieces per style per colour.' }],
+    ['owner:sample-time', { text: 'Standard samples take 10 to 15 days from the approved brief.' }],
+    ['owner:lead-time', { text: 'Bulk production normally takes 35 to 40 days after sample approval and deposit.' }],
+    ['owner:about', { text: 'We have sewn swimwear in Guangzhou for twenty years and more.' }],
+  ]);
+  const own = 'Every order on this page is checked twice before it leaves the factory floor.';
+  const pkg = { pages: [
+    { page_id: 'a', sections: [{ section_id: 'terms', fact_ids: ['owner:moq', 'owner:sample-time', 'owner:lead-time'], body: `${terms} ${own}` }] },
+    { page_id: 'b', sections: [{ section_id: 'list', items: [{ title: 'Lead time', text: 'Once you approve the sample and we receive your deposit, bulk production takes 35 to 40 days.', fact_ids: ['owner:lead-time'] }, { title: 'About', text: 'We have sewn swimwear in Guangzhou for twenty years and more.', fact_ids: ['owner:about'] }] }] },
+  ] };
+  const exempt = termsSentences(pkg, facts);
+  assert.equal(exempt.size, 4, 'three term facts and the term item, not the about fact');
+  const pages = ['/a/', '/b/', '/c/'].map((route) => page(route, [{ id: 'terms', type: 'intro', heading: 'Terms', paragraphs: [terms] }]));
+  assert.equal(lintContent(pages).filter((issue) => issue.kind === 'repeated_paragraph').length, 3);
+  assert.equal(lintContent(pages, { exempt }).filter((issue) => issue.kind === 'repeated_paragraph').length, 0);
+  // The writer's own sentences in a terms section are checked as before.
+  const padded = ['/a/', '/b/', '/c/'].map((route) => page(route, [{ id: 'terms', type: 'intro', heading: 'Terms', paragraphs: [`${terms} ${own} ${own.replace('twice', 'three times')} ${own.replace('floor', 'gate')}`] }]));
+  assert.equal(lintContent(padded, { exempt }).filter((issue) => issue.kind === 'repeated_paragraph').length, 3);
+});
+
+test("sentences the owner requires word for word (site.json verbatimSentences) are not boilerplate where no fact_ids cite them (aloha 2026-11-17)", () => {
+  const terms = 'We ship on FOB, CIF or DDP terms. With worldwide DDP, one all-in price covers delivery to your door, and we handle duties, customs and freight through our forwarding partners. You pay a 50% deposit when you confirm the order and the remaining 50% before shipment.';
+  const pages = ['/a/', '/b/', '/c/'].map((route) => page(route, [{ id: 'm1', type: 'intro', heading: 'Shipping', paragraphs: [terms] }]));
+  assert.ok(lintContent(pages).some((issue) => issue.kind === 'repeated_paragraph'));
+  assert.deepEqual(lintContent(pages, { exempt: verbatimKeys([terms]) }).filter((issue) => issue.kind === 'repeated_paragraph'), []);
+});
+
+test("a product page's review about another of the site's products goes back to Site Factory; one about its kind stays (aloha 2026-11-18, audit H-8)", async () => {
+  const { testimonialsOffPage } = await import('../lib/content-lint.mjs');
+  const reviews = (...quotes) => ({ id: 'owner-testimonials', type: 'testimonials', items: quotes.map((quote) => ({ quote })) });
+  const product = (route, heading, ...quotes) => ({ route, pageType: 'product_manufacturer', status: 'authored', seo: { title: heading }, hero: { heading }, blocks: [reviews(...quotes)] });
+  const pages = [
+    product('/swimwear-manufacturer/', 'Swimwear Manufacturer', 'The aloha shirts filled a gap in our range.', 'Our swimwear sold out.'),
+    product('/big-and-tall-aloha-shirt-manufacturer/', 'Big and Tall Aloha Shirts', 'The shirts fit our larger sizes.'),
+    product('/aloha-work-uniform-manufacturer/', 'Aloha Work Uniforms', 'Our first batch of rayon shirts held up.'),
+  ];
+  const issues = testimonialsOffPage(pages);
+  assert.deepEqual(issues.map((issue) => [issue.route, issue.text]), [['/swimwear-manufacturer/', 'The aloha shirts filled a gap in our range.']]);
+  assert.equal(issues[0].kind, 'testimonial_off_page');
 });

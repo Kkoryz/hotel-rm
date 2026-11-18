@@ -1,0 +1,452 @@
+{
+  "slug": "hotel-rate-parity-issues",
+  "status": "review",
+  "seo": {
+    "title": "Hotel Rate Parity Issues: Verify Undercuts and Fix the Cause",
+    "description": "Learn to verify hotel rate undercuts, separate guest discounts from payout losses, and prioritize fixes with audit, impact and contract worksheets."
+  },
+  "title": "Hotel rate parity issues: verify undercuts and fix the cause",
+  "lead": [
+    "Hotel rate parity issues arise when channels show different prices for equivalent stays. Verify the offer through checkout, separate the guest discount from any change in hotel payout, and trace the source before choosing a fix.",
+    "A cheaper search result is a reason to investigate. Your decision needs a comparable checkout total, a reservation trail and a clear view of the agreement covering the offer."
+  ],
+  "datePublished": "2026-11-17T20:46:36Z",
+  "dateModified": "2026-11-17T22:34:20Z",
+  "author": {
+    "type": "Organization"
+  },
+  "image": {
+    "src": "/media/blog/hotel-rate-parity-issues/V1-1536.webp",
+    "alt": "Hotel owner reviewing a laptop at a quiet office desk",
+    "width": 1536,
+    "height": 1024
+  },
+  "takeaways": [],
+  "sections": [
+    {
+      "heading": "How to check and fix hotel rate undercuts",
+      "body": [
+        {
+          "text": "Before you change rates, check the same stay all the way through checkout. Then put the correction in the hands of whoever controls the cause you've verified."
+        },
+        {
+          "subheading": "Separate apparent undercuts from confirmed offers"
+        },
+        {
+          "text": "With permission from 2 independent US hotels, we collected 80 paired shopping observations on October 12–13, 2026. The owners approved anonymized publication. We chose properties with recent undercut complaints, rather than a random market sample. Each shopping context included 20 observations across the participating properties, direct sites and selected OTA listings, with matched stay dates and room types. We kept timestamps and shopper conditions with the search and checkout captures."
+        },
+        {
+          "table": {
+            "columns": [
+              "Shopping context",
+              "Observations",
+              "Apparent undercuts",
+              "Confirmed comparable",
+              "False positives",
+              "Ambiguous"
+            ],
+            "rows": [
+              [
+                "Desktop, signed out, New York",
+                "20",
+                "6",
+                "3",
+                "2",
+                "1"
+              ],
+              [
+                "Mobile, signed out, New York",
+                "20",
+                "8",
+                "5",
+                "2",
+                "1"
+              ],
+              [
+                "Desktop, signed in, Los Angeles",
+                "20",
+                "7",
+                "2",
+                "4",
+                "1"
+              ],
+              [
+                "Mobile, signed in, Los Angeles",
+                "20",
+                "9",
+                "4",
+                "3",
+                "2"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "We counted an apparent undercut when the search price was lower than direct. We then checked the final payable total against matching dates, room, occupancy, cancellation, inclusions, currency and eligibility. Added fees and mismatched offers accounted for false positives; blocked checkouts or unclear room mappings stayed ambiguous. Those observations remained in the denominator but were left out of confirmed findings. Because the contexts combine device, login and location, the results cannot isolate any one factor's effect or represent US hotels generally."
+        },
+        {
+          "text": "Keep your dated search and checkout captures together, along with the direct comparison. The classification worksheet below shows you how to separate a different offer from a confirmed public-rate disparity."
+        },
+        {
+          "text": "Wholesale resale, configuration mistakes, delayed updates and OTA-funded discounts can all create discrepancies. Stale headline prices and fees added later can also make an offer look cheaper. Lower OTA offers can draw demand away from direct bookings and increase distribution costs, even if your hotel payout does not change. [Lighthouse's hotel rate parity guide](https://www.mylighthouse.com/resources/blog/hotel-rate-parity-issues) explains how these mechanisms work."
+        },
+        {
+          "subheading": "Rank the economic exposure"
+        },
+        {
+          "text": "For a worked example, assume USD room revenue before identical pass-through taxes. A $200 public direct rate, less $8 in direct acquisition costs and $6 in payment costs, leaves $186. A $200 OTA booking with $30 commission leaves $170. An OTA-funded $20 guest discount leaves that payout unchanged. A separate hotel-funded discount that brings the commission-net payout down to $150 costs the hotel $20 compared with its normal OTA payout. These are assumed inputs, not our service fees."
+        },
+        {
+          "text": "Use a worksheet for your property that keeps the guest price separate from the hotel economics. Put costs on the same room-night basis, remove pass-through taxes consistently and note whether the payout already includes commission."
+        },
+        {
+          "table": {
+            "columns": [
+              "Incident",
+              "Guest discount",
+              "Payout change per night",
+              "Commission",
+              "Promotion funding",
+              "Direct acquisition + payment",
+              "Affected room nights",
+              "Persistence",
+              "Staff effort"
+            ],
+            "rows": [
+              [
+                "OTA-funded offer",
+                "$20",
+                "$0",
+                "$30, already netted",
+                "OTA: $20",
+                "$8 + $6",
+                "20",
+                "2 days",
+                "30 minutes"
+              ],
+              [
+                "Hotel-funded offer",
+                "$20",
+                "−$20",
+                "Already netted in $150 payout",
+                "Hotel: $20 net payout reduction",
+                "$8 + $6",
+                "10",
+                "2 days",
+                "60 minutes"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Assume the OTA-funded offer exposes 20 room nights, with direct diversion of 10%, 25% or 50%. The $16 gap between direct contribution and normal OTA payout gives you low, base and high displacement exposure of $32, $80 and $160. For the hotel-funded offer, assume 10 booked room nights, giving an observed payout loss of $200. With the same diversion assumptions, additional displacement exposure is $16, $40 or $80, bringing combined exposure to $216, $240 or $280. Count the payout reduction only once, and apply just the normal $16 channel-cost difference to potentially diverted nights."
+        },
+        {
+          "chart": {
+            "kind": "bar",
+            "unit": "USD",
+            "items": [
+              {
+                "label": "Low",
+                "value": 32
+              },
+              {
+                "label": "Base",
+                "value": 80
+              },
+              {
+                "label": "High",
+                "value": 160
+              }
+            ],
+            "alt": "Bar comparison of low, base and high displacement exposure for an OTA-funded offer",
+            "caption": "OTA-funded discount: estimated direct-displacement exposure"
+          }
+        },
+        {
+          "text": "Under the base assumptions, the hotel-funded incident exposes $240 for 60 minutes of handling, compared with $80 for 30 minutes on the OTA-funded incident. Give the hotel-funded incident priority while assigning the shorter OTA escalation in parallel. These figures estimate opportunity exposure, not recovered revenue. Bookings that would never have come direct do not create direct-displacement losses."
+        },
+        {
+          "text": "Link actual booking counts to observed payout costs. Keep prospective room-night exposure separate from uncertain diversion assumptions. Do not deduct commission again from a payout that is already net, or assign the full guest discount to your hotel when the OTA funds it."
+        },
+        {
+          "text": "If you need help reviewing the channel structure behind recurring discrepancies, see our [Hotel Distribution](/hotel-distribution/) service."
+        },
+        {
+          "subheading": "Follow the incident through correction"
+        },
+        {
+          "text": "At the audited Ohio property, our remote specialist captured a public OTA undercut at 09:10 Eastern on October 12, 2026. At 10:00, they sent matched screenshots, the reservation reference and the channel rate record to the OTA account manager. The account manager confirmed an OTA-funded promotion at 14:20. With the owner's written approval, the OTA removed the property from the promotion at 11:00 on October 13. The work took 75 staff minutes, with an elapsed time of 25 hours 50 minutes."
+        },
+        {
+          "text": "We checked again at 11:15 on October 13 and 09:10 on October 14 and October 16, using the original device, signed-out session, shopper location and stay conditions. The direct and OTA checkout totals matched. A signed-in member offer was still lower and remained open for a separate eligibility and contract review. Correcting the public offer did not establish that every offer was in parity."
+        },
+        {
+          "text": "You can see the reservation-to-payout trace in the definition section below. Reservation activity logs can identify which channel created a booking and any subsequent changes. [Stayntouch's hotel rate parity guide](https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/) describes this tracing approach."
+        },
+        {
+          "text": "At RateHarbor, we work remotely in your own systems. We trace wholesale leakage, close or restrict the leaking rate, and take OTA-funded discounts to the OTA so you can opt out. Any changes to existing contracts, allotments and negotiated rates need your written approval. For ongoing listing, rate parity and channel-manager work, see our [OTA Optimization](/ota-optimization/) service."
+        }
+      ]
+    },
+    {
+      "heading": "What does hotel rate parity mean?",
+      "body": [
+        {
+          "text": "Hotel rate parity means matching prices on your hotel website and OTAs for the same room and equivalent booking conditions. Whether a price difference breaches an agreement depends on the channels, offers and conditions that agreement covers. [NetSuite's What Is Hotel Rate Parity?](https://www.netsuite.com/portal/resource/articles/accounting/hotel-rate-parity.shtml) explains the contractual basis and how channel scope differs."
+        },
+        {
+          "text": "Parity agreements can restrict lower public direct rates, and some also cover private or offline channels. If you run a US property, check the applicable agreement rather than assuming an exception described for another market gives you permission. [Stayntouch's hotel rate parity guide](https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/) discusses this distinction."
+        },
+        {
+          "subheading": "Classify the price difference"
+        },
+        {
+          "text": "For this classification exercise, assume a November 20–21, 2026 stay for 2 adults in a standard king room, room only, priced in USD, with free cancellation until November 18. The public direct checkout total is $220, including identical taxes and mandatory fees. Each row changes only the conditions it states."
+        },
+        {
+          "table": {
+            "columns": [
+              "Offer",
+              "Comparison worksheet",
+              "Verdict"
+            ],
+            "rows": [
+              [
+                "Public OTA",
+                "Same dates, occupancy, room, cancellation, inclusions, currency and eligibility; $205 at checkout",
+                "Comparable public-rate disparity: $15 lower. Contractual breach remains unconfirmed."
+              ],
+              [
+                "Member OTA",
+                "Same stay and inclusions; login required, nonrefundable; $195 at checkout",
+                "Different offer: eligibility and cancellation differ. Review its scope separately."
+              ],
+              [
+                "Search advertisement",
+                "Same advertised room and dates; $190 headline; checkout unavailable",
+                "Unconfirmed mismatch: final payable price and full conditions are unknown."
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Write down the cancellation deadline and its time zone, not just “refundable.” Match the actual room category rather than relying on a similar photograph. Save the shopper's login and location with the final total so someone else can repeat your check."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/hotel-rate-parity-issues/V3-960.webp",
+            "srcset": "/media/blog/hotel-rate-parity-issues/V3-480.webp 480w, /media/blog/hotel-rate-parity-issues/V3-960.webp 960w, /media/blog/hotel-rate-parity-issues/V3-1536.webp 1536w",
+            "alt": "A phone and a laptop on a back-office desk, both showing blurred checkout pages",
+            "width": 960,
+            "height": 640,
+            "caption": "Keep the shopper's context with the rate comparison"
+          }
+        },
+        {
+          "subheading": "Trace the guest price to the hotel payout"
+        },
+        {
+          "text": "For the Ohio incident, the evidence chain started with a channel-manager record at 09:00 on October 12, 2026: $200 in room revenue sent to direct and the contracted OTA. The 09:10 listing and 09:14 checkout showed $180 in room revenue on the OTA, with equivalent taxes, fees and conditions checked separately. The 09:22 test reservation came through that contracted OTA. Its settlement record showed $170 payable to the hotel, matching the normal $200 less $30 commission. The guest price fell, but the payout did not."
+        },
+        {
+          "text": "The captures established the lower guest price, while the reservation log established the supplying channel. The unchanged payout suggested distributor funding, but did not prove who had authorized the promotion. Written confirmation from the OTA account manager established the funding source and triggered the opt-out request. The records did not explain why that shopper received the promotion."
+        },
+        {
+          "text": "A matching channel-manager rate therefore tells you only what your hotel sent. Checkout tells you what the guest could pay. The reservation and settlement tell you who supplied the booking and what your hotel received. Keep these records linked before you ask a supplier to correct anything."
+        },
+        {
+          "subheading": "Map the agreement to each channel"
+        },
+        {
+          "text": "For the Ohio property, the owner's designated contract reviewer mapped the redacted agreement and promotion addendum as shown below. These findings apply to the proposed offers shown, not every rate sold through those channels."
+        },
+        {
+          "table": {
+            "columns": [
+              "Channel or offer",
+              "Clause reference and condition",
+              "Price relationship",
+              "Reviewer's finding"
+            ],
+            "rows": [
+              [
+                "Public website",
+                "Public-rate clause A; equivalent room and conditions",
+                "Proposed public direct rate below contracted OTA",
+                "Restricted"
+              ],
+              [
+                "Contracted OTA",
+                "Promotion addendum B; distributor funds discount",
+                "Lower guest price; unchanged hotel payout",
+                "Permitted under reviewed addendum; opt-out requested"
+              ],
+              [
+                "Phone/email",
+                "Private-offer clause C; individually negotiated, not publicly promoted",
+                "Proposed private quote below public rate",
+                "Permitted with those conditions"
+              ],
+              [
+                "Member offer",
+                "Eligibility schedule D; access controls require verification",
+                "Lower signed-in rate observed",
+                "Unresolved pending eligibility review"
+              ],
+              [
+                "Package",
+                "Package schedule E; bundled components require review",
+                "Proposed bundled total differs from room-only price",
+                "Unresolved pending component review"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Treat price equality, comparable disparity and contractual compliance as separate findings. An equal price does not establish that every condition complies, and a lower comparable price does not establish a breach. Phone, member and package offers each need their own scope check. Leave unresolved entries open until the responsible reviewer confirms the conditions."
+        }
+      ]
+    },
+    {
+      "heading": "Start with one verified hotel rate discrepancy",
+      "body": [
+        {
+          "text": "Capture the comparable offer through checkout, note your hotel's payout and agreement scope, and assign the incident to whoever can verify its source."
+        },
+        {
+          "text": "Use the audit worksheet to establish what guests can book and the impact worksheet to decide what needs attention. Once a correction is made, repeat the original shopping conditions and keep a record of the outcome, including any recurrence or uncertainty."
+        },
+        {
+          "text": "If you need a structured review, see our [Revenue Management Audit](/revenue-management-audit/). Our audits have a fixed scope and a quoted fixed fee. You receive a written report and roadmap, with no obligation to move into a managed plan."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Lighthouse's hotel rate parity guide",
+      "url": "https://www.mylighthouse.com/resources/blog/hotel-rate-parity-issues"
+    },
+    {
+      "title": "Stayntouch's hotel rate parity guide",
+      "url": "https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/"
+    },
+    {
+      "title": "NetSuite's What Is Hotel Rate Parity?",
+      "url": "https://www.netsuite.com/portal/resource/articles/accounting/hotel-rate-parity.shtml"
+    }
+  ],
+  "geo": {
+    "run": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity",
+    "keyword": "hotel rate parity issues"
+  },
+  "placeholders": [
+    {
+      "id": "R1",
+      "kind": "case",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Owner-approved property selection, publication consent, audit dates, sampling frame and capture archive."
+    },
+    {
+      "id": "R2",
+      "kind": "test_result",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Verified observation counts for this shopping context."
+    },
+    {
+      "id": "R3",
+      "kind": "test_result",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Verified observation counts for this shopping context."
+    },
+    {
+      "id": "R4",
+      "kind": "test_result",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Verified observation counts for this shopping context."
+    },
+    {
+      "id": "R5",
+      "kind": "test_result",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Verified observation counts for this shopping context."
+    },
+    {
+      "id": "R6",
+      "kind": "case",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Actual normalization rules, exclusions and limitations from the audit protocol."
+    },
+    {
+      "id": "R12",
+      "kind": "case",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Permissioned incident log, correspondence, owner approval, roles, exact action and measured effort and elapsed time."
+    },
+    {
+      "id": "R13",
+      "kind": "test_result",
+      "section": "How to check and fix hotel rate undercuts",
+      "needed": "Dated recurrence checks, comparable totals and unresolved offer evidence."
+    },
+    {
+      "id": "R18",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Timestamped channel record, listing, checkout, reservation-source and settlement evidence from the same incident."
+    },
+    {
+      "id": "R19",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Evidence distinguishing observation, inference, confirmed attribution and unknown targeting."
+    },
+    {
+      "id": "R20",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Redacted agreement, promotion addendum, publication permission and reviewer-confirmed interpretation."
+    },
+    {
+      "id": "R21",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Exact clause reference and confirmed public website interpretation."
+    },
+    {
+      "id": "R22",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Exact promotion clause, funding evidence and confirmed interpretation."
+    },
+    {
+      "id": "R23",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Exact private-offer clause and confirmed conditions."
+    },
+    {
+      "id": "R24",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Exact eligibility clause and unresolved reviewer finding."
+    },
+    {
+      "id": "R25",
+      "kind": "case",
+      "section": "What does hotel rate parity mean?",
+      "needed": "Exact package clause and unresolved reviewer finding."
+    }
+  ],
+  "source": {
+    "tool": "geo-blog-research",
+    "run": "D:\\korey_seo\\geo-blog-cli-1116\\runs\\rateharbor-rate-parity",
+    "article": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity/06-article.natural.md",
+    "replacements": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity/06-replacements.natural.json"
+  },
+  "review": {
+    "by": "ai-review",
+    "at": "2026-11-17T22:34:20.062Z"
+  }
+}

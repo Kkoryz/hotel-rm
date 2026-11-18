@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-17T22:41:07.165Z",
+  "published": 1,
+  "report": [
+    {
+      "file": "how-much-otas-charge-hotels.json",
+      "slug": "how-much-otas-charge-hotels",
+      "failures": [],
+      "warnings": [
+        "4 placeholder(s) still the writer's stand-in for our own claim: R21 (case), R22 (case), R23 (case), R24 (case)"
+      ]
+    }
+  ]
+}

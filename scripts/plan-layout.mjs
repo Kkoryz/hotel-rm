@@ -17,7 +17,7 @@
 // Usage: node scripts/plan-layout.mjs [siteRoot] [--feasibility | --gate] [--out <dir>]
 
 import { existsSync } from 'node:fs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { wrapEmFor } from './lib/heading-fit.mjs';
@@ -29,6 +29,7 @@ import { PLAN_ASSERTIONS, PLAN_WAIVERS, applyPlanWaivers, planGate } from './lib
 import { cardVisual } from './lib/slot-visuals.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 import { trustBarContent } from './lib/site-trust.mjs';
+import { thresholdsToReview } from './lib/thresholds.mjs';
 import { MAX_BUDGET_WALLS } from './lib/visual-budget.mjs';
 
 export const LAYOUT_PLAN_SCHEMA = 'seo-site-layout-plan-v1';
@@ -74,7 +75,8 @@ export async function planSite({ root = process.cwd(), maxWalls = MAX_BUDGET_WAL
   const figures = await readJson(resolve(root, 'src/data/page-figures.json'), null);
   const trust = await readJson(resolve(root, 'src/data/site-trust.json'), null);
   const trustBar = (page) => { const { items, certifications } = trustBarContent(page, figures, trust); return items.length > 0 || certifications.length > 0; };
-  const plans = pages.map((page) => planPage(page, components, { isBuilt, headingModel, charEm, pageTypes, phoneHeroes, maxWalls, trustBar: trustBar(page) }));
+  const treatmentCss = await readFile(resolve(root, 'src/styles/reference.css'), 'utf8').catch(() => '');
+  const plans = pages.map((page) => planPage(page, components, { isBuilt, headingModel, charEm, pageTypes, phoneHeroes, maxWalls, trustBar: trustBar(page), treatmentCss }));
   // Cards that name services carry a line icon where the site's cards carry icons (Fable's plan 3.2: "站点卡片用图标时";
   // lib/slot-visuals.mjs cardVisual: the site's choice, else icons for a trade whose photos are scenes).
   const context = { serviceCards: cardVisual(components) === 'icon', phoneHeroes: Boolean(phoneHeroes), maxWalls };
@@ -129,6 +131,12 @@ export function planMarkdown(plan, { feasibilityOnly = false } = {}) {
   if (!feasibilityOnly) {
     const kinds = Object.entries(Object.groupBy(plan.photoSlots, (slot) => slot.kind)).map(([kind, list]) => `${kind} ${list.length}`).join('，');
     lines.push('', '## 照片位清单', '', `共 ${plan.photoSlots.length} 个（${kinds || '无'}），明细在 layout-plan.json 的 photoSlots。`);
+  }
+  // The thresholds measured on fewer than two sites (config/thresholds.json): a new site is where to look at them again.
+  const review = thresholdsToReview();
+  if (!feasibilityOnly && review.length) {
+    lines.push('', `## 只在一个站上量过（或没有记录）的阈值（${review.length} 个，换站时复核）`, '', '| 阈值 | 值 | 管什么 | 量过的站 |', '|---|---|---|---|');
+    for (const entry of review) lines.push(`| ${entry.id}（${entry.module}） | \`${JSON.stringify(entry.value)}\` | ${entry.what} | ${entry.sites.join('、') || '没有记录'} |`);
   }
   return `${lines.join('\n')}\n`;
 }

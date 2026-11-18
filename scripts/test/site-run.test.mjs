@@ -73,7 +73,7 @@ test('a run stops at a step an agent must do, skips unchanged steps and stops at
   // (The template's gaps are collected once the modules are named, before the treatment.)
   // The inputs are checked every run; the capture's density and check are unchanged with it.
   assert.deepEqual(next.summary.map((item) => `${item.step}:${item.status}`), ['inputs:passed', 'capture:unchanged', 'density:unchanged', 'capture-check:unchanged', 'analysis:done', 'apply-analysis:passed', 'brand:passed', 'patterns:passed', 'modules:done', 'template-gaps:passed', 'treatment:waiting']);
-  assert.deepEqual(ran, ['scripts/check-inputs.mjs', 'scripts/apply-reference-analysis.mjs', 'scripts/site-brand.mjs', 'scripts/scaffold-placeholder-pages.mjs', 'scripts/collect-template-gaps.mjs']);
+  assert.deepEqual(ran, ['scripts/check-inputs.mjs', 'scripts/apply-reference-analysis.mjs', 'scripts/check-token-contrast.mjs', 'scripts/site-brand.mjs', 'scripts/scaffold-placeholder-pages.mjs', 'scripts/collect-template-gaps.mjs']);
   // A failing step stops the run and names its log.
   await mkdir(join(root, 'src/styles'), { recursive: true });
   // The template's empty reference.css (a comment only) is not a treatment.
@@ -107,8 +107,9 @@ test('a site makes its own photos and never shows the competitor\'s; each step t
   await writeFile(join(root, 'site.json'), JSON.stringify(site));
   assert.equal(steps(site).find((step) => step.id === 'images').kind, 'codex', 'generate is the default');
   assert.throws(() => steps({ ...site, images: 'reference' }), /never shown/);
-  // The photos are installed by the image step alone: applying the analysis sets the design lock only.
-  assert.deepEqual(steps(site).find((step) => step.id === 'apply-analysis').run, [['node', 'scripts/apply-reference-analysis.mjs', '--design-lock', 'docs/research/analysis/design-lock.json']]);
+  // The photos are installed by the image step alone: applying the analysis sets the design lock only, and its colour
+  // pairs are checked right there.
+  assert.deepEqual(steps(site).find((step) => step.id === 'apply-analysis').run, [['node', 'scripts/apply-reference-analysis.mjs', '--design-lock', 'docs/research/analysis/design-lock.json'], ['node', 'scripts/check-token-contrast.mjs', '.']]);
   // A step writes a file; the run commits it under the step's name.
   const runner = async (command) => { if (String(command[1]).includes('capture')) await writeFile(join(root, 'capture.txt'), 'captured'); return 0; };
   await siteRun({ root, runner, to: 'capture', repo: true });
@@ -163,7 +164,8 @@ test('with a template repository on record, every run starts by syncing the temp
   const list = steps(site, { coreSource: '../template' });
   assert.equal(list[0].id, 'core');
   assert.equal(list[0].always, true);
-  assert.deepEqual(list[0].run[0], ['node', '../template/scripts/sync-template-core.mjs', '.']);
+  // The run syncs the template's commit, never another session's uncommitted edits (hotel-rm r10, r17).
+  assert.deepEqual(list[0].run[0], ['node', '../template/scripts/sync-template-core.mjs', '--committed', '.']);
   assert.notEqual(steps(site)[0].id, 'core');
 });
 
@@ -182,7 +184,16 @@ test('the layout audit runs again when what it compares the build with changes, 
 test('the release step judges the release build, then makes the development build again for the preview', () => {
   const release = steps(site).find((step) => step.id === 'release');
   assert.equal(release.keepGoing, true);
-  assert.deepEqual(release.run.map((command) => command.at(-1)), ['scripts/build-release.mjs', 'scripts/build-nginx-config.mjs', 'scripts/sf-report.mjs', 'scripts/preflight.mjs', 'build']);
+  // The comparison with the owner's other sites and the handoff are made by the step itself, before the preflight that
+  // reads them (Fable's 11-14 plan, item 11: the preflight held until a person ran check:cross-site by hand).
+  assert.deepEqual(release.run.map((command) => (command[0] === 'node' ? command.slice(1).join(' ') : command.at(-1))), ['scripts/build-release.mjs', 'scripts/build-nginx-config.mjs', 'scripts/sf-report.mjs', 'scripts/check-cross-site.mjs --hold', 'scripts/handoff.mjs', 'scripts/prelaunch.mjs', 'scripts/preflight.mjs', 'build']);
+});
+
+test("a page nearly the same as one on the owner's other sites holds the release for the owner, it does not fail it", async () => {
+  const { crossSiteExit } = await import('../check-cross-site.mjs');
+  assert.equal(crossSiteExit({ duplicates: [] }), 0);
+  assert.equal(crossSiteExit({ duplicates: [{ route: '/a/' }] }), 1);
+  assert.equal(crossSiteExit({ duplicates: [{ route: '/a/' }] }, { hold: true }), 2);
 });
 
 test('a new Site Factory snapshot does not capture the reference again, and a state from before named fields is kept', async () => {
@@ -798,6 +809,13 @@ test('a new capture and every blueprint write keep what the treatment and repair
   const written = JSON.parse(await readFile(join(root, 'src/data/template-variants.json'), 'utf8')).components;
   assert.deepEqual(written.heroByPageType, { home: 'media-split', about: 'media-banner' });
   assert.deepEqual(written.pageTypes.home.blocks, { story: { variant: 'single' } });
+  // Owner 2026-11-18: a hero the majority of the competitor's pages decided is not undone by the analysis of one page.
+  await writeFile(join(root, 'src/data/template-variants.json'), JSON.stringify({ schemaVersion: 'seo-site-template-variants-v1', components: { hero: 'plain', heroByPageType: { about: 'media-overlay' }, pageTypes: {} } }));
+  await writeFile(join(root, 'docs/research/pattern-inventory.json'), JSON.stringify({ pages: [{ pageType: 'about', heroVariant: 'media-overlay', heroOwn: 'media-banner', heroSamples: [{ url: 'u1', heroVariant: 'media-overlay' }, { url: 'u2', heroVariant: 'media-overlay' }], sections: [] }] }));
+  await writeBlueprintPages({ root, pagesPlan });
+  assert.equal(JSON.parse(await readFile(join(root, 'src/data/template-variants.json'), 'utf8')).components.heroByPageType.about, 'media-overlay');
+  await writeFile(join(root, 'docs/research/pattern-inventory.json'), JSON.stringify({ pages: ['home', 'about'].map((pageType) => ({ pageType, heroVariant: 'media-overlay', sections: [] })) }));
+  await writeFile(join(root, 'src/data/template-variants.json'), JSON.stringify({ schemaVersion: 'seo-site-template-variants-v1', components: { hero: 'plain', heroByPageType: { home: 'media-split', about: 'media-banner' }, pageTypes: { home: { blocks: { story: { variant: 'single' } } } } } }));
   assert.equal(written.tradePhotos, undefined, 'a clothing site photographs its products');
   // A service site (its trade's photos are scenes of its work) records it: its cards take icons (lib/slot-visuals.mjs).
   await writeFile(join(root, 'site.json'), JSON.stringify({ trade: 'service' }));
@@ -879,10 +897,10 @@ test('the agent repairs only what the site\'s stylesheet is where to fix: contra
   assert.deepEqual([css.result.code, css.repairs], [0, ['audits-repair']]);
   // A heading off the axis and a row whose texts start apart are moved by the site's stylesheet: the agent's.
   assert.ok(['heading_off_axis', 'misaligned_row'].every((issue) => SITE_CSS_ISSUES.includes(issue)));
-  // A crop or a grid's unfilled row beside a contrast failure: nothing goes to the agent.
-  const rules = await runFrom(['low_contrast', 'heavy_crop', 'unfilled_row', 'heading_off_axis']);
+  // A title under the fold or a grid's unfilled row beside a contrast failure: nothing goes to the agent.
+  const rules = await runFrom(['low_contrast', 'h1_below_fold', 'unfilled_row', 'heading_off_axis']);
   assert.deepEqual([rules.result.code, rules.result.failed, rules.repairs], [1, 'audits', []]);
-  assert.match(rules.result.summary.find((item) => item.step === 'audits-repair').status, /not given to the agent: 2 failure\(s\) for a rule of the template \(heavy_crop, unfilled_row\); see docs\/research\/authoring-layout-audit\.json/);
+  assert.match(rules.result.summary.find((item) => item.step === 'audits-repair').status, /not given to the agent: 2 failure\(s\) for a rule of the template \(h1_below_fold, unfilled_row\); see docs\/research\/authoring-layout-audit\.json/);
 });
 
 test("the navigation audit's failures are open problems of the audit step too, one per failing check", async () => {
@@ -975,4 +993,79 @@ test('a run says at its start which steps that call a model it will run, as far 
   assert.deepEqual((await pendingPaidSteps(root, list, { board: { status: 'passed', hash }, images: { status: 'passed', hash: 'other' } })).map((step) => step.id), ['images']);
   // The style board's review calls a model (design-review.mjs board).
   assert.equal(steps(site).find((step) => step.id === 'style-board').paid, true);
+});
+
+test('the images step waits for a person when more photos already made are queued again than a run makes at once', () => {
+  const images = steps(site).find((step) => step.id === 'images' && step.kind === 'codex');
+  assert.match(images.waitsOnExit, /remake-hold\.md/);
+});
+
+test("every site plans its section photos from its copy before the images, a clothing site too (owner 2026-11-17, aloha)", async () => {
+  const list = steps(site);
+  const at = (id) => list.findIndex((step) => step.id === id);
+  assert.ok(at('photo-briefs') >= 0 && at('photo-briefs') < at('images'));
+  assert.ok(list[at('photo-briefs')].inputs.includes('config/image-briefs.json'));
+  assert.ok(list[at('images')].inputs.includes('src/data/photo-briefs.json'));
+  assert.ok(list.find((step) => step.id === 'phone-heroes').inputs.includes('src/data/photo-briefs.json'));
+  const service = steps({ ...site, trade: 'service' });
+  assert.ok(service.find((step) => step.id === 'photo-briefs').inputs.includes('config/image-briefs.service.json'));
+  // What each trade's photos show is filled into the instructions; a trade's briefs without it fail.
+  const { scopedPrompt } = await import('../plan-photo-briefs.mjs');
+  const apparel = JSON.parse(await readFile(new URL('../../config/image-briefs.json', import.meta.url), 'utf8'));
+  assert.equal(apparel.planFromCopy, true);
+  const prompt = scopedPrompt(await readFile(new URL('../../config/agent-steps/photo-briefs.md', import.meta.url), 'utf8'), apparel);
+  assert.ok(prompt.includes(apparel.photoScope) && prompt.includes(apparel.scopeRule) && !prompt.includes('{{'.concat('photoScope}}')));
+  assert.throws(() => scopedPrompt('{{photoScope}}', { photoScope: 'x' }), /no scopeRule/);
+});
+
+test('the images step plans and checks every photo by its page\'s text, makes one sample of each class and has it judged before the library, and waits on a held photo last (owner 2026-11-17)', () => {
+  const images = steps(site).find((step) => step.id === 'images');
+  const commands = images.run.map((command) => command.slice(1).map((part) => String(part).split(/[\\/]/).at(-1)).join(' '));
+  const at = (command) => commands.indexOf(command);
+  assert.ok(at(`plan-images.mjs --line ${site.line}`) === 0, 'the plan, its classes and the text check first');
+  assert.ok(at('generate-images.mjs --samples') > 0 && at('generate-images.mjs --samples') + 1 === at('judge-image-fit.mjs --samples'), 'one sample of each class, then its judgment');
+  assert.equal(commands.indexOf('generate-images.mjs'), at('judge-image-fit.mjs --samples') + 1, 'the library only after the samples are judged (it waits on a class whose sample did not pass)');
+  assert.equal(commands.at(-1), 'check-photo-text.mjs --gate', 'a photo held by the text check waits for a person once the rest is made and applied');
+  assert.match(images.waitsOnExit, /samples\.md/);
+  assert.match(images.waitsOnExit, /text-check\.md/);
+  assert.ok(images.inputs.includes('config/photo-text-check.json'));
+  // The photo briefs read the last image-fit judgments (a position whose photo fits keeps it) and the made library.
+  const briefs = steps(site).find((step) => step.id === 'photo-briefs');
+  assert.ok(briefs.inputs.includes('docs/research/image-fit.json') && briefs.inputs.includes('docs/research/image-plan.json'));
+});
+
+test('a second design repair that breaks the passing layout audit is undone too (Staylumen 2026-11-17: the polish repair undone, the gate repair after it kept)', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'site-run-undo-twice-')); await seedPhotos(root);
+  await writeFile(join(root, 'site.json'), JSON.stringify(site));
+  await mkdir(join(root, 'src/styles'), { recursive: true });
+  await writeFile(join(root, 'src/styles/reference.css'), 'v0');
+  await mkdir(join(root, 'docs/research/design-review'), { recursive: true });
+  await writeFile(join(root, 'docs/research/design-review/manifest.json'), JSON.stringify({ id: 'shots', pages: [] }));
+  // The review's findings: a small one for the polish, a P1 for the gate (each repair is asked about its own).
+  await writeFile(join(root, 'docs/research/design-review.json'), JSON.stringify({ status: 'open', findings: [{ review: 'home', viewport: 'mobile', block: 'cta', severity: 'P2', scope: 'site', issue: 'x' }, { review: 'home', viewport: 'desktop', block: 'hero', severity: 'P1', scope: 'site', issue: 'y' }] }));
+  let gates = 0;
+  let polishes = 0;
+  const runner = async (command) => {
+    if (String(command[1]).includes('break-text-runs')) return 2;
+    if (command.includes('gate')) return gates++ === 0 ? 0 : 2;
+    if (command.includes('minor')) return polishes++ === 0 ? 2 : 0;
+    if (!String(command[1]).includes('audit-authoring-layout')) return 0;
+    const css = (await readFile(join(root, 'src/styles/reference.css'), 'utf8')).trim();
+    const failures = css === 'v0' ? [] : [{ route: '/', viewport: 'mobile', issue: 'cta_below_fold' }];
+    await mkdir(join(root, 'docs/research'), { recursive: true });
+    await writeFile(join(root, 'docs/research/authoring-layout-audit.json'), JSON.stringify({ failures }));
+    return failures.length ? 1 : 0;
+  };
+  const repairs = [];
+  const agent = async ({ step }) => { repairs.push(step.id); if (step.id !== 'audits-repair') await writeFile(join(root, 'src/styles/reference.css'), `broken by ${step.id}`); return 0; };
+  const result = await siteRun({ root, runner, agent, repo: true, from: 'audits', to: 'design-polish' });
+  assert.deepEqual(repairs, ['design-polish-repair', 'design-gate-repair'], JSON.stringify(result.summary.filter((item) => /repair/.test(item.step))));
+  assert.equal((await readFile(join(root, 'src/styles/reference.css'), 'utf8')).trim(), 'v0', 'both design repairs are undone');
+  assert.equal(result.summary.filter((item) => item.step === 'audits-repair' && /back to the state with the fewest problems/.test(item.status)).length, 2);
+});
+
+test('the template\'s own tests run with their stand-in models in an iteration run too (Strandmill 2026-11-18)', () => {
+  const check = steps(site).find((step) => step.id === 'template-check');
+  assert.equal(check.run[0].ownModels, true);
+  assert.ok(check.run.slice(1).every((command) => !command.ownModels));
 });

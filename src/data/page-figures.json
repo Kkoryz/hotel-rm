@@ -1,138 +1,116 @@
 {
-  "/services/": [
-    {
-      "value": "2 to 3 business days",
-      "label": "Booking.com listing optimisation"
-    },
-    {
-      "value": "10 business days",
-      "label": "Revenue audit delivery"
-    },
-    {
-      "value": "365 days",
-      "label": "Annual service coverage"
-    },
-    {
-      "value": "30-minute",
-      "label": "Initial consultation"
-    }
-  ],
   "/hotel-digital-marketing/": [
     {
       "value": "4 to 6 weeks",
-      "label": "Website launch time"
+      "label": "Website launch after written sign-off"
+    },
+    {
+      "value": "3 to 5 pages",
+      "label": "Landing pages in first three months"
     },
     {
       "value": "2 website articles",
-      "label": "Monthly website articles"
+      "label": "Monthly articles, about 1,000 words each"
     },
     {
       "value": "12 social posts",
       "label": "Monthly social posts"
-    },
-    {
-      "value": "2 videos",
-      "label": "Monthly videos"
     }
   ],
   "/boutique-hotel-consulting/": [
     {
       "value": "3 months",
-      "label": "Starter duration"
+      "label": "Starter engagement duration"
     },
     {
       "value": "6 months",
-      "label": "Core duration"
+      "label": "Core engagement duration"
     },
     {
-      "value": "4 to 6 OTA channels",
-      "label": "Core managed channels"
+      "value": "4 to 6 OTA",
+      "label": "Channels actively managed on Core"
     },
     {
       "value": "10 properties",
-      "label": "Maximum specialist caseload"
+      "label": "Maximum properties per specialist"
     }
   ],
   "/commercial-strategy/": [
     {
       "value": "12-month",
-      "label": "Strategy plan duration"
+      "label": "Commercial strategy plan"
     },
     {
       "value": "5 to 8 properties",
-      "label": "Competitive set size"
-    },
-    {
-      "value": "6 to 8 weeks",
-      "label": "New property strategy reviews"
+      "label": "Matched competitors checked daily"
     },
     {
       "value": "60-minute",
       "label": "Leadership kickoff call"
+    },
+    {
+      "value": "90-minute",
+      "label": "Planning sessions (two within four weeks)"
     }
   ],
   "/ota-optimization/": [
+    {
+      "value": "2 to 3 business days",
+      "label": "Booking.com optimization delivery"
+    },
     {
       "value": "2 to 3 weeks",
       "label": "Full multi-channel setup"
     },
     {
-      "value": "2 to 3 business days",
-      "label": "Booking.com optimization"
-    },
-    {
       "value": "5 to 7 business days",
-      "label": "Expedia or Agoda rebuild"
+      "label": "Each Expedia Group or Agoda rebuild"
     },
     {
       "value": "7 to 10 business days",
-      "label": "Metasearch connection time"
+      "label": "Provider’s side of each metasearch connection"
     }
   ],
   "/dynamic-pricing-strategy/": [
     {
       "value": "1 to 2 business days",
-      "label": "PriceLabs setup delivery"
+      "label": "PriceLabs setup including written handover"
     },
     {
       "value": "90 minutes to 3 hours",
-      "label": "Live session duration"
-    },
-    {
-      "value": "5 to 8 comparable properties",
-      "label": "Competitive set size"
+      "label": "Live session in your existing system"
     },
     {
       "value": "6 to 8 weeks",
-      "label": "Self-run recalibration interval"
+      "label": "Usual self-run recalibration revisit interval"
+    },
+    {
+      "value": "12 months",
+      "label": "Demand calendar built ahead"
     }
   ],
   "/hotel-distribution/": [
     {
-      "value": "4 hours",
-      "label": "Sync fault resolution"
-    },
-    {
-      "value": "24 hours",
-      "label": "Post-outage booking reconciliation"
-    },
-    {
-      "value": "12 hours",
-      "label": "Stale data threshold"
-    },
-    {
       "value": "30 days",
-      "label": "OTA fixes review"
+      "label": "Selected OTA fixes review"
+    },
+    {
+      "value": "60-minute",
+      "label": "Contracts review kickoff call"
+    },
+    {
+      "value": "12 months",
+      "label": "Minimum booking history for takeover"
     }
   ],
   "/revenue-management-audit/": [
     {
       "value": "3 to 4 weeks",
-      "label": "Total audit timeline"
+      "label": "Single-property scoping to management presentation"
     },
     {
-      "value": "4 to 6 hours",
-      "label": "Team time required"
+      "value": "about 4 to 6 hours",
+      "label": "Total time needed from your team"
     },
     {
       "value": "90-Day",
@@ -140,78 +118,78 @@
     },
     {
       "value": "5 to 8 competing properties",
-      "label": "Competitive benchmarking set"
+      "label": "Agreed competitive set"
     }
   ],
   "/contact-us/": [
     {
       "value": "9:00 a.m. to 5:00 p.m. Eastern Time",
-      "label": "Weekday phone hours"
+      "label": "Phone hours, Monday to Friday"
     },
     {
       "value": "5 business days",
-      "label": "Proposal turnaround"
+      "label": "Written proposal after consultation"
     },
     {
       "value": "30-minute",
-      "label": "Consultation duration"
+      "label": "Free consultation duration"
     },
     {
       "value": "365 days",
-      "label": "Annual account coverage"
+      "label": "Annual account coverage for existing clients"
     }
   ],
   "/case-studies/": [
     {
       "value": "60 to 90 days",
-      "label": "Typical measurable results"
+      "label": "Measurable results for most priced hotels"
     }
   ],
   "/our-process/": [
     {
+      "value": "1 to 3 business days",
+      "label": "Most quick services after checklist completion"
+    },
+    {
       "value": "10 business days",
-      "label": "Discovery and audit"
+      "label": "Audit after signing and granting access"
     },
     {
       "value": "5 business days",
-      "label": "Strategy development"
+      "label": "Goals and strategy after audit"
     },
     {
       "value": "365 days",
-      "label": "Annual coverage"
+      "label": "Account coverage each year"
     }
   ],
   "/resources/": [
     {
-      "value": "8 to 12 weeks",
-      "label": "Before peak season"
-    },
-    {
-      "value": "3 months",
-      "label": "Before financial year"
+      "value": "about 3 months",
+      "label": "Budget template use before financial year"
     },
     {
       "value": "30 days",
-      "label": "OTA checklist update window"
+      "label": "OTA checklist updates after rule changes"
     }
   ],
   "/careers/": [],
   "/request-a-quote/": [
     {
       "value": "3 business days",
-      "label": "Consultation booking time"
+      "label": "Consultation booked from request, after reply"
     },
     {
-      "value": "14 days",
-      "label": "Invoice payment window"
-    },
-    {
-      "value": "5 business days",
-      "label": "Proposal after call"
+      "value": "3 to 5",
+      "label": "Competitors you watch to include"
     },
     {
       "value": "30-minute",
-      "label": "Consultation duration"
+      "label": "No-obligation consultation duration"
+    },
+    {
+      "value": "5 business days",
+      "label": "Proposal sent after consultation call"
     }
   ]
 }

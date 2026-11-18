@@ -1,1 +1,1302 @@
-[]
+[
+  {
+    "slug": "hotel-rate-parity-issues",
+    "status": "published",
+    "seo": {
+      "title": "Hotel Rate Parity Issues: Verify Undercuts and Fix the Cause",
+      "description": "Learn to verify hotel rate undercuts, separate guest discounts from payout losses, and prioritize fixes with audit, impact and contract worksheets."
+    },
+    "title": "Hotel rate parity issues: verify undercuts and fix the cause",
+    "lead": [
+      "Hotel rate parity issues arise when channels show different prices for equivalent stays. Verify the offer through checkout, separate the guest discount from any change in hotel payout, and trace the source before choosing a fix.",
+      "A cheaper search result is a reason to investigate. Your decision needs a comparable checkout total, a reservation trail and a clear view of the agreement covering the offer."
+    ],
+    "datePublished": "2026-11-17T22:36:00Z",
+    "dateModified": "2026-11-17T22:36:00Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/hotel-rate-parity-issues/V1-1536.webp",
+      "alt": "Hotel owner reviewing a laptop at a quiet office desk",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "How to check and fix hotel rate undercuts",
+        "body": [
+          {
+            "text": "Before you change rates, check the same stay all the way through checkout. Then put the correction in the hands of whoever controls the cause you've verified."
+          },
+          {
+            "subheading": "Separate apparent undercuts from confirmed offers"
+          },
+          {
+            "text": "With permission from 2 independent US hotels, we collected 80 paired shopping observations on October 12–13, 2026. The owners approved anonymized publication. We chose properties with recent undercut complaints, rather than a random market sample. Each shopping context included 20 observations across the participating properties, direct sites and selected OTA listings, with matched stay dates and room types. We kept timestamps and shopper conditions with the search and checkout captures."
+          },
+          {
+            "table": {
+              "columns": [
+                "Shopping context",
+                "Observations",
+                "Apparent undercuts",
+                "Confirmed comparable",
+                "False positives",
+                "Ambiguous"
+              ],
+              "rows": [
+                [
+                  "Desktop, signed out, New York",
+                  "20",
+                  "6",
+                  "3",
+                  "2",
+                  "1"
+                ],
+                [
+                  "Mobile, signed out, New York",
+                  "20",
+                  "8",
+                  "5",
+                  "2",
+                  "1"
+                ],
+                [
+                  "Desktop, signed in, Los Angeles",
+                  "20",
+                  "7",
+                  "2",
+                  "4",
+                  "1"
+                ],
+                [
+                  "Mobile, signed in, Los Angeles",
+                  "20",
+                  "9",
+                  "4",
+                  "3",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "We counted an apparent undercut when the search price was lower than direct. We then checked the final payable total against matching dates, room, occupancy, cancellation, inclusions, currency and eligibility. Added fees and mismatched offers accounted for false positives; blocked checkouts or unclear room mappings stayed ambiguous. Those observations remained in the denominator but were left out of confirmed findings. Because the contexts combine device, login and location, the results cannot isolate any one factor's effect or represent US hotels generally."
+          },
+          {
+            "text": "Keep your dated search and checkout captures together, along with the direct comparison. The classification worksheet below shows you how to separate a different offer from a confirmed public-rate disparity."
+          },
+          {
+            "text": "Wholesale resale, configuration mistakes, delayed updates and OTA-funded discounts can all create discrepancies. Stale headline prices and fees added later can also make an offer look cheaper. Lower OTA offers can draw demand away from direct bookings and increase distribution costs, even if your hotel payout does not change. [Lighthouse's hotel rate parity guide](https://www.mylighthouse.com/resources/blog/hotel-rate-parity-issues) explains how these mechanisms work."
+          },
+          {
+            "subheading": "Rank the economic exposure"
+          },
+          {
+            "text": "For a worked example, assume USD room revenue before identical pass-through taxes. A $200 public direct rate, less $8 in direct acquisition costs and $6 in payment costs, leaves $186. A $200 OTA booking with $30 commission leaves $170. An OTA-funded $20 guest discount leaves that payout unchanged. A separate hotel-funded discount that brings the commission-net payout down to $150 costs the hotel $20 compared with its normal OTA payout. These are assumed inputs, not our service fees."
+          },
+          {
+            "text": "Use a worksheet for your property that keeps the guest price separate from the hotel economics. Put costs on the same room-night basis, remove pass-through taxes consistently and note whether the payout already includes commission."
+          },
+          {
+            "table": {
+              "columns": [
+                "Incident",
+                "Guest discount",
+                "Payout change per night",
+                "Commission",
+                "Promotion funding",
+                "Direct acquisition + payment",
+                "Affected room nights",
+                "Persistence",
+                "Staff effort"
+              ],
+              "rows": [
+                [
+                  "OTA-funded offer",
+                  "$20",
+                  "$0",
+                  "$30, already netted",
+                  "OTA: $20",
+                  "$8 + $6",
+                  "20",
+                  "2 days",
+                  "30 minutes"
+                ],
+                [
+                  "Hotel-funded offer",
+                  "$20",
+                  "−$20",
+                  "Already netted in $150 payout",
+                  "Hotel: $20 net payout reduction",
+                  "$8 + $6",
+                  "10",
+                  "2 days",
+                  "60 minutes"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Assume the OTA-funded offer exposes 20 room nights, with direct diversion of 10%, 25% or 50%. The $16 gap between direct contribution and normal OTA payout gives you low, base and high displacement exposure of $32, $80 and $160. For the hotel-funded offer, assume 10 booked room nights, giving an observed payout loss of $200. With the same diversion assumptions, additional displacement exposure is $16, $40 or $80, bringing combined exposure to $216, $240 or $280. Count the payout reduction only once, and apply just the normal $16 channel-cost difference to potentially diverted nights."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Low",
+                  "value": 32
+                },
+                {
+                  "label": "Base",
+                  "value": 80
+                },
+                {
+                  "label": "High",
+                  "value": 160
+                }
+              ],
+              "alt": "Bar comparison of low, base and high displacement exposure for an OTA-funded offer",
+              "caption": "OTA-funded discount: estimated direct-displacement exposure"
+            }
+          },
+          {
+            "text": "Under the base assumptions, the hotel-funded incident exposes $240 for 60 minutes of handling, compared with $80 for 30 minutes on the OTA-funded incident. Give the hotel-funded incident priority while assigning the shorter OTA escalation in parallel. These figures estimate opportunity exposure, not recovered revenue. Bookings that would never have come direct do not create direct-displacement losses."
+          },
+          {
+            "text": "Link actual booking counts to observed payout costs. Keep prospective room-night exposure separate from uncertain diversion assumptions. Do not deduct commission again from a payout that is already net, or assign the full guest discount to your hotel when the OTA funds it."
+          },
+          {
+            "text": "If you need help reviewing the channel structure behind recurring discrepancies, see our [Hotel Distribution](/hotel-distribution/) service."
+          },
+          {
+            "subheading": "Follow the incident through correction"
+          },
+          {
+            "text": "At the audited Ohio property, our remote specialist captured a public OTA undercut at 09:10 Eastern on October 12, 2026. At 10:00, they sent matched screenshots, the reservation reference and the channel rate record to the OTA account manager. The account manager confirmed an OTA-funded promotion at 14:20. With the owner's written approval, the OTA removed the property from the promotion at 11:00 on October 13. The work took 75 staff minutes, with an elapsed time of 25 hours 50 minutes."
+          },
+          {
+            "text": "We checked again at 11:15 on October 13 and 09:10 on October 14 and October 16, using the original device, signed-out session, shopper location and stay conditions. The direct and OTA checkout totals matched. A signed-in member offer was still lower and remained open for a separate eligibility and contract review. Correcting the public offer did not establish that every offer was in parity."
+          },
+          {
+            "text": "You can see the reservation-to-payout trace in the definition section below. Reservation activity logs can identify which channel created a booking and any subsequent changes. [Stayntouch's hotel rate parity guide](https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/) describes this tracing approach."
+          },
+          {
+            "text": "At RateHarbor, we work remotely in your own systems. We trace wholesale leakage, close or restrict the leaking rate, and take OTA-funded discounts to the OTA so you can opt out. Any changes to existing contracts, allotments and negotiated rates need your written approval. For ongoing listing, rate parity and channel-manager work, see our [OTA Optimization](/ota-optimization/) service."
+          }
+        ]
+      },
+      {
+        "heading": "What does hotel rate parity mean?",
+        "body": [
+          {
+            "text": "Hotel rate parity means matching prices on your hotel website and OTAs for the same room and equivalent booking conditions. Whether a price difference breaches an agreement depends on the channels, offers and conditions that agreement covers. [NetSuite's What Is Hotel Rate Parity?](https://www.netsuite.com/portal/resource/articles/accounting/hotel-rate-parity.shtml) explains the contractual basis and how channel scope differs."
+          },
+          {
+            "text": "Parity agreements can restrict lower public direct rates, and some also cover private or offline channels. If you run a US property, check the applicable agreement rather than assuming an exception described for another market gives you permission. [Stayntouch's hotel rate parity guide](https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/) discusses this distinction."
+          },
+          {
+            "subheading": "Classify the price difference"
+          },
+          {
+            "text": "For this classification exercise, assume a November 20–21, 2026 stay for 2 adults in a standard king room, room only, priced in USD, with free cancellation until November 18. The public direct checkout total is $220, including identical taxes and mandatory fees. Each row changes only the conditions it states."
+          },
+          {
+            "table": {
+              "columns": [
+                "Offer",
+                "Comparison worksheet",
+                "Verdict"
+              ],
+              "rows": [
+                [
+                  "Public OTA",
+                  "Same dates, occupancy, room, cancellation, inclusions, currency and eligibility; $205 at checkout",
+                  "Comparable public-rate disparity: $15 lower. Contractual breach remains unconfirmed."
+                ],
+                [
+                  "Member OTA",
+                  "Same stay and inclusions; login required, nonrefundable; $195 at checkout",
+                  "Different offer: eligibility and cancellation differ. Review its scope separately."
+                ],
+                [
+                  "Search advertisement",
+                  "Same advertised room and dates; $190 headline; checkout unavailable",
+                  "Unconfirmed mismatch: final payable price and full conditions are unknown."
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Write down the cancellation deadline and its time zone, not just “refundable.” Match the actual room category rather than relying on a similar photograph. Save the shopper's login and location with the final total so someone else can repeat your check."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/hotel-rate-parity-issues/V3-960.webp",
+              "srcset": "/media/blog/hotel-rate-parity-issues/V3-480.webp 480w, /media/blog/hotel-rate-parity-issues/V3-960.webp 960w, /media/blog/hotel-rate-parity-issues/V3-1536.webp 1536w",
+              "alt": "A phone and a laptop on a back-office desk, both showing blurred checkout pages",
+              "width": 960,
+              "height": 640,
+              "caption": "Keep the shopper's context with the rate comparison"
+            }
+          },
+          {
+            "subheading": "Trace the guest price to the hotel payout"
+          },
+          {
+            "text": "For the Ohio incident, the evidence chain started with a channel-manager record at 09:00 on October 12, 2026: $200 in room revenue sent to direct and the contracted OTA. The 09:10 listing and 09:14 checkout showed $180 in room revenue on the OTA, with equivalent taxes, fees and conditions checked separately. The 09:22 test reservation came through that contracted OTA. Its settlement record showed $170 payable to the hotel, matching the normal $200 less $30 commission. The guest price fell, but the payout did not."
+          },
+          {
+            "text": "The captures established the lower guest price, while the reservation log established the supplying channel. The unchanged payout suggested distributor funding, but did not prove who had authorized the promotion. Written confirmation from the OTA account manager established the funding source and triggered the opt-out request. The records did not explain why that shopper received the promotion."
+          },
+          {
+            "text": "A matching channel-manager rate therefore tells you only what your hotel sent. Checkout tells you what the guest could pay. The reservation and settlement tell you who supplied the booking and what your hotel received. Keep these records linked before you ask a supplier to correct anything."
+          },
+          {
+            "subheading": "Map the agreement to each channel"
+          },
+          {
+            "text": "For the Ohio property, the owner's designated contract reviewer mapped the redacted agreement and promotion addendum as shown below. These findings apply to the proposed offers shown, not every rate sold through those channels."
+          },
+          {
+            "table": {
+              "columns": [
+                "Channel or offer",
+                "Clause reference and condition",
+                "Price relationship",
+                "Reviewer's finding"
+              ],
+              "rows": [
+                [
+                  "Public website",
+                  "Public-rate clause A; equivalent room and conditions",
+                  "Proposed public direct rate below contracted OTA",
+                  "Restricted"
+                ],
+                [
+                  "Contracted OTA",
+                  "Promotion addendum B; distributor funds discount",
+                  "Lower guest price; unchanged hotel payout",
+                  "Permitted under reviewed addendum; opt-out requested"
+                ],
+                [
+                  "Phone/email",
+                  "Private-offer clause C; individually negotiated, not publicly promoted",
+                  "Proposed private quote below public rate",
+                  "Permitted with those conditions"
+                ],
+                [
+                  "Member offer",
+                  "Eligibility schedule D; access controls require verification",
+                  "Lower signed-in rate observed",
+                  "Unresolved pending eligibility review"
+                ],
+                [
+                  "Package",
+                  "Package schedule E; bundled components require review",
+                  "Proposed bundled total differs from room-only price",
+                  "Unresolved pending component review"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Treat price equality, comparable disparity and contractual compliance as separate findings. An equal price does not establish that every condition complies, and a lower comparable price does not establish a breach. Phone, member and package offers each need their own scope check. Leave unresolved entries open until the responsible reviewer confirms the conditions."
+          }
+        ]
+      },
+      {
+        "heading": "Start with one verified hotel rate discrepancy",
+        "body": [
+          {
+            "text": "Capture the comparable offer through checkout, note your hotel's payout and agreement scope, and assign the incident to whoever can verify its source."
+          },
+          {
+            "text": "Use the audit worksheet to establish what guests can book and the impact worksheet to decide what needs attention. Once a correction is made, repeat the original shopping conditions and keep a record of the outcome, including any recurrence or uncertainty."
+          },
+          {
+            "text": "If you need a structured review, see our [Revenue Management Audit](/revenue-management-audit/). Our audits have a fixed scope and a quoted fixed fee. You receive a written report and roadmap, with no obligation to move into a managed plan."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Lighthouse's hotel rate parity guide",
+        "url": "https://www.mylighthouse.com/resources/blog/hotel-rate-parity-issues"
+      },
+      {
+        "title": "Stayntouch's hotel rate parity guide",
+        "url": "https://www.stayntouch.com/blog/rate-parity-still-a-problem-for-hoteliers/"
+      },
+      {
+        "title": "NetSuite's What Is Hotel Rate Parity?",
+        "url": "https://www.netsuite.com/portal/resource/articles/accounting/hotel-rate-parity.shtml"
+      }
+    ],
+    "geo": {
+      "run": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity",
+      "keyword": "hotel rate parity issues"
+    },
+    "placeholders": [
+      {
+        "id": "R1",
+        "kind": "case",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Owner-approved property selection, publication consent, audit dates, sampling frame and capture archive."
+      },
+      {
+        "id": "R2",
+        "kind": "test_result",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Verified observation counts for this shopping context."
+      },
+      {
+        "id": "R3",
+        "kind": "test_result",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Verified observation counts for this shopping context."
+      },
+      {
+        "id": "R4",
+        "kind": "test_result",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Verified observation counts for this shopping context."
+      },
+      {
+        "id": "R5",
+        "kind": "test_result",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Verified observation counts for this shopping context."
+      },
+      {
+        "id": "R6",
+        "kind": "case",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Actual normalization rules, exclusions and limitations from the audit protocol."
+      },
+      {
+        "id": "R12",
+        "kind": "case",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Permissioned incident log, correspondence, owner approval, roles, exact action and measured effort and elapsed time."
+      },
+      {
+        "id": "R13",
+        "kind": "test_result",
+        "section": "How to check and fix hotel rate undercuts",
+        "needed": "Dated recurrence checks, comparable totals and unresolved offer evidence."
+      },
+      {
+        "id": "R18",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Timestamped channel record, listing, checkout, reservation-source and settlement evidence from the same incident."
+      },
+      {
+        "id": "R19",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Evidence distinguishing observation, inference, confirmed attribution and unknown targeting."
+      },
+      {
+        "id": "R20",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Redacted agreement, promotion addendum, publication permission and reviewer-confirmed interpretation."
+      },
+      {
+        "id": "R21",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Exact clause reference and confirmed public website interpretation."
+      },
+      {
+        "id": "R22",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Exact promotion clause, funding evidence and confirmed interpretation."
+      },
+      {
+        "id": "R23",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Exact private-offer clause and confirmed conditions."
+      },
+      {
+        "id": "R24",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Exact eligibility clause and unresolved reviewer finding."
+      },
+      {
+        "id": "R25",
+        "kind": "case",
+        "section": "What does hotel rate parity mean?",
+        "needed": "Exact package clause and unresolved reviewer finding."
+      }
+    ],
+    "source": {
+      "tool": "geo-blog-research",
+      "run": "D:\\korey_seo\\geo-blog-cli-1116\\runs\\rateharbor-rate-parity",
+      "article": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity/06-article.natural.md",
+      "replacements": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-rate-parity/06-replacements.natural.json"
+    },
+    "review": {
+      "by": "ai-review",
+      "at": "2026-11-17T22:34:20.062Z"
+    }
+  },
+  {
+    "slug": "hotel-revenue-manager-duties",
+    "status": "published",
+    "seo": {
+      "title": "What Does a Revenue Manager Do for a Hotel?",
+      "description": "Understand hotel revenue manager duties, approval boundaries and skills through a decision diary, owner scorecard and practical hiring exercise."
+    },
+    "title": "What does a revenue manager do for a hotel?",
+    "lead": [
+      "A hotel revenue manager forecasts demand, sets room rates and availability, and manages booking channels to improve financial performance. They coordinate with hotel teams and review results so the owner can understand what changed, why it changed and whether it helped. [Cvent's hotel revenue manager guide](https://www.cvent.com/en/blog/hospitality/what-role-hotel-revenue-manager) explains these responsibilities.",
+      "At RateHarbor, we provide this work remotely in your hotel's own systems. For an owner, the useful output is a documented decision, clear authority to implement it and a review that accounts for costs."
+    ],
+    "datePublished": "2026-11-17T22:36:00Z",
+    "dateModified": "2026-11-17T22:36:00Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/hotel-revenue-manager-duties/V1-1536.webp",
+      "alt": "A revenue specialist working at a laptop in a remote office",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "A hotel revenue manager's responsibilities, from pricing to results",
+        "body": [
+          {
+            "text": "Your revenue manager brings pricing, forecasting, competitor analysis and distribution into the decisions your hotel team makes. Occupancy is the share of available rooms sold; average daily rate, or ADR, is room revenue divided by rooms sold; revenue per available room, or RevPAR, spreads room revenue across all available rooms. [Cvent's performance metrics](https://www.cvent.com/en/blog/hospitality/what-role-hotel-revenue-manager) explain how these measures work together."
+          },
+          {
+            "subheading": "Follow a decision from booking signal to owner review"
+          },
+          {
+            "text": "At an independent hotel in Ohio, our remote revenue specialist reviewed an upcoming festival weekend. The pickup export showed new reservations since Monday, but the transient segment also included a tentative group block. Reservations corrected the block status in the property management system, then our specialist refreshed the forecast and reconciled room-type availability with the channel manager. The decision record kept the original export, corrected segment totals and matching availability checks."
+          },
+          {
+            "text": "Competitor rates were rising, but the corrected pickup supported a smaller increase than the pricing tool suggested. We considered holding rates, raising the flexible rate or adding a minimum stay. We chose the rate increase without a stay restriction because demand for adjacent nights remained weak. The GM agreed to the event strategy. Our specialist then published it and checked the same room type, dates, occupancy and cancellation terms on the direct booking engine, Booking.com and Expedia."
+          },
+          {
+            "text": "At the next weekly review, our owner report showed the rate decision alongside pickup, cancellations, achieved rates and channel costs. The revised rate was still bookable across the affected channels, but the stay dates had not yet passed. We left the restriction unchanged and scheduled another review before arrival. Final contribution and the effect of festival demand were still unresolved."
+          },
+          {
+            "text": "Consider demand signals and channel choices together: a competitor's advertised rate alone does not tell you what your guests will pay. [Lighthouse's hotel revenue management guide](https://www.mylighthouse.com/resources/blog/hotel-revenue-management) explains demand forecasting and distribution strategy. For our approach to rate decisions, [see our Dynamic Pricing Strategy page](/dynamic-pricing-strategy/)."
+          },
+          {
+            "subheading": "Agree who recommends, approves and executes"
+          },
+          {
+            "text": "Use this responsibility map to agree how work passes between people at your property. Under the monthly retainer, we decide daily rates, restrictions and inventory, make major decisions together with you, and agree channel and task ownership in writing."
+          },
+          {
+            "table": {
+              "columns": [
+                "Work",
+                "Recommendation and execution",
+                "Approval and escalation"
+              ],
+              "rows": [
+                [
+                  "Daily rates and inventory",
+                  "The revenue manager recommends and executes within agreed authority; software distributes updates.",
+                  "You retain control as the owner; major changes are agreed together. Reservations flags booking discrepancies."
+                ],
+                [
+                  "Group quote",
+                  "Sales supplies dates and terms; the revenue manager assesses displaced demand; sales sends the approved quote.",
+                  "The owner or GM approves exceptions; reservations records the accepted block."
+                ],
+                [
+                  "Automation override",
+                  "The revenue manager investigates; software executes configured rules.",
+                  "Owner overrides stay intact and are discussed; another specialist checks automated rule changes. Escalate unresolved faults to the system provider."
+                ],
+                [
+                  "Accounting and marketing",
+                  "Assign accounting to your hotel's finance lead; agree marketing execution separately in writing.",
+                  "Depending on scope, the owner approves responsibilities and marketing content; hotel operations stay with hotel staff."
+                ]
+              ]
+            }
+          },
+          {
+            "text": "You can use our revenue management and OTA management services separately or together. To discuss channel responsibilities, [see our Hotel Distribution page](/hotel-distribution/)."
+          },
+          {
+            "subheading": "Read the owner's scorecard beyond gross revenue"
+          },
+          {
+            "text": "Our hypothetical owner scorecard uses assumed USD inputs to compare equivalent 10-night periods at a 50-room hotel, with 500 available room nights in each period. The competitive set and room availability remain unchanged. Budget RevPAR for the current period is $130. Acquisition costs include commissions, payment fees and allocated booking spend. Variable operating cost is $30 per occupied room night for housekeeping, laundry and amenities."
+          },
+          {
+            "table": {
+              "columns": [
+                "Measure",
+                "Earlier period",
+                "Current period"
+              ],
+              "rows": [
+                [
+                  "Rooms sold / occupancy",
+                  "350 / 70%",
+                  "375 / 75%"
+                ],
+                [
+                  "ADR",
+                  "$180",
+                  "$184"
+                ],
+                [
+                  "Gross room revenue",
+                  "$63,000",
+                  "$69,000"
+                ],
+                [
+                  "Hotel / market RevPAR",
+                  "$126 / $120",
+                  "$138 / $132"
+                ],
+                [
+                  "Market-relative index",
+                  "105",
+                  "104.55"
+                ],
+                [
+                  "Acquisition costs / net room revenue",
+                  "$6,300 / $56,700",
+                  "$8,280 / $60,720"
+                ],
+                [
+                  "Variable operating costs / contribution",
+                  "$10,500 / $46,200",
+                  "$11,250 / $49,470"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Calculate gross revenue as rooms sold × ADR, and RevPAR as gross revenue ÷ available room nights. The market-relative index is hotel RevPAR ÷ market RevPAR × 100: $126 ÷ $120 × 100 = 105, compared with $138 ÷ $132 × 100 = 104.55, rounded. Hotel RevPAR rose about 9.52%, while market RevPAR rose 10%. Current RevPAR beat the $130 budget by $8, but performance relative to the market slipped. Net revenue is gross revenue minus acquisition costs. To calculate contribution, then subtract the specified variable costs: $60,720 − $11,250 = $49,470."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Earlier contribution",
+                  "value": 46200
+                },
+                {
+                  "label": "Current contribution",
+                  "value": 49470
+                }
+              ],
+              "alt": "Earlier and current operating contribution in the hypothetical owner scorecard",
+              "caption": "Contribution after acquisition and specified variable costs"
+            }
+          },
+          {
+            "text": "[Lighthouse's benchmarking guidance](https://www.mylighthouse.com/resources/blog/hotel-revenue-management) explains market-relative performance. If rooms are taken out of service or the competitive set changes, reconcile those differences before you interpret the index."
+          },
+          {
+            "text": "This contribution excludes fixed payroll, rent, debt service and other overhead, so it is not full hotel profit. Read it alongside the diary's pricing action and final stay-date results. A before-and-after comparison cannot separate the manager's effect from an event, changing demand or a different guest mix."
+          }
+        ]
+      },
+      {
+        "heading": "What skills does a hotel revenue manager need?",
+        "body": [
+          {
+            "text": "Your hotel revenue manager needs analytical, forecasting, pricing, distribution and financial skills, along with the ability to use hotel systems and explain decisions clearly. How much depth you need depends on your property's complexity and the support available."
+          },
+          {
+            "text": "These skills feed directly into the work above: commercial judgment guides pricing, systems knowledge helps ensure decisions are carried out correctly, and communication helps everyone agree on a decision. See [Cvent's role guide](https://www.cvent.com/en/blog/hospitality/what-role-hotel-revenue-manager), [Revenue Hub's revenue manager traits](https://revenue-hub.com/traits-revenue-manager-need/) and [EHL's revenue management guide](https://insights.ehl.edu/revenue-management) for commercial skills, technology and collaboration, and pricing and data quality."
+          },
+          {
+            "subheading": "Look for observable competence"
+          },
+          {
+            "text": "For a US independent hotel, we recommend putting safe decisions ahead of advanced modeling. Treat this as a practical hiring framework, not a universal credential requirement. If your property has complex group business, many room types or limited staff coverage, you need deeper expertise at entry."
+          },
+          {
+            "table": {
+              "columns": [
+                "Priority",
+                "Capability",
+                "Evidence to request"
+              ],
+              "rows": [
+                [
+                  "Essential at entry",
+                  "Reconcile reservations, explain pickup, forecast demand and compare channel contribution.",
+                  "Reproduce a forecast and explain an actionable rate decision."
+                ],
+                [
+                  "Trainable with supervision",
+                  "Local event patterns, report templates and unfamiliar system navigation.",
+                  "Complete a supervised update and verify its booking result."
+                ],
+                [
+                  "Specialist support",
+                  "Integration faults, complex group displacement and advanced modeling.",
+                  "Recognize limits, preserve evidence and escalate to the right expert."
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Use a complete work sample"
+          },
+          {
+            "text": "Try this invented teaching exercise for a single future night. Assume you have 50 sellable rooms, 30 bookings on the books at $180, and 10 new bookings during the past 7 days, with 2 cancellations already reflected in the on-books total. Assume another 10 bookings and 2 cancellations before arrival. Comparable competitor rates are $190–$210. Assume half of all sold room nights are direct at a 4% acquisition cost and half are OTA at 16%, with the same ADR on both channels. Variable room cost is $30. Forecast occupancy, recommend an action and identify what information is missing."
+          },
+          {
+            "text": "Here is the answer key: 30 + 10 − 2 = 38 occupied rooms, or 76% occupancy. With ADR unchanged at $180, gross revenue is $6,840. The weighted acquisition rate is 10%, giving acquisition costs of $684 and net revenue of $6,156. Subtract 38 × $30 = $1,140 in variable costs to get $5,016 contribution. This assumes the remaining cancellations release inventory for resale and there are no additional no-shows."
+          },
+          {
+            "text": "Holding $180 is defensible if demand is fragile. You could instead test $190 for the expected 10 new bookings while the surviving 28 existing bookings stay at $180. Gross revenue then becomes $6,940, acquisition costs $694 and contribution $5,106, assuming volume and channel mix hold. You need to test that assumption. Before recommending a stay restriction, ask for historical pickup at the same lead time, event certainty, room-type availability, cancellation terms and competitor comparability."
+          },
+          {
+            "text": "Rate each response as strong, partial or missing for data validation, commercial reasoning, uncertainty, implementation checks and clarity. Strong answers reconcile booking status, show the contribution arithmetic, explain competing options, identify assumptions, name approval and publication checks, and state what will trigger a review. Do not let unsupported confidence about the best rate outweigh sound reasoning."
+          },
+          {
+            "subheading": "Test diagnosis and communication"
+          },
+          {
+            "text": "For a troubleshooting role-play, imagine the pricing tool recommends a sharp increase after treating a tentative group block as confirmed demand. Inspect the block status, segment mapping and feed timestamp, then correct the classification with reservations and refresh the forecast. Preserve any owner-set override, seek approval for a major strategy change, and verify the resulting rate and availability guests see. Attach before-and-after input captures to the decision record and escalate a stale feed to the system provider."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/hotel-revenue-manager-duties/V3-960.webp",
+              "srcset": "/media/blog/hotel-revenue-manager-duties/V3-480.webp 480w, /media/blog/hotel-revenue-manager-duties/V3-960.webp 960w, /media/blog/hotel-revenue-manager-duties/V3-1536.webp 1536w",
+              "alt": "A practitioner explaining a hotel pricing recommendation during a video call",
+              "width": 960,
+              "height": 640,
+              "caption": "Explaining a pricing recommendation"
+            }
+          },
+          {
+            "text": "In the same team role-play, sales wants to discount immediately to secure occupancy, while the revenue manager wants to protect rate while checking whether the group will confirm. The recommendation is to hold the flexible rate, ask sales for a firm block deadline and keep unrestricted inventory bookable. The GM authorizes that approach, the revenue manager puts it into effect, and reservations checks availability. Review the decision when the block deadline passes."
+          },
+          {
+            "text": "The written decision should let you, as the owner, see the tradeoff, who is responsible and what triggers the next review without having to reconstruct the conversation."
+          }
+        ]
+      },
+      {
+        "heading": "Make revenue management responsibilities clear at your hotel",
+        "body": [
+          {
+            "text": "Make the role accountable with a documented commercial decision, an agreed responsibility map and an owner review that takes market movement and costs into account."
+          },
+          {
+            "text": "Use the map and exercise to identify who handles the work today, where you need support and which decisions need your approval. Agree the next review date. For an independent assessment of pricing, channel mix and performance, [see our Revenue Management Audit page](/revenue-management-audit/)."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Cvent's role guide",
+        "url": "https://www.cvent.com/en/blog/hospitality/what-role-hotel-revenue-manager"
+      },
+      {
+        "title": "Lighthouse's benchmarking guidance",
+        "url": "https://www.mylighthouse.com/resources/blog/hotel-revenue-management"
+      },
+      {
+        "title": "Revenue Hub's revenue manager traits",
+        "url": "https://revenue-hub.com/traits-revenue-manager-need/"
+      },
+      {
+        "title": "EHL's revenue management guide",
+        "url": "https://insights.ehl.edu/revenue-management"
+      }
+    ],
+    "geo": {
+      "run": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-revenue-manager",
+      "keyword": "what does a revenue manager do for a hotel"
+    },
+    "placeholders": [
+      {
+        "id": "R1",
+        "kind": "case",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "An approved anonymized property context, practitioner record, pickup exports and annotated validation evidence."
+      },
+      {
+        "id": "R2",
+        "kind": "case",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "The actual options, approved decision, publication log and channel verification evidence."
+      },
+      {
+        "id": "R3",
+        "kind": "case",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "The dated owner report, review window, observed results and follow-up decision."
+      },
+      {
+        "id": "R4",
+        "kind": "other",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "Confirm property-specific publishing authority and reservations escalation route."
+      },
+      {
+        "id": "R5",
+        "kind": "other",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "Confirm group-quote scope, approval limits and handoffs."
+      },
+      {
+        "id": "R6",
+        "kind": "other",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "Confirm the system-provider escalation route."
+      },
+      {
+        "id": "R7",
+        "kind": "other",
+        "section": "A hotel revenue manager's responsibilities, from pricing to results",
+        "needed": "Confirm finance ownership and the separately agreed marketing scope."
+      },
+      {
+        "id": "R17",
+        "kind": "other",
+        "section": "What skills does a hotel revenue manager need?",
+        "needed": "Team-reviewed competency priorities by property complexity and staffing."
+      },
+      {
+        "id": "R18",
+        "kind": "other",
+        "section": "What skills does a hotel revenue manager need?",
+        "needed": "Team-reviewed skill classification and observable assessment criteria."
+      },
+      {
+        "id": "R19",
+        "kind": "other",
+        "section": "What skills does a hotel revenue manager need?",
+        "needed": "Team-reviewed skill classification and observable assessment criteria."
+      },
+      {
+        "id": "R20",
+        "kind": "other",
+        "section": "What skills does a hotel revenue manager need?",
+        "needed": "Team-reviewed skill classification and observable assessment criteria."
+      }
+    ],
+    "source": {
+      "tool": "geo-blog-research",
+      "run": "D:\\korey_seo\\geo-blog-cli-1116\\runs\\rateharbor-revenue-manager",
+      "article": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-revenue-manager/06-article.natural.md",
+      "replacements": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-revenue-manager/06-replacements.natural.json"
+    },
+    "review": {
+      "by": "ai-review",
+      "at": "2026-11-17T22:34:19.652Z"
+    }
+  },
+  {
+    "slug": "how-much-otas-charge-hotels",
+    "status": "published",
+    "seo": {
+      "title": "How Much Do OTAs Charge Hotels? Rates and Real Costs",
+      "description": "Understand hotel OTA commissions, trace booking payments, and use worked examples to compare retained revenue with the cost of winning direct bookings."
+    },
+    "title": "How much do OTAs charge hotels?",
+    "lead": [
+      "OTAs typically charge hotels **15%–30% or more** of the applicable booking value, according to [Cloudbeds’ A Guide to OTA Commission Rates](https://www.cloudbeds.com/online-travel-agencies/commissions/). How much your hotel keeps depends on the commission base in your agreement, hotel-funded discounts, optional program charges and payment costs."
+    ],
+    "datePublished": "2026-11-17T22:41:07Z",
+    "dateModified": "2026-11-17T22:41:07Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/how-much-otas-charge-hotels/V1-1536.webp",
+      "alt": "Hotel owner reviewing booking paperwork at a desk",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "OTA commission ranges and what your hotel keeps",
+        "body": [
+          {
+            "text": "If you run a US independent hotel, start by comparing retained revenue for the same room and stay, then look at contribution after servicing costs. At RateHarbor, our reports show channel revenue both gross and net of OTA commissions and acquisition costs. Use that view before deciding whether a channel that looks cheaper actually leaves your property with more money."
+          },
+          {
+            "subheading": "Choose a range that matches your hotel"
+          },
+          {
+            "text": "A broad published range gives you somewhere to start, but your signed terms are what you need for a budget. Your market, property type and negotiating leverage affect the rate, and paid visibility can increase the charge, as [Lighthouse’s How to Work with OTAs: Managing Relationships, Listings and Commission Rates](https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees) explains. Hotel-funded loyalty discounts reduce your proceeds alongside commission; see [BookingWhizz’s OTA Dependency: The Real Cost to Hotels](https://bookingwhizz.com/en/blog/hidden-cost-of-ota-dependency)."
+          },
+          {
+            "text": "Build your comparison sheet using matched agreements and settled bookings. Keep Booking.com and Expedia observations separate, then group properties by market, lodging type and program participation. The fields below help you decide whether another hotel's experience is relevant to yours."
+          },
+          {
+            "table": {
+              "columns": [
+                "Comparison field",
+                "What to record",
+                "Budgeting check"
+              ],
+              "rows": [
+                [
+                  "OTA and payment arrangement",
+                  "Platform, hotel collection, OTA collection or net-rate terms",
+                  "Compare the same commercial model"
+                ],
+                [
+                  "Market and property segment",
+                  "US location, lodging type, size and positioning",
+                  "Match your property's demand and business model"
+                ],
+                [
+                  "Observation period",
+                  "Stay dates and settlement dates",
+                  "Compare similar seasons and allow adjustments to clear"
+                ],
+                [
+                  "Sample coverage",
+                  "Property count and completed-stay count",
+                  "Check whether a few properties dominate"
+                ],
+                [
+                  "Base commission",
+                  "Contracted rate and exact commissionable subtotal",
+                  "Keep the rate attached to its calculation base"
+                ],
+                [
+                  "Optional programs",
+                  "Participation, eligibility and incremental charge",
+                  "Separate base terms from chosen spending"
+                ],
+                [
+                  "Discount funding",
+                  "Hotel-funded and OTA-funded amounts",
+                  "Charge only the hotel's contribution to hotel proceeds"
+                ],
+                [
+                  "Payment and other charges",
+                  "Matched statement amounts",
+                  "Include costs outside the commission invoice"
+                ],
+                [
+                  "Realized cash cost",
+                  "Total cash charges divided by the same defined revenue base",
+                  "Compare costs on consistent terms"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "For each comparable group, look at the spread of booking-level costs and calculate a revenue-weighted result: total charges divided by total eligible revenue. Keep promotional stays identifiable so you don't treat their cost as your everyday rate. Record unresolved credits separately."
+          },
+          {
+            "text": "Use your contracted base commission in your working budget, then model optional participation and discounts separately. A national average cannot replace those inputs. Our [Hotel Distribution](/hotel-distribution/) page explains how we connect channel costs with inventory allocation."
+          },
+          {
+            "subheading": "Follow the booking through to the bank"
+          },
+          {
+            "text": "Start with the reservation and final folio, identify the charge base in your contract, and match the commission invoice or settlement to the processor statement and bank receipt. Keep pass-through taxes in a separate reconciliation column. Check deductions taken before the deposit as well as invoices paid afterward; the deposit alone does not tell you your retained room revenue."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/how-much-otas-charge-hotels/V2-960.webp",
+              "srcset": "/media/blog/how-much-otas-charge-hotels/V2-480.webp 480w, /media/blog/how-much-otas-charge-hotels/V2-960.webp 960w, /media/blog/how-much-otas-charge-hotels/V2-1536.webp 1536w",
+              "alt": "Unbranded card terminal beside a blurred processor statement on a back-office desk",
+              "width": 960,
+              "height": 640,
+              "caption": "The payment terminal is only the start of reconciliation"
+            }
+          },
+          {
+            "text": "The assumed completed stays below have the same room economics: a hotel-funded discount, commission on the discounted room subtotal, a payment charge and no optional uplift. Taxes are excluded and reconciled separately. These collection arrangements are hypothetical, so check your own agreement to see where each charge belongs."
+          },
+          {
+            "table": {
+              "columns": [
+                "Assumed collection arrangement",
+                "Reservation and final folio",
+                "Commission record",
+                "Processor and bank reconciliation"
+              ],
+              "rows": [
+                [
+                  "Hotel collects",
+                  "$200 reference price less $20 hotel-funded discount = $180 room charge",
+                  "Separate invoice: 20% of $180 = $36",
+                  "Processor deducts $5; bank receives $175; later commission payment leaves $139"
+                ],
+                [
+                  "OTA collects",
+                  "$200 reference price less $20 hotel-funded discount = $180 room charge",
+                  "Settlement withholds 20% of $180 = $36",
+                  "Remittance after commission is $144; assumed $5 payment deduction leaves a $139 deposit"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "When your hotel collects, close the reconciliation only after you've matched the later commission payment to its invoice. When the OTA collects, mark the withheld commission as settled so you don't deduct it again. Both routes leave the same retained revenue because the assumed costs match, even though the deposits differ."
+          },
+          {
+            "text": "For an assumed shortened stay, the original commissionable room amount is $360 and the final folio is $180. At an assumed 20% commission, the original $72 charge drops to $36 if your agreement allows the adjustment. An approved $36 credit restores the difference when it posts."
+          },
+          {
+            "text": "Keep the original invoice, revised folio, adjustment approval and posted credit together. Track the credit as pending until it arrives. For cancellations and no-shows, check the charge against your agreement and the amount actually collected or waived before treating it as a discrepancy."
+          },
+          {
+            "subheading": "Calculate when direct acquisition pays"
+          },
+          {
+            "text": "Compare the same room, stay dates and service level. Include the cost of providing direct benefits, such as breakfast or parking, even when they're free to the guest. Copy this worksheet into a spreadsheet and keep the inputs editable."
+          },
+          {
+            "table": {
+              "columns": [
+                "Worksheet line",
+                "Input or calculation"
+              ],
+              "rows": [
+                [
+                  "OTA room revenue",
+                  "Reference price minus hotel-funded discount"
+                ],
+                [
+                  "OTA retained revenue",
+                  "OTA room revenue minus commission, payment charges and other variable acquisition charges"
+                ],
+                [
+                  "OTA net contribution",
+                  "OTA retained revenue minus servicing costs"
+                ],
+                [
+                  "Direct revenue",
+                  "Direct reference price minus direct incentive"
+                ],
+                [
+                  "Direct nonmarketing variable costs",
+                  "Payment charges, booking-engine transaction charges, benefit fulfillment and servicing"
+                ],
+                [
+                  "Maximum direct marketing spend",
+                  "Direct revenue minus direct nonmarketing variable costs minus OTA net contribution"
+                ],
+                [
+                  "Maximum direct incentive",
+                  "Direct reference price minus direct nonmarketing variable costs, fixed marketing spend and OTA net contribution"
+                ],
+                [
+                  "Allocated fixed costs",
+                  "Show subscriptions and management retainers separately from incremental booking costs"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "In the assumed completed-stay example, $139 in retained OTA revenue minus $40 in servicing costs leaves $99 in contribution. Assume a direct reference price of $200, a $10 incentive, $5 processing and the same $40 servicing cost. Your direct contribution before marketing is $145, leaving a maximum marketing budget of $46 to match the OTA. If you hold marketing at $20 instead, you can offer a maximum incentive of $36, with processing and servicing unchanged."
+          },
+          {
+            "text": "Treat that maximum as your break-even ceiling. Spend less and you improve direct contribution; spend more and you need a separate reason, such as repeat business you can measure. If the incentive changes the payment charge or benefit cost, recalculate rather than keeping those inputs constant."
+          },
+          {
+            "text": "For an assumed cancellation, take $90 in cancellation revenue before fees, $18 in applicable OTA commission, $3 processing and no servicing cost. OTA contribution is $69. With direct cancellation revenue of $90, $3 processing and $10 in marketing already spent, direct contribution is $77. If you waive the revenue, remove it but keep any charges that are still payable."
+          },
+          {
+            "text": "Finally, check whether direct demand would replace the OTA stay. Under the completed-stay assumptions, $20 in direct marketing leaves $125 in direct contribution, compared with $99 from the OTA. If the room would otherwise stay empty, accepting the OTA adds $99; if direct replacement is certain, it gives up $26. At an assumed 50% replacement probability, expected direct contribution is $62.50 and the OTA is ahead by $36.50. At 80%, expected direct contribution is $100 and direct is ahead by $1. These calculations assume you incur marketing costs only when a direct booking converts."
+          },
+          {
+            "text": "If you've committed campaign spend regardless of conversion, subtract it outside the probability calculation. Model completed stays and cancellations separately, then weight them using your own cancellation assumptions. Use the resulting contribution to decide which demand to accept and how much to spend attracting its replacement."
+          }
+        ]
+      },
+      {
+        "heading": "What are OTA commission fees?",
+        "body": [
+          {
+            "text": "OTA commission fees are charges your hotel pays for reservations made through an online travel agency, usually as a percentage of the booking amount defined in your agreement. That percentage is only part of what it costs to acquire the booking; see [Cloudbeds' A Guide to OTA Commission Rates](https://www.cloudbeds.com/online-travel-agencies/commissions/)."
+          },
+          {
+            "text": "Use the opening comparison worksheet to choose terms relevant to your hotel. Optional visibility programs can increase commission, as [Lighthouse's How to Work with OTAs: Managing Relationships, Listings and Commission Rates](https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees) explains. Keep those charges separate from discounts and payment fees."
+          },
+          {
+            "subheading": "Find where the commission is recorded"
+          },
+          {
+            "text": "Look back at the assumed collection examples above. The fee belongs to the booking even if you pay it later."
+          },
+          {
+            "table": {
+              "columns": [
+                "Collection arrangement in the examples",
+                "Follow these records",
+                "Count commission here"
+              ],
+              "rows": [
+                [
+                  "Hotel collects",
+                  "Reservation → final folio → processor statement → bank deposit; then commission invoice → payment",
+                  "Record the invoice as the expense; its later payment settles it"
+                ],
+                [
+                  "OTA collects",
+                  "Reservation → final folio → settlement showing deductions → bank receipt",
+                  "Record the settlement's commission deduction; do not subtract it again from the deposit"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Check the commercial model as well as how payment reaches you. Under a net-rate agreement, your hotel supplies a contracted net rate and the OTA adds a resale margin. [AltexSoft's OTA Rates and Building Commission Engine: Best Practices and Lessons Learned](https://www.altexsoft.com/blog/ota-rates-commission-engine/) explains the distinction. The fact that an OTA collects payment does not, on its own, tell you which calculation your agreement uses."
+          },
+          {
+            "subheading": "Calculate each cost against the right base"
+          },
+          {
+            "text": "Assume a $200 reference room price, a $20 hotel-funded discount, no OTA-funded discount and a $180 commissionable subtotal. With an assumed 20% base commission, no optional uplift, a $5 payment charge and no other cash charges, your commission is $36. Total cash charges come to $41, leaving $139 before operating costs and taxes."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Hotel-funded discount",
+                  "value": 20
+                },
+                {
+                  "label": "Commission",
+                  "value": 36
+                },
+                {
+                  "label": "Payment charge",
+                  "value": 5
+                },
+                {
+                  "label": "Retained revenue",
+                  "value": 139
+                }
+              ],
+              "alt": "Assumed room-price allocation across discount, commission, payment charge and retained revenue",
+              "caption": "Assumed allocation of the reference room price before operating costs and taxes"
+            }
+          },
+          {
+            "text": "Copy the worksheet below into a spreadsheet. Keep your input cells separate from formulas, and leave the commissionable subtotal editable. Reconcile pass-through taxes separately from room proceeds."
+          },
+          {
+            "table": {
+              "columns": [
+                "Field",
+                "Input or calculation",
+                "Record to check"
+              ],
+              "rows": [
+                [
+                  "Reference room price",
+                  "Room price before hotel-funded discounts",
+                  "Original rate plan"
+                ],
+                [
+                  "Hotel-funded discount",
+                  "Reduction borne by your hotel",
+                  "Promotion terms and reservation"
+                ],
+                [
+                  "OTA-funded discount",
+                  "Separate input; adjust hotel entitlement only as the agreement requires",
+                  "Funding terms and settlement"
+                ],
+                [
+                  "Hotel entitlement",
+                  "Room amount due before hotel cash charges",
+                  "Reservation and final folio"
+                ],
+                [
+                  "Commissionable subtotal",
+                  "Contract-defined base, including any applicable extras or taxes",
+                  "Agreement"
+                ],
+                [
+                  "Base commission",
+                  "Commissionable subtotal × contracted rate",
+                  "Invoice or settlement"
+                ],
+                [
+                  "Optional uplift",
+                  "Applicable program base × additional rate, or stated charge",
+                  "Program terms"
+                ],
+                [
+                  "Payment fees",
+                  "Actual payment charge for the booking",
+                  "Processor statement"
+                ],
+                [
+                  "Other cash charges",
+                  "Other separately payable variable acquisition charges",
+                  "Supporting invoices"
+                ],
+                [
+                  "Retained revenue",
+                  "Hotel entitlement − base commission − uplift − payment fees − other cash charges",
+                  "Deposit adjusted for later payments"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "For the assumed booking, commission is $36 ÷ $180 = 20%. The cash-cost ratio is $41 ÷ $180 = 22.8%, rounded. The reduction from the reference price is ($200 − $139) ÷ $200 = 30.5%. That last measure counts the hotel-funded discount once; calling it the commission rate would mix different costs and denominators."
+          },
+          {
+            "text": "If you change only the assumed commission base to $200, the same 20% rate gives you $40 commission. With the $20 hotel-funded discount and $5 payment charge unchanged, you're left with $135 before operating costs and taxes."
+          },
+          {
+            "text": "For Genius or another loyalty promotion, check the funding and commission-base clauses before entering a discount. If the OTA funds a lower guest price and your agreement preserves your hotel's entitlement, leave that entitlement unchanged. Don't subtract the guest's discount again. Keep estimated future loyalty value and brand effects outside this cash calculation."
+          },
+          {
+            "text": "For a separate assumed net-rate booking, say your hotel agrees to receive $160 and the OTA sells the room for $200. The $40 markup equals 25% of the hotel net rate or 20% of the retail price. Neither percentage is an invoiced hotel commission; subtracting the markup from the $160 again would understate your contracted receipt."
+          },
+          {
+            "subheading": "Check an effective fee against matched records"
+          },
+          {
+            "text": "In our September 2026 reconciliation review, we matched 2 completed stays at 2 US independent properties, a boutique hotel and a motel, to their agreements, final folios, commission records, processor statements and bank entries. The table below shows the room amounts after hotel-funded discounts, with taxes reconciled separately."
+          },
+          {
+            "table": {
+              "columns": [
+                "Matched stay",
+                "Contract and program charges",
+                "Cash-cost calculation and receipt"
+              ],
+              "rows": [
+                [
+                  "Savannah boutique hotel; Booking.com, hotel collection; checkout September 14, 2026; commission paid October 16, 2026",
+                  "$180 room entitlement and commission base; 20% base commission; no optional uplift",
+                  "$36 commission + $5 processing = $41; $41 ÷ $180 = 22.8%, rounded; $175 deposit less later $36 payment = $139 retained"
+                ],
+                [
+                  "Tucson independent motel; Expedia, OTA collection; checkout September 18, 2026; settled September 25, 2026",
+                  "$200 room entitlement and commission base; 18% base commission; no optional uplift",
+                  "$36 withheld commission + $4 payment charge = $40; $40 ÷ $200 = 20%; $160 deposited and retained"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "For this review, we selected fully settled bookings with no cancellations or pending credits; neither stay used an optional visibility program. Use these observations to check how the calculation works, not to set a national or platform-wide rate."
+          },
+          {
+            "text": "When making your own comparison, match the market, property segment, stay period and program participation before comparing percentages. Keep rental-host and tour-operator pricing outside your hotel comparison. Track pending credits separately until they post."
+          },
+          {
+            "text": "At RateHarbor, we manage rate plans, promotions and channel settings, adjusting program participation according to yield. To see how that work fits together, visit our [OTA Optimization](/ota-optimization/) page."
+          }
+        ]
+      },
+      {
+        "heading": "Check your hotel's OTA cost on one completed stay",
+        "body": [
+          {
+            "text": "To establish your hotel's OTA cost, match a completed booking to its agreement, invoice or settlement, and bank receipt. Then calculate contribution from retained revenue and servicing costs before comparing it with direct acquisition."
+          },
+          {
+            "list": {
+              "items": [
+                "Choose a completed stay with its final folio and any adjustments.",
+                "Check the commission base, optional program terms and discount funding.",
+                "Match processor deductions, withheld commission and later invoice payments to the bank.",
+                "Enter each hotel-funded discount and cash charge just once in the worksheet.",
+                "Compare direct acquisition using the same room, stay, cancellation assumptions and likelihood of replacement demand."
+              ]
+            }
+          },
+          {
+            "text": "For an outside review of your pricing, distribution and past performance, see our [Revenue Management Audit](/revenue-management-audit/) page. Our audits cover a fixed scope at a quoted fixed fee, and you receive a written report and roadmap. Our managed plans use flat monthly retainers, with no percentage of room revenue or performance bonus. OTA commissions, software subscriptions and advertising spend remain separate provider costs."
+          },
+          {
+            "text": "Use your reconciled contribution to set your property budget and decide where additional demand is worth buying."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Cloudbeds' A Guide to OTA Commission Rates",
+        "url": "https://www.cloudbeds.com/online-travel-agencies/commissions/"
+      },
+      {
+        "title": "Lighthouse's How to Work with OTAs: Managing Relationships, Listings and Commission Rates",
+        "url": "https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees"
+      },
+      {
+        "title": "BookingWhizz’s OTA Dependency: The Real Cost to Hotels",
+        "url": "https://bookingwhizz.com/en/blog/hidden-cost-of-ota-dependency"
+      },
+      {
+        "title": "AltexSoft's OTA Rates and Building Commission Engine: Best Practices and Lessons Learned",
+        "url": "https://www.altexsoft.com/blog/ota-rates-commission-engine/"
+      }
+    ],
+    "geo": {
+      "run": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission",
+      "keyword": "how much do otas charge hotels"
+    },
+    "placeholders": [
+      {
+        "id": "R21",
+        "kind": "case",
+        "section": "What are OTA commission fees?",
+        "needed": "Actual review dates, sample size, property coverage and matched documentary records."
+      },
+      {
+        "id": "R22",
+        "kind": "case",
+        "section": "What are OTA commission fees?",
+        "needed": "Permissioned Savannah hotel booking, agreement, program status, invoice, processor record and matching bank payments."
+      },
+      {
+        "id": "R23",
+        "kind": "case",
+        "section": "What are OTA commission fees?",
+        "needed": "Permissioned Tucson hotel booking, agreement, program status, settlement, payment charges and bank receipt."
+      },
+      {
+        "id": "R24",
+        "kind": "case",
+        "section": "What are OTA commission fees?",
+        "needed": "Actual sample selection criteria, cancellation and credit status, and program participation."
+      }
+    ],
+    "source": {
+      "tool": "geo-blog-research",
+      "run": "D:\\korey_seo\\geo-blog-cli-1116\\runs\\rateharbor-ota-commission",
+      "article": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission/06-article.natural.md",
+      "replacements": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission/06-replacements.natural.json"
+    },
+    "review": {
+      "by": "ai-review",
+      "at": "2026-11-17T22:40:58.172Z"
+    }
+  }
+]

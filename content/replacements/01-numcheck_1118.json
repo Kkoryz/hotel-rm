@@ -1,0 +1,30 @@
+[
+ {
+  "n": 1,
+  "url": "/boutique-hotel-consulting/",
+  "old": "No subcontractor works on your account.",
+  "new": "No subcontractor gets access to your account.",
+  "reason": "numcheck 2026-11-18 (blog_1118/numcheck): the page against the site fact sheet"
+ },
+ {
+  "n": 2,
+  "url": "/dynamic-pricing-strategy/",
+  "old": "No subcontractor works on your pricing.",
+  "new": "No subcontractor gets access to your pricing data.",
+  "reason": "numcheck 2026-11-18 (blog_1118/numcheck): the page against the site fact sheet"
+ },
+ {
+  "n": 3,
+  "url": "/ota-optimization/",
+  "old": "no subcontractor works on your listings or data",
+  "new": "no subcontractor gets access to your listings or data",
+  "reason": "numcheck 2026-11-18 (blog_1118/numcheck): the page against the site fact sheet"
+ },
+ {
+  "n": 4,
+  "url": "/boutique-hotel-consulting/",
+  "old": "You join a 60-minute kickoff call, then weekly or monthly strategy calls, and you reply",
+  "new": "You join a 60-minute kickoff call, then remote working sessions every two weeks on Starter or every week on Core, and you reply",
+  "reason": "numcheck 2026-11-18 (blog_1118/numcheck): the page against the site fact sheet"
+ }
+]

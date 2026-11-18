@@ -5,7 +5,7 @@
   "header": [
     {
       "label": "Services",
-      "route": "/services/",
+      "route": null,
       "children": [
         {
           "label": "Hotel Digital Marketing",

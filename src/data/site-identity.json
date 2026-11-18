@@ -4,9 +4,9 @@
   "siteName": "RateHarbor",
   "origin": "https://rateharbor.com",
   "logo": {
-    "src": "/logo.png",
-    "width": 2160,
-    "height": 240
+    "src": "/logo-header.webp",
+    "width": 320,
+    "height": 28
   },
   "schemaLogo": {
     "src": "/icon-512.png",
@@ -34,9 +34,21 @@
     "height": 630
   },
   "generated": {
-    "wordmark": "docs/research/brand/wordmark-1.png",
+    "wordmark": "docs/research/brand/wordmark-2.png",
     "mark": "docs/research/brand/mark.png",
-    "ink": "#171717",
+    "ink": "#111111",
     "replaceable": true
+  },
+  "logoFit": {
+    "source": "docs/research/brand/logo.png",
+    "background": "#eae8e2",
+    "contrast": 15.41,
+    "inverse": false,
+    "png": {
+      "src": "/logo.png",
+      "width": 320,
+      "height": 28,
+      "sha256": "70645a27dd46385cae65d050db28a346f39b7ce89c1b4bb582492d8935f16d17"
+    }
   }
 }

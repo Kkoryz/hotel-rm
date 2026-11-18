@@ -3,28 +3,24 @@
     "x": 0.74,
     "y": 0.36
   },
+  "/media/photos/hotel-digital-marketing-hero-1-960.webp": {
+    "x": 0.365,
+    "y": 0.54
+  },
   "/media/photos/general-hero-2-960.webp": {
     "x": 0.71,
     "y": 0.53
-  },
-  "/media/photos/hotel-digital-marketing-hero-1-960.webp": {
-    "x": 0.725,
-    "y": 0.55
   },
   "/media/photos/general-hero-3-960.webp": {
     "x": 0.62,
     "y": 0.57
   },
-  "/media/photos/general-hero-4-960.webp": {
-    "x": 0.52,
-    "y": 0.46
-  },
   "/media/photos/ota-optimization-hero-1-960.webp": {
-    "x": 0.63,
-    "y": 0.55
+    "x": 0.67,
+    "y": 0.51
   },
   "/media/photos/dynamic-pricing-strategy-hero-1-960.webp": {
-    "x": 0.58,
+    "x": 0.25,
     "y": 0.53
   },
   "/media/photos/hotel-distribution-hero-1-960.webp": {
@@ -32,8 +28,20 @@
     "y": 0.43
   },
   "/media/photos/revenue-management-audit-hero-1-960.webp": {
+    "x": 0.33,
+    "y": 0.68
+  },
+  "/media/photos/general-hero-4-960.webp": {
+    "x": 0.52,
+    "y": 0.46
+  },
+  "/media/photos/general-hero-5-960.webp": {
     "x": 0.75,
-    "y": 0.55
+    "y": 0.36
+  },
+  "/media/photos/general-hero-6-960.webp": {
+    "x": 0.36,
+    "y": 0.69
   },
   "/media/photos/general-product-1-960.webp": {
     "x": 0.19,
@@ -44,28 +52,28 @@
     "y": 0.35
   },
   "/media/photos/general-product-3-960.webp": {
-    "x": 0.24,
+    "x": 0.25,
     "y": 0.59
   },
   "/media/photos/general-product-4-960.webp": {
-    "x": 0.63,
-    "y": 0.57
+    "x": 0.65,
+    "y": 0.55
   },
   "/media/photos/general-product-5-960.webp": {
-    "x": 0.29,
-    "y": 0.46
+    "x": 0.15,
+    "y": 0.51
   },
   "/media/photos/general-product-6-960.webp": {
-    "x": 0.62,
-    "y": 0.34
+    "x": 0.8,
+    "y": 0.41
   },
   "/media/photos/general-product-7-960.webp": {
-    "x": 0.23,
-    "y": 0.53
+    "x": 0.25,
+    "y": 0.59
   },
   "/media/photos/general-product-8-960.webp": {
-    "x": 0.68,
-    "y": 0.59
+    "x": 0.65,
+    "y": 0.53
   },
   "/media/photos/request-a-quote-brief-m6-1-960.webp": {
     "x": 0.32,
@@ -112,24 +120,16 @@
     "y": 0.36
   },
   "/media/photos/general-lifestyle-3-960.webp": {
-    "x": 0.5,
-    "y": 0.46
+    "x": 0.35,
+    "y": 0.5
   },
   "/media/photos/general-lifestyle-4-960.webp": {
-    "x": 0.33,
-    "y": 0.33
+    "x": 0.62,
+    "y": 0.35
   },
   "/media/photos/general-lifestyle-5-960.webp": {
     "x": 0.62,
     "y": 0.66
-  },
-  "/media/photos/general-lifestyle-6-960.webp": {
-    "x": 0.79,
-    "y": 0.76
-  },
-  "/media/photos/general-lifestyle-7-960.webp": {
-    "x": 0.235,
-    "y": 0.705
   },
   "/media/photos/general-lifestyle-how-we-work-with-hotel-owners-960.webp": {
     "x": 0.34,
@@ -140,159 +140,103 @@
     "y": 0.34
   },
   "/media/photos/hotel-digital-marketing-lifestyle-1-960.webp": {
-    "x": 0.582,
-    "y": 0.4
+    "x": 0.365,
+    "y": 0.413
   },
   "/media/photos/hotel-digital-marketing-lifestyle-2-960.webp": {
-    "x": 0.31,
-    "y": 0.4
+    "x": 0.277,
+    "y": 0.453
   },
   "/media/photos/hotel-digital-marketing-lifestyle-3-960.webp": {
-    "x": 0.33,
-    "y": 0.32
+    "x": 0.657,
+    "y": 0.73
   },
   "/media/photos/hotel-digital-marketing-lifestyle-4-960.webp": {
-    "x": 0.31,
-    "y": 0.43
+    "x": 0.213,
+    "y": 0.443
   },
   "/media/photos/hotel-digital-marketing-lifestyle-5-960.webp": {
-    "x": 0.34,
+    "x": 0.29,
     "y": 0.72
   },
   "/media/photos/hotel-digital-marketing-lifestyle-6-960.webp": {
     "x": 0.2,
     "y": 0.72
   },
-  "/media/photos/hotel-digital-marketing-lifestyle-7-960.webp": {
-    "x": 0.69,
-    "y": 0.57
-  },
   "/media/photos/hotel-digital-marketing-brief-m5-1-960.webp": {
     "x": 0.41,
     "y": 0.46
   },
   "/media/photos/hotel-digital-marketing-brief-splitmedia-1-1-960.webp": {
-    "x": 0.34,
-    "y": 0.43
+    "x": 0.27,
+    "y": 0.39
   },
   "/media/photos/ota-optimization-lifestyle-1-960.webp": {
-    "x": 0.43,
-    "y": 0.67
+    "x": 0.493,
+    "y": 0.556
   },
   "/media/photos/ota-optimization-lifestyle-2-960.webp": {
-    "x": 0.48,
-    "y": 0.69
+    "x": 0.46,
+    "y": 0.7
   },
   "/media/photos/ota-optimization-lifestyle-3-960.webp": {
-    "x": 0.51,
-    "y": 0.53
+    "x": 0.44,
+    "y": 0.59
   },
   "/media/photos/ota-optimization-lifestyle-4-960.webp": {
     "x": 0.3,
     "y": 0.71
-  },
-  "/media/photos/ota-optimization-lifestyle-5-960.webp": {
-    "x": 0.323,
-    "y": 0.625
-  },
-  "/media/photos/ota-optimization-lifestyle-6-960.webp": {
-    "x": 0.703,
-    "y": 0.493
-  },
-  "/media/photos/ota-optimization-lifestyle-7-960.webp": {
-    "x": 0.556,
-    "y": 0.468
   },
   "/media/photos/ota-optimization-brief-m3-1-960.webp": {
     "x": 0.77,
     "y": 0.4
   },
   "/media/photos/ota-optimization-brief-m5-1-960.webp": {
-    "x": 0.51,
-    "y": 0.55
+    "x": 0.81,
+    "y": 0.47
   },
   "/media/photos/dynamic-pricing-strategy-lifestyle-1-960.webp": {
-    "x": 0.547,
-    "y": 0.523
+    "x": 0.65,
+    "y": 0.48
   },
   "/media/photos/dynamic-pricing-strategy-lifestyle-2-960.webp": {
     "x": 0.35,
-    "y": 0.34
+    "y": 0.42
   },
   "/media/photos/dynamic-pricing-strategy-lifestyle-3-960.webp": {
     "x": 0.2,
     "y": 0.4
-  },
-  "/media/photos/dynamic-pricing-strategy-lifestyle-4-960.webp": {
-    "x": 0.3,
-    "y": 0.73
-  },
-  "/media/photos/dynamic-pricing-strategy-lifestyle-5-960.webp": {
-    "x": 0.385,
-    "y": 0.555
-  },
-  "/media/photos/dynamic-pricing-strategy-lifestyle-6-960.webp": {
-    "x": 0.835,
-    "y": 0.535
-  },
-  "/media/photos/dynamic-pricing-strategy-lifestyle-7-960.webp": {
-    "x": 0.414,
-    "y": 0.415
   },
   "/media/photos/dynamic-pricing-strategy-brief-splitmedia-2-1-960.webp": {
     "x": 0.3,
     "y": 0.42
   },
   "/media/photos/hotel-distribution-lifestyle-1-960.webp": {
-    "x": 0.46,
-    "y": 0.49
+    "x": 0.49,
+    "y": 0.67
   },
   "/media/photos/hotel-distribution-lifestyle-2-960.webp": {
-    "x": 0.81,
-    "y": 0.65
-  },
-  "/media/photos/hotel-distribution-lifestyle-3-960.webp": {
-    "x": 0.335,
-    "y": 0.66
-  },
-  "/media/photos/hotel-distribution-lifestyle-4-960.webp": {
-    "x": 0.635,
-    "y": 0.55
+    "x": 0.5,
+    "y": 0.69
   },
   "/media/photos/hotel-distribution-brief-m2-1-960.webp": {
     "x": 0.32,
     "y": 0.44
   },
   "/media/photos/hotel-distribution-brief-splitmedia-1-1-960.webp": {
-    "x": 0.36,
-    "y": 0.42
+    "x": 0.34,
+    "y": 0.32
   },
   "/media/photos/revenue-management-audit-lifestyle-1-960.webp": {
-    "x": 0.79,
-    "y": 0.736
+    "x": 0.73,
+    "y": 0.752
   },
   "/media/photos/revenue-management-audit-lifestyle-2-960.webp": {
-    "x": 0.266,
-    "y": 0.645
+    "x": 0.66,
+    "y": 0.51
   },
   "/media/photos/revenue-management-audit-lifestyle-3-960.webp": {
-    "x": 0.769,
-    "y": 0.528
-  },
-  "/media/photos/revenue-management-audit-lifestyle-4-960.webp": {
-    "x": 0.285,
-    "y": 0.405
-  },
-  "/media/photos/revenue-management-audit-lifestyle-5-960.webp": {
-    "x": 0.525,
-    "y": 0.26
-  },
-  "/media/photos/revenue-management-audit-lifestyle-6-960.webp": {
-    "x": 0.346,
-    "y": 0.754
-  },
-  "/media/photos/revenue-management-audit-lifestyle-7-960.webp": {
-    "x": 0.533,
-    "y": 0.709
+    "x": 0.52,
+    "y": 0.7
   }
 }

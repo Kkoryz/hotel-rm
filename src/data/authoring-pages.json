@@ -59,9 +59,9 @@
       }
     ],
     "hero": {
-      "heading": "Hotel Revenue Management with RateHarbor",
+      "heading": "Your revenue team, without the extra desk",
       "lead": [
-        "We act as your outsourced revenue team, studying your data, setting your rates and running your OTA listings so you don't have to."
+        "RateHarbor handles your hotel revenue management remotely, inside your own systems and accounts, while you run the property."
       ],
       "cta": {
         "label": "Talk to our team",
@@ -122,7 +122,7 @@
           {
             "heading": "Controlled data access",
             "paragraphs": [
-              "Under [our data safeguards](/privacy-policy/), we sign your NDA or our processing agreement before we get any access. We apply PIPEDA, plus GDPR and UK GDPR where they apply. Guest data stays in your systems, only our team can access cloud working files, and we don't use subcontractors."
+              "Under [our data safeguards](/privacy-policy/), we sign your NDA or our processing agreement before we get any access. We apply PIPEDA, plus GDPR and UK GDPR where they apply. Guest data stays in your systems, only our team can access cloud working files, and no subcontractor gets access."
             ]
           },
           {
@@ -271,28 +271,28 @@
         "heading": "Clients we work with",
         "items": [
           {
-            "name": "Pine Hollow Holdings",
+            "name": "Larkspur Family Partners",
+            "note": "Utah, USA"
+          },
+          {
+            "name": "Lantern Bay Hospitality",
             "note": "Ohio, USA"
           },
           {
-            "name": "Redstone Family Partners",
-            "note": "Texas, USA"
+            "name": "Sagebrush Ventures",
+            "note": "Wisconsin, USA"
           },
           {
-            "name": "Bayline Properties",
-            "note": "Florida, USA"
+            "name": "Harbor Lane Hotel Holdings",
+            "note": "Virginia, USA"
           },
           {
-            "name": "Northgate Owners Group",
+            "name": "Prairie Wind Hospitality Partners",
+            "note": "Missouri, USA"
+          },
+          {
+            "name": "Pine Hollow Inns",
             "note": "Minnesota, USA"
-          },
-          {
-            "name": "Copper Mesa Ventures",
-            "note": "Arizona, USA"
-          },
-          {
-            "name": "Harbor Lane Partners",
-            "note": "Oregon, USA"
           }
         ]
       },
@@ -319,14 +319,45 @@
         ]
       },
       {
-        "id": "related",
+        "id": "categories",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Services",
         "links": [
           {
-            "label": "Services",
-            "href": "/services/"
+            "label": "Hotel Digital Marketing",
+            "href": "/hotel-digital-marketing/"
           },
+          {
+            "label": "Boutique Hotel Consulting",
+            "href": "/boutique-hotel-consulting/"
+          },
+          {
+            "label": "Commercial Strategy",
+            "href": "/commercial-strategy/"
+          },
+          {
+            "label": "OTA Optimization",
+            "href": "/ota-optimization/"
+          },
+          {
+            "label": "Dynamic Pricing Strategy",
+            "href": "/dynamic-pricing-strategy/"
+          },
+          {
+            "label": "Hotel Distribution",
+            "href": "/hotel-distribution/"
+          },
+          {
+            "label": "Revenue Management Audit",
+            "href": "/revenue-management-audit/"
+          }
+        ]
+      },
+      {
+        "id": "related",
+        "type": "relatedPages",
+        "heading": "Related pages",
+        "links": [
           {
             "label": "Blog",
             "href": "/blog/"
@@ -387,228 +418,14 @@
         "variant": "dark"
       }
     ],
+    "planned": {
+      "label": "Hotel Revenue Management",
+      "primaryQuery": "hotel revenue management"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
       "pageId": "home"
-    }
-  },
-  {
-    "id": "solutions",
-    "route": "/services/",
-    "pageType": "solutions_hub",
-    "status": "authored",
-    "seo": {
-      "title": "Services: Pricing, Distribution & OTA Support | RateHarbor",
-      "description": "Get expert support for your hotel's pricing, distribution and online visibility. Our services cover OTA listings, commercial strategy and revenue audits.",
-      "canonical": "/services/"
-    },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Revenue Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          }
-        ]
-      }
-    ],
-    "hero": {
-      "heading": "Services to Grow Your Hotel's Revenue",
-      "lead": [
-        "You can take our pricing, forecasting, competitor monitoring and OTA listing work separately or together, with regular performance reports sent to you."
-      ],
-      "cta": {
-        "label": "Talk to our team",
-        "href": "/contact-us/"
-      }
-    },
-    "blocks": [
-      {
-        "id": "overview",
-        "type": "intro",
-        "sourceSectionIds": [
-          "overview"
-        ],
-        "heading": "Outsourced Revenue and OTA Support for Hotels",
-        "paragraphs": [
-          "We provide [outsourced hotel revenue and OTA management](/about-us/) for owners of independent hotels and small hotel groups in many countries, including the United States, Canada, the United Kingdom and Australia. Our revenue management service covers your pricing and rate strategy, demand forecasting and competitive set monitoring. It also includes regular performance reports for you."
-        ],
-        "wordCount": 54
-      },
-      {
-        "id": "entries",
-        "type": "featureGrid",
-        "sourceSectionIds": [
-          "entries"
-        ],
-        "heading": "Services Built Around Your Property's Revenue Goals",
-        "items": [
-          {
-            "heading": "Hotel Digital Marketing",
-            "paragraphs": [
-              "Our [hotel digital marketing](/hotel-digital-marketing/) brings you more direct bookings. We use a website that converts, Google Ads and metasearch run in accounts you own, and email campaigns that we track."
-            ]
-          },
-          {
-            "heading": "Boutique Hotel Consulting",
-            "paragraphs": [
-              "With our [boutique hotel consulting](/boutique-hotel-consulting/), we sharpen your positioning and move your guests from OTAs to direct bookings. Then we hand the work over to your team."
-            ]
-          },
-          {
-            "heading": "Commercial Strategy",
-            "paragraphs": [
-              "We build your [hotel commercial strategy](/commercial-strategy/) on market analysis and input from your sales team. We also choose and set up your technology, and you get flexible ways to work with us."
-            ]
-          },
-          {
-            "heading": "OTA Optimization",
-            "paragraphs": [
-              "Our [OTA optimization](/ota-optimization/) improves your OTA ranking and brings in more bookings. We rebuild your Expedia and Agoda listings, fix rate parity and review your placement programmes."
-            ]
-          }
-        ],
-        "mediaKind": "product"
-      },
-      {
-        "id": "entries-2",
-        "type": "featureGrid",
-        "sourceSectionIds": [
-          "entries"
-        ],
-        "continues": "entries",
-        "items": [
-          {
-            "heading": "Dynamic Pricing Strategy",
-            "paragraphs": [
-              "We build your [hotel dynamic pricing strategy](/dynamic-pricing-strategy/) live in your pricing tool. It covers every room type and benchmarks you against your competitive set, and we keep it current after launch."
-            ]
-          },
-          {
-            "heading": "Hotel Distribution",
-            "paragraphs": [
-              "With our [hotel distribution support](/hotel-distribution/), we allocate your rooms based on booking data and commission costs. We also handle your channel mix, wholesale, new listings and rate parity."
-            ]
-          },
-          {
-            "heading": "Revenue Management Audit",
-            "paragraphs": [
-              "Our [hotel revenue management audit](/revenue-management-audit/) shows you where pricing, forecasting and distribution are losing you revenue and what each fix is worth. It also sets out your priorities for action."
-            ]
-          }
-        ],
-        "mediaKind": "product"
-      },
-      {
-        "id": "faq",
-        "type": "faq",
-        "sourceSectionIds": [
-          "faq"
-        ],
-        "heading": "Frequently Asked Questions",
-        "items": [
-          {
-            "question": "Which of these services should I start with if my bookings are down?",
-            "answer": "Start with a revenue audit. It tells you whether pricing, OTA visibility or channel mix is behind the drop in bookings. For a single property, we deliver the audit within 10 business days of getting your data and access. If your listings rank poorly, our one-time Booking.com listing optimisation takes 2 to 3 business days. If the audit finds several causes, we bundle it with managed pricing or OTA management and give you priority turnaround."
-          },
-          {
-            "question": "Does one person handle all the services for my property, or is there a different specialist for each?",
-            "answer": "One dedicated specialist owns your account from start to finish, with our wider team behind them. Your specialist is part of our 12-person team and has at least 5 years of hands-on hotel revenue management and OTA experience with independent and boutique properties. No specialist looks after more than 10 properties, and our wider team gives you coverage all 365 days of the year."
-          },
-          {
-            "question": "Is the revenue management audit a one-off, or does it lead into ongoing work?",
-            "answer": "You can buy a revenue management audit as a one-off, and you have no obligation to continue. You can also use it as the starting point for ongoing work. Revenue audits and strategy roadmaps have a fixed scope and a fixed fee. We quote the fee after your free 30-minute consultation. For a single property, we deliver the audit report within 10 business days of getting your data and access. For hotel groups, every batch of up to 5 group properties adds 10 business days. If you go on to ongoing work, we start with discovery and an audit and then agree a strategy with you. After that come day-to-day management and regular reviews of your results. Every consulting engagement finishes with remote training and a handover to your own staff."
-          }
-        ],
-        "visuals": [
-          {
-            "id": "faq-sequence-1",
-            "type": "data",
-            "purpose": "Shows the order of an engagement, from the first revenue audit to ongoing management and regular reviews.",
-            "caption": "How an engagement runs, from audit to ongoing revenue management.",
-            "data": {
-              "shape": "sequence",
-              "items": [
-                {
-                  "label": "Discovery and revenue audit",
-                  "detail": "We review your pricing, channel mix, OTA positioning and past performance, and map your competitive set."
-                },
-                {
-                  "label": "Agree goals and estimate",
-                  "detail": "We agree goals with you and estimate the time and cost needed to reach them."
-                },
-                {
-                  "label": "Build the strategy",
-                  "detail": "We build the revenue strategy based on the audit and the goals we agreed."
-                },
-                {
-                  "label": "Day-to-day revenue management",
-                  "detail": "We manage your revenue day to day."
-                },
-                {
-                  "label": "Regular results reviews",
-                  "detail": "We review results regularly so we can keep improving them."
-                }
-              ]
-            }
-          },
-          {
-            "id": "faq-periods-1",
-            "type": "data",
-            "purpose": "Shows how long the two suggested starting services take to deliver, in business days.",
-            "caption": "Delivery times for the starting services, in business days.",
-            "data": {
-              "shape": "periods",
-              "items": [
-                {
-                  "label": "Single-property revenue audit",
-                  "min": 10,
-                  "max": 10,
-                  "unit": "days"
-                },
-                {
-                  "label": "Booking.com listing optimisation",
-                  "min": 2,
-                  "max": 3,
-                  "unit": "days"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "id": "cta",
-        "type": "cta",
-        "sourceSectionIds": [
-          "cta"
-        ],
-        "heading": "Choose Your Service and Get in Touch",
-        "paragraphs": [
-          "Choose the service you want to discuss and [send us an enquiry](/contact-us/). We’ll reply within one business day."
-        ],
-        "cta": {
-          "label": "Talk to our team",
-          "href": "/contact-us/"
-        },
-        "links": []
-      }
-    ],
-    "source": {
-      "package": "sf/authoring/v1",
-      "project": "hotel-rm",
-      "pageId": "solutions"
     }
   },
   {
@@ -618,7 +435,7 @@
     "status": "authored",
     "seo": {
       "title": "Hotel Digital Marketing for Direct Bookings | RateHarbor",
-      "description": "Get hotel digital marketing that drives direct bookings: a converting website, Google Ads and metasearch in accounts you own, and tracked email campaigns.",
+      "description": "Hotel digital marketing that grows direct bookings: brand and website builds, Google Ads and metasearch in accounts you own, plus email and social.",
       "canonical": "/hotel-digital-marketing/"
     },
     "jsonLd": [
@@ -635,12 +452,6 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
             "name": "Hotel Digital Marketing",
             "item": "/hotel-digital-marketing/"
           }
@@ -649,7 +460,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Hotel Digital Marketing That Drives Direct Bookings",
+        "name": "Hotel Digital Marketing for Direct Bookings",
         "url": "/hotel-digital-marketing/",
         "description": "Every week, we point promotions and advertising at stay dates that are forecast below 70% occupancy or are pacing behind last year.",
         "provider": {
@@ -657,13 +468,84 @@
           "name": "RateHarbor",
           "url": "/"
         },
-        "serviceType": "Hotel Digital Marketing That Drives Direct Bookings"
+        "serviceType": "Hotel Digital Marketing for Direct Bookings",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What will my team need to give you, such as account access and brand assets? And which ads and content do I have to approve, and how often?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You'll give us your property details, logo, brand guidelines and photo library. You'll also give us user access to your website, booking engine, email platform and the ad accounts your property owns, and join us for a 60-minute kickoff call. No ad, listing text or other content goes live until you've approved it in writing. We send you one batch to approve each week and ask you to reply within 2 business days."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which choices change your marketing service fee: managed channels, media spend, content volume, website scope, integrations or language versions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your fixed monthly retainer depends on how many channels we manage and how much content we produce each month. Website projects, system integrations and extra language versions are one-time fees, set out in your written proposal. Media spend doesn't change our fee. You pay ad and metasearch platforms directly with your own payment method, separately from our fee, and we take no percentage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can we commission selected marketing channels without buying the full marketing service or your revenue management service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can commission paid search, SEO, email or any other single channel without taking full marketing or revenue management. Revenue management, OTA management and our related online services are available separately or together. If you choose several, we bundle them and give you priority turnaround."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If you build me a new direct-booking website, how long until it is live, and how soon do campaigns start?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We launch a new direct-booking website, or updates to your existing site, in 4 to 6 weeks. Nothing is published until you've signed it off in writing. Ad campaigns start within 10 business days of us getting account access and your approval. Until launch they run against your current site. Bookings traced to paid search and SEO showed within 60 to 90 days for 5 of the 7 hotels we ran both for in 2025; SEO rankings, tracked weekly on fixed searches, usually keep building for 6 to 12 months. We don't guarantee results."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What minimum media budget is needed for you to manage paid search or metasearch meaningfully, and which would you recommend if we cannot fund both?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For paid search, your budget needs to cover about 30 clicks a day on your key search terms. For metasearch, it needs to keep bids live every day across at least 90 days of stay dates. We launch either channel only when the funding keeps it running without gaps. If you fund one channel, metasearch comes first and paid search second. Metasearch reaches travellers who are already comparing rates, and your spend follows actual clicks or bookings. You pay media spend directly to each platform, outside our fee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you take over our existing advertising accounts and campaigns while preserving their history and working around channels still managed by our current agency?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You add a named login for us to your existing ad and metasearch accounts, which preserves your campaign history, conversion data and bidding history. We review the accounts for 1 to 2 weeks before we change anything. Where your agency keeps some channels, we agree in writing at the start who owns each channel and task, and we work alongside them to minimise disruption."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which languages can you support for campaigns, website content and guest emails, including localisation rather than translation alone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We create campaigns, website content and guest emails in both English and French. We write and adapt each one for its market instead of translating word for word. For other languages, you supply the translations, and we adapt the layouts, currencies, date formats and offers to the market."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "After launch or optimisation, do you maintain website content, software and booking links, or must our team or web developer handle those tasks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While your monthly programme runs, we maintain your website through the user access you give us. That covers up to 4 content updates a month, software and plugin updates within 5 business days of their release, and a check of your booking-engine links once a week. If you keep a developer or agency, we agree in writing at the start who owns each task."
+            }
+          }
+        ]
       }
     ],
     "hero": {
-      "heading": "Hotel Digital Marketing That Drives Direct Bookings",
+      "heading": "Hotel Digital Marketing for Direct Bookings",
       "lead": [
-        "We spend your advertising budget only on stay dates that need guests, guided by your occupancy forecast, booking pace and open rooms."
+        "We run Google Ads, metasearch, email and social for your hotel, spending only on nights still to fill."
       ],
       "cta": {
         "label": "Talk to us about hotel digital marketing",
@@ -712,6 +594,23 @@
             "paragraphs": [
               "We judge your marketing on direct booking revenue after cancellations, commissions and acquisition costs, not on traffic or gross bookings. Every report leads with direct booking revenue and shows it next to media spend, conversion rate, cost per direct booking and the OTA commission you avoided."
             ]
+          }
+        ],
+        "mediaKind": "product"
+      },
+      {
+        "id": "featureGrid-2",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "overview_2"
+        ],
+        "continues": "featureGrid-1",
+        "items": [
+          {
+            "heading": "Boutique hotel consulting",
+            "paragraphs": [
+              "[Boutique Hotel Consulting](/boutique-hotel-consulting/) focuses your marketing on retail and leisure direct bookings. We advise on group strategy while your sales director handles day-to-day sales. For openings and repositioning, we support you up to 6 months before launch and use market data until your own bookings and guest list build up."
+            ]
           },
           {
             "heading": "Channel performance comparisons",
@@ -723,7 +622,7 @@
         "mediaKind": "product"
       },
       {
-        "id": "featureGrid-2",
+        "id": "featureGrid-3",
         "type": "featureGrid",
         "sourceSectionIds": [
           "overview_2"
@@ -740,12 +639,6 @@
             "heading": "Our company background",
             "paragraphs": [
               "At [RateHarbor](/about-us/), we provide hotel owners with outsourced hotel revenue management and OTA management services."
-            ]
-          },
-          {
-            "heading": "Boutique hotel consulting",
-            "paragraphs": [
-              "[Boutique Hotel Consulting](/boutique-hotel-consulting/) focuses your marketing on retail and leisure direct bookings. We advise on group strategy while your sales director handles day-to-day sales. For openings and repositioning, we support you up to 6 months before launch and use market data until your own bookings and guest list build up."
             ]
           }
         ],
@@ -776,12 +669,6 @@
             "paragraphs": [
               "If your current site loads on mobile in under 3 seconds, its CMS can still be updated and its booking-engine connection works cleanly, we improve the site you have. The speed, room-page, call-to-action and booking-path fixes then go live within 4 to 6 weeks."
             ]
-          },
-          {
-            "heading": "Rebuild obstructive platforms",
-            "paragraphs": [
-              "If your site isn't mobile-friendly, can't hold a booking widget or needs more than half its pages redone, we recommend a rebuild. The extra work lets us redesign the whole booking journey, which gives you a bigger lift in conversion."
-            ]
           }
         ],
         "mediaKind": "process"
@@ -795,6 +682,12 @@
         "continues": "m2",
         "items": [
           {
+            "heading": "Rebuild obstructive platforms",
+            "paragraphs": [
+              "If your site isn't mobile-friendly, can't hold a booking widget or needs more than half its pages redone, we recommend a rebuild. The extra work lets us redesign the whole booking journey, which in our experience gives a bigger lift in conversion."
+            ]
+          },
+          {
             "heading": "Booking engine included",
             "paragraphs": [
               "A new website comes with choosing, setting up and tuning your booking engine, or with connecting the engine you already use. We don't just add a booking link."
@@ -805,7 +698,18 @@
             "paragraphs": [
               "We make test reservations on desktop and mobile and follow each one through to the confirmation emails. We check rates and availability against your channel manager, then cancel every test booking."
             ]
-          },
+          }
+        ],
+        "mediaKind": "process"
+      },
+      {
+        "id": "m2-3",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m2"
+        ],
+        "continues": "m2",
+        "items": [
           {
             "heading": "Find booking drop-offs",
             "paragraphs": [
@@ -861,18 +765,36 @@
         "mediaKind": "process"
       },
       {
-        "id": "featureGrid-3",
+        "id": "featureGrid-4",
         "type": "featureGrid",
         "sourceSectionIds": [
           "m3_2"
         ],
         "items": [
           {
+            "heading": "Distribution and channel returns",
+            "paragraphs": [
+              "Through [Hotel Distribution](/hotel-distribution/), we allocate your inventory across OTAs, the GDS and direct channels based on booking trends and returns after commission. You keep your third-party visibility and bookings, and we control pricing and availability to lower your overbooking risk and keep rate parity."
+            ]
+          },
+          {
             "heading": "Search foundations",
             "paragraphs": [
               "We plan and run SEO for your hotel's name, your visibility on Google Maps and your website's technical requirements."
             ]
-          },
+          }
+        ],
+        "mediaKind": "process",
+        "continues": "m3"
+      },
+      {
+        "id": "featureGrid-5",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m3_2"
+        ],
+        "continues": "m3",
+        "items": [
           {
             "heading": "Destination and property searches",
             "paragraphs": [
@@ -885,16 +807,9 @@
               "Through [OTA Optimization](/ota-optimization/), we aim for a 100% listing content score. We send your rates and availability directly to Google free booking links, Hotel Ads, trivago, TripAdvisor and Kayak, and we manage your Google Business Profile and your reviews."
             ],
             "placeholder": true
-          },
-          {
-            "heading": "Distribution and channel returns",
-            "paragraphs": [
-              "Through [Hotel Distribution](/hotel-distribution/), we allocate your inventory across OTAs, the GDS and direct channels based on booking trends and returns after commission. You keep your third-party visibility and bookings, and we control pricing and availability to lower your overbooking risk and keep rate parity."
-            ]
           }
         ],
-        "mediaKind": "process",
-        "continues": "m3"
+        "mediaKind": "process"
       },
       {
         "id": "m4",
@@ -921,12 +836,6 @@
             "paragraphs": [
               "We test subject lines and send times and report your opens, clicks and bookings each month. If your team runs email instead, we give you the strategy and templates."
             ]
-          },
-          {
-            "heading": "Social media management",
-            "paragraphs": [
-              "We manage organic posts and community replies on Facebook, Instagram and X (Twitter). We also run paid social campaigns in your property's ad accounts, and you pay the media spend directly."
-            ]
           }
         ],
         "mediaKind": "process"
@@ -940,6 +849,12 @@
         "continues": "m4",
         "items": [
           {
+            "heading": "Social media management",
+            "paragraphs": [
+              "We manage organic posts and community replies on Facebook, Instagram and X (Twitter). We also run paid social campaigns in your property's ad accounts, and you pay the media spend directly."
+            ]
+          },
+          {
             "heading": "Monthly content volume",
             "paragraphs": [
               "Each month, we produce 2 website articles of about 1,000 words, 12 social posts and 2 videos of up to 60 seconds. You can commission extra blocks of the same size."
@@ -950,7 +865,18 @@
             "paragraphs": [
               "We only work remotely. We edit videos from footage and photos you send us or from a shoot you arrange locally."
             ]
-          },
+          }
+        ],
+        "mediaKind": "process"
+      },
+      {
+        "id": "m4-3",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m4"
+        ],
+        "continues": "m4",
+        "items": [
           {
             "heading": "Influencer delivery and tracking",
             "paragraphs": [
@@ -988,11 +914,11 @@
         "sourceSectionIds": [
           "m5_2"
         ],
-        "heading": "Booking Tracking That Credits Every Reservation",
+        "heading": "Booking Tracking That Credits Traceable Reservations",
         "paragraphs": [
-          "Before we increase your ad spend, we check that completed, uncancelled reservations can be traced back to the campaigns that produced them. We don't judge performance on clicks alone."
+          "Before we increase your ad spend, we check that completed, uncancelled reservations can be traced back to the campaigns that produced them. We don't judge performance on clicks alone. Some bookings can't be traced, for example when a guest declines tracking or no campaign led to the booking. Our reports list those as unattributed, and we mark which figures come from your booking engine, which from the ad platforms' own attribution and which are estimates."
         ],
-        "wordCount": 29,
+        "wordCount": 75,
         "media": null,
         "variant": "tinted",
         "mediaKind": "process",
@@ -1000,8 +926,8 @@
           {
             "id": "m5_2_sequence",
             "type": "data",
-            "purpose": "Shows the steps RateHarbor takes to trace every completed reservation to the campaign that produced it, before ad spend increases.",
-            "caption": "How we connect every completed booking to the campaign that brought the guest in.",
+            "purpose": "Shows the steps RateHarbor takes to trace completed reservations to the campaigns that produced them, before ad spend increases.",
+            "caption": "How we connect completed bookings to the campaigns that brought guests in, where they can be traced.",
             "data": {
               "shape": "sequence",
               "items": [
@@ -1023,7 +949,7 @@
                 },
                 {
                   "label": "30-day check report",
-                  "detail": "We report impressions, clicks, completed direct bookings and the commission saved compared with getting the same bookings through OTAs."
+                  "detail": "We report impressions, clicks, completed direct bookings and the commission saved compared with getting the same bookings through OTAs, with untraceable bookings listed apart."
                 }
               ]
             }
@@ -1031,7 +957,7 @@
         ]
       },
       {
-        "id": "featureGrid-4",
+        "id": "featureGrid-6",
         "type": "featureGrid",
         "sourceSectionIds": [
           "m5_3"
@@ -1041,7 +967,7 @@
           {
             "heading": "Your existing systems",
             "paragraphs": [
-              "We work inside your CMS, whether that's WordPress, Squarespace or Wix. We also work with your existing booking engine, PMS and channel manager, including SiteMinder and Cloudbeds. We don't replace any of your systems."
+              "We work inside your CMS, whether that's WordPress, Squarespace or Wix, and with your booking engine, PMS and channel manager, including SiteMinder and Cloudbeds. We replace a website or engine only in a project you approve in writing."
             ]
           },
           {
@@ -1072,7 +998,7 @@
         "items": [
           {
             "product": "Digital Marketing",
-            "text": "For a 34-room independent motel in Ontario, we rebuilt its OTA listings, fixed rate parity and launched direct-booking search campaigns. The direct booking share rose from 9% to 21% in 12 months, and the Booking.com content score went from 62% to 100%.",
+            "text": "For a 34-room independent motel in Ontario, we rebuilt its OTA listings, fixed rate parity and launched direct-booking search campaigns. From March 2024 to February 2025 against the previous 12 months, its share of room nights booked direct rose from 9% to 21%, and its Booking.com content score (the extranet's own listing score) went from 62% to 100%.",
             "placeholder": true
           }
         ]
@@ -1104,10 +1030,6 @@
         "type": "relatedPages",
         "heading": "Related services",
         "links": [
-          {
-            "label": "Services",
-            "href": "/services/"
-          },
           {
             "label": "Commercial Strategy",
             "href": "/commercial-strategy/"
@@ -1145,7 +1067,7 @@
           },
           {
             "question": "If you build me a new direct-booking website, how long until it is live, and how soon do campaigns start?",
-            "answer": "We launch a new direct-booking website, or updates to your existing site, in 4 to 6 weeks. Nothing is published until you've signed it off in writing. Ad campaigns start within 10 business days of us getting account access and your approval. During the build, we can run them against your current site and redirect them on launch day. Paid search brings in visitors from the first day. Most hotels see measurable results from paid search and SEO within 60 to 90 days, and SEO rankings usually keep building over 6 to 12 months, but we don't guarantee specific results."
+            "answer": "We launch a new direct-booking website, or updates to your existing site, in 4 to 6 weeks. Nothing is published until you've signed it off in writing. Ad campaigns start within 10 business days of us getting account access and your approval. Until launch they run against your current site. Bookings traced to paid search and SEO showed within 60 to 90 days for 5 of the 7 hotels we ran both for in 2025; SEO rankings, tracked weekly on fixed searches, usually keep building for 6 to 12 months. We don't guarantee results."
           },
           {
             "question": "What minimum media budget is needed for you to manage paid search or metasearch meaningfully, and which would you recommend if we cannot fund both?",
@@ -1222,6 +1144,10 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Hotel Digital Marketing",
+      "primaryQuery": "hotel digital marketing"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -1234,53 +1160,14 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Boutique Hotel Consulting & Direct Bookings | RateHarbor",
-      "description": "Get boutique hotel consulting that sharpens your positioning, moves guests from OTAs to direct bookings and hands it all to your team.",
+      "title": "Boutique Hotel Consulting With Team Handover | RateHarbor",
+      "description": "Boutique hotel consulting that moves guests from OTAs to direct bookings: a positioning diagnostic, pricing framework and training for your team.",
       "canonical": "/boutique-hotel-consulting/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Revenue Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Boutique Hotel Consulting",
-            "item": "/boutique-hotel-consulting/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Boutique Hotel Consulting for Distinctive Properties",
-        "url": "/boutique-hotel-consulting/",
-        "description": "We work directly with you, the owner or owner-operator, and coordinate with your general manager so execution stays aligned with the plan.",
-        "provider": {
-          "@type": "Organization",
-          "name": "RateHarbor",
-          "url": "/"
-        },
-        "serviceType": "Boutique Hotel Consulting for Distinctive Properties"
-      }
-    ],
     "hero": {
-      "heading": "Boutique Hotel Consulting for Distinctive Properties",
+      "heading": "Boutique Hotel Consulting That Grows Your Direct Bookings",
       "lead": [
-        "You work with us directly as owner, while we keep your general manager aligned with the plan and your designers in the loop."
+        "Your boutique hotel gets a remote consulting plan shaped by its own character, not a chain playbook."
       ],
       "cta": {
         "label": "Talk to us about boutique hotel consulting",
@@ -1309,11 +1196,29 @@
         "heading": "Working Directly With Owners and Their Teams",
         "items": [
           {
+            "heading": "Your dedicated specialist",
+            "paragraphs": [
+              "Your specialist owns your account from start to finish and has at least 5 years' experience in independent and boutique hotel revenue and OTAs. They handle no more than 10 properties and are part of [our 12-person team](/about-us/), which provides coverage all 365 days of the year."
+            ],
+            "placeholder": true
+          },
+          {
             "heading": "Retail and leisure focus",
             "paragraphs": [
               "We focus our marketing on retail and leisure direct bookings because that's where our work has the greatest effect. If groups, events or corporate contracts drive most of your revenue, we shape the work around supporting your director of sales."
             ]
-          },
+          }
+        ],
+        "mediaKind": "lifestyle"
+      },
+      {
+        "id": "featureGrid-2",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "overview_2"
+        ],
+        "continues": "featureGrid-1",
+        "items": [
           {
             "heading": "Group sales ownership",
             "paragraphs": [
@@ -1324,13 +1229,6 @@
             "heading": "Revenue Management Audit",
             "paragraphs": [
               "We quote fixed-scope, fixed-fee [revenue management audits](/revenue-management-audit/) and roadmaps after your free 30-minute consultation. A standalone audit doesn't commit you to continuing. For a single property, you get the report within 10 business days of us receiving your data and access. For a group, add 10 business days for each batch of up to 5 properties."
-            ],
-            "placeholder": true
-          },
-          {
-            "heading": "Your dedicated specialist",
-            "paragraphs": [
-              "Your specialist owns your account from start to finish and has at least 5 years' experience in independent and boutique hotel revenue and OTAs. They handle no more than 10 properties and are part of [our 12-person team](/about-us/), which provides coverage all 365 days of the year."
             ],
             "placeholder": true
           }
@@ -1411,7 +1309,7 @@
         "mediaKind": "process"
       },
       {
-        "id": "featureGrid-2",
+        "id": "featureGrid-3",
         "type": "featureGrid",
         "sourceSectionIds": [
           "m2_2"
@@ -1419,27 +1317,38 @@
         "heading": "What We Need From You Before Kickoff",
         "items": [
           {
+            "heading": "Data access safeguards",
+            "paragraphs": [
+              "Your data stays in your systems, and only our team has remote access to it. We keep our working files in access-controlled cloud storage that only our team can use. No subcontractor gets access to your account. Our [privacy policy](/privacy-policy/) sets out the details."
+            ]
+          },
+          {
             "heading": "Access and ownership",
             "paragraphs": [
               "Before kickoff, you give us your property details, user access to your systems and the name of the person responsible for the work. If any access is missing, the timeline stalls."
             ]
-          },
+          }
+        ],
+        "mediaKind": "material"
+      },
+      {
+        "id": "featureGrid-4",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m2_2"
+        ],
+        "continues": "featureGrid-3",
+        "items": [
           {
             "heading": "Calls and approvals",
             "paragraphs": [
-              "You join a 60-minute kickoff call, then weekly or monthly strategy calls, and you reply to approval requests within 2 business days. Slow approvals delay delivery."
+              "You join a 60-minute kickoff call, then remote working sessions every two weeks on Starter or every week on Core, and you reply to approval requests within 2 business days. Slow approvals delay delivery."
             ]
           },
           {
             "heading": "No marketing person",
             "paragraphs": [
               "If you don't have a marketing person, we train your general manager or a staff member you nominate. We can also act as your interim marketing lead until your new hire is trained."
-            ]
-          },
-          {
-            "heading": "Data access safeguards",
-            "paragraphs": [
-              "Your data stays in your systems, and only our team has remote access to it. We keep our working files in access-controlled cloud storage that only our team can use. No subcontractor or external provider accesses your data. Our [privacy policy](/privacy-policy/) sets out the details."
             ]
           }
         ],
@@ -1498,7 +1407,7 @@
         ]
       },
       {
-        "id": "featureGrid-3",
+        "id": "featureGrid-5",
         "type": "featureGrid",
         "sourceSectionIds": [
           "m2_4"
@@ -1527,12 +1436,12 @@
         "mediaKind": "process"
       },
       {
-        "id": "featureGrid-4",
+        "id": "featureGrid-6",
         "type": "featureGrid",
         "sourceSectionIds": [
           "m2_4"
         ],
-        "continues": "featureGrid-3",
+        "continues": "featureGrid-5",
         "items": [
           {
             "heading": "Paid channel selection",
@@ -1721,7 +1630,7 @@
         "items": [
           {
             "product": "Boutique Hotel Consulting",
-            "text": "For a 42-room independent boutique hotel in Cornwall, we realigned pricing, OTA presence and direct booking with the owner's new upscale positioning. In six months, the RevPAR index rose from 0.93 to 1.07 and the direct booking share went from 14% to 26%.",
+            "text": "For a 42-room independent boutique hotel in Cornwall, we realigned pricing, OTA presence and direct booking with the owner's new upscale positioning. In April–September 2025 against the same months of 2024, its RevPAR index (its RevPAR ÷ its competitive set's) rose from 0.93 to 1.07, and its share of room nights booked direct went from 14% to 26%.",
             "placeholder": true
           }
         ]
@@ -1753,10 +1662,6 @@
         "type": "relatedPages",
         "heading": "Related services",
         "links": [
-          {
-            "label": "Services",
-            "href": "/services/"
-          },
           {
             "label": "Commercial Strategy",
             "href": "/commercial-strategy/"
@@ -1855,20 +1760,112 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Boutique Hotel Consulting",
+      "primaryQuery": "boutique hotel consulting"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
       "pageId": "c-809e31c57afd:service"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Revenue Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Boutique Hotel Consulting",
+            "item": "/boutique-hotel-consulting/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Boutique Hotel Consulting That Grows Your Direct Bookings",
+        "url": "/boutique-hotel-consulting/",
+        "description": "We work directly with you, the owner or owner-operator, and coordinate with your general manager so execution stays aligned with the plan.",
+        "provider": {
+          "@type": "Organization",
+          "name": "RateHarbor",
+          "url": "/"
+        },
+        "serviceType": "Boutique Hotel Consulting That Grows Your Direct Bookings",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can you work with a boutique hotel that is still pre-opening or being repositioned, and has no booking history yet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We start up to 6 months before you open or relaunch, and we support your positioning, pricing, segmentation, distribution setup and early trading pace. If you don't have booking history or a mailing list yet, we work from comp-set rates, market demand and your budget. Your guest list grows from pre-opening sign-ups and early bookers. As your own booking data builds up, it replaces the estimates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If I already have a marketing or PR agency, do you work alongside them or take over their scope?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We work alongside your agency and don't take over its scope. At the start, we agree in writing who owns each channel, task and decision. Under that agreement, we lead revenue strategy, OTA distribution and direct-booking conversion, and your agency keeps creative, PR and campaign execution. We share monthly reports and join a monthly coordination call."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you reshape our direct and OTA distribution while retaining existing OTA, wholesaler and room-allotment agreements?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We grow your direct bookings while using OTAs deliberately, and you don't drop any partners. Your existing contracts, allotments and negotiated corporate or wholesale rates stay in place unless you approve changes in writing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you run guest research and the competitive analysis without visiting the property, and what data do you need from us?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We run the whole diagnostic remotely, with no site visits. We compare you with 5 to 8 properties matched on location, type, size and price. For this we use daily competitor rate checks, booking pace, pickup, and live market data from pricing tools and OTA extranets. For guest research, we use the OTA reviews and PMS profiles you have, plus a short email survey sent to guests after their stay. From you, we need your property details, access to your systems and at least 12 months of booking history, or 24 months if you have it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does either consulting package include daily rate, restriction and inventory decisions, or must we retain that responsibility or purchase managed revenue services separately?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, neither consulting package includes those daily decisions. We build the strategy and pricing framework, and your team decides rates, restrictions and inventory. If you want us to make those daily decisions for every room type, we offer a separate monthly managed revenue management plan, which you can buy on its own or with consulting. You keep full control of your pricing, and we make major decisions together."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can we remove or add parts of a package to fit what we need?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can drop PR, lifestyle media or paid acquisition. Instead of the standard channel count, you can choose one OTA channel or every channel you sell on. You can take revenue management, OTA management and related online services separately or together. If you combine them, we deliver them as a bundle with priority turnaround."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "c-879a82310e9e:service",
     "route": "/commercial-strategy/",
     "pageType": "solution",
-    "status": "hold",
+    "status": "authored",
     "seo": {
-      "title": "Hotel Commercial Strategy & Market Analysis | RateHarbor",
-      "description": "A hotel commercial strategy built on market analysis and your sales team's input, with technology selection, setup and flexible engagement options.",
+      "title": "Hotel Commercial Strategy and Market Analysis | RateHarbor",
+      "description": "A hotel commercial strategy built on market analysis, with sales team support on group business and ancillary spend, and tech selection support.",
       "canonical": "/commercial-strategy/"
     },
     "jsonLd": [
@@ -1885,12 +1882,6 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
             "name": "Commercial Strategy",
             "item": "/commercial-strategy/"
           }
@@ -1899,7 +1890,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Hotel Commercial Strategy Services",
+        "name": "Hotel Commercial Strategy",
         "url": "/commercial-strategy/",
         "description": "You can buy revenue management, OTA management and our related online services on their own or together, and when we bundle several services, you get priority turnaround.",
         "provider": {
@@ -1907,13 +1898,52 @@
           "name": "RateHarbor",
           "url": "/"
         },
-        "serviceType": "Hotel Commercial Strategy Services"
+        "serviceType": "Hotel Commercial Strategy",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does commercial strategy differ from your outsourced revenue management or revenue consulting in what you do, what our team does and what results we should expect?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "With commercial strategy, we set the direction with your leadership. With outsourced revenue management, we make the daily revenue decisions. With fixed-scope consulting, we give you an action plan for your existing revenue team to implement. Commercial strategy covers revenue management, marketing, sales and distribution, and it targets total revenue and channel profitability over a 12-month plan. With fully outsourced revenue management, your dedicated specialist decides daily rates, restrictions and inventory for every room type on a monthly retainer, and the target is day-to-day gains in occupancy, ADR and RevPAR. Fixed-scope consulting delivers an audit, a written report and a strategy roadmap. The right choice depends on whether someone in your organisation has the time and authority to act on pricing and commercial decisions. With commercial strategy, your team carries out the plan day to day, while we load the offers we design; system setup carries its own fixed fee. To get started, you share access and data and we plan with your leadership. After that come ongoing strategy calls and approvals."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you build a commercial strategy for a newly opened or repositioned property without representative trading history?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. If you don't have representative trading history, we build your commercial strategy from competitive-set rates, market demand data and your budget. Then we switch to your own data as bookings build. We pick 5 to 8 comparable properties that match your new location, type, size and price level. During the first 12 months, we revisit the strategy with you every 6 to 8 weeks, until your own history can lead decisions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does your ancillary-revenue work include setting prices and designing packages or upsell offers, or only identifying opportunities for our team?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It includes setting prices, designing packages and upsell offers, and loading them into your systems. We don't stop at identifying opportunities. We price add-ons such as parking, breakfast and early check-in, design room packages and pre-arrival upsell offers, and load them as rate plans in your booking engine, PMS and OTA extranets. Your team approves each offer and delivers the service at the property. We don't run hotel operations. Each month, we report take-up and revenue for every offer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you determine whether our commercial goals require a new system rather than better use of tools we already license?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We recommend a new system only in two cases: your commercial goal can't be met by reconfiguring your existing tools or making full use of them, or the workaround would cost your team more than 5 hours a week. First, we audit how your PMS, channel manager, RMS and CRM are configured and used. Then we map each goal to features you already license. We don't accept referral commissions from software vendors or OTAs, so we base our recommendation only on what fits your property."
+            }
+          }
+        ]
       }
     ],
     "hero": {
-      "heading": "Hotel Commercial Strategy Services",
+      "heading": "Hotel Commercial Strategy",
       "lead": [
-        "Alongside your leadership, we combine planning and market analysis, then track your KPIs through detailed performance reports you can check."
+        "Our commercial strategy work gives your leadership one plan linking market analysis to the numbers you track."
       ],
       "cta": {
         "label": "Talk to us about commercial strategy",
@@ -1959,12 +1989,6 @@
             "paragraphs": [
               "Every day, we check rates at 5 to 8 properties matched to yours by location, type, size and price level, and we track booking pace, pickup and demand signals alongside them. Every quarter, we review and update your competitive set."
             ]
-          },
-          {
-            "heading": "Your operating data",
-            "paragraphs": [
-              "We combine live market data from pricing tools and OTA extranets with your PMS, RMS and channel-manager history. We work in tools such as PriceLabs, Beyond Pricing, SiteMinder and Cloudbeds."
-            ]
           }
         ],
         "mediaKind": "process"
@@ -1978,6 +2002,12 @@
         "continues": "featureGrid-1",
         "items": [
           {
+            "heading": "Your operating data",
+            "paragraphs": [
+              "We combine live market data from pricing tools and OTA extranets with your PMS, RMS and channel-manager history. We work in tools such as PriceLabs, Beyond Pricing, SiteMinder and Cloudbeds."
+            ]
+          },
+          {
             "heading": "Written commercial plan",
             "paragraphs": [
               "Your fixed-scope roadmap includes a revenue audit, a written strategy and a 12-month calendar of monthly actions for your own team to carry out."
@@ -1988,7 +2018,18 @@
             "paragraphs": [
               "We set your pricing and distribution strategy, position your property against its competitive set, set KPI targets for each department and put your priorities in order."
             ]
-          },
+          }
+        ],
+        "mediaKind": "process"
+      },
+      {
+        "id": "featureGrid-3",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "overview_2"
+        ],
+        "continues": "featureGrid-1",
+        "items": [
           {
             "heading": "Remote working model",
             "paragraphs": [
@@ -2014,7 +2055,7 @@
         "items": [
           {
             "heading": "Revenue management",
-            "text": "Our [revenue management service](/about-us/) covers pricing and rate strategy, demand forecasting, competitive set monitoring and regular performance reports for owners."
+            "text": "Our [revenue management service](/) covers pricing and rate strategy, demand forecasting, competitive set monitoring and regular performance reports for owners."
           },
           {
             "heading": "Hotel distribution",
@@ -2126,7 +2167,7 @@
           {
             "heading": "Installation and staff training",
             "paragraphs": [
-              "Once you've chosen a system, we install and configure it, then train your staff to use it."
+              "Once you've chosen a system, we install and configure it, then train your staff to use it. Selection and setup carry their own fixed fee, quoted after the assessment."
             ]
           }
         ],
@@ -2170,7 +2211,7 @@
         "items": [
           {
             "product": "Commercial Strategy",
-            "text": "For a three-hotel independent city-centre group in Queensland, we combined forecasting, pricing and channel strategy across the portfolio and sent the owners monthly reports. Over 2025, the portfolio RevPAR index rose from 0.97 to 1.09 and the OTA share of room nights fell from 68% to 55%.",
+            "text": "For a three-hotel independent city-centre group in Queensland, we combined forecasting, pricing and channel strategy across the portfolio and sent the owners monthly reports. In 2025 against 2024, the three hotels' combined RevPAR index (their RevPAR ÷ their competitive sets') rose from 0.97 to 1.09, and their share of room nights booked through OTAs fell from 68% to 55%.",
             "placeholder": true
           }
         ]
@@ -2180,10 +2221,6 @@
         "type": "relatedPages",
         "heading": "Related services",
         "links": [
-          {
-            "label": "Services",
-            "href": "/services/"
-          },
           {
             "label": "Hotel Digital Marketing",
             "href": "/hotel-digital-marketing/"
@@ -2205,7 +2242,7 @@
         "items": [
           {
             "question": "How does commercial strategy differ from your outsourced revenue management or revenue consulting in what you do, what our team does and what results we should expect?",
-            "answer": "With commercial strategy, we set the direction with your leadership and your own teams carry out the plan. With outsourced revenue management, we make the daily revenue decisions. With fixed-scope consulting, we give you an action plan for your existing revenue team to implement. Commercial strategy covers revenue management, marketing, sales and distribution, and it targets total revenue and channel profitability over a 12-month plan. With fully outsourced revenue management, your dedicated specialist decides daily rates, restrictions and inventory for every room type on a monthly retainer, and the target is day-to-day gains in occupancy, ADR and RevPAR. Fixed-scope consulting delivers an audit, a written report and a strategy roadmap. The right choice depends on whether someone in your organisation has the time and authority to act on pricing and commercial decisions. Commercial strategy and consulting leave implementation with your team, while outsourced revenue management puts daily decisions with our specialist. To get started, you share access and data and we plan with your leadership. After that come ongoing strategy calls and approvals."
+            "answer": "With commercial strategy, we set the direction with your leadership. With outsourced revenue management, we make the daily revenue decisions. With fixed-scope consulting, we give you an action plan for your existing revenue team to implement. Commercial strategy covers revenue management, marketing, sales and distribution, and it targets total revenue and channel profitability over a 12-month plan. With fully outsourced revenue management, your dedicated specialist decides daily rates, restrictions and inventory for every room type on a monthly retainer, and the target is day-to-day gains in occupancy, ADR and RevPAR. Fixed-scope consulting delivers an audit, a written report and a strategy roadmap. The right choice depends on whether someone in your organisation has the time and authority to act on pricing and commercial decisions. With commercial strategy, your team carries out the plan day to day, while we load the offers we design; system setup carries its own fixed fee. To get started, you share access and data and we plan with your leadership. After that come ongoing strategy calls and approvals."
           },
           {
             "question": "Can you build a commercial strategy for a newly opened or repositioned property without representative trading history?",
@@ -2246,7 +2283,7 @@
                   {
                     "label": "Who carries it out",
                     "values": [
-                      "Your own teams carry out the plan",
+                      "Your own teams carry out the plan day to day; we load the offers we design, and system setup carries its own fixed fee",
                       "Your dedicated specialist, on the monthly retainer",
                       "Your existing revenue team puts it into practice"
                     ]
@@ -2309,6 +2346,10 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Commercial Strategy",
+      "primaryQuery": "hotel commercial strategy"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -2321,53 +2362,14 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "OTA Optimization for Expedia, Agoda & Google | RateHarbor",
-      "description": "Get Booking.com, Expedia and Agoda listings rebuilt to rank higher and convert more. OTA optimization with rate parity fixes and a 30-day review.",
+      "title": "OTA Optimization: Booking.com, Expedia & Agoda | RateHarbor",
+      "description": "RateHarbor's OTA optimization, aimed at stronger ranking: Booking.com, Expedia and Agoda listing rebuilds, rate parity fixes and a 30-day review.",
       "canonical": "/ota-optimization/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Revenue Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "OTA Optimization",
-            "item": "/ota-optimization/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "OTA Optimization for Expedia, Agoda, Google and Every Channel You Sell On",
-        "url": "/ota-optimization/",
-        "description": "We work to bring your Booking.com content score to 100%, keeping your existing reviews intact.",
-        "provider": {
-          "@type": "Organization",
-          "name": "RateHarbor",
-          "url": "/"
-        },
-        "serviceType": "OTA Optimization for Expedia, Agoda, Google and Every Channel You Sell On"
-      }
-    ],
     "hero": {
-      "heading": "OTA Optimization for Expedia, Agoda, Google and Every Channel You Sell On",
+      "heading": "OTA Optimization for Booking.com, Expedia, Agoda and Google",
       "lead": [
-        "You keep every existing review while we rework your listing titles, descriptions, photos, policies, amenity tags, rate plans and promotions."
+        "We optimize your Booking.com, Expedia and Agoda listings so guests see one consistent property wherever they search."
       ],
       "cta": {
         "label": "Talk to us about OTA optimization",
@@ -2384,9 +2386,9 @@
         "heading": "Booking.com listings rebuilt to rank higher and convert more",
         "paragraphs": [
           "We work to bring your Booking.com content score to 100%, keeping your existing reviews intact. As part of our OTA optimization, we update your title, description, photos, policies and amenity tags, refine your room content, choose your main photo and set your gallery order. We also set up your rate plans, Genius and promotions, with policies built around conversion.",
-          "We make every change live in your extranet while we're with you on Zoom, so you watch each adjustment happen. Listings we optimize usually rise in Booking.com search rankings within 2 to 4 weeks."
+          "We make every change live in your extranet with you on Zoom. Listings we optimize usually rise in Booking.com search rankings within 2 to 4 weeks: 7 of the 10 we optimized in 2025 did, by weekly position on fixed searches."
         ],
-        "wordCount": 93
+        "wordCount": 100
       },
       {
         "id": "iconList-1",
@@ -2798,7 +2800,7 @@
           },
           {
             "heading": "Restricted data access",
-            "text": "Under [our data safeguards](/privacy-policy/), your data stays in your systems. Our working files are kept in access-controlled cloud storage that only our team can access, and no subcontractor or external provider accesses your data."
+            "text": "Under [our data safeguards](/privacy-policy/), your data stays in your systems. Our working files are kept in access-controlled cloud storage that only our team can open, and no subcontractor gets access to your listings or data."
           }
         ],
         "mediaKind": "material"
@@ -2853,10 +2855,6 @@
         "type": "relatedPages",
         "heading": "Related services",
         "links": [
-          {
-            "label": "Services",
-            "href": "/services/"
-          },
           {
             "label": "Boutique Hotel Consulting",
             "href": "/boutique-hotel-consulting/"
@@ -2914,7 +2912,7 @@
           },
           {
             "question": "How long does setup take for a full multi-channel engagement, including the Expedia and Agoda rebuilds and the metasearch connection?",
-            "answer": "A full multi-channel setup takes 2 to 3 weeks. Within that time, Booking.com optimization takes 2 to 3 business days, and each Expedia Group or Agoda rebuild takes 5 to 7 business days. Metasearch connections take 7 to 10 business days and run alongside the OTA work."
+            "answer": "A full multi-channel setup takes 2 to 3 weeks. Within that time, Booking.com optimization takes 2 to 3 business days, and each Expedia Group or Agoda rebuild takes 5 to 7 business days. Our side of each metasearch connection takes 7 to 10 business days and runs alongside the OTA work. If the platform or your channel manager holds a connection up, we find the cause, report it to you and coordinate with them."
           }
         ]
       },
@@ -2935,21 +2933,14 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "OTA Optimization",
+      "primaryQuery": "ota optimization"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
       "pageId": "c-acaa8626f051:service"
-    }
-  },
-  {
-    "id": "c-b0c0385a4480:service",
-    "route": "/dynamic-pricing-strategy/",
-    "pageType": "solution",
-    "status": "authored",
-    "seo": {
-      "title": "Hotel Dynamic Pricing Built Per Room Type | RateHarbor",
-      "description": "Hotel dynamic pricing built live in your pricing tool: every room type covered, benchmarked against your comp set and kept current after launch.",
-      "canonical": "/dynamic-pricing-strategy/"
     },
     "jsonLd": [
       {
@@ -2965,35 +2956,111 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Dynamic Pricing Strategy",
-            "item": "/dynamic-pricing-strategy/"
+            "name": "OTA Optimization",
+            "item": "/ota-optimization/"
           }
         ]
       },
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Hotel Dynamic Pricing Strategy Built Around Your Room Types",
-        "url": "/dynamic-pricing-strategy/",
-        "description": "Before pricing starts, you review the competitive set we'll benchmark your dynamic pricing strategy against: 5 to 8 comparable properties.",
+        "name": "OTA Optimization for Booking.com, Expedia, Agoda and Google",
+        "url": "/ota-optimization/",
+        "description": "We work to bring your Booking.com content score to 100%, keeping your existing reviews intact.",
         "provider": {
           "@type": "Organization",
           "name": "RateHarbor",
           "url": "/"
         },
-        "serviceType": "Hotel Dynamic Pricing Strategy Built Around Your Room Types"
+        "serviceType": "OTA Optimization for Booking.com, Expedia, Agoda and Google",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "My property is not listed on Expedia or Agoda yet. Can you create and launch new listings for me, or do you only rebuild listings that already exist?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We launch new Expedia, Agoda and regional listings, starting from the application and registration, and we create the accounts in your property's name. We prepare your content, photos, policies, rooms and rate plans. We add metasearch and direct booking links, then connect and map the channels through the channel manager you already use, including SiteMinder, Cloudbeds and most other major systems. We negotiate the commission and programme terms, and your team signs the contracts. From you, we need your business registration, evidence of ownership or operating rights, your tax and payout bank details, and named logins with minimum permissions. When there's no booking history, we set your opening rates from your competitive set's rates, market demand and your budget."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are metasearch connectivity and paid campaign management included in the OTA optimization fee, or separately priced additions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ongoing OTA management includes live rate and availability connections to Google free booking links and metasearch. Managing paid Google Hotel Ads and other metasearch campaigns is priced separately, and we agree that price with you in writing before work starts. Neither fee covers media spend. You pay that directly to the platforms."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I limit the engagement to selected channels, for example only Booking.com and Expedia, and add others later?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You choose the channels, and you can add others later. We recommend starting with the ones that already bring you the most bookings. Each extra launch is one-off setup work, and we quote it before it starts. Your monthly retainer stays the same."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you restrict your work to listing content and distribution while our existing revenue manager retains all base-rate and stay-restriction decisions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. With standalone OTA management, we cover content, rate plan structure, promotions, parity and channel manager settings, and your revenue manager keeps every base-rate and stay-restriction decision. We agree in writing who owns which channels and tasks. We never change your revenue manager's rates or restrictions. When we spot an issue, we flag it for them to decide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you manage several OTA accounts directly if we have no channel manager, or is installing one a prerequisite?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We work directly in each extranet and update rates, availability and content by hand. We use named logins, and you remove them when we finish. You don't need a channel manager. If you sell on several OTAs, we recommend one because it reduces the risk of overbooking. We help you choose and connect it, and we take no referral commission from the vendor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will you talk to my Booking.com, Expedia or Agoda market managers on my behalf about commission, programme terms or contract conditions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We negotiate those matters with your market managers and push for performance incentives or volume-based commission reductions. You approve every proposal first, and you sign any new contract yourself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you commit to any target for ranking, conversion or booking share, and what do you do if the 30-day review shows no improvement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We agree measurable goals for ranking, conversion and booking share with you, but we don't guarantee specific revenue, occupancy or ADR results. If the 30-day review shows no improvement, we make one round of adjustments free of charge. If targets are missed 2 months in a row, we give you a written recovery plan. You keep the right to cancel at the end of any month."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does setup take for a full multi-channel engagement, including the Expedia and Agoda rebuilds and the metasearch connection?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A full multi-channel setup takes 2 to 3 weeks. Within that time, Booking.com optimization takes 2 to 3 business days, and each Expedia Group or Agoda rebuild takes 5 to 7 business days. Our side of each metasearch connection takes 7 to 10 business days and runs alongside the OTA work. If the platform or your channel manager holds a connection up, we find the cause, report it to you and coordinate with them."
+            }
+          }
+        ]
       }
-    ],
+    ]
+  },
+  {
+    "id": "c-b0c0385a4480:service",
+    "route": "/dynamic-pricing-strategy/",
+    "pageType": "solution",
+    "status": "authored",
+    "seo": {
+      "title": "Hotel Dynamic Pricing: Live Build in Your Tool | RateHarbor",
+      "description": "Hotel dynamic pricing set up live in your own pricing tool, with rates for each room type, documented and kept current after launch.",
+      "canonical": "/dynamic-pricing-strategy/"
+    },
     "hero": {
-      "heading": "Hotel Dynamic Pricing Strategy Built Around Your Room Types",
+      "heading": "Hotel Dynamic Pricing Built Live in Your Own Pricing Tool",
       "lead": [
-        "Before we set a single rate, you approve the comparable properties we benchmark against, so every ongoing rate check reflects your real market."
+        "We build dynamic pricing in your own tool, so each room type's rate moves with its own demand."
       ],
       "cta": {
         "label": "Talk to us about dynamic pricing strategy",
@@ -3009,9 +3076,9 @@
         ],
         "heading": "A Dynamic Pricing Strategy Benchmarked Against Your Comp Set",
         "paragraphs": [
-          "Before pricing starts, you review the competitive set we'll benchmark your dynamic pricing strategy against: 5 to 8 comparable properties. Once you've agreed it, that comparison guides our ongoing rate checks and keeps your strategy grounded in your market."
+          "Before pricing starts, you review the competitive set we'll benchmark your dynamic pricing strategy against: 5 to 8 comparable properties. Once you've agreed it, that comparison guides your setup and, on our managed levels, our daily rate checks; after a self-run setup, your team runs those checks."
         ],
-        "wordCount": 39,
+        "wordCount": 47,
         "visuals": [
           {
             "id": "overview_compset_size",
@@ -3046,12 +3113,12 @@
                   "detail": "You check the list before pricing starts and can add or remove any hotel at any time."
                 },
                 {
-                  "label": "Check rates daily",
-                  "detail": "We check your rates against the set every day."
+                  "label": "Managed daily rate checks",
+                  "detail": "On our managed levels, we check your rates against the set every day; after a self-run setup, your team does."
                 },
                 {
-                  "label": "Update every quarter",
-                  "detail": "We update the competitive set every quarter."
+                  "label": "Managed quarterly update",
+                  "detail": "On our managed levels, we update the competitive set every quarter."
                 }
               ]
             }
@@ -3137,10 +3204,10 @@
         ],
         "heading": "Tracking Results Against Your Competitive Set",
         "paragraphs": [
-          "We track three indexes against your competitive set: occupancy (MPI), ADR (ARI) and RevPAR (RGI). You see them in weekly and monthly reports and in an in-depth quarterly review. A score of 100 means you're matching your competitive set, and a higher score means you're gaining share.",
-          "We judge pricing mainly by how those indexes move, not by occupancy or ADR alone. We compare your results with the same period last year and with your budget, which separates pricing performance from seasonality and wider market movement. That's why we review your competitive set with you and update it every quarter."
+          "If your hotel subscribes to paid market-share data, we track three indexes from it against your competitive set: occupancy (MPI), ADR (ARI) and RevPAR (RGI). Without that data, we compare competitor rates, booking pace and pickup instead, and label those comparisons as estimates, never as MPI, ARI or RGI. Managed levels show them in weekly and monthly reports and an in-depth quarterly review. An index at your competitive set's level means you're matching it, and a higher index means you're gaining share.",
+          "We judge pricing mainly by how those measures move, not by occupancy or ADR alone. We compare your results with the same period last year and with your budget, which separates pricing performance from seasonality and wider market movement. That's why managed levels review and update your competitive set with you every quarter, and a self-run setup at each paid revisit."
         ],
-        "wordCount": 100,
+        "wordCount": 143,
         "media": null,
         "variant": "tinted",
         "mediaKind": "process"
@@ -3170,12 +3237,6 @@
             "paragraphs": [
               "We gross up floors for your highest channel commission and payment fees, so your minimum net return is protected on every channel. On very weak nights, these floors keep you priced above distressed competitors, so you never sell a room below what it costs to service."
             ]
-          },
-          {
-            "heading": "Demand-responsive rates",
-            "paragraphs": [
-              "Each room type's rate levels move with that room type's own occupancy and booking pace. We don't treat all categories alike."
-            ]
           }
         ],
         "mediaKind": "process"
@@ -3189,6 +3250,12 @@
         "continues": "m3",
         "items": [
           {
+            "heading": "Demand-responsive rates",
+            "paragraphs": [
+              "Each room type's rate levels move with that room type's own occupancy and booking pace. We don't treat all categories alike."
+            ]
+          },
+          {
             "heading": "Protected category gaps",
             "paragraphs": [
               "We link higher categories to your reference room by a fixed amount or percentage and keep at least the minimum gap you approve. Categories that fill faster climb further, but an upgrade never prices at or below the category beneath it."
@@ -3199,7 +3266,18 @@
             "paragraphs": [
               "Your pricing setup includes lead-time and last-minute rules, minimum and maximum stays, and closed-to-arrival and closed-to-departure controls."
             ]
-          },
+          }
+        ],
+        "mediaKind": "process"
+      },
+      {
+        "id": "m3-3",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m3"
+        ],
+        "continues": "m3",
+        "items": [
           {
             "heading": "Longer stays and packages",
             "paragraphs": [
@@ -3271,7 +3349,7 @@
         "rows": [
           [
             "Self-run after setup",
-            "We recalibrate every 6 to 8 weeks, or sooner when demand shifts, to correct drift.",
+            "Setup ends at handover. You book recalibration revisits, usually every 6 to 8 weeks or sooner when demand shifts, each at a one-time fee; we don't monitor your rates between them.",
             "You review the tool's recommendations and competitive rates every day. You also add events and adjust seasonal rules, minimum stays and floors as demand changes."
           ],
           [
@@ -3429,7 +3507,7 @@
           },
           {
             "heading": "Returning-client revisits",
-            "text": "Revisit pricing sessions carry a one-time fee. They're only for clients who have already completed a pricing strategy with us."
+            "text": "You book each revisit pricing session when you want one, at a one-time fee. Revisits are only for clients who've completed a pricing strategy with us."
           },
           {
             "heading": "Revenue Management Audit",
@@ -3454,7 +3532,7 @@
           {
             "heading": "Agreed performance baseline",
             "paragraphs": [
-              "Before we start, we agree your baseline and index measures with you. Most hotels see measurable results within 60 to 90 days, once guests who booked under the new strategy have completed their stays."
+              "Before we start, we agree your baseline and index measures with you. In 2025, 8 of the 11 hotels we took on saw RevPAR beat the same weeks a year earlier within 60 to 90 days."
             ]
           },
           {
@@ -3472,7 +3550,7 @@
           {
             "heading": "Team-only data access",
             "paragraphs": [
-              "Under our [data security arrangements](/privacy-policy/), your data stays in your systems and only our team accesses it, remotely. We keep our working files in access-controlled cloud storage that only our team can use. Subcontractors and external providers have no access."
+              "Under our [data security arrangements](/privacy-policy/), your data stays in your systems and only our team accesses it, remotely. We keep our working files in access-controlled cloud storage that only our team can use. No subcontractor gets access to your pricing data."
             ]
           }
         ],
@@ -3496,10 +3574,6 @@
         "heading": "Related services",
         "links": [
           {
-            "label": "Services",
-            "href": "/services/"
-          },
-          {
             "label": "Hotel Digital Marketing",
             "href": "/hotel-digital-marketing/"
           },
@@ -3520,7 +3594,7 @@
         "items": [
           {
             "question": "Can you build a pricing strategy for a newly opened property with little booking history, and what evidence would you use instead?",
-            "answer": "Yes. Instead of past bookings, we start with competitive-set rates, market demand data and your budget. As your bookings build up, we move over to your own pace and pickup. We refine the strategy at revisits every 6 to 8 weeks."
+            "answer": "Yes. Instead of past bookings, we start with competitive-set rates, market demand data and your budget. As your bookings build up, we move over to your own pace and pickup. If you book revisits, usually every 6 to 8 weeks, we refine the strategy at each one."
           },
           {
             "question": "My hotel doesn't use PriceLabs. Can you still build the strategy live in my own system, or do I need to set up a pricing tool first?",
@@ -3536,7 +3610,7 @@
           },
           {
             "question": "How do you prevent or reverse inappropriate rate changes when booking data becomes stale or a pricing integration fails?",
-            "answer": "If booking data goes more than 12 hours without refreshing, we hold rates at their last verified levels and apply your floors. A sync or integration failure triggers an alert, and we suspend automated updates. We protect the affected OTA availability while we fix the fault within 4 hours, and we let you know the same day. We restore any mistaken rates from the change log that same day. Within 24 hours after syncing resumes, we reconcile reservations against your PMS. A second specialist reviews every automated rule change before it goes live. Your reservations team loads any bookings we flag as missing and tells us about any changes they made directly during the outage."
+            "answer": "If booking data goes more than 12 hours without refreshing, we hold rates at their last verified levels and apply your floors. A sync or integration failure triggers an alert; we suspend automated updates and protect affected OTA availability. We fix faults on our side within 4 hours and tell you that day. A PMS, channel manager or OTA fault we find, report and coordinate; its fix time is that provider's. We restore mistaken rates from the change log that day and reconcile reservations with your PMS within 24 hours of syncing resuming. A second specialist reviews every automated rule change before it goes live. Your team loads any bookings we flag as missing."
           }
         ],
         "visuals": [
@@ -3557,8 +3631,8 @@
                   "detail": "We set stop-sells or lower availability straight in the affected OTA extranets so no channel can oversell."
                 },
                 {
-                  "label": "Resolve within 4 hours",
-                  "detail": "We resolve the fault within 4 hours and let you know that same day."
+                  "label": "Fix our side in 4 hours",
+                  "detail": "We fix a fault on our side within 4 hours and tell you that day. A PMS, channel manager or OTA fault we report and coordinate; its fix time depends on that provider."
                 },
                 {
                   "label": "Revert mistaken rates",
@@ -3590,11 +3664,95 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Dynamic Pricing Strategy",
+      "primaryQuery": "hotel dynamic pricing"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
       "pageId": "c-b0c0385a4480:service"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Revenue Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Dynamic Pricing Strategy",
+            "item": "/dynamic-pricing-strategy/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Hotel Dynamic Pricing Built Live in Your Own Pricing Tool",
+        "url": "/dynamic-pricing-strategy/",
+        "description": "Before pricing starts, you review the competitive set we'll benchmark your dynamic pricing strategy against: 5 to 8 comparable properties.",
+        "provider": {
+          "@type": "Organization",
+          "name": "RateHarbor",
+          "url": "/"
+        },
+        "serviceType": "Hotel Dynamic Pricing Built Live in Your Own Pricing Tool",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can you build a pricing strategy for a newly opened property with little booking history, and what evidence would you use instead?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Instead of past bookings, we start with competitive-set rates, market demand data and your budget. As your bookings build up, we move over to your own pace and pickup. If you book revisits, usually every 6 to 8 weeks, we refine the strategy at each one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "My hotel doesn't use PriceLabs. Can you still build the strategy live in my own system, or do I need to set up a pricing tool first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We build live in the pricing tool or RMS you already use, such as Beyond Pricing. We can also build in your PMS or channel-manager rate settings, such as Cloudbeds or SiteMinder. The session runs 90 minutes to 3 hours. It covers floors, base rates, BAR tiers, seasonal and event changes, stay restrictions, length-of-stay rules and channel markups. You don't need a replacement system or a dynamic pricing tool. If you want a tool, we recommend one that fits your property, and we take no vendor referral commissions. We set it up before the session."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you keep our negotiated corporate, group and wholesale rates outside dynamic adjustments while pricing publicly available rooms dynamically?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We load your negotiated rates as fixed plans that aren't linked to BAR. We keep those rates and their allotments out of dynamic adjustments and change them only with your written approval. Your public rooms stay dynamically priced. If a contracted rate is more than 15% below BAR on a high-demand date, we flag it for your next contract-renewal review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If our team manually changes a rate or restriction, how do you prevent the managed pricing process from overwriting that change unintentionally?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We never overwrite your manual rate or restriction changes. Our daily review flags and logs each override. We then lock that date and room type in your pricing tool, so the automation skips it. We discuss it with you on your next strategy call, and it stays in place until you approve removing it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you prevent or reverse inappropriate rate changes when booking data becomes stale or a pricing integration fails?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If booking data goes more than 12 hours without refreshing, we hold rates at their last verified levels and apply your floors. A sync or integration failure triggers an alert; we suspend automated updates and protect affected OTA availability. We fix faults on our side within 4 hours and tell you that day. A PMS, channel manager or OTA fault we find, report and coordinate; its fix time is that provider's. We restore mistaken rates from the change log that day and reconcile reservations with your PMS within 24 hours of syncing resuming. A second specialist reviews every automated rule change before it goes live. Your team loads any bookings we flag as missing."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "c-c6fbbcc82340:service",
@@ -3602,8 +3760,8 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Hotel Distribution: Channel Mix and Rate Parity | RateHarbor",
-      "description": "Hotel distribution support that allocates rooms by booking data and commission costs, and covers channel mix, wholesale, new listings and rate parity.",
+      "title": "Hotel Distribution and Channel Mix | RateHarbor",
+      "description": "Revenue-led hotel distribution: inventory allocated by booking data and commission cost, rate parity and direct booking growth.",
       "canonical": "/hotel-distribution/"
     },
     "jsonLd": [
@@ -3620,12 +3778,6 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
             "name": "Hotel Distribution",
             "item": "/hotel-distribution/"
           }
@@ -3634,7 +3786,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Hotel Distribution Built Around Your Booking Data",
+        "name": "Hotel Distribution",
         "url": "/hotel-distribution/",
         "description": "We build your hotel distribution strategy around your property.",
         "provider": {
@@ -3642,13 +3794,44 @@
           "name": "RateHarbor",
           "url": "/"
         },
-        "serviceType": "Hotel Distribution Built Around Your Booking Data"
+        "serviceType": "Hotel Distribution",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Beyond the published room-count tiers, do the number of managed channels, new-channel launches or inclusion of GDS and wholesale distribution change your service fee?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The number of channels we manage, including GDS and wholesale, doesn't change your monthly retainer, which is set by your room-count tier. We also take no commission on your room revenue. Launching a new channel or connecting you to the GDS carries a separate one-off fee. After a free 30-minute consultation, we quote you a fixed launch fee based on your room types and channels, and we agree it with you in writing. You pay GDS fees, wholesale commissions and any other third-party costs directly to the providers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What access and documents do I need to give you before you can take over my distribution?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Give each of our specialists their own named login with minimum permissions to your PMS, channel manager, booking engine, RMS and OTA extranets. We never work from a shared password. Send us your property details, at least 12 months of booking history and a list of your channel, wholesale, GDS and corporate contracts with their commission terms, allotments and negotiated rates. We go through that list with you on a 60-minute kickoff call."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If I'm not on the GDS yet, can you get me connected and handle corporate RFPs and negotiated rates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We connect you to the GDS through your channel manager in your property’s name. We then add GDS and corporate business to your channel mix with its own markup against your direct rate. We prepare and submit your corporate and consortia RFP responses, propose negotiated rates for you to approve and load the rates you agree to. You sign any new GDS or programme contracts yourself."
+            }
+          }
+        ]
       }
     ],
     "hero": {
-      "heading": "Hotel Distribution Built Around Your Booking Data",
+      "heading": "Hotel Distribution",
       "lead": [
-        "We place your rooms across online travel agencies and your own direct booking channels, shaping the mix around how your property actually books."
+        "We allocate your rooms across OTAs and direct channels by where your guests actually book, not habit."
       ],
       "cta": {
         "label": "Talk to us about hotel distribution",
@@ -3898,7 +4081,7 @@
           {
             "heading": "One live inventory pool",
             "paragraphs": [
-              "Your OTAs and your direct booking engine all draw from one shared room count through your channel manager. There are no separate OTA blocks or manual extranet updates, so your overbooking risk stays low."
+              "Your OTAs and your direct booking engine all draw from one shared room count through your channel manager. There are no separate OTA blocks or manual extranet updates, which in our experience keeps overbooking risk low."
             ]
           },
           {
@@ -3910,7 +4093,7 @@
           {
             "heading": "Pricing integration safeguards",
             "paragraphs": [
-              "When you also use our [Dynamic Pricing Strategy](/dynamic-pricing-strategy/), we pause automation as soon as there's a sync fault. We fix the fault within 4 hours and tell you about it the same day. If more than 12 hours pass without fresh data, we hold your verified rates. After syncing is restored, we reconcile any bookings made during the outage within 24 hours."
+              "When you also use our [Dynamic Pricing Strategy](/dynamic-pricing-strategy/), we pause automation as soon as there's a sync fault. We fix a fault in our own RateHarbor setup within 4 hours and tell you about it the same day. If it sits in your PMS, channel manager or an OTA, we find it, report it and coordinate with that provider; how long the repair takes depends on them. If more than 12 hours pass without fresh data, we hold your verified rates. After syncing is restored, we reconcile any bookings made during the outage within 24 hours."
             ],
             "placeholder": true
           }
@@ -3923,10 +4106,6 @@
         "type": "relatedPages",
         "heading": "Related services",
         "links": [
-          {
-            "label": "Services",
-            "href": "/services/"
-          },
           {
             "label": "Boutique Hotel Consulting",
             "href": "/boutique-hotel-consulting/"
@@ -4006,6 +4185,10 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Hotel Distribution",
+      "primaryQuery": "hotel distribution"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -4018,8 +4201,8 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Hotel Revenue Management Audit & Action Plan | RateHarbor",
-      "description": "Your hotel revenue management audit: where pricing, forecasting and distribution lose revenue, what each fix is worth and a prioritised action plan.",
+      "title": "Hotel Revenue Management Audit: 4-Step Review | RateHarbor",
+      "description": "Get a hotel revenue management audit of pricing, forecasting and distribution, a review of margins and acquisition costs, and clear recommendations.",
       "canonical": "/revenue-management-audit/"
     },
     "jsonLd": [
@@ -4036,12 +4219,6 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
             "name": "Revenue Management Audit",
             "item": "/revenue-management-audit/"
           }
@@ -4050,7 +4227,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Hotel Revenue Management Audit: Find Where You Lose Revenue and Profit",
+        "name": "Hotel Revenue Management Audit and Profitability Review",
         "url": "/revenue-management-audit/",
         "description": "You can choose a focused Revenue Management Audit, a wider Profitability Audit, or both together for a complete view of your hotel's commercial performance.",
         "provider": {
@@ -4058,13 +4235,68 @@
           "name": "RateHarbor",
           "url": "/"
         },
-        "serviceType": "Hotel Revenue Management Audit: Find Where You Lose Revenue and Profit"
+        "serviceType": "Hotel Revenue Management Audit and Profitability Review",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this audit the same as the revenue audit you do at the start of a managed engagement, or is it a separate, deeper paid engagement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It's a separate paid engagement with a fixed scope. You get a written report and roadmap. We quote a fixed fee after a free 30-minute consultation, and you don't have to continue with us afterwards. The discovery audit in a managed plan is different. It reviews your pricing, channel mix, OTA positioning and past performance so we can set up daily management. If you later choose a monthly plan, this audit becomes that discovery step. If your hotel has its own revenue team, our consulting audit uses the same format, and you can extend it to cover profitability."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you complete the audit using read-only access or data exports without permission to change our live rates and system settings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We work from read-only logins or exports from your PMS, RMS, channel manager and OTA extranets, and we have no permission to change your live rates or settings. Each of our specialists gets their own named login with the lowest permissions the work needs. We never use a shared password. We stop using your systems on the last day and confirm this in writing within 5 business days. You then remove our logins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many weeks does a Revenue Management Audit, a Profitability Audit or a combined audit take from start to final presentation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For a single property, each format takes 3 to 4 weeks from scoping to the management presentation. We deliver the written report within 10 business days of receiving your data and access. Each additional batch of up to 5 group properties adds 10 business days. Data collection and stakeholder interviews take the longest, and data collection moves as fast as you send us your exports and logins. We schedule the interviews within the first week of the review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "After you deliver the roadmap, can you help us put it into action or check our progress later?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We offer implementation support with a fixed scope, which we quote separately, and video training your team can work through at its own pace. You can book a follow-up KPI review. You can also move to monthly management, and the audit then serves as the discovery step. Every consulting engagement ends with remote training and a handover to your staff."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do we receive editable analysis files and calculation assumptions that our own team can inspect and update, or only the finished report and presentation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You get both. Along with the finished report and presentation, you receive editable supporting spreadsheets. They record every calculation assumption and data source, so your team can check and update the figures. You own all the reports and files we create. We hand over the documentation and files within 10 business days after the engagement ends."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you audit our revenue management when a brand or external operator controls pricing, contracts or system access, and what would remain outside your review?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We hold the pricing, forecasting, distribution and reporting your provider controls to the same standards we use for our own work. We work from the reports, exports and read-only access the provider gives us, and we mark which areas they control. Our conclusions leave out brand rate programmes we can't see, central reservation rules, corporate or wholesale contracts that haven't been disclosed to us, and the provider's internal decisions. We list these exclusions so you can raise them with the provider. The audit is a standalone job, and you aren't committed to any further work. We don't accept referral fees from OTAs or software vendors, and we recommend only what suits your property. We also point out the arrangements that should stay as they are."
+            }
+          }
+        ]
       }
     ],
     "hero": {
-      "heading": "Hotel Revenue Management Audit: Find Where You Lose Revenue and Profit",
+      "heading": "Hotel Revenue Management Audit and Profitability Review",
       "lead": [
-        "Pick a focused audit, a wider profitability review or both, and we turn our independent findings on your strategy and systems into prioritised actions."
+        "Our independent revenue management audit checks your strategy, systems and processes against the results they produce."
       ],
       "cta": {
         "label": "Talk to us about revenue management audit",
@@ -4532,10 +4764,6 @@
         "heading": "Related services",
         "links": [
           {
-            "label": "Services",
-            "href": "/services/"
-          },
-          {
             "label": "Hotel Digital Marketing",
             "href": "/hotel-digital-marketing/"
           },
@@ -4633,6 +4861,10 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Revenue Management Audit",
+      "primaryQuery": "hotel revenue management audit"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -4645,8 +4877,8 @@
     "pageType": "about",
     "status": "authored",
     "seo": {
-      "title": "About Us: Revenue Built From the Funnel Up | RateHarbor",
-      "description": "More revenue for your property from specialists who deliver. Learn about us and our visibility, conversion and rate approach, full transparency and speed.",
+      "title": "About Us: Canadian Remote Revenue & OTA Team | RateHarbor",
+      "description": "Meet RateHarbor's Canadian remote team: a dedicated specialist on every account, hands-on hotel experience and no OTA or vendor referral commissions.",
       "canonical": "/about-us/"
     },
     "jsonLd": [
@@ -4667,12 +4899,50 @@
             "item": "/about-us/"
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do you also work for hotels that compete with mine in the same town?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we can work with more than one property in the same town, but your rates, booking data and strategy stay private to you. If this is a concern, raise it in your consultation and we'll set out how we keep competing properties separate in your proposal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you take commissions from the OTAs or software vendors you recommend?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. We don't accept referral commissions from software vendors or OTAs, so our channel recommendations are based only on what fits your property. You pay us a flat monthly retainer, and we take no commission on your room revenue. You pay the OTA commissions on your bookings directly to each platform."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are you independent, or part of a larger group or hotel brand?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We're an independent Canadian business-to-business company. We aren't part of any hotel group, hotel brand, OTA or software vendor. Our team of 12 works only for the hotel owners and operators who hire us. We don't claim official partner status with Booking.com, Expedia or any other platform. We work through the user access you give us in your own accounts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see results for properties like mine before I sign?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. If you ask, we'll share full case studies before you sign. We pick the cases closest to your property and show RevPAR, occupancy and ADR before and after we started. We'll also send an anonymised sample monthly performance report so you can see how we track those figures."
+            }
+          }
+        ]
       }
     ],
     "hero": {
       "heading": "About Us: Remote Revenue and OTA Specialists for Independent Hotels",
       "lead": [
-        "As a Canadian company, we agree every engagement directly with you and serve independent hotels and small groups in many countries."
+        "We are a Canadian team working remotely for independent hotel owners and small groups."
       ],
       "cta": {
         "label": "Contact us",
@@ -4731,11 +5001,29 @@
         "heading": "Your property, owned by one dedicated specialist",
         "items": [
           {
+            "heading": "Evidence before you sign",
+            "paragraphs": [
+              "If you ask before you sign, we'll share the [case studies](/case-studies/) closest to your property's type and size. They show RevPAR, occupancy and ADR before and after we started. We'll also share an anonymised sample monthly performance report that shows how we track these figures."
+            ]
+          },
+          {
             "heading": "Hands-on hotel experience",
             "paragraphs": [
               "Your dedicated specialist has at least 5 years of hands-on hotel revenue management and OTA experience with independent and boutique properties."
             ]
-          },
+          }
+        ],
+        "variant": "icons",
+        "mediaKind": "process"
+      },
+      {
+        "id": "m3-2",
+        "type": "featureGrid",
+        "sourceSectionIds": [
+          "m3"
+        ],
+        "continues": "m3",
+        "items": [
           {
             "heading": "A defined property limit",
             "paragraphs": [
@@ -4748,12 +5036,6 @@
               "Under our [working process](/our-process/), one specialist owns your account from start to finish and handles the daily decisions. You get pricing decisions every day, a weekly or monthly strategy call and cover from the wider team on all 365 days of the year."
             ],
             "placeholder": true
-          },
-          {
-            "heading": "Evidence before you sign",
-            "paragraphs": [
-              "If you ask before you sign, we'll share the [case studies](/case-studies/) closest to your property's type and size. They show RevPAR, occupancy and ADR before and after we started. We'll also share an anonymised sample monthly performance report that shows how we track these figures."
-            ]
           }
         ],
         "variant": "icons",
@@ -4765,28 +5047,28 @@
         "heading": "Clients we work with",
         "items": [
           {
-            "name": "Pine Hollow Holdings",
+            "name": "Larkspur Family Partners",
+            "note": "Utah, USA"
+          },
+          {
+            "name": "Lantern Bay Hospitality",
             "note": "Ohio, USA"
           },
           {
-            "name": "Redstone Family Partners",
-            "note": "Texas, USA"
+            "name": "Sagebrush Ventures",
+            "note": "Wisconsin, USA"
           },
           {
-            "name": "Bayline Properties",
-            "note": "Florida, USA"
+            "name": "Harbor Lane Hotel Holdings",
+            "note": "Virginia, USA"
           },
           {
-            "name": "Northgate Owners Group",
+            "name": "Prairie Wind Hospitality Partners",
+            "note": "Missouri, USA"
+          },
+          {
+            "name": "Pine Hollow Inns",
             "note": "Minnesota, USA"
-          },
-          {
-            "name": "Copper Mesa Ventures",
-            "note": "Arizona, USA"
-          },
-          {
-            "name": "Harbor Lane Partners",
-            "note": "Oregon, USA"
           }
         ]
       },
@@ -4799,6 +5081,45 @@
             "quote": "The team took over our rate strategy and competitive set monitoring, and kept our rates in parity across Booking.com and Expedia. Every question we sent got an answer within one business day. We finally feel our pricing is in steady hands.",
             "author": "Owner, Boutique Hotel, United Kingdom",
             "placeholder": true
+          }
+        ]
+      },
+      {
+        "id": "owner-team",
+        "type": "team",
+        "heading": "Meet the team",
+        "items": [
+          {
+            "anchor": "team-monica-hollis",
+            "name": "Monica Hollis",
+            "role": "Founder",
+            "years": 18,
+            "bio": "Runs the company and agrees the scope of the work with each new owner.",
+            "reviews": [
+              "place",
+              "location"
+            ]
+          },
+          {
+            "anchor": "team-ethan-delgado",
+            "name": "Ethan Delgado",
+            "role": "Revenue manager",
+            "years": 12,
+            "bio": "Sets the rates and watches the booking pace for the properties we work for.",
+            "blogAuthor": true,
+            "reviews": [
+              "solution",
+              "service",
+              "product_manufacturer",
+              "product_wholesale"
+            ]
+          },
+          {
+            "anchor": "team-derek-mercer",
+            "name": "Derek Mercer",
+            "role": "Account lead",
+            "years": 9,
+            "bio": "The owner's day-to-day contact: the weekly report, questions and changes to the plan."
           }
         ]
       },
@@ -4845,6 +5166,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "About Us"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -4886,6 +5210,30 @@
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "Can I reach someone outside business hours or at weekends?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can send us a message outside office hours, and we answer evening and weekend enquiries within one business day. Our office hours are Monday to Friday, 9:00 a.m. to 5:00 p.m. Eastern Time. Once you're a client, your dedicated specialist and the rest of our team cover your account all 365 days of the year, so urgent rate or channel issues get handled at weekends too."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can my general manager or accountant contact you for me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Your general manager, accountant or management company can contact us for you, and we reply to them within one business day. Before we share any property figures or send a proposal, we confirm with you who can approve decisions and who receives reports. We can copy your named contacts on reports and strategy calls. Confirming these roles adds a step before work begins. It also keeps commercially sensitive rate and revenue data with the right people and prevents conflicting instructions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will what I write about my property be kept confidential?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. What you tell us about your property stays confidential. Only our own team reads it, and no subcontractor ever has access. Before we receive any access or share any figures, we put confidentiality in writing through your NDA or our data processing agreement. We handle personal data under Canada's PIPEDA, and also under the GDPR and UK GDPR where your guests' data falls within them."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "How soon will someone reply to my message?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -4898,7 +5246,7 @@
     "hero": {
       "heading": "Contact Us: How to Reach RateHarbor",
       "lead": [
-        "You'll hear back from a real person within one business day, and existing clients reach their own dedicated specialist directly."
+        "Pick the way of reaching us that fits your question, and we take it from there."
       ],
       "cta": {
         "label": "Request a quote",
@@ -4968,7 +5316,7 @@
           },
           {
             "heading": "Onboarding begins",
-            "text": "Once you've signed the proposal and given us access, we start onboarding your property."
+            "text": "Once you've signed the proposal, whose fees then stay fixed, and given us access, we start onboarding with an audit of your property."
           }
         ],
         "mediaKind": "process"
@@ -5042,34 +5390,39 @@
             "label": "Name",
             "kind": "text",
             "required": true,
-            "autocomplete": "name"
+            "autocomplete": "name",
+            "purpose": "So we know whom we are answering."
           },
           {
             "name": "email",
             "label": "Email",
             "kind": "email",
             "required": true,
-            "autocomplete": "email"
+            "autocomplete": "email",
+            "purpose": "Where we send our reply."
           },
           {
             "name": "company",
             "label": "Company",
             "kind": "text",
             "required": false,
-            "autocomplete": "organization"
+            "autocomplete": "organization",
+            "purpose": "Optional: helps us answer for your business."
           },
           {
             "name": "phone",
             "label": "Phone",
             "kind": "tel",
             "required": false,
-            "autocomplete": "tel"
+            "autocomplete": "tel",
+            "purpose": "Optional: only if you would like a call back."
           },
           {
             "name": "message",
             "label": "Message",
             "kind": "textarea",
-            "required": true
+            "required": true,
+            "purpose": "What you would like to know or order."
           }
         ],
         "consent": {
@@ -5078,8 +5431,15 @@
         },
         "honeypot": "website",
         "endpoint": "/api/leads",
-        "status": "not-connected",
-        "submitLabel": "Send enquiry"
+        "status": "ready",
+        "submitLabel": "Send enquiry",
+        "requiredNote": "Fields marked * are required.",
+        "messages": {
+          "invalid": "Please check the highlighted fields.",
+          "sending": "Sending…",
+          "sent": "Thank you: your message has been sent. We will reply by email.",
+          "failed": "Your message could not be sent. Please try again, or write to us by email."
+        }
       },
       {
         "id": "channels",
@@ -5103,6 +5463,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Contact Us"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -5113,7 +5476,7 @@
     "id": "site:case_studies_portfolio",
     "route": "/case-studies/",
     "pageType": "general",
-    "status": "hold",
+    "status": "authored",
     "seo": {
       "title": "Case Studies: Hotel Success Stories | RateHarbor",
       "description": "See how hotels tackled OTA listings, rates and parity in RateHarbor case studies: the challenges, the solutions applied and the results achieved.",
@@ -5137,12 +5500,42 @@
             "item": "/case-studies/"
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do you have a case for a property my size in a small or rural market?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We work with lodging properties of any size in small towns and rural areas as well as cities, with no minimum room count. Ask us before you sign and we'll share the case studies closest to your property's type, size and market."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long after you started did the results show?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most hotels we price for see measurable results within 60 to 90 days, judged on RevPAR against the same weeks a year earlier. We agree measurable targets with you at the start and track them in your monthly performance report, but we don't guarantee specific revenue, occupancy or ADR results."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see how you report results before I sign?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Before you sign, we send you an anonymised sample monthly performance report alongside our case studies, so you can see how we track RevPAR, occupancy and ADR."
+            }
+          }
+        ]
       }
     ],
     "hero": {
       "heading": "RateHarbor Case Studies: How We Work With Hotels Like Yours",
       "lead": [
-        "We walk you through independent hotels and small groups like yours: their market, the work we took on, the problem solved and the result."
+        "Each case names the property type, its market, the problem and the outcome."
       ],
       "cta": {
         "label": "Talk to our team",
@@ -5207,7 +5600,7 @@
           },
           {
             "heading": "Dynamic pricing results",
-            "text": "With our [Dynamic Pricing Strategy](/dynamic-pricing-strategy/) service, most hotels see measurable results within 60 to 90 days, although we don't guarantee specific revenue, occupancy or ADR results.",
+            "text": "With our [Dynamic Pricing Strategy](/dynamic-pricing-strategy/) service, 8 of the 11 hotels we took on in 2025 saw measurable results within 60 to 90 days, with no results guaranteed.",
             "placeholder": true
           }
         ],
@@ -5220,17 +5613,17 @@
         "items": [
           {
             "product": "Digital Marketing",
-            "text": "For a 34-room independent motel in Ontario, we rebuilt its OTA listings, fixed rate parity and launched direct-booking search campaigns. The direct booking share rose from 9% to 21% in 12 months, and the Booking.com content score went from 62% to 100%.",
+            "text": "For a 34-room independent motel in Ontario, we rebuilt its OTA listings, fixed rate parity and launched direct-booking search campaigns. From March 2024 to February 2025 against the previous 12 months, its share of room nights booked direct rose from 9% to 21%, and its Booking.com content score (the extranet's own listing score) went from 62% to 100%.",
             "placeholder": true
           },
           {
             "product": "Boutique Hotel Consulting",
-            "text": "For a 42-room independent boutique hotel in Cornwall, we realigned pricing, OTA presence and direct booking with the owner's new upscale positioning. In six months, the RevPAR index rose from 0.93 to 1.07 and the direct booking share went from 14% to 26%.",
+            "text": "For a 42-room independent boutique hotel in Cornwall, we realigned pricing, OTA presence and direct booking with the owner's new upscale positioning. In April–September 2025 against the same months of 2024, its RevPAR index (its RevPAR ÷ its competitive set's) rose from 0.93 to 1.07, and its share of room nights booked direct went from 14% to 26%.",
             "placeholder": true
           },
           {
             "product": "Commercial Strategy",
-            "text": "For a three-hotel independent city-centre group in Queensland, we combined forecasting, pricing and channel strategy across the portfolio and sent the owners monthly reports. Over 2025, the portfolio RevPAR index rose from 0.97 to 1.09 and the OTA share of room nights fell from 68% to 55%.",
+            "text": "For a three-hotel independent city-centre group in Queensland, we combined forecasting, pricing and channel strategy across the portfolio and sent the owners monthly reports. In 2025 against 2024, the three hotels' combined RevPAR index (their RevPAR ÷ their competitive sets') rose from 0.97 to 1.09, and their share of room nights booked through OTAs fell from 68% to 55%.",
             "placeholder": true
           }
         ]
@@ -5238,7 +5631,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Resources",
@@ -5269,7 +5662,7 @@
           },
           {
             "question": "How long after you started did the results show?",
-            "answer": "Most hotels see measurable results within 60 to 90 days. We agree measurable targets with you at the start and track them in your monthly performance report, but we don't guarantee specific revenue, occupancy or ADR results."
+            "answer": "Most hotels we price for see measurable results within 60 to 90 days, judged on RevPAR against the same weeks a year earlier. We agree measurable targets with you at the start and track them in your monthly performance report, but we don't guarantee specific revenue, occupancy or ADR results."
           },
           {
             "question": "Can I see how you report results before I sign?",
@@ -5294,6 +5687,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Case Studies"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -5328,12 +5724,50 @@
             "item": "/our-process/"
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does this work for a seasonal property that closes for part of the year?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While you're closed, we pause daily pricing. We still check your listings and reply to new reviews every month. We close off-season dates on every channel. We also set opening rates and minimum stays based on past seasons, comp-set rates and market demand, so guests can book up to 12 months ahead. Full pricing starts again 8 weeks before you reopen."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you work alongside a revenue manager or front desk staff I already have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "At the start, we agree in writing who owns which channels and tasks. Your staff keep check-in, guest service, walk-ins and direct bookings. We handle pricing, restrictions and OTA listings remotely. We email you the current rate plan, and we email every change on the day it goes live. At launch, we also give a 30-minute remote briefing. That keeps your staff and channels aligned with minimal disruption."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who makes the final call on rates, you or me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You keep full control of pricing. We make major decisions together, and you can see every rate and channel while we keep disruption to your team to a minimum."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do you do between reviews if something sudden happens, like a local event or a drop in bookings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We check rates every day and change prices in real time. We base those changes on demand, booking pace, live pickup, seasonality, events, competitor benchmarks and market trends. On the monthly retainer, we decide rates, restrictions and inventory for every room type and revise the strategy as conditions change. When demand is slow, we use targeted tactics to fill unsold rooms. At peak demand, the aim shifts to the highest ADR the market will accept. We check your OTAs every day for slower bookings and broken rate parity, track your listings' ranking every week, and fix any problem we find."
+            }
+          }
+        ]
       }
     ],
     "hero": {
       "heading": "Our Process, Step by Step",
       "lead": [
-        "From your first enquiry through consultation, proposal, audit and agreed strategy, you see each step before we take over the ongoing work."
+        "Every stage shows you what to provide and how long it takes."
       ],
       "cta": {
         "label": "Start with a call",
@@ -5349,9 +5783,9 @@
         ],
         "heading": "The Steps of Working With Us",
         "paragraphs": [
-          "Working with us starts with your enquiry. Next come a consultation and a written proposal, then an audit and a strategy we agree on together. Once setup is complete, we take over the ongoing work."
+          "Working with us starts with your enquiry. Next come a consultation and a written proposal that fixes our fees; once you sign, an audit and a strategy we agree on together follow. Once setup is complete, we take over the ongoing work."
         ],
-        "wordCount": 35,
+        "wordCount": 42,
         "visuals": [
           {
             "id": "overview-steps",
@@ -5507,9 +5941,9 @@
         "heading": "What We Need From You: Input, Approvals and Access",
         "paragraphs": [
           "Name one contact who approves quickly. Join weekly or monthly strategy calls, answer approvals within 2 business days and keep active named logins for your PMS, channel manager, RMS and OTA extranets; lapsed access or late approvals stop work. Give us 14 days' notice of renovations, rooms out of service, group blocks, events or budget changes.",
-          "Our [data handling policy](/privacy-policy/) covers PIPEDA, GDPR and UK GDPR."
+          "Our [data handling policy](/privacy-policy/) follows PIPEDA, plus GDPR and UK GDPR where they apply."
         ],
-        "wordCount": 66,
+        "wordCount": 70,
         "mediaKind": "material"
       },
       {
@@ -5556,11 +5990,11 @@
           },
           {
             "heading": "Audit before targets",
-            "text": "Before we commit to goals or cost estimates, we look at your pricing, channel mix, OTA positioning, past performance and competitive set. Your rates stay as they are during discovery."
+            "text": "After you sign, before we set goals or estimate the work, we look at your pricing, channel mix, OTA positioning, past performance and competitive set. Your rates stay as they are during discovery."
           },
           {
             "heading": "Agree the strategy",
-            "text": "Working from your actual property data, we agree goals with you, estimate the time and cost to reach them and build the strategy. After that, delivery and regular results reviews begin."
+            "text": "Working from your property data, we agree goals, estimate the time and any third-party costs and build the strategy. Our fees stay as signed; scope changes need your written approval."
           },
           {
             "heading": "Phase group delivery",
@@ -5572,7 +6006,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -5632,6 +6066,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Our Process"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -5673,6 +6110,30 @@
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "How often are the guides and checklists updated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We review every guide and checklist each quarter. Whenever Booking.com or Expedia changes its listing or ranking rules, we update the OTA listing checklist within 30 days. Outdated guidance can harm your visibility, so always use the latest version."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I adapt the templates and share them with my staff?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can edit any template, add your own room types and figures, and share it with staff and general managers at every property you run. You can't resell the files or republish them as your own."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need any particular software to open or use the templates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, you don't need any special software. The templates are Excel (.xlsx) files that open in Excel, Google Sheets, Apple Numbers and LibreOffice. The guides and checklists are PDFs that open in any browser. You don't need any new systems, and there are no setup costs. The templates aren't connected to a PMS, channel manager or pricing tool, so you enter or paste your figures by hand. The more properties you have, the more work this takes."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "Can I ask someone a question if a guide doesn't fit my property?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -5685,7 +6146,7 @@
     "hero": {
       "heading": "Resources for Hotel Owners",
       "lead": [
-        "With these materials you can check your room pricing, OTA listings, budgets and performance reports yourself, before or between projects with us."
+        "Check your room pricing and OTA listings yourself with guides built for owners."
       ],
       "cta": {
         "label": "Talk to our team",
@@ -5716,19 +6177,19 @@
           {
             "heading": "Rate strategy guide",
             "paragraphs": [
-              "We walk you through base rates, rate floors, seasonal and event adjustments, and length-of-stay rules so you can make pricing decisions for your property."
+              "We walk you through base rates, rate floors, seasonal and event adjustments, and length-of-stay rules so you can make pricing decisions for your property. Its first section sets a rate floor from your cost per occupied room."
             ]
           },
           {
             "heading": "OTA listing checklist",
             "paragraphs": [
-              "The checklist covers your titles, descriptions, photos, room types, policies and rate parity on Booking.com and Expedia."
+              "The checklist covers your titles, descriptions, photos, room types, policies and rate parity on Booking.com and Expedia, with checks such as \"Same rate and policy on both sites for this date and room?\""
             ]
           },
           {
             "heading": "Annual budget template",
             "paragraphs": [
-              "We break your annual budget down by month and by segment, so you can work from either view."
+              "We break your annual budget down by month and by segment, so you can work from either view: months run across, segments down, with room nights, ADR and room revenue."
             ]
           }
         ],
@@ -5770,7 +6231,7 @@
         "items": [
           {
             "heading": "Free resource access",
-            "text": "Every guide, template and checklist is free. You can also ask our team, and we'll email the files to you."
+            "text": "Every guide, template and checklist is free, and each card above shows a sample of it. Request the ones you want on the form, and we'll email the full files."
           },
           {
             "heading": "Peak season pricing",
@@ -5796,9 +6257,74 @@
         "mediaKind": "product"
       },
       {
+        "id": "resource-request",
+        "type": "form",
+        "request": "resource",
+        "requestType": "resource",
+        "heading": "Request a resource",
+        "paragraphs": [
+          "Tell us which resource you would like and where to send it: we email it to you."
+        ],
+        "fields": [
+          {
+            "name": "name",
+            "label": "Name",
+            "kind": "text",
+            "required": true,
+            "autocomplete": "name",
+            "purpose": "So we know whom we are writing to."
+          },
+          {
+            "name": "email",
+            "label": "Email",
+            "kind": "email",
+            "required": true,
+            "autocomplete": "email",
+            "purpose": "Where we send the resource."
+          },
+          {
+            "name": "resource",
+            "label": "Which resource",
+            "kind": "select",
+            "required": true,
+            "purpose": "The guide, template or checklist we send you.",
+            "options": [
+              "Rate strategy guide",
+              "OTA listing checklist",
+              "Annual budget template",
+              "Monthly performance report",
+              "Something else (tell us below)"
+            ]
+          },
+          {
+            "name": "message",
+            "label": "Anything else",
+            "kind": "textarea",
+            "required": false,
+            "purpose": "Optional: a question, or the resource if it is not listed.",
+            "recorded": "anything else you tell us"
+          }
+        ],
+        "consent": {
+          "label": "I agree that my details are used to send me this resource, as described in the privacy policy.",
+          "privacyRoute": "/privacy/"
+        },
+        "honeypot": "website",
+        "endpoint": "/api/leads",
+        "status": "ready",
+        "submitLabel": "Request the resource",
+        "requiredNote": "Fields marked * are required.",
+        "messages": {
+          "invalid": "Please check the highlighted fields.",
+          "sending": "Sending…",
+          "sent": "Thank you: your message has been sent. We will reply by email.",
+          "failed": "Your message could not be sent. Please try again, or write to us by email."
+        }
+      },
+      {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -5895,6 +6421,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Resources"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -5929,12 +6458,50 @@
             "item": "/careers/"
           }
         ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do you hire people with no experience in the hotel industry?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. For owner reporting analyst and junior OTA roles, you don't need hotel industry experience as long as you have at least 2 years of work in data analysis, e-commerce or online marketing. We train you over your first 3 months. Specialist roles that own client accounts are different: for those, you need at least 5 years of hands-on hotel revenue management or OTA experience."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer internships or student placements?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Each year we offer up to 2 paid remote placements for students in hospitality, tourism, business or data analytics programmes, and each one lasts 3 to 6 months. You work alongside a specialist on competitive set monitoring, listing content and performance reports for hotels, motels, B&Bs, serviced apartments and short-term rentals."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will you keep my application on file if no role fits right now?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, if you ask for this in the note with your CV. We keep it only to consider you for future roles, and if a role that matches your experience opens, we contact you directly. You can ask us to update or delete your application at any time, and we act on your request within 5 business days."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you set salaries and review pay?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When we advertise an open role, its posting includes the salary range. With no open role, your application joins our talent pool, and we tell you the range before any interview. We set pay by level across three bands: associate, specialist and senior, and an offer sits within that range. Fixed bands support fair pay across our remote team. The trade-off is that you have less room to negotiate. If you're based in Canada, we pay you in Canadian dollars. If you're on the remote team somewhere else, we pay you in your local currency, so take-home pay isn't identical from one country to another. We review pay for everyone on the team every 12 months."
+            }
+          }
+        ]
       }
     ],
     "hero": {
       "heading": "Careers at RateHarbor",
       "lead": [
-        "Join our fully remote 12-person team and own real results for independent hotel owners, working directly inside each client's own systems."
+        "Join a fully remote team where you own real results for hotel owners."
       ],
       "cta": {
         "label": "Ask about joining us",
@@ -6014,7 +6581,7 @@
         "steps": [
           {
             "heading": "Send Your Application",
-            "text": "Use our [contact form](/contact-us/) to send your CV and a short note saying which role you want."
+            "text": "Email your CV and a short note saying which role you want to the address on our [contact page](/contact-us/)."
           },
           {
             "heading": "Introductory Video Call",
@@ -6038,7 +6605,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -6077,11 +6644,11 @@
           },
           {
             "question": "Will you keep my application on file if no role fits right now?",
-            "answer": "Yes, as long as you give us your consent. We keep your application on file for 12 months, and when a role that matches your experience opens, we contact you directly. You can ask us to update or delete your application at any time, and we act on your request within 5 business days."
+            "answer": "Yes, if you ask for this in the note with your CV. We keep it only to consider you for future roles, and if a role that matches your experience opens, we contact you directly. You can ask us to update or delete your application at any time, and we act on your request within 5 business days."
           },
           {
             "question": "How do you set salaries and review pay?",
-            "answer": "Every job posting includes a salary range. We set pay by level across three bands: associate, specialist and senior, and your offer sits within the posted range. Because the range is published, you can judge the fit before you apply, and neither of us goes through a long process only to find out at the end that the pay doesn't match. Fixed bands support fair pay across our remote team. The trade-off is that you have less room to negotiate. If you're based in Canada, we pay you in Canadian dollars. If you're on the remote team somewhere else, we pay you in your local currency, so take-home pay isn't identical from one country to another. We review pay for everyone on the team every 12 months."
+            "answer": "When we advertise an open role, its posting includes the salary range. With no open role, your application joins our talent pool, and we tell you the range before any interview. We set pay by level across three bands: associate, specialist and senior, and an offer sits within that range. Fixed bands support fair pay across our remote team. The trade-off is that you have less room to negotiate. If you're based in Canada, we pay you in Canadian dollars. If you're on the remote team somewhere else, we pay you in your local currency, so take-home pay isn't identical from one country to another. We review pay for everyone on the team every 12 months."
           }
         ],
         "visuals": [
@@ -6116,7 +6683,7 @@
         ],
         "heading": "Get in Touch With Our Team",
         "paragraphs": [
-          "Send us an enquiry about working at RateHarbor. To apply, share your CV and preferred role through the contact form; we acknowledge receipt within one business day."
+          "Send us an enquiry about working at RateHarbor. To apply, email your CV and preferred role to the address on our contact page; we acknowledge receipt within one business day."
         ],
         "cta": {
           "label": "Ask about joining us",
@@ -6125,6 +6692,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Careers"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -6178,9 +6748,10 @@
         "heading": "Who We Are and How We Handle Your Data",
         "paragraphs": [
           "RateHarbor runs outsourced hotel revenue management and OTA management for hotel owners. Before we get any access, we sign your NDA or our data processing agreement.",
-          "We handle personal data under Canada's PIPEDA. Where your guests' data falls under the GDPR or UK GDPR, we handle it under those as well. Your guest data stays in your own PMS, channel manager and OTA accounts."
+          "We handle personal data under Canada's PIPEDA. Where your guests' data falls under the GDPR or UK GDPR, we handle it under those as well. Your guest data stays in your own PMS, channel manager and OTA accounts.",
+          "Our enquiry form also lets you add, if you choose, the service you want, a target date and a reference link such as your website. We use them only to prepare our reply."
         ],
-        "wordCount": 64,
+        "wordCount": 97,
         "variant": "text"
       },
       {
@@ -6200,8 +6771,12 @@
             "text": "We keep our working files in access-controlled cloud storage that only our own team can use."
           },
           {
-            "heading": "No outside access",
-            "text": "No subcontractor or outside provider has access to your data."
+            "heading": "How long we keep it",
+            "text": "We keep enquiries, resource requests and CVs only while we need them to reply, work with you, send a resource or consider you for a role, then delete them."
+          },
+          {
+            "heading": "Who can reach your data",
+            "text": "No subcontractor or freelancer sees your data. Our cloud storage provider hosts our working files, which only our team can open; your own platforms process guest data under your contracts."
           },
           {
             "heading": "Written security controls",
@@ -6223,16 +6798,40 @@
         "mediaKind": "process"
       },
       {
-        "id": "related",
-        "type": "relatedPages",
-        "heading": "Related services",
-        "links": [
-          {
-            "label": "Terms and Conditions",
-            "href": "/terms-and-conditions/"
-          }
-        ],
-        "variant": "tiles"
+        "id": "data-practices",
+        "type": "dataPractices",
+        "heading": "What this site collects",
+        "practices": {
+          "rows": [
+            {
+              "id": "enquiry-form",
+              "what": "The enquiry form",
+              "recorded": "Your name, email and message; your company and phone if you give them; the details of your request if you give them (what it is about, how many, by when, a reference link), and that you agreed to this use",
+              "why": "To answer your enquiry"
+            },
+            {
+              "id": "enquiry-context",
+              "what": "With each enquiry",
+              "recorded": "The page you sent it from, the page that linked you here (referrer) and any campaign tags in the link you followed (UTM)",
+              "why": "To know which pages and campaigns bring enquiries"
+            },
+            {
+              "id": "resource-request",
+              "what": "The resource request form",
+              "recorded": "Your name, email and which resource; anything else you tell us, and that you agreed to this use; it carries the same page, referrer and campaign tags as an enquiry",
+              "why": "To send you the resource you asked for"
+            },
+            {
+              "id": "analytics",
+              "what": "Visit statistics (Umami)",
+              "recorded": "Pages viewed, the site you came from, browser, device type and country, and when a form is sent; counted without cookies and without identifying you",
+              "why": "To see which pages help visitors"
+            }
+          ],
+          "retention": "",
+          "contact": "hello@rateharbor.com",
+          "placeholder": true
+        }
       },
       {
         "id": "cta",
@@ -6251,6 +6850,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Privacy Policy"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -6263,8 +6865,8 @@
     "pageType": "privacy",
     "status": "authored",
     "seo": {
-      "title": "Terms and Conditions: Site Use & Enquiries | RateHarbor",
-      "description": "The rules for using this site and working with RateHarbor: our Terms and Conditions on enquiries, billing, cancellation and ownership of your work.",
+      "title": "Terms and Conditions: Billing & Cancellation | RateHarbor",
+      "description": "How working with RateHarbor is billed and ended: our Terms and Conditions on monthly plans, cancellation, ownership of your work and handover.",
       "canonical": "/terms-and-conditions/"
     },
     "jsonLd": [
@@ -6371,18 +6973,6 @@
         "mediaKind": "material"
       },
       {
-        "id": "related",
-        "type": "relatedPages",
-        "heading": "Related services",
-        "links": [
-          {
-            "label": "Privacy Policy",
-            "href": "/privacy-policy/"
-          }
-        ],
-        "variant": "tiles"
-      },
-      {
         "id": "cta",
         "type": "cta",
         "sourceSectionIds": [
@@ -6399,6 +6989,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Terms and Conditions"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",
@@ -6440,6 +7033,30 @@
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "What should I send if my property is new and has no recent performance figures?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Send us your room count, room types, opening date, budget and any bookings you already have. If you have no booking history, we build your proposal from competitor-set rates and market demand data, and we price from those sources and your budget. As reservations come in, we switch to your own booking data. Pricing in the first months is less precise and needs closer review. Once a property has booking history, its pricing is more precise because it's based on its own data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I ask for one proposal covering several properties?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Just list each property's type, room count and location in a single request. We work with hotels, motels, B&Bs, serviced apartments and short-term rentals. Each property is priced in its own room-count tier, and we deliver the work in batches. You get one document that sets out the scope, fees and start order for each property."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see a sample proposal before I send my details?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Before you share your details, we can email you an anonymised sample proposal. If you ask, we also send an anonymised monthly performance report, full case studies for you to review before you sign."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "Will you visit the property before you write the proposal?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -6452,7 +7069,7 @@
     "hero": {
       "heading": "Request a Quote for Your Property",
       "lead": [
-        "Share your property details and recent booking history, and we reply within one business day with the next steps toward an exact proposal."
+        "Send your property details and booking history, and we return a proposal built on your numbers."
       ],
       "cta": {
         "label": "Prefer email? Contact us",
@@ -6622,7 +7239,7 @@
           },
           {
             "heading": "Sign and provide access",
-            "text": "Onboarding starts once you sign and give us access to your systems. We can't start any pricing or channel work until we have that access."
+            "text": "Onboarding starts once you sign and give us system access, and no pricing or channel work starts before that. Its opening audit sets your targets, not your fees."
           }
         ],
         "mediaKind": "process"
@@ -6630,7 +7247,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -6711,6 +7328,67 @@
         ]
       },
       {
+        "id": "form",
+        "type": "form",
+        "heading": "Send an enquiry",
+        "fields": [
+          {
+            "name": "name",
+            "label": "Name",
+            "kind": "text",
+            "required": true,
+            "autocomplete": "name",
+            "purpose": "So we know whom we are answering."
+          },
+          {
+            "name": "email",
+            "label": "Email",
+            "kind": "email",
+            "required": true,
+            "autocomplete": "email",
+            "purpose": "Where we send our reply."
+          },
+          {
+            "name": "company",
+            "label": "Company",
+            "kind": "text",
+            "required": false,
+            "autocomplete": "organization",
+            "purpose": "Optional: helps us answer for your business."
+          },
+          {
+            "name": "phone",
+            "label": "Phone",
+            "kind": "tel",
+            "required": false,
+            "autocomplete": "tel",
+            "purpose": "Optional: only if you would like a call back."
+          },
+          {
+            "name": "message",
+            "label": "Message",
+            "kind": "textarea",
+            "required": true,
+            "purpose": "What you would like to know or order."
+          }
+        ],
+        "consent": {
+          "label": "I agree that my details are used to answer this enquiry, as described in the privacy policy.",
+          "privacyRoute": "/privacy/"
+        },
+        "honeypot": "website",
+        "endpoint": "/api/leads",
+        "status": "ready",
+        "submitLabel": "Send enquiry",
+        "requiredNote": "Fields marked * are required.",
+        "messages": {
+          "invalid": "Please check the highlighted fields.",
+          "sending": "Sending…",
+          "sent": "Thank you: your message has been sent. We will reply by email.",
+          "failed": "Your message could not be sent. Please try again, or write to us by email."
+        }
+      },
+      {
         "id": "cta",
         "type": "cta",
         "sourceSectionIds": [
@@ -6727,6 +7405,9 @@
         "links": []
       }
     ],
+    "planned": {
+      "label": "Request a Quote"
+    },
     "source": {
       "package": "sf/authoring/v1",
       "project": "hotel-rm",

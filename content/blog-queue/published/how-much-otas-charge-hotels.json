@@ -1,0 +1,488 @@
+{
+  "slug": "how-much-otas-charge-hotels",
+  "status": "review",
+  "seo": {
+    "title": "How Much Do OTAs Charge Hotels? Rates and Real Costs",
+    "description": "Understand hotel OTA commissions, trace booking payments, and use worked examples to compare retained revenue with the cost of winning direct bookings."
+  },
+  "title": "How much do OTAs charge hotels?",
+  "lead": [
+    "OTAs typically charge hotels **15%–30% or more** of the applicable booking value, according to [Cloudbeds’ A Guide to OTA Commission Rates](https://www.cloudbeds.com/online-travel-agencies/commissions/). How much your hotel keeps depends on the commission base in your agreement, hotel-funded discounts, optional program charges and payment costs."
+  ],
+  "datePublished": "2026-11-17T20:59:30Z",
+  "dateModified": "2026-11-17T22:40:58Z",
+  "author": {
+    "type": "Organization"
+  },
+  "image": {
+    "src": "/media/blog/how-much-otas-charge-hotels/V1-1536.webp",
+    "alt": "Hotel owner reviewing booking paperwork at a desk",
+    "width": 1536,
+    "height": 1024
+  },
+  "takeaways": [],
+  "sections": [
+    {
+      "heading": "OTA commission ranges and what your hotel keeps",
+      "body": [
+        {
+          "text": "If you run a US independent hotel, start by comparing retained revenue for the same room and stay, then look at contribution after servicing costs. At RateHarbor, our reports show channel revenue both gross and net of OTA commissions and acquisition costs. Use that view before deciding whether a channel that looks cheaper actually leaves your property with more money."
+        },
+        {
+          "subheading": "Choose a range that matches your hotel"
+        },
+        {
+          "text": "A broad published range gives you somewhere to start, but your signed terms are what you need for a budget. Your market, property type and negotiating leverage affect the rate, and paid visibility can increase the charge, as [Lighthouse’s How to Work with OTAs: Managing Relationships, Listings and Commission Rates](https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees) explains. Hotel-funded loyalty discounts reduce your proceeds alongside commission; see [BookingWhizz’s OTA Dependency: The Real Cost to Hotels](https://bookingwhizz.com/en/blog/hidden-cost-of-ota-dependency)."
+        },
+        {
+          "text": "Build your comparison sheet using matched agreements and settled bookings. Keep Booking.com and Expedia observations separate, then group properties by market, lodging type and program participation. The fields below help you decide whether another hotel's experience is relevant to yours."
+        },
+        {
+          "table": {
+            "columns": [
+              "Comparison field",
+              "What to record",
+              "Budgeting check"
+            ],
+            "rows": [
+              [
+                "OTA and payment arrangement",
+                "Platform, hotel collection, OTA collection or net-rate terms",
+                "Compare the same commercial model"
+              ],
+              [
+                "Market and property segment",
+                "US location, lodging type, size and positioning",
+                "Match your property's demand and business model"
+              ],
+              [
+                "Observation period",
+                "Stay dates and settlement dates",
+                "Compare similar seasons and allow adjustments to clear"
+              ],
+              [
+                "Sample coverage",
+                "Property count and completed-stay count",
+                "Check whether a few properties dominate"
+              ],
+              [
+                "Base commission",
+                "Contracted rate and exact commissionable subtotal",
+                "Keep the rate attached to its calculation base"
+              ],
+              [
+                "Optional programs",
+                "Participation, eligibility and incremental charge",
+                "Separate base terms from chosen spending"
+              ],
+              [
+                "Discount funding",
+                "Hotel-funded and OTA-funded amounts",
+                "Charge only the hotel's contribution to hotel proceeds"
+              ],
+              [
+                "Payment and other charges",
+                "Matched statement amounts",
+                "Include costs outside the commission invoice"
+              ],
+              [
+                "Realized cash cost",
+                "Total cash charges divided by the same defined revenue base",
+                "Compare costs on consistent terms"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "For each comparable group, look at the spread of booking-level costs and calculate a revenue-weighted result: total charges divided by total eligible revenue. Keep promotional stays identifiable so you don't treat their cost as your everyday rate. Record unresolved credits separately."
+        },
+        {
+          "text": "Use your contracted base commission in your working budget, then model optional participation and discounts separately. A national average cannot replace those inputs. Our [Hotel Distribution](/hotel-distribution/) page explains how we connect channel costs with inventory allocation."
+        },
+        {
+          "subheading": "Follow the booking through to the bank"
+        },
+        {
+          "text": "Start with the reservation and final folio, identify the charge base in your contract, and match the commission invoice or settlement to the processor statement and bank receipt. Keep pass-through taxes in a separate reconciliation column. Check deductions taken before the deposit as well as invoices paid afterward; the deposit alone does not tell you your retained room revenue."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/how-much-otas-charge-hotels/V2-960.webp",
+            "srcset": "/media/blog/how-much-otas-charge-hotels/V2-480.webp 480w, /media/blog/how-much-otas-charge-hotels/V2-960.webp 960w, /media/blog/how-much-otas-charge-hotels/V2-1536.webp 1536w",
+            "alt": "Unbranded card terminal beside a blurred processor statement on a back-office desk",
+            "width": 960,
+            "height": 640,
+            "caption": "The payment terminal is only the start of reconciliation"
+          }
+        },
+        {
+          "text": "The assumed completed stays below have the same room economics: a hotel-funded discount, commission on the discounted room subtotal, a payment charge and no optional uplift. Taxes are excluded and reconciled separately. These collection arrangements are hypothetical, so check your own agreement to see where each charge belongs."
+        },
+        {
+          "table": {
+            "columns": [
+              "Assumed collection arrangement",
+              "Reservation and final folio",
+              "Commission record",
+              "Processor and bank reconciliation"
+            ],
+            "rows": [
+              [
+                "Hotel collects",
+                "$200 reference price less $20 hotel-funded discount = $180 room charge",
+                "Separate invoice: 20% of $180 = $36",
+                "Processor deducts $5; bank receives $175; later commission payment leaves $139"
+              ],
+              [
+                "OTA collects",
+                "$200 reference price less $20 hotel-funded discount = $180 room charge",
+                "Settlement withholds 20% of $180 = $36",
+                "Remittance after commission is $144; assumed $5 payment deduction leaves a $139 deposit"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "When your hotel collects, close the reconciliation only after you've matched the later commission payment to its invoice. When the OTA collects, mark the withheld commission as settled so you don't deduct it again. Both routes leave the same retained revenue because the assumed costs match, even though the deposits differ."
+        },
+        {
+          "text": "For an assumed shortened stay, the original commissionable room amount is $360 and the final folio is $180. At an assumed 20% commission, the original $72 charge drops to $36 if your agreement allows the adjustment. An approved $36 credit restores the difference when it posts."
+        },
+        {
+          "text": "Keep the original invoice, revised folio, adjustment approval and posted credit together. Track the credit as pending until it arrives. For cancellations and no-shows, check the charge against your agreement and the amount actually collected or waived before treating it as a discrepancy."
+        },
+        {
+          "subheading": "Calculate when direct acquisition pays"
+        },
+        {
+          "text": "Compare the same room, stay dates and service level. Include the cost of providing direct benefits, such as breakfast or parking, even when they're free to the guest. Copy this worksheet into a spreadsheet and keep the inputs editable."
+        },
+        {
+          "table": {
+            "columns": [
+              "Worksheet line",
+              "Input or calculation"
+            ],
+            "rows": [
+              [
+                "OTA room revenue",
+                "Reference price minus hotel-funded discount"
+              ],
+              [
+                "OTA retained revenue",
+                "OTA room revenue minus commission, payment charges and other variable acquisition charges"
+              ],
+              [
+                "OTA net contribution",
+                "OTA retained revenue minus servicing costs"
+              ],
+              [
+                "Direct revenue",
+                "Direct reference price minus direct incentive"
+              ],
+              [
+                "Direct nonmarketing variable costs",
+                "Payment charges, booking-engine transaction charges, benefit fulfillment and servicing"
+              ],
+              [
+                "Maximum direct marketing spend",
+                "Direct revenue minus direct nonmarketing variable costs minus OTA net contribution"
+              ],
+              [
+                "Maximum direct incentive",
+                "Direct reference price minus direct nonmarketing variable costs, fixed marketing spend and OTA net contribution"
+              ],
+              [
+                "Allocated fixed costs",
+                "Show subscriptions and management retainers separately from incremental booking costs"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "In the assumed completed-stay example, $139 in retained OTA revenue minus $40 in servicing costs leaves $99 in contribution. Assume a direct reference price of $200, a $10 incentive, $5 processing and the same $40 servicing cost. Your direct contribution before marketing is $145, leaving a maximum marketing budget of $46 to match the OTA. If you hold marketing at $20 instead, you can offer a maximum incentive of $36, with processing and servicing unchanged."
+        },
+        {
+          "text": "Treat that maximum as your break-even ceiling. Spend less and you improve direct contribution; spend more and you need a separate reason, such as repeat business you can measure. If the incentive changes the payment charge or benefit cost, recalculate rather than keeping those inputs constant."
+        },
+        {
+          "text": "For an assumed cancellation, take $90 in cancellation revenue before fees, $18 in applicable OTA commission, $3 processing and no servicing cost. OTA contribution is $69. With direct cancellation revenue of $90, $3 processing and $10 in marketing already spent, direct contribution is $77. If you waive the revenue, remove it but keep any charges that are still payable."
+        },
+        {
+          "text": "Finally, check whether direct demand would replace the OTA stay. Under the completed-stay assumptions, $20 in direct marketing leaves $125 in direct contribution, compared with $99 from the OTA. If the room would otherwise stay empty, accepting the OTA adds $99; if direct replacement is certain, it gives up $26. At an assumed 50% replacement probability, expected direct contribution is $62.50 and the OTA is ahead by $36.50. At 80%, expected direct contribution is $100 and direct is ahead by $1. These calculations assume you incur marketing costs only when a direct booking converts."
+        },
+        {
+          "text": "If you've committed campaign spend regardless of conversion, subtract it outside the probability calculation. Model completed stays and cancellations separately, then weight them using your own cancellation assumptions. Use the resulting contribution to decide which demand to accept and how much to spend attracting its replacement."
+        }
+      ]
+    },
+    {
+      "heading": "What are OTA commission fees?",
+      "body": [
+        {
+          "text": "OTA commission fees are charges your hotel pays for reservations made through an online travel agency, usually as a percentage of the booking amount defined in your agreement. That percentage is only part of what it costs to acquire the booking; see [Cloudbeds' A Guide to OTA Commission Rates](https://www.cloudbeds.com/online-travel-agencies/commissions/)."
+        },
+        {
+          "text": "Use the opening comparison worksheet to choose terms relevant to your hotel. Optional visibility programs can increase commission, as [Lighthouse's How to Work with OTAs: Managing Relationships, Listings and Commission Rates](https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees) explains. Keep those charges separate from discounts and payment fees."
+        },
+        {
+          "subheading": "Find where the commission is recorded"
+        },
+        {
+          "text": "Look back at the assumed collection examples above. The fee belongs to the booking even if you pay it later."
+        },
+        {
+          "table": {
+            "columns": [
+              "Collection arrangement in the examples",
+              "Follow these records",
+              "Count commission here"
+            ],
+            "rows": [
+              [
+                "Hotel collects",
+                "Reservation → final folio → processor statement → bank deposit; then commission invoice → payment",
+                "Record the invoice as the expense; its later payment settles it"
+              ],
+              [
+                "OTA collects",
+                "Reservation → final folio → settlement showing deductions → bank receipt",
+                "Record the settlement's commission deduction; do not subtract it again from the deposit"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Check the commercial model as well as how payment reaches you. Under a net-rate agreement, your hotel supplies a contracted net rate and the OTA adds a resale margin. [AltexSoft's OTA Rates and Building Commission Engine: Best Practices and Lessons Learned](https://www.altexsoft.com/blog/ota-rates-commission-engine/) explains the distinction. The fact that an OTA collects payment does not, on its own, tell you which calculation your agreement uses."
+        },
+        {
+          "subheading": "Calculate each cost against the right base"
+        },
+        {
+          "text": "Assume a $200 reference room price, a $20 hotel-funded discount, no OTA-funded discount and a $180 commissionable subtotal. With an assumed 20% base commission, no optional uplift, a $5 payment charge and no other cash charges, your commission is $36. Total cash charges come to $41, leaving $139 before operating costs and taxes."
+        },
+        {
+          "chart": {
+            "kind": "bar",
+            "unit": "USD",
+            "items": [
+              {
+                "label": "Hotel-funded discount",
+                "value": 20
+              },
+              {
+                "label": "Commission",
+                "value": 36
+              },
+              {
+                "label": "Payment charge",
+                "value": 5
+              },
+              {
+                "label": "Retained revenue",
+                "value": 139
+              }
+            ],
+            "alt": "Assumed room-price allocation across discount, commission, payment charge and retained revenue",
+            "caption": "Assumed allocation of the reference room price before operating costs and taxes"
+          }
+        },
+        {
+          "text": "Copy the worksheet below into a spreadsheet. Keep your input cells separate from formulas, and leave the commissionable subtotal editable. Reconcile pass-through taxes separately from room proceeds."
+        },
+        {
+          "table": {
+            "columns": [
+              "Field",
+              "Input or calculation",
+              "Record to check"
+            ],
+            "rows": [
+              [
+                "Reference room price",
+                "Room price before hotel-funded discounts",
+                "Original rate plan"
+              ],
+              [
+                "Hotel-funded discount",
+                "Reduction borne by your hotel",
+                "Promotion terms and reservation"
+              ],
+              [
+                "OTA-funded discount",
+                "Separate input; adjust hotel entitlement only as the agreement requires",
+                "Funding terms and settlement"
+              ],
+              [
+                "Hotel entitlement",
+                "Room amount due before hotel cash charges",
+                "Reservation and final folio"
+              ],
+              [
+                "Commissionable subtotal",
+                "Contract-defined base, including any applicable extras or taxes",
+                "Agreement"
+              ],
+              [
+                "Base commission",
+                "Commissionable subtotal × contracted rate",
+                "Invoice or settlement"
+              ],
+              [
+                "Optional uplift",
+                "Applicable program base × additional rate, or stated charge",
+                "Program terms"
+              ],
+              [
+                "Payment fees",
+                "Actual payment charge for the booking",
+                "Processor statement"
+              ],
+              [
+                "Other cash charges",
+                "Other separately payable variable acquisition charges",
+                "Supporting invoices"
+              ],
+              [
+                "Retained revenue",
+                "Hotel entitlement − base commission − uplift − payment fees − other cash charges",
+                "Deposit adjusted for later payments"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "For the assumed booking, commission is $36 ÷ $180 = 20%. The cash-cost ratio is $41 ÷ $180 = 22.8%, rounded. The reduction from the reference price is ($200 − $139) ÷ $200 = 30.5%. That last measure counts the hotel-funded discount once; calling it the commission rate would mix different costs and denominators."
+        },
+        {
+          "text": "If you change only the assumed commission base to $200, the same 20% rate gives you $40 commission. With the $20 hotel-funded discount and $5 payment charge unchanged, you're left with $135 before operating costs and taxes."
+        },
+        {
+          "text": "For Genius or another loyalty promotion, check the funding and commission-base clauses before entering a discount. If the OTA funds a lower guest price and your agreement preserves your hotel's entitlement, leave that entitlement unchanged. Don't subtract the guest's discount again. Keep estimated future loyalty value and brand effects outside this cash calculation."
+        },
+        {
+          "text": "For a separate assumed net-rate booking, say your hotel agrees to receive $160 and the OTA sells the room for $200. The $40 markup equals 25% of the hotel net rate or 20% of the retail price. Neither percentage is an invoiced hotel commission; subtracting the markup from the $160 again would understate your contracted receipt."
+        },
+        {
+          "subheading": "Check an effective fee against matched records"
+        },
+        {
+          "text": "In our September 2026 reconciliation review, we matched 2 completed stays at 2 US independent properties, a boutique hotel and a motel, to their agreements, final folios, commission records, processor statements and bank entries. The table below shows the room amounts after hotel-funded discounts, with taxes reconciled separately."
+        },
+        {
+          "table": {
+            "columns": [
+              "Matched stay",
+              "Contract and program charges",
+              "Cash-cost calculation and receipt"
+            ],
+            "rows": [
+              [
+                "Savannah boutique hotel; Booking.com, hotel collection; checkout September 14, 2026; commission paid October 16, 2026",
+                "$180 room entitlement and commission base; 20% base commission; no optional uplift",
+                "$36 commission + $5 processing = $41; $41 ÷ $180 = 22.8%, rounded; $175 deposit less later $36 payment = $139 retained"
+              ],
+              [
+                "Tucson independent motel; Expedia, OTA collection; checkout September 18, 2026; settled September 25, 2026",
+                "$200 room entitlement and commission base; 18% base commission; no optional uplift",
+                "$36 withheld commission + $4 payment charge = $40; $40 ÷ $200 = 20%; $160 deposited and retained"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "For this review, we selected fully settled bookings with no cancellations or pending credits; neither stay used an optional visibility program. Use these observations to check how the calculation works, not to set a national or platform-wide rate."
+        },
+        {
+          "text": "When making your own comparison, match the market, property segment, stay period and program participation before comparing percentages. Keep rental-host and tour-operator pricing outside your hotel comparison. Track pending credits separately until they post."
+        },
+        {
+          "text": "At RateHarbor, we manage rate plans, promotions and channel settings, adjusting program participation according to yield. To see how that work fits together, visit our [OTA Optimization](/ota-optimization/) page."
+        }
+      ]
+    },
+    {
+      "heading": "Check your hotel's OTA cost on one completed stay",
+      "body": [
+        {
+          "text": "To establish your hotel's OTA cost, match a completed booking to its agreement, invoice or settlement, and bank receipt. Then calculate contribution from retained revenue and servicing costs before comparing it with direct acquisition."
+        },
+        {
+          "list": {
+            "items": [
+              "Choose a completed stay with its final folio and any adjustments.",
+              "Check the commission base, optional program terms and discount funding.",
+              "Match processor deductions, withheld commission and later invoice payments to the bank.",
+              "Enter each hotel-funded discount and cash charge just once in the worksheet.",
+              "Compare direct acquisition using the same room, stay, cancellation assumptions and likelihood of replacement demand."
+            ]
+          }
+        },
+        {
+          "text": "For an outside review of your pricing, distribution and past performance, see our [Revenue Management Audit](/revenue-management-audit/) page. Our audits cover a fixed scope at a quoted fixed fee, and you receive a written report and roadmap. Our managed plans use flat monthly retainers, with no percentage of room revenue or performance bonus. OTA commissions, software subscriptions and advertising spend remain separate provider costs."
+        },
+        {
+          "text": "Use your reconciled contribution to set your property budget and decide where additional demand is worth buying."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Cloudbeds' A Guide to OTA Commission Rates",
+      "url": "https://www.cloudbeds.com/online-travel-agencies/commissions/"
+    },
+    {
+      "title": "Lighthouse's How to Work with OTAs: Managing Relationships, Listings and Commission Rates",
+      "url": "https://www.mylighthouse.com/resources/blog/how-to-work-with-otas-including-tips-for-negotiating-fair-fees"
+    },
+    {
+      "title": "BookingWhizz’s OTA Dependency: The Real Cost to Hotels",
+      "url": "https://bookingwhizz.com/en/blog/hidden-cost-of-ota-dependency"
+    },
+    {
+      "title": "AltexSoft's OTA Rates and Building Commission Engine: Best Practices and Lessons Learned",
+      "url": "https://www.altexsoft.com/blog/ota-rates-commission-engine/"
+    }
+  ],
+  "geo": {
+    "run": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission",
+    "keyword": "how much do otas charge hotels"
+  },
+  "placeholders": [
+    {
+      "id": "R21",
+      "kind": "case",
+      "section": "What are OTA commission fees?",
+      "needed": "Actual review dates, sample size, property coverage and matched documentary records."
+    },
+    {
+      "id": "R22",
+      "kind": "case",
+      "section": "What are OTA commission fees?",
+      "needed": "Permissioned Savannah hotel booking, agreement, program status, invoice, processor record and matching bank payments."
+    },
+    {
+      "id": "R23",
+      "kind": "case",
+      "section": "What are OTA commission fees?",
+      "needed": "Permissioned Tucson hotel booking, agreement, program status, settlement, payment charges and bank receipt."
+    },
+    {
+      "id": "R24",
+      "kind": "case",
+      "section": "What are OTA commission fees?",
+      "needed": "Actual sample selection criteria, cancellation and credit status, and program participation."
+    }
+  ],
+  "source": {
+    "tool": "geo-blog-research",
+    "run": "D:\\korey_seo\\geo-blog-cli-1116\\runs\\rateharbor-ota-commission",
+    "article": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission/06-article.natural.md",
+    "replacements": "D:/korey_seo/geo-blog-cli-1116/runs/rateharbor-ota-commission/06-replacements.natural.json"
+  },
+  "review": {
+    "by": "ai-review",
+    "at": "2026-11-17T22:40:58.172Z"
+  }
+}

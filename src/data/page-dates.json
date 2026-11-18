@@ -1,78 +1,86 @@
 {
   "/": {
-    "hash": "db702d4456ab76ff",
-    "modified": "2026-11-14"
-  },
-  "/services/": {
-    "hash": "66c5b9993994c549",
-    "modified": "2026-11-13"
+    "hash": "11e4a387565a012f",
+    "modified": "2026-11-17"
   },
   "/hotel-digital-marketing/": {
-    "hash": "b40729da6ff6f8d4",
-    "modified": "2026-11-14"
+    "hash": "81eacfc0dd3aa025",
+    "modified": "2026-11-17"
   },
   "/boutique-hotel-consulting/": {
-    "hash": "ef4625ec99b839ad",
-    "modified": "2026-11-14"
+    "hash": "dbd078226dbff12d",
+    "modified": "2026-11-17"
   },
   "/commercial-strategy/": {
-    "hash": "27d8ef3fe6dcb886",
-    "modified": "2026-11-13"
+    "hash": "0948519c9559a19b",
+    "modified": "2026-11-17"
   },
   "/ota-optimization/": {
-    "hash": "7389fc5c9370b777",
-    "modified": "2026-11-13"
+    "hash": "27298772b43c706d",
+    "modified": "2026-11-17"
   },
   "/dynamic-pricing-strategy/": {
-    "hash": "01a58b42855ba386",
-    "modified": "2026-11-14"
+    "hash": "dee3aa82147ac3f3",
+    "modified": "2026-11-17"
   },
   "/hotel-distribution/": {
-    "hash": "55eaae8c5c68efb7",
-    "modified": "2026-11-14"
+    "hash": "71c592aaef491677",
+    "modified": "2026-11-17"
   },
   "/revenue-management-audit/": {
-    "hash": "7543a171bd361dd1",
-    "modified": "2026-11-13"
+    "hash": "73178f9c62bcb7e3",
+    "modified": "2026-11-17"
   },
   "/about-us/": {
-    "hash": "c6f0c5240a89894f",
-    "modified": "2026-11-13"
+    "hash": "08abbe1391658f12",
+    "modified": "2026-11-17"
   },
   "/contact-us/": {
-    "hash": "208de8dc19b90a85",
-    "modified": "2026-11-13"
+    "hash": "d06dd93c947f4b75",
+    "modified": "2026-11-17"
   },
   "/case-studies/": {
-    "hash": "581c62819e0afb86",
-    "modified": "2026-11-13"
+    "hash": "7fff346f1bc1959a",
+    "modified": "2026-11-17"
   },
   "/our-process/": {
-    "hash": "c75a40637abf75fc",
-    "modified": "2026-11-13"
+    "hash": "831008130f2d616d",
+    "modified": "2026-11-17"
   },
   "/resources/": {
-    "hash": "aa4f53cdfa9b07e5",
-    "modified": "2026-11-13"
+    "hash": "233e3450225e3c26",
+    "modified": "2026-11-17"
   },
   "/careers/": {
-    "hash": "be6824b12d4eff34",
-    "modified": "2026-11-13"
+    "hash": "2640cbc57090659f",
+    "modified": "2026-11-17"
   },
   "/privacy-policy/": {
-    "hash": "f4b822b5858edf2e",
-    "modified": "2026-11-13"
+    "hash": "0e9532e9bf50d5e1",
+    "modified": "2026-11-17"
   },
   "/terms-and-conditions/": {
-    "hash": "3eb6fa9daa3d41af",
-    "modified": "2026-11-13"
+    "hash": "3c73f2713f22d613",
+    "modified": "2026-11-17"
   },
   "/request-a-quote/": {
-    "hash": "547b7ae371361528",
-    "modified": "2026-11-13"
+    "hash": "3d0d9e6bbec5f5b5",
+    "modified": "2026-11-17"
   },
   "/blog/": {
-    "hash": "d345d664cdb9a952",
-    "modified": "2026-11-13"
+    "hash": "2692d3e769d9a3af",
+    "modified": "2026-11-17"
+  },
+  "/blog/hotel-rate-parity-issues/": {
+    "hash": "7679925fe668358e",
+    "modified": "2026-11-17"
+  },
+  "/blog/hotel-revenue-manager-duties/": {
+    "hash": "76938c74b3249e70",
+    "modified": "2026-11-17"
+  },
+  "/blog/how-much-otas-charge-hotels/": {
+    "hash": "390e27071d809097",
+    "modified": "2026-11-17"
   }
 }

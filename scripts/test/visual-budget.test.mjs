@@ -48,6 +48,16 @@ test('the block model is fitted from measured blocks, and a moved model plans th
   assert.equal(modelMoved(model, { ...model, 'intro:text': { ...model['intro:text'], base: 400 } }), true);
 });
 
+test('the default model knows a related block\'s text links carry no picture (measured on three sites)', async () => {
+  const { DEFAULT_BLOCK_MODEL } = await import('../lib/visual-budget.mjs');
+  // Staylumen 2026-11-16: before its calibration the links fell to relatedPages:* (a third picture) and seven service
+  // pages failed service_card_photo for "links with photos".
+  const links = estimateBlock({ type: 'relatedPages', links: [] }, 'links', 0, DEFAULT_BLOCK_MODEL);
+  assert.equal(links.pictured, false);
+  assert.equal(links.visual, 0);
+  assert.equal(estimateBlock({ type: 'relatedPages', links: [] }, 'tiles', 0, DEFAULT_BLOCK_MODEL).pictured, true);
+});
+
 test('a module a page type styles its own way is estimated by that page type\'s fit', () => {
   const samples = [
     ...['/a/', '/b/', '/c/'].map(() => ({ key: 'cta:form+photo', pageType: 'solution', words: 15, height: 665, visualShare: 0, before: 665, after: 665 })),
@@ -67,12 +77,23 @@ test('two rows of short items never stand together: the card grid of the pair be
   // Steps right after a grid: the grid goes, unless the block before it is a list already.
   const steps = [grid('e'), { id: 's', type: 'process' }];
   assert.deepEqual(varyItemRows(steps, variantOf).map((block) => variantOf(block) ?? block.type), ['bullets', 'process']);
-  // A section split in two is one section; a grid without its own heading is never made a list.
+  // A section split in two is one section, never half a list; a grid without its own heading is never made a list: the
+  // split section is the list, both halves in it.
   const split = [grid('m9'), { id: 'm9-2', type: 'featureGrid', continues: 'm9' }, { id: 'n', type: 'featureGrid' }];
-  assert.deepEqual(varyItemRows(split, variantOf).map((block) => variantOf(block)), ['icons', 'icons', 'icons']);
+  assert.deepEqual(varyItemRows(split, variantOf).map((block) => [block.id, variantOf(block)]), [['m9', 'bullets'], ['n', 'icons']]);
   // Steps, then a card set others go on from: the set stays cards, all of it, and the steps are a list.
   const set = [{ id: 'steps', type: 'process' }, grid('entries'), { id: 'entries-2', type: 'featureGrid', continues: 'entries' }];
   assert.deepEqual(varyItemRows(set, variantOf).map((block) => variantOf(block) ?? block.type), ['list', 'icons', 'icons']);
+  // Two card sets in grids of their own, one under the other, no steps (Strandmill's women's swimwear page, 2026-11-14:
+  // m4, m4-2 then m5, m5-2): the later set is one list, all its cards in it, beside its heading.
+  const cards = (count) => Array.from({ length: count }, (_, index) => ({ heading: `c${index}` }));
+  const sets = [{ ...grid('m4'), items: cards(3) }, { id: 'm4-2', type: 'featureGrid', continues: 'm4', items: cards(2) }, { ...grid('m5'), items: cards(3) }, { id: 'm5-2', type: 'featureGrid', continues: 'm5', items: cards(2) }];
+  const joined = varyItemRows(sets, variantOf);
+  assert.deepEqual(joined.map((block) => [block.id, variantOf(block), block.items.length]), [['m4', 'icons', 3], ['m4-2', 'icons', 2], ['m5', 'bullets', 5]]);
+  // The later set too long for one list: the earlier one is the list; both too long, both stay cards.
+  const more = (id, count) => [{ ...grid(id), items: cards(4) }, ...Array.from({ length: count - 1 }, (_, index) => ({ id: `${id}-${index + 2}`, type: 'featureGrid', continues: id, items: cards(4) }))];
+  assert.deepEqual(varyItemRows([...more('a', 2), ...more('b', 3)], variantOf).map((block) => block.id), ['a', 'b', 'b-2', 'b-3']);
+  assert.equal(varyItemRows([...more('a', 3), ...more('b', 3)], variantOf).length, 6);
 });
 
 test('a page short of pictures gets walls wherever a run takes one, and a section too long for the band takes one where its module changes', () => {
@@ -124,8 +145,22 @@ test('two split rows of the tinted variant one under the other: the later one is
   // hotel-rm's digital marketing page, 2026-11-14: two tinted splits ran as one grey band.
   const blocks = [{ id: 'm5', type: 'splitMedia' }, { id: 's1', type: 'splitMedia' }, { id: 'g', type: 'featureGrid' }, { id: 's2', type: 'splitMedia' }];
   const varied = varySurfaces(blocks, (block) => (block.planned ? block.variant : block.type === 'splitMedia' ? 'tinted' : 'cards'));
-  assert.deepEqual(varied.map((block) => block.variant ?? null), [null, 'single', null, null]);
+  // The run between the first band and the last (s1 and g, two sections) cannot alternate: m5 is a plain row too.
+  assert.deepEqual(varied.map((block) => block.variant ?? null), ['single', 'single', null, null]);
   assert.equal(varied[1].planned, true);
+});
+
+test("an even run of plain sections between two tinted split rows: the band it opens after is a plain split row (aloha's /quality-control/ 2026-11-17)", async () => {
+  const { varySurfaces } = await import('../lib/visual-budget.mjs');
+  const { tintedSections } = await import('../lib/section-surfaces.mjs');
+  const variantOf = (block) => (block.planned ? block.variant : block.type === 'splitMedia' ? 'tinted' : 'cards');
+  const blocks = [{ id: 'list', type: 'iconList' }, { id: 'b1', type: 'splitMedia' }, { id: 'single', type: 'splitMedia', variant: 'single', planned: true }, { id: 'related', type: 'iconList' }, { id: 'b2', type: 'splitMedia' }, { id: 'steps', type: 'process' }];
+  const varied = varySurfaces(blocks, variantOf);
+  assert.deepEqual(varied.map((block) => variantOf(block)), ['cards', 'single', 'single', 'cards', 'tinted', 'cards']);
+  // No two neighbours on one grey: b2 is the only band, the run before it ends white.
+  const tinted = tintedSections(varied, variantOf);
+  const grey = (block) => tinted.has(block.id) || variantOf(block) === 'tinted';
+  assert.ok(varied.slice(1).every((block, index) => !(grey(block) && grey(varied[index]))));
 });
 
 test('a card grid of fewer than three cards is no structured block to the measure: none of it counts as picture', () => {
@@ -138,4 +173,48 @@ test('a card grid of fewer than three cards is no structured block to the measur
   assert.ok(estimateBlock({ type: 'featureGrid', items: [{}, {}, {}] }, 'cards', 80, grid).visual > 0);
   // Photo cards show their photos whatever their number.
   assert.ok(estimateBlock({ type: 'featureGrid', items: [{}, {}] }, 'media', 80, { 'featureGrid:media': { ...grid['featureGrid:cards'], visual: 0.5 } }).visual > 0);
+});
+
+test('a grid is not made a list where it would be the third list in a row (Staylumen and Strandmill 2026-11-17)', async () => {
+  const { varyItemRows } = await import('../lib/visual-budget.mjs');
+  const { repeatedModules } = await import('../lib/visual-checks.mjs');
+  const grid = (id) => ({ id, type: 'featureGrid', heading: `H ${id}`, items: [{ heading: 'a', text: 'b' }, { heading: 'c', text: 'd' }] });
+  const list = (id) => ({ id, type: 'iconList', heading: `L ${id}`, items: [{ text: 'x' }] });
+  const blocks = [{ id: 'intro', type: 'intro' }, grid('a'), grid('b'), list('c'), list('d'), { id: 'cta', type: 'cta' }];
+  varyItemRows(blocks, (block) => block.variant ?? 'cards');
+  // b beside the two icon lists stays cards; a (the pair's other grid) becomes the list instead.
+  assert.deepEqual(blocks.map((block) => `${block.id}:${block.variant ?? '-'}`), ['intro:-', 'a:bullets', 'b:-', 'c:-', 'd:-', 'cta:-']);
+  const rendered = blocks.map((block) => ({ id: block.id, type: block.type, pattern: block.variant === 'bullets' ? 'bullets' : undefined }));
+  assert.deepEqual(repeatedModules(rendered, {}), []);
+});
+
+test("a grid the reference's pattern shows as a list keeps its cards where it would be the third list in a row (Staylumen 2026-11-17)", async () => {
+  const { varyItemRows } = await import('../lib/visual-budget.mjs');
+  const grid = (id) => ({ id, type: 'featureGrid', variant: 'cards', heading: `H ${id}`, items: [{ heading: 'a', text: 'b' }] });
+  const list = (id) => ({ id, type: 'iconList', heading: `L ${id}`, items: [{ text: 'x' }] });
+  // The reference sets its grids out as lists (designedVariant): a cards grid shows as bullets unless it keeps its cards.
+  const shown = (block) => (block.type === 'featureGrid' && block.variant === 'cards' && !block.keepCards ? 'bullets' : block.variant);
+  const blocks = [{ id: 'intro', type: 'intro' }, grid('a'), list('b'), list('c'), { id: 'cta', type: 'cta' }];
+  varyItemRows(blocks, shown);
+  assert.equal(blocks[1].keepCards, true);
+  const apart = [{ id: 'intro', type: 'intro' }, grid('a'), { id: 't', type: 'table' }, list('b'), list('c')];
+  varyItemRows(apart, shown);
+  assert.equal(apart[1].keepCards, undefined, 'a list with no two lists beside it stays as the reference shows it');
+});
+
+test('a card set split into grids is not joined into one list where that list would be the third in a row (Staylumen 2026-11-17)', async () => {
+  const { varyItemRows } = await import('../lib/visual-budget.mjs');
+  const list = (id) => ({ id, type: 'iconList', heading: `L ${id}`, items: [{ text: 'x' }] });
+  const set = () => [
+    { id: 'g', type: 'featureGrid', variant: 'cards', heading: 'H g', items: [{ heading: 'a', text: 'b' }, { heading: 'c', text: 'd' }] },
+    { id: 'g-2', type: 'featureGrid', variant: 'cards', continues: 'g', items: [{ heading: 'e', text: 'f' }] },
+    { id: 'g-3', type: 'featureGrid', variant: 'cards', continues: 'g', items: [{ heading: 'h', text: 'i' }] },
+  ];
+  const blocks = [{ id: 'intro', type: 'intro' }, ...set(), list('r'), list('m3'), { id: 'cta', type: 'cta' }];
+  varyItemRows(blocks, (block) => block.variant ?? 'cards');
+  assert.deepEqual(blocks.map((block) => `${block.id}:${block.variant ?? '-'}`), ['intro:-', 'g:cards', 'g-2:cards', 'g-3:cards', 'r:-', 'm3:-', 'cta:-']);
+  // With one icon list after it, the set still becomes the one list beside its heading.
+  const one = [{ id: 'intro', type: 'intro' }, ...set(), list('r'), { id: 'cta', type: 'cta' }];
+  varyItemRows(one, (block) => block.variant ?? 'cards');
+  assert.deepEqual(one.map((block) => `${block.id}:${block.variant ?? '-'}`), ['intro:-', 'g:bullets', 'r:-', 'cta:-']);
 });

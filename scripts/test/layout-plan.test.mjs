@@ -94,6 +94,20 @@ test('a page is planned as the renderer places it: variants, columns, card title
   assert.equal(plan.feasibility, undefined, 'a contact page has no density band');
 });
 
+test('the testimonials are planned on the surface the renderer gives them: a plain section of the alternation', async () => {
+  // swimwear 2026-11-15: the plan took them for a tinted band of their own and failed 22 pairs the page draws apart
+  // (iconList-1 tinted, testimonials white, related tinted).
+  const { planPage } = await import('../lib/layout-plan.mjs');
+  const page = { route: '/p/', pageType: 'contact', hero: { heading: 'A product' }, blocks: [
+    { id: 'intro', type: 'intro', heading: 'Intro', paragraphs: ['Short intro.'] },
+    { id: 'list', type: 'iconList', heading: 'Points', items: [{ heading: 'One', text: 'A point.' }, { heading: 'Two', text: 'A point.' }] },
+    { id: 'quotes', type: 'testimonials', heading: 'Clients', items: [{ quote: 'Good work.', name: 'A client' }] },
+    { id: 'faq', type: 'faq', heading: 'Questions', items: [{ question: 'How long?', answer: 'Two weeks.' }] },
+  ] };
+  const plan = planPage(page, {}, { headingModel: { desktop: { '*': 30 }, mobile: { '*': 12 } }, charEm: 0.6 });
+  assert.deepEqual(plan.blocks.map((block) => block.surface), ['white', 'tinted', 'white', 'tinted']);
+});
+
 test('a page with a band gets its feasibility from the plan without the walls added for density', async () => {
   const { planPage } = await import('../lib/layout-plan.mjs');
   const text = (id, words) => ({ id, type: 'intro', heading: id, paragraphs: [Array.from({ length: words }, () => 'word').join(' ')] });
@@ -143,14 +157,61 @@ test("the page's estimate holds what the page renders outside its blocks: the tr
   assert.equal(blockWords({ id: 't', type: 'table', heading: 'Rate parity', columns: ['Situation', 'What we do'], rows: [['Channel mix', 'We decide which']] }, 'cards', {}), 2 + 4 + 5);
 });
 
-test("a hero's lead set under it (page-lead) is part of the page's estimate", async () => {
+test("a hero's lead is counted in the hero, where it is set, whatever the competitor's hero carries (site13 claude-seo audit 2026-11-17, M-10)", async () => {
   const { planPage } = await import('../lib/layout-plan.mjs');
   const lead = Array.from({ length: 120 }, () => 'word').join(' ');
   const page = { route: '/s/', pageType: 'solution', hero: { heading: 'A service', lead: [lead] }, blocks: [{ id: 'a', type: 'intro', heading: 'A', paragraphs: ['Words.'] }] };
-  const model = { 'page-lead:': { base: 100, perWord: 1, visual: 0, before: 1, after: 1 }, 'intro:text': { base: 300, perWord: 0, visual: 0, before: 1, after: 1 }, 'hero:media-overlay': { base: 600, perWord: 0, visual: 1, before: 0, after: 0 } };
+  const model = { 'intro:text': { base: 300, perWord: 0, visual: 0, before: 1, after: 1 }, 'hero:media-overlay': { base: 600, perWord: 1, visual: 1, before: 0, after: 0 } };
   const components = { hero: 'media-overlay', heroText: { leadWords: 20 }, blockModel: model };
   const plan = planPage(page, components);
-  assert.equal(plan.hero.leadBelow, true);
-  // motel /our-history/ 2026-11-14: 188px the plan did not hold.
-  assert.equal(plan.estimate.heightPx, 600 + (100 + 120) + 300);
+  assert.equal('leadBelow' in plan.hero, false);
+  assert.equal(plan.estimate.heightPx, 600 + 2 + 120 + 300);
+});
+
+test("the planner plans a page with a long hero lead into its band", async () => {
+  const { planPage } = await import('../lib/layout-plan.mjs');
+  const words = (count) => Array.from({ length: count }, () => 'word').join(' ');
+  const page = { route: '/p/', pageType: 'general', hero: { heading: 'Our process', lead: [words(40)] }, blocks: [
+    ...['a', 'b', 'c', 'd', 'e', 'f'].map((id) => ({ id, type: 'intro', heading: id, paragraphs: [words(100)] })),
+    { id: 'cta', type: 'cta', heading: 'Call', paragraphs: ['Now.'] },
+  ] };
+  const model = {
+    'hero:media-overlay': { base: 500, perWord: 0, visual: 1, before: 0, after: 0 },
+    'intro:text': { base: 200, perWord: 3, visual: 0, before: 1, after: 1 },
+    'gallery:band': { base: 800, perWord: 0, visual: 0.95, before: 0.02, after: 0.02 },
+  };
+  const components = { hero: 'media-overlay', heroText: { leadWords: 5 }, blockModel: model, densityBands: { wordsPer1000px: { max: 999 }, visualAreaPct: { min: 30, max: 80 }, longestTextOnlyPx: { max: 99999 } }, pageTypes: { general: { mediaModules: [{ at: 0.5, type: 'band' }] } } };
+  // motel /our-process/ 2026-11-14: the page under its band without a wall.
+  const plan = planPage(page, components);
+  assert.ok(plan.budgetWalls > 0, `walls: ${plan.budgetWalls}`);
+  assert.ok(plan.estimate.visualAreaPct >= 30, `picture area ${plan.estimate.visualAreaPct}%`);
+});
+
+test('the visual budget plans with the variants the page renders: steps set out as a list next to a card row hold no picture', async () => {
+  const { planPage } = await import('../lib/layout-plan.mjs');
+  const words = (count) => Array.from({ length: count }, () => 'word').join(' ');
+  const card = (heading) => ({ heading, paragraphs: [words(20)] });
+  const page = { route: '/p/', pageType: 'general', hero: { heading: 'Our process' }, blocks: [
+    { id: 'overview', type: 'intro', heading: 'Overview', paragraphs: [words(150)] },
+    { id: 'g1', type: 'featureGrid', heading: 'What we do', items: [card('A'), card('B'), card('C')] },
+    { id: 'g2', type: 'featureGrid', continues: 'g1', items: [card('D'), card('E')] },
+    { id: 'steps', type: 'process', heading: 'How it works', steps: ['One.', 'Two.', 'Three.'] },
+    { id: 'faq', type: 'faq', heading: 'Questions', items: [{ question: 'Q?', answer: 'A.' }] },
+    { id: 'cta', type: 'cta', heading: 'Call', paragraphs: ['Now.'] },
+  ] };
+  const model = {
+    'hero:plain': { base: 400, perWord: 0, visual: 0, before: 1, after: 1 },
+    'intro:text': { base: 200, perWord: 3, visual: 0, before: 1, after: 1 },
+    'featureGrid:cards': { base: 450, perWord: 0, visual: 0.4, before: 0.2, after: 0.2 },
+    'process:circles': { base: 900, perWord: 0, visual: 0.7, before: 0.1, after: 0.1 },
+    'process:list': { base: 600, perWord: 0, visual: 0, before: 1, after: 1 },
+    'gallery:band': { base: 800, perWord: 0, visual: 0.95, before: 0.02, after: 0.02 },
+  };
+  const components = { hero: 'plain', blockModel: model, densityBands: { wordsPer1000px: { max: 999 }, visualAreaPct: { min: 30, max: 80 }, longestTextOnlyPx: { max: 99999 } } };
+  // motel /our-process/ 2026-11-14: the budget counted the steps as circles over a photo, planned no wall, and the
+  // steps were then set out as a list beside the card row (varyItemRows): 16% for a band from 19%.
+  const plan = planPage(page, components);
+  assert.equal(plan.blocks.find((block) => block.id === 'steps').variant, 'list');
+  assert.ok(plan.budgetWalls > 0, `walls: ${plan.budgetWalls}`);
+  assert.ok(plan.estimate.visualAreaPct >= 30, `picture area ${plan.estimate.visualAreaPct}%`);
 });

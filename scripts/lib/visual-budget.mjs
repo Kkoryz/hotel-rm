@@ -6,6 +6,7 @@
 // any photo is made: components.blockModel, calibrate-plan.mjs).
 
 import defaults from '../../config/block-model.default.json' with { type: 'json' };
+import { tintedSections } from './section-surfaces.mjs';
 
 export const DEFAULT_BLOCK_MODEL = defaults.modules;
 // The estimate aims inside the band, not at its edges: the model is a fit, the audit measures the real page.
@@ -34,6 +35,15 @@ export function estimateBlock(block, variant, words, model = DEFAULT_BLOCK_MODEL
   return { height, visual: share * height, before: pictured ? fit.before * height : height, after: pictured ? fit.after * height : height, pictured };
 }
 
+// Two estimates one after the other as one (a block and the charts drawn after it, a hero and its lead set under it):
+// their heights and pictures add up, the text at its top and foot runs on across a part with no picture.
+export function joinEstimates(first, second) {
+  const height = first.height + second.height;
+  const before = first.pictured ? first.before : second.pictured ? first.height + second.before : height;
+  const after = second.pictured ? second.after : first.pictured ? first.after + second.height : height;
+  return { height, visual: first.visual + second.visual, before, after, pictured: first.pictured || second.pictured };
+}
+
 // A page's estimated density from its blocks' estimates in order (the hero first): content height, picture share (%)
 // and the longest picture-less run (px), as lib/density.mjs measures the built page.
 export function pageEstimate(estimates) {
@@ -59,9 +69,17 @@ export function pageEstimate(estimates) {
 // photo tiles (links instead), the competitor's other walls, then its bands down to the floor.
 // apart(before, after): whether a wall may stand between these two blocks (media-slots: never between two proof sections,
 // where a photo has nothing to break up).
-export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, pageType = null, floor = 0, apart = () => true }) {
+// chartsOf(block): whether the block's data is drawn as charts after it (a closing band's before it), counted as the
+// layout plan and the trial build count them (lib/layout-plan.mjs). The trust bar is not: it is in the
+// plan's estimate only, about a point on a short page, inside BUDGET_MARGIN.
+export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, chartsOf = () => false, pageType = null, floor = 0, apart = () => true }) {
   const target = { run: bands.longestTextOnlyPx.max * BUDGET_MARGIN.run, min: bands.visualAreaPct.min + BUDGET_MARGIN.visualPct, max: bands.visualAreaPct.max - BUDGET_MARGIN.visualPct };
-  const estimates = () => blocks.map((block) => estimateBlock(block, variantOf(block), wordsOf(block), model, pageType));
+  const charts = () => estimateBlock({ type: 'charts' }, '', 0, model, pageType);
+  const estimates = () => blocks.map((block) => {
+    const own = estimateBlock(block, variantOf(block), wordsOf(block), model, pageType);
+    if (!chartsOf(block)) return own;
+    return block.type === 'cta' ? joinEstimates(charts(), own) : joinEstimates(own, charts());
+  });
   const top = hero ? estimateBlock(hero.block, hero.variant, hero.words, model, pageType) : null;
   const measure = () => pageEstimate([...(top ? [top] : []), ...estimates()]);
   const closing = () => { const at = blocks.findIndex((block) => block.type === 'cta' || block.type === 'form'); return at < 0 ? blocks.length : at; };
@@ -144,7 +162,14 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
 // plan: it ran inside the visual budget, so a site without a band and the pages without walls never had it).
 const itemRow = (block, variant) => (block.type === 'featureGrid' && variant !== 'bullets') || (block.type === 'process' && variant !== 'list') || block.type === 'stats';
 export function varyItemRows(blocks, variantOf) {
-  const toList = (index) => { blocks[index] = { ...blocks[index], variant: 'bullets', planned: true }; };
+  // A list on the page (an icon list, or a grid already set out as a list): a grid made a list beside two of them is the
+  // third list in a row the layout audit fails (repeated_module; Staylumen and Strandmill 2026-11-17: a grid made a list
+  // between two of Site Factory's icon lists). Such a grid stays cards.
+  // As the page shows it: a grid the reference's pattern sets out as a list (media-slots.mjs designedVariant) is one.
+  const listLike = (at) => at >= 0 && at < blocks.length && (blocks[at].type === 'iconList' || (blocks[at].type === 'featureGrid' && (blocks[at].variant === 'bullets' || variantOf(blocks[at]) === 'bullets')));
+  // The run of lists a block from first to last (one section, its grids together) would stand in as one list.
+  const listRun = (at, last = at) => { let run = 1; for (let k = at - 1; listLike(k); k -= 1) run += 1; for (let k = last + 1; listLike(k); k += 1) run += 1; return run; };
+  const toList = (index) => { if (listRun(index) > 2) return false; blocks[index] = { ...blocks[index], variant: 'bullets', planned: true }; return true; };
   // Only a grid with its own heading becomes a list (the list sits beside it); a section split in two (continues) is one
   // section, never a pair: its second half became a headless list, two points stacked down an empty column.
   // Nor does a grid other blocks go on from: its first grid alone as a list left a list over three rows of cards (the
@@ -154,13 +179,48 @@ export function varyItemRows(blocks, variantOf) {
     const [before, block] = [blocks[index - 1], blocks[index]];
     if (block.continues === before.id || before.continues === block.id) continue;
     if (!itemRow(before, variantOf(before)) || !itemRow(block, variantOf(block))) continue;
-    if (listable(index)) toList(index);
-    else if (listable(index - 1) && !(index >= 2 && blocks[index - 2].type === 'featureGrid' && variantOf(blocks[index - 2]) === 'bullets')) toList(index - 1);
+    if (listable(index) && toList(index)) continue;
+    if (listable(index - 1) && !(index >= 2 && blocks[index - 2].type === 'featureGrid' && variantOf(blocks[index - 2]) === 'bullets') && toList(index - 1)) continue;
+    // Neither grid could become a list without making three lists in a row: the pair stays cards.
+    if ([index, index - 1].some((at) => listable(at)) && [index, index - 1].every((at) => !listable(at) || listRun(at) > 2)) continue;
     // Neither grid can be a list (one goes on from another, or has no heading of its own): the pair's steps are
     // (hotel-rm's pricing page, motel's process page, 2026-11-14: a grid going on from another over a row of steps).
-    else for (const at of [index, index - 1]) if (blocks[at].type === 'process') { blocks[at] = { ...blocks[at], variant: 'list', planned: true }; break; }
+    else if ([index, index - 1].some((at) => blocks[at].type === 'process')) { const at = blocks[index].type === 'process' ? index : index - 1; blocks[at] = { ...blocks[at], variant: 'list', planned: true }; }
+    // No steps either: two card sets in grids of their own (Strandmill 2026-11-14, four pages: m4, m4-2 then m5, m5-2).
+    // A whole set becomes one list beside its heading, all its cards in it, the later set first.
+    else {
+      const start = [index, setStart(blocks, index - 1)].find((at) => joinable(blocks, at));
+      // Counted with the set as the one list it becomes, from its first grid to its last (Staylumen 2026-11-17:
+      // /airbnb-booking-management/'s three grids joined into a list before two icon lists, counted from its first alone).
+      const grids = start == null ? [] : blocks.filter((item, at) => at > start && item.continues === blocks[start].id);
+      if (start != null && listRun(start, start + grids.length) <= 2) {
+        blocks.splice(start, grids.length + 1, { ...blocks[start], items: [blocks[start], ...grids].flatMap((item) => item.items ?? []), variant: 'bullets', planned: true });
+      }
+    }
+  }
+  // A grid the reference's pattern alone sets out as a list (its own variant cards) that is then the third list in a
+  // row keeps its cards (keepCards, read by designedVariant; Staylumen 2026-11-17: /airbnb-booking-management/'s first
+  // grid shown as a list before two icon lists).
+  for (let at = 0; at < blocks.length; at += 1) {
+    const block = blocks[at];
+    if (block.type === 'featureGrid' && block.variant !== 'bullets' && !block.keepCards && variantOf(block) === 'bullets' && listRun(at) > 2) blocks[at] = { ...block, keepCards: true };
   }
   return blocks;
+}
+
+// The most cards a set joined into one list holds; a longer set stays cards (the hotel hub's thirteen entry cards).
+export const JOINED_LIST_MAX = 8;
+// The first grid of the card set the block at `at` belongs to.
+const setStart = (blocks, at) => (blocks[at].continues == null ? at : blocks.findIndex((item) => item.id === blocks[at].continues));
+// A card set the template can set out as one list: a grid with its own heading and the grids right after it that go on
+// from it, all cards, JOINED_LIST_MAX at most.
+function joinable(blocks, start) {
+  const first = blocks[start];
+  if (!first || first.type !== 'featureGrid' || !first.heading || first.continues != null) return false;
+  let end = start + 1;
+  while (blocks[end]?.continues === first.id) end += 1;
+  const grids = blocks.slice(start, end);
+  return !blocks.some((item, at) => (at < start || at >= end) && item.continues === first.id) && grids.every((item) => item.type === 'featureGrid') && grids.reduce((sum, item) => sum + (item.items?.length ?? 0), 0) <= JOINED_LIST_MAX;
 }
 
 // Two split rows of the tinted variant one under the other run as one grey band (hotel-rm's digital marketing page,
@@ -170,6 +230,16 @@ export function varySurfaces(blocks, variantOf) {
   for (let index = 1; index < blocks.length; index += 1) {
     const [before, block] = [blocks[index - 1], blocks[index]];
     if (before.type === 'splitMedia' && block.type === 'splitMedia' && variantOf(before) === 'tinted' && variantOf(block) === 'tinted') blocks[index] = { ...block, variant: 'single', planned: true };
+  }
+  // An even run of plain sections between two tinted split rows cannot alternate without one end meeting a band on its
+  // own grey (aloha's /quality-control/ 2026-11-17: a band, a split row and a list, a band): the band the run opens
+  // after is a plain split row too, and the run takes it in.
+  const band = (block) => block.type === 'splitMedia' && block.continues == null && variantOf(block) === 'tinted';
+  for (let round = 0; round < blocks.length; round += 1) {
+    const tinted = tintedSections(blocks, variantOf);
+    const at = blocks.findIndex((block, index) => band(block) && blocks[index + 1] && blocks[index + 1].continues !== block.id && tinted.has(blocks[index + 1].id));
+    if (at < 0) break;
+    blocks[at] = { ...blocks[at], variant: 'single', planned: true };
   }
   return blocks;
 }
