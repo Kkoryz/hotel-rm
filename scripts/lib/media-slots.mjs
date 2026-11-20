@@ -418,7 +418,7 @@ export function modelVariant(block, page, blocks, components, options) {
   if (block.type === 'featureGrid') return variant ?? (mediaSlots(block, variant, components, options).length ? 'media' : 'cards');
   const shown = variant ?? { process: 'circles', cta: components.cta, relatedPages: 'links', iconList: 'checks', faq: components.faq }[block.type];
   // An FAQ the photo plan measured as an open list (lib/faq-layout.mjs faqPlannedOpen) is measured as one: the site's
-  // photos stay where they were placed when its long FAQs showed open (hand fix 2026-11-18: the FAQs fold, no photo moves).
+  // photos were placed with that measure, kept when the FAQ folds (owner 2026-11-18: no fewer photos).
   if (block.type === 'faq' && shown !== 'cards' && faqPlannedOpen(block, shown, page)) return 'open-list';
   return block.type === 'cta' && mediaSlots(block, shown, components, options).length ? `${shown}+photo` : shown;
 }

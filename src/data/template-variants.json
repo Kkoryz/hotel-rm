@@ -1965,6 +1965,53 @@
         "before": 1,
         "after": 1
       }
+    },
+    "heroHeights": {
+      "home": {
+        "desktop": {
+          "height": 902,
+          "share": 0.902
+        },
+        "tablet": {
+          "height": 926,
+          "share": 0.904
+        },
+        "phone": {
+          "height": 675,
+          "share": 0.8
+        }
+      },
+      "solution": {
+        "desktop": {
+          "height": 902,
+          "share": 0.902
+        },
+        "tablet": {
+          "height": 926,
+          "share": 0.904
+        },
+        "phone": {
+          "height": 675,
+          "share": 0.8
+        }
+      },
+      "about": {
+        "desktop": {
+          "height": 902,
+          "share": 0.902
+        },
+        "tablet": {
+          "height": 926,
+          "share": 0.904
+        },
+        "phone": {
+          "height": 675,
+          "share": 0.8
+        }
+      }
+    },
+    "photoWall": {
+      "fit": "full"
     }
   }
 }

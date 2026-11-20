@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { FAQ_OPEN_LIST_ITEMS, faqOpenList, faqPlannedOpen, isFaqPage } from '../lib/faq-layout.mjs';
+import { FAQ_OPEN_LIST_ITEMS, faqOpenList, faqPageFolds, faqPlannedOpen, isFaqPage } from '../lib/faq-layout.mjs';
 import { blockWords, modelVariant } from '../lib/media-slots.mjs';
 
 const source = (path) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
@@ -23,6 +23,34 @@ test('every FAQ folds, on the FAQ page and however long; only the open variants 
   assert.equal(faqOpenList({ items: items(1) }, 'open-list'), true);
   assert.equal(faqOpenList({ items: items(1) }, 'cards'), true);
   assert.equal(faqOpenList({ items: items(2) }, 'accordion'), false);
+});
+
+test("the FAQ page's sections that answer one question fold under it, the blocks going on from them with them (Staylumen 2026-11-18)", () => {
+  const blocks = [
+    { id: 'overview', type: 'intro', heading: 'Who We Are and How We Work Remotely' },
+    { id: 'm4', type: 'iconList', heading: 'What Are Your Contract, Insurance and Cancellation Terms?' },
+    { id: 'm2', type: 'splitMedia', heading: 'How Soon Can My Home Go Live and Take Bookings? ' },
+    { id: 'm2-steps', type: 'process', continues: 'm2' },
+    { id: 'faq', type: 'faq', heading: 'More questions?' },
+    { id: 'related', type: 'relatedPages', heading: 'Where next?' },
+    { id: 'cta', type: 'cta', heading: 'Ready to start?' },
+  ];
+  const folds = faqPageFolds({ id: 'site:faq', route: '/faq/', pageType: 'general', blocks });
+  assert.deepEqual([...folds.keys()], ['m4', 'm2', 'm2-steps']);
+  assert.deepEqual(folds.get('m2'), { head: 'm2', question: 'How Soon Can My Home Go Live and Take Bookings?' });
+  assert.equal(folds.get('m2-steps'), folds.get('m2'));
+  // Any other page keeps its sections as they are.
+  assert.equal(faqPageFolds({ id: 'site:about', route: '/about/', pageType: 'about', blocks }).size, 0);
+});
+
+test('the FAQ page renders each fold as one <details>, the question its summary, out of the tinted alternation', async () => {
+  const view = await source('src/components/blocks/PageView.astro');
+  assert.match(view, /const folds = faqPageFolds\(page, blocks\);/);
+  assert.match(view, /<details class="faq-fold" data-fold=\{fold\.head\}/);
+  assert.match(view, /<summary class="faq-fold__summary"><span class="container faq-fold__question">\{fold\.question\}<\/span><\/summary>/);
+  assert.match(view, /fold\?\.head === full\.id \? \(\{ \.\.\.full, heading: undefined \}/, 'the head block shows its answer without the heading');
+  assert.match(view, /\.filter\(\(block\) => !folds\.has\(block\.id\)\)/);
+  assert.match(await source('src/styles/template.css'), /\.faq-fold\[open\] \.faq-fold__question::after/);
 });
 
 test('an open list renders each question as an h3 with its answer shown; the accordion keeps no heading in its summary', async () => {

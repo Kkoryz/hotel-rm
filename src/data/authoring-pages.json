@@ -266,37 +266,6 @@
         "mediaKind": "lifestyle"
       },
       {
-        "id": "owner-logos",
-        "type": "logos",
-        "heading": "Clients we work with",
-        "items": [
-          {
-            "name": "Larkspur Family Partners",
-            "note": "Utah, USA"
-          },
-          {
-            "name": "Lantern Bay Hospitality",
-            "note": "Ohio, USA"
-          },
-          {
-            "name": "Sagebrush Ventures",
-            "note": "Wisconsin, USA"
-          },
-          {
-            "name": "Harbor Lane Hotel Holdings",
-            "note": "Virginia, USA"
-          },
-          {
-            "name": "Prairie Wind Hospitality Partners",
-            "note": "Missouri, USA"
-          },
-          {
-            "name": "Pine Hollow Inns",
-            "note": "Minnesota, USA"
-          }
-        ]
-      },
-      {
         "id": "owner-testimonials",
         "type": "testimonials",
         "heading": "What clients say",
@@ -5040,37 +5009,6 @@
         ],
         "variant": "icons",
         "mediaKind": "process"
-      },
-      {
-        "id": "owner-logos",
-        "type": "logos",
-        "heading": "Clients we work with",
-        "items": [
-          {
-            "name": "Larkspur Family Partners",
-            "note": "Utah, USA"
-          },
-          {
-            "name": "Lantern Bay Hospitality",
-            "note": "Ohio, USA"
-          },
-          {
-            "name": "Sagebrush Ventures",
-            "note": "Wisconsin, USA"
-          },
-          {
-            "name": "Harbor Lane Hotel Holdings",
-            "note": "Virginia, USA"
-          },
-          {
-            "name": "Prairie Wind Hospitality Partners",
-            "note": "Missouri, USA"
-          },
-          {
-            "name": "Pine Hollow Inns",
-            "note": "Minnesota, USA"
-          }
-        ]
       },
       {
         "id": "owner-testimonials",
